@@ -1,5 +1,13 @@
-import type { AppProps } from "next/app";
+import React from "react";
+import Header from "@/components/Header";
+import { GlobalStyle } from "@/styles/global.styled";
 
-export default function App({ Component }: AppProps) {
-  return <div>hi</div>;
+export default function App({ Component }: any) {
+  return (
+    <React.Fragment>
+      <GlobalStyle />
+      <Header />
+      <Component />
+    </React.Fragment>
+  );
 }
