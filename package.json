@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@redux-devtools/extension": "^3.2.5",
+    "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
@@ -16,8 +18,14 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
     "next": "13.4.4",
+    "next-redux-wrapper": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^8.0.7",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@types/redux-logger": "^3.0.9",
+    "redux-logger": "^3.0.6"
   }
 }

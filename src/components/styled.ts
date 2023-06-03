@@ -26,19 +26,20 @@ const IconContainer = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-right: 20px;
+  margin-right: 30px;
+`;
 
-  div {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: black;
-    cursor: pointer;
-  }
+const DropDownIcon = styled.div`
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: black;
 `;
 
 export const S = {
   HeaderContainer,
   Logo,
   IconContainer,
+  DropDownIcon,
 };
