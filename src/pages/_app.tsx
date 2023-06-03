@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "@/components/Header";
+import Header from "@/components/common/Header";
 import { GlobalStyle } from "@/styles/global.styled";
 import wrapper from "@/store";
 import PropTypes from "prop-types";

@@ -15,8 +15,6 @@ export const useDropDownControl = () => {
   useEffect(() => {
     const handleOutSideClick = (e: any) => {
       if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
-        console.log("outside click");
-
         dispatch(userActions.initDropdownState());
       }
     };
