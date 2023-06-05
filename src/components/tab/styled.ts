@@ -58,7 +58,6 @@ const RecordElement = styled.div`
 
 export const S = {
   TabContainer,
-  Element,
   RecordContainer,
   RecordWrapper,
   RecordElement,
