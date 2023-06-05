@@ -1,22 +1,25 @@
 import styled from "styled-components";
 
-const TabContainer = styled.div`
+const TabContainer = styled.div<{ tabState: number }>`
   display: flex;
   height: 20px;
   width: 500px;
-  background-color: aqua;
+
   justify-content: space-around;
   align-items: center;
   margin-bottom: 40px;
-`;
-
-const Element = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-  border-bottom: 3px solid gray;
-  height: 100%;
+  div:nth-child(${(props) => props.tabState + 1}) {
+    border-bottom: 3px solid black;
+  }
+  div {
+    transition: 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    border-bottom: 3px solid white;
+    height: 100%;
+  }
 `;
 
 const RecordContainer = styled.div`

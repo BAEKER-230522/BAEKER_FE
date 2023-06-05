@@ -24,9 +24,9 @@ const Profile = () => {
       case 1:
         return <div>programmers</div>;
       case 2:
-        return <Board category={["스터디", "소개", "인원", "스터디 장", "상태"]} widthRatio={[1, 2, 1, 1, 1]} />;
+        return <Board category={["스터디", "소개", "인원", "스터디 장", "랭킹"]} widthRatio={[1, 2, 1, 1, 1]} />;
       case 3:
-        return <div>join</div>;
+        return <Board category={["스터디", "소개", "인원", "스터디 장", "상태"]} widthRatio={[1, 2, 1, 1, 1]} />;
     }
   };
   return (
