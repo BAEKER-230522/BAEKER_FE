@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { S } from "./styled";
-import DropDown from "../DropDown/DropDown";
+import DropDown from "../dropdown/DropDown";
 import { useOncClickIcon } from "@/hooks/useOnClickIcon";
-import { useDropDownControl } from "@/hooks/useDropDownControl";
+
 const Header = () => {
   const { dropdownState, changeDropdownState } = useOncClickIcon();
   return (
