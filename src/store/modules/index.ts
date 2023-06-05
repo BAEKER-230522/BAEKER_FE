@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import { HYDRATE } from "next-redux-wrapper";
 
 import dropdown from "./dropdown";
+import tab from "./tab";
 
 const reducer = (state: any, action: any) => {
   if (action.type === HYDRATE) {
@@ -15,6 +16,7 @@ const reducer = (state: any, action: any) => {
   return combineReducers({
     // 정의한 리듀서 모듈들을 결합
     dropdown,
+    tab,
     // 리듀서 모듈(slice)을 추가할 때마다 combineReducers 함수의 인자로 전달되는 객체 내부에 추가해줘야함
   })(state, action);
 };
