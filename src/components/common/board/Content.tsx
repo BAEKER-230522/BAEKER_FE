@@ -1,6 +1,7 @@
 import { S } from "./styled";
 import { IBoard } from "./Board";
 
+// get api로 데이터 받기.
 const mock = [
   {
     title: "study",
