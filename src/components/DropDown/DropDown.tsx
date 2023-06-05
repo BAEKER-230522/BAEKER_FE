@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { S } from "./styled";
 import { useSelector } from "react-redux";
 // import { useDropDownControl } from "@/hooks/useDropDownControl";
