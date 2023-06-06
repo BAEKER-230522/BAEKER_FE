@@ -9,6 +9,7 @@ const Container = styled.div`
   background: url("http://ec2-15-164-211-17.ap-northeast-2.compute.amazonaws.com:8080/images/welcome.jpg") no-repeat
     center fixed;
   background-size: cover;
+  background-color: #2a303c;
 `;
 
 const Wrapper = styled.div`
