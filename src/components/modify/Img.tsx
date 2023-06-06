@@ -4,7 +4,7 @@ const ModifyImg = () => {
   return (
     <S.ImgContainer>
       <img src={IMG_URL} />
-      <S.Button>이미지 변경</S.Button>
+      <button>이미지 변경</button>
     </S.ImgContainer>
   );
 };
