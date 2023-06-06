@@ -37,9 +37,33 @@ const DropDownIcon = styled.div`
   background-color: black;
 `;
 
+export const Input = styled.input`
+  width: 100%;
+  height: 40px;
+  margin-bottom: 30px;
+  border-radius: 7px;
+  border: 0.6px solid #a6adbb;
+  background-color: transparent;
+`;
+
+const Title = styled.span`
+  font-size: 1rem;
+  font-weight: 700;
+  color: #a6adbb;
+  margin-bottom: 10px;
+`;
+
+const InputContainer = styled.div<{ size: string }>`
+  width: ${(props) => props.size};
+  display: flex;
+  flex-direction: column;
+`;
 export const S = {
   HeaderContainer,
   Logo,
   IconContainer,
   DropDownIcon,
+  Input,
+  Title,
+  InputContainer,
 };
