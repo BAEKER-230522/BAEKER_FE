@@ -9,8 +9,9 @@ import { useSelector } from "react-redux";
 
 const Profile = () => {
   const tabState = useSelector((state: any) => {
-    return state.tab.tabState;
+    return state.tab.profileTabState;
   });
+  const TAB_ELEMENTS = ["백준", "프로그래머스", "스터디", "가입 대기"];
 
   const Component = (num: number) => {
     switch (num) {
@@ -35,7 +36,7 @@ const Profile = () => {
         <UserInfo />
         <UserSolvedInfo />
       </S.InfoContainer>
-      <Tab />
+      <Tab elements={TAB_ELEMENTS} type="profile" />
       <S.RecordContainer>{Component(tabState)}</S.RecordContainer>
     </S.Container>
   );
