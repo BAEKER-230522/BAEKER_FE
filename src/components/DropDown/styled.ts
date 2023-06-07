@@ -20,7 +20,7 @@ const Container = styled.div<IContainer>`
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-  background-color: gray;
+  background-color: #4b5563;
   border-radius: 7px;
   transition-delay: 0.3s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -57,12 +57,14 @@ const Container = styled.div<IContainer>`
 const Item = styled.div`
   cursor: pointer;
   border-radius: 5px;
-  padding: 10px;
+  padding: 7px 10px;
+  color: #f8f9fa;
+  font-weight: 500;
   &:not(:first-child) {
     margin-top: 10px;
   }
   &:hover {
-    background-color: aquamarine;
+    background-color: #a6adbb;
   }
   transition-duration: 0.3s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

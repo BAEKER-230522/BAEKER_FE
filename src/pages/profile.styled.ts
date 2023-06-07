@@ -16,7 +16,7 @@ const InfoContainer = styled.div`
   justify-content: center;
 `;
 
-const RecordContainer = styled.div`
+export const RecordContainer = styled.div`
   width: 80%;
   padding: 20px;
   height: 65vh;

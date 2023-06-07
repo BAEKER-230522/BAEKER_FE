@@ -43,8 +43,8 @@ const mock = [
 const Content = ({ target_nth, ratio }: IBoard) => {
   return (
     <S.ContentContainer>
-      {mock.map((e) => (
-        <S.ContentWrapper key={e.host} target_nth={target_nth!} ratio={ratio!}>
+      {mock.map((e, idx) => (
+        <S.ContentWrapper key={idx} target_nth={target_nth!} ratio={ratio!}>
           <div>스터디</div>
           <div>Lorem, ipsum dolor sit amet consectetur</div>
           <div>인원</div>

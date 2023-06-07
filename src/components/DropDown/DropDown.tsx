@@ -7,7 +7,6 @@ const DropDown = ({ type }: { type: "rank" | "menu" }) => {
     return state.dropdown.dropdownState;
   });
 
-  // const { dropdownRef } = useDropDownControl();
   const info = {
     rank: {
       items: [
