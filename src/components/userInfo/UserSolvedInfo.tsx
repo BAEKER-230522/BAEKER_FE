@@ -4,18 +4,21 @@ const UserSolvedInfo = () => {
   return (
     <S.Container>
       <div>
-        <h2>Ranking</h2>
-        <div>31th</div>
+        <S.Title>Ranking</S.Title>
+        <S.BigFont>31th</S.BigFont>
       </div>
       <S.Line></S.Line>
       <div>
-        <h2>백준</h2>
-        <div>341 문제 해결</div>
+        <S.Title>백준</S.Title>
+        <div style={{ display: "flex", alignContent: "center" }}>
+          <S.BigFont>341</S.BigFont>
+          <S.SmallFont>문제 해결</S.SmallFont>
+        </div>
       </div>
       <S.Line></S.Line>
       <div>
-        <h2>프로그래머스</h2>
-        <div>BAEKER 연동하기</div>
+        <S.Title>프로그래머스</S.Title>
+        <S.SmallFont>BAEKER 연동하기</S.SmallFont>
       </div>
     </S.Container>
   );

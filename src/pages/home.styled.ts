@@ -6,9 +6,10 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("http://ec2-15-164-211-17.ap-northeast-2.compute.amazonaws.com:8080/images/welcome.jpg") no-repeat
+  background: url("http://ec2-3-39-24-149.ap-northeast-2.compute.amazonaws.com:8080/images/welcome.jpg") no-repeat
     center fixed;
   background-size: cover;
+  background-color: #2a303c;
 `;
 
 const Wrapper = styled.div`
@@ -32,7 +33,7 @@ const KakaoButton = styled.button`
   display: flex;
   align-items: center;
   border-radius: 10px;
-  background: url("http://ec2-15-164-211-17.ap-northeast-2.compute.amazonaws.com:8080/images/kakao_login.png");
+  background: url("http://ec2-3-39-24-149.ap-northeast-2.compute.amazonaws.com:8080/images/kakao_login.png");
   background-repeat: no-repeat;
   object-fit: cover;
   cursor: pointer;

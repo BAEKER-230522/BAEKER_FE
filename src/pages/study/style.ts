@@ -1,8 +1,8 @@
 import styled from "styled-components";
-
+import { RecordContainer } from "../profile.styled";
 const Container = styled.div`
   width: 100vw;
-  height: 95vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,4 +10,9 @@ const Container = styled.div`
   background-color: #2a303c;
 `;
 
-export const S = { Container };
+const ContentContainer = styled(RecordContainer)`
+  width: 60%;
+  height: 60vh;
+`;
+
+export const S = { Container, ContentContainer };

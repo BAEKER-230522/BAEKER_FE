@@ -1,12 +1,15 @@
 import { S } from "./styled";
 import DropDown from "../dropdown/DropDown";
 import { useOncClickIcon } from "@/hooks/useOnClickIcon";
+import Link from "next/link";
 
 const Header = () => {
   const { dropdownState, changeDropdownState } = useOncClickIcon();
   return (
     <S.HeaderContainer>
-      <S.Logo>BAEKER</S.Logo>
+      <Link href={"/home"}>
+        <S.Logo>BAEKER</S.Logo>
+      </Link>
       <S.IconContainer>
         <S.DropDownIcon onClick={() => changeDropdownState(0)}>
           {dropdownState[0] === 1 && <DropDown type={"rank"} />}
