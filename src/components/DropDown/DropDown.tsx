@@ -1,6 +1,6 @@
 import { S } from "./styled";
 import { useSelector } from "react-redux";
-// import { useDropDownControl } from "@/hooks/useDropDownControl";
+import Link from "next/link";
 const DropDown = ({ type }: { type: "rank" | "menu" }) => {
   const styledProp = type === "rank" ? 0 : 1;
   const dropdownState = useSelector((state: any) => {
@@ -18,7 +18,6 @@ const DropDown = ({ type }: { type: "rank" | "menu" }) => {
     menu: {
       items: [
         { name: "마이페이지", link: "profile" },
-        { name: "내 스터디", link: "myStudy" },
         { name: "스터디 만들기", link: "createStudy" },
         { name: "로그아웃", link: "logout" },
       ],
@@ -29,7 +28,9 @@ const DropDown = ({ type }: { type: "rank" | "menu" }) => {
     <S.Position>
       <S.Container dropdownState={dropdownState} styledProp={styledProp}>
         {info[type].items.map((e) => (
-          <S.Item key={e.name}>{e.name}</S.Item>
+          <Link key={e.name} href={`/${e.link}`}>
+            <S.Item>{e.name}</S.Item>
+          </Link>
         ))}
       </S.Container>
     </S.Position>
