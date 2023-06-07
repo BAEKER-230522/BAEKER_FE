@@ -44,6 +44,9 @@ export const Input = styled.input`
   border-radius: 7px;
   border: 0.6px solid #a6adbb;
   background-color: transparent;
+  color: white;
+  padding-left: 10px;
+  outline: none;
 `;
 
 const Title = styled.span`

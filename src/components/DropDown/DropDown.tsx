@@ -17,6 +17,7 @@ const DropDown = ({ type }: { type: "rank" | "menu" }) => {
     },
     menu: {
       items: [
+        { name: "마이페이지", link: "profile" },
         { name: "내 스터디", link: "myStudy" },
         { name: "스터디 만들기", link: "createStudy" },
         { name: "로그아웃", link: "logout" },

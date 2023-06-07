@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 80%;
-  height: 100%;
-  background-color: aqua;
+  background-color: #242933;
   display: flex;
   align-items: start;
   flex-direction: column;
+  border-radius: 10px;
+  color: white;
 `;
 
 interface IRatios {
@@ -18,8 +19,9 @@ const HeaderContainer = styled.div<IRatios>`
   display: flex;
   width: 100%;
   align-items: center;
+  background-color: #242933;
   border-radius: 5px 5px 0px 0px;
-  background-color: white;
+
   height: 70px;
   div {
     text-align: center;
@@ -35,7 +37,7 @@ const ContentContainer = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
-  background-color: blanchedalmond;
+  background-color: #2a303c;
 `;
 
 const ContentWrapper = styled.div<IRatios>`
@@ -47,8 +49,11 @@ const ContentWrapper = styled.div<IRatios>`
     border-radius: 0 0 5px 5px;
     z-index: 50;
   }
+  border-bottom: 0.5px solid #a6adbb;
   div {
     text-align: center;
+    cursor: pointer;
+
     width: ${(props) => props.ratio}%;
     &:nth-child(${(props) => props.target_nth + 1}) {
       width: ${(props) => props.ratio * 2}%;
@@ -58,7 +63,7 @@ const ContentWrapper = styled.div<IRatios>`
 
 const PaginationContainer = styled.div`
   width: 40%;
-  background-color: azure;
+
   height: 50px;
   display: flex;
   align-items: center;
