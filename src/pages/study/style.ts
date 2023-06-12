@@ -13,6 +13,19 @@ const Container = styled.div`
 const ContentContainer = styled(RecordContainer)`
   width: 60%;
   height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-export const S = { Container, ContentContainer };
+const ChartContainer = styled.div`
+  display: flex;
+  margin-top: 20px;
+`;
+
+const StatusContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const S = { Container, ContentContainer, ChartContainer, StatusContainer };
