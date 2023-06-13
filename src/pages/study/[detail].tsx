@@ -26,11 +26,11 @@ const StudyDetail = () => {
           </S.StatusContainer>
         );
       case 1:
-        return <Board category={["규칙", "소개", "작성일"]} widthRatio={[1, 2, 1]} />;
+        return <Board category={["규칙", "소개", "작성일"]} widthRatio={[1, 2, 1]} test={1} />;
       case 2:
-        return <Board category={["이름", "랭킹", "가입한 스터디"]} widthRatio={[2, 1, 1]} />;
+        return <Board category={["이름", "랭킹", "가입한 스터디"]} widthRatio={[2, 1, 1]} test={2} />;
       case 3:
-        return <Board category={["이름", "랭킹", "상태"]} widthRatio={[1, 1, 1]} />;
+        return <Board category={["이름", "랭킹", "상태"]} widthRatio={[1, 1, 1]} test={3} />;
     }
   };
   return (
