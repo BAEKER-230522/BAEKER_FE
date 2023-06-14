@@ -1,17 +1,24 @@
 import { S } from "./styled";
-import { usePagination } from "@/hooks/usePagination";
 
-const Pagination = ({ test }: { test: number }) => {
-  const _test = Array.from({ length: 10 * test }, (_, idx: number) => idx + 1);
+interface IPagination {
+  onClickNext: () => void;
+  onClickPrev: () => void;
+  crntPageArray: number[];
+  onClickPage: (num: number) => void;
+  crntPage: number;
+}
 
-  const { crntPage, onClickNext, onClickPrev, crntPageArray, onClickPage } = usePagination(_test!);
-  console.log(test, crntPage);
+const Pagination = ({ onClickNext, onClickPrev, crntPageArray, onClickPage, crntPage }: IPagination) => {
   return (
     <S.PaginationContainer>
       <S.PrevBtn onClick={onClickPrev} />
       {crntPageArray.map((e) =>
         e === crntPage + 1 ? (
-          <S.PaginationElement onClick={() => onClickPage(e)} style={{ background: "red" }} key={e}>
+          <S.PaginationElement
+            onClick={() => onClickPage(e)}
+            style={{ background: "gray", borderRadius: "5px", padding: "5px" }}
+            key={e}
+          >
             {e}
           </S.PaginationElement>
         ) : (

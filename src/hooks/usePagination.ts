@@ -10,7 +10,6 @@ export const usePagination = (page: number[]) => {
   const PAGE_COUNT = 5;
   // 현재 페이지
   const [crntPage, setCrntPage] = useState<number>(0);
-  console.log(page, crntPage);
 
   // 현재 페이지 범위
   // range logic

@@ -3,11 +3,16 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 const PrevBtn = styled(GrFormPrevious)`
   background-color: white;
-  color: white;
+  padding: 3px;
+  border-radius: 50%;
+  cursor: pointer;
 `;
 
 const NextBtn = styled(GrFormNext)`
   background-color: white;
+  padding: 3px;
+  border-radius: 50%;
+  cursor: pointer;
 `;
 
 const Container = styled.div`
@@ -84,6 +89,7 @@ const PaginationContainer = styled.div`
 const PaginationElement = styled.span`
   margin: 5px;
   padding: 5px;
+  cursor: pointer;
 `;
 
 export const S = {
