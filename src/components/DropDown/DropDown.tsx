@@ -10,8 +10,8 @@ const DropDown = ({ type }: { type: "rank" | "menu" }) => {
   const info = {
     rank: {
       items: [
-        { name: "알고리즘 랭킹", link: "algoRank" },
-        { name: "스터디 랭킹", link: "studyRank" },
+        { name: "알고리즘 랭킹", link: "rank/algorithm" },
+        { name: "스터디 랭킹", link: "rank/study" },
       ],
     },
     menu: {

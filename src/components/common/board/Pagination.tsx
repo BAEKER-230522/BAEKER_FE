@@ -1,13 +1,33 @@
 import { S } from "./styled";
-import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
-const Pagination = () => {
+interface IPagination {
+  onClickNext: () => void;
+  onClickPrev: () => void;
+  crntPageArray: number[];
+  onClickPage: (num: number) => void;
+  crntPage: number;
+}
+
+const Pagination = ({ onClickNext, onClickPrev, crntPageArray, onClickPage, crntPage }: IPagination) => {
   return (
     <S.PaginationContainer>
-      <GrFormPrevious style={{ color: "white" }} />
-      <span>1</span>
-      <span>2</span>
-      <GrFormNext />
+      <S.PrevBtn onClick={onClickPrev} />
+      {crntPageArray.map((e) =>
+        e === crntPage + 1 ? (
+          <S.PaginationElement
+            onClick={() => onClickPage(e)}
+            style={{ background: "gray", borderRadius: "5px", padding: "5px" }}
+            key={e}
+          >
+            {e}
+          </S.PaginationElement>
+        ) : (
+          <S.PaginationElement onClick={() => onClickPage(e)} key={e}>
+            {e}
+          </S.PaginationElement>
+        )
+      )}
+      <S.NextBtn onClick={onClickNext} />
     </S.PaginationContainer>
   );
 };

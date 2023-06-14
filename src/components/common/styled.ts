@@ -74,6 +74,42 @@ const InputContainer = styled.div<{ size: string }>`
   display: flex;
   flex-direction: column;
 `;
+
+const StatusContainer = styled.div`
+  width: 100%;
+  height: 120px;
+  background-color: #2a303c;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const StatusElement = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  &:last-child {
+    border: none;
+  }
+  border-right: 1px solid white;
+`;
+
+const StatusTitle = styled.span`
+  font-weight: 600;
+  font-size: 1rem;
+  color: #a6adbb;
+`;
+
+const StatusNumber = styled.span`
+  font-weight: 700;
+  font-size: 2.7rem;
+  &:nth-child(2) {
+    color: #661ae6;
+  }
+`;
+
 export const S = {
   HeaderContainer,
   Logo,
@@ -83,4 +119,8 @@ export const S = {
   Title,
   InputContainer,
   MedalIcon,
+  StatusContainer,
+  StatusElement,
+  StatusTitle,
+  StatusNumber,
 };
