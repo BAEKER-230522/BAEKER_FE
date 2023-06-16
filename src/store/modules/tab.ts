@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   profileTabState: 0,
+  memberTabState: 0,
   studyTabState: 0,
 };
 
@@ -15,8 +16,11 @@ const tabSlice = createSlice({
     changeStudyTabState: (state: any, action) => {
       state.studyTabState = action.payload;
     },
+    changeMemberTabState: (state: any, action) => {
+      state.memberTabState = action.payload;
+    },
   },
 });
 
-export const { changeProfileTabState, changeStudyTabState } = tabSlice.actions;
+export const { changeProfileTabState, changeStudyTabState, changeMemberTabState } = tabSlice.actions;
 export default tabSlice.reducer;
