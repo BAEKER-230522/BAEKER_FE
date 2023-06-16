@@ -1,4 +1,4 @@
-import { S } from "./profile.styled";
+import { S } from "./style";
 import LineChart from "@/components/chart/chart";
 import UserInfo from "@/components/userInfo/UserInfo";
 import UserSolvedInfo from "@/components/userInfo/UserSolvedInfo";
