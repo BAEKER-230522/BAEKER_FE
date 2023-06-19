@@ -8,6 +8,8 @@
 
 ### Redux-toolkit
 
+### React-Query
+
 ---
 
 ## 고려할 부분
