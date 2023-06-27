@@ -1,0 +1,41 @@
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+const END_POINT = "api/member";
+const BASE_URL = "http://101.101.208.240:9000/";
+export const memberApi = createApi({
+  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  reducerPath: "memberApi",
+  tagTypes: ["Member"],
+  endpoints: (builder) => ({
+    // 모든 멤버 정보 가져오기
+    getAllMembers: builder.query({
+      // query가 없다면 ? 어떻게 해야할까 ?
+      query: () => `${END_POINT}/get/v1/all-members`,
+    }),
+
+    // id로 멤버 정보 가져오기
+    getMember: builder.query({
+      query: (id) => `${END_POINT}/get/v1/id?id=${id}`,
+    }),
+
+    // 멤버 생성
+    createMember: builder.mutation({
+      query: (body) => ({
+        url: `${END_POINT}/v1/create`,
+        method: "POST",
+        body,
+      }),
+    }),
+
+    // 멤버 정보 수정
+    updateMember: builder.mutation({
+      query: (body) => ({
+        url: `${END_POINT}/v1/update`,
+        method: "POST",
+        body,
+      }),
+    }),
+  }),
+});
+
+export const { useGetAllMembersQuery, useGetMemberQuery, useCreateMemberMutation } = memberApi;
