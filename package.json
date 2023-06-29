@@ -26,10 +26,12 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.9.0",
     "react-redux": "^8.0.7",
+    "styled-reset": "^4.4.7",
     "typescript": "5.0.4"
   },
   "devDependencies": {
     "@types/redux-logger": "^3.0.9",
+    "@types/styled-components": "^5.1.26",
     "redux-logger": "^3.0.6"
   }
 }
