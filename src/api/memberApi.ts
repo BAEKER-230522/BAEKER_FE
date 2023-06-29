@@ -11,11 +11,13 @@ export const memberApi = createApi({
     getAllMembers: builder.query({
       // query가 없다면 ? 어떻게 해야할까 ?
       query: () => `${END_POINT}/get/v1/all-members`,
+      providesTags: [{type: "Member"}]
     }),
 
     // id로 멤버 정보 가져오기
     getMember: builder.query({
       query: (id) => `${END_POINT}/get/v1/id?id=${id}`,
+      providesTags: [{type: "Member"}]
     }),
 
     // 멤버 생성
@@ -25,6 +27,7 @@ export const memberApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: [{type: "Member"}]
     }),
 
     // 멤버 정보 수정
@@ -34,6 +37,7 @@ export const memberApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: [{type: "Member"}]
     }),
   }),
 });
