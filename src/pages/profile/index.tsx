@@ -6,9 +6,12 @@ import Tab from "@/components/tab/Tab";
 import SolvedRecord from "@/components/tab/SolvedRecord";
 import Board from "@/components/common/board/Board";
 import { useSelector } from "react-redux";
-
+import { useRouter } from "next/router";
 const flag = 0;
+
 const Profile = () => {
+  // const {query: {detail : param}}  = useRouter();
+  
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
   });
@@ -20,7 +23,7 @@ const Profile = () => {
       case 0:
         return (
           <>
-            <SolvedRecord />
+            <SolvedRecord id={1}/>
             <LineChart />
           </>
         );
