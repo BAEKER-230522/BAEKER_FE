@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const END_POINT = "api/study/v1/";
+const END_POINT = "api/study/v1";
 const BASE_URL = "http://101.101.208.240:9000/";
 
 // baseQuery, reducerPath, tagTypes, endpoints,
@@ -28,7 +28,9 @@ export const studyApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: [{type: "Study"}]
     }),
+    
 
     // study 이름/소개/인원 수정
     updateStudy: builder.mutation({
@@ -37,6 +39,7 @@ export const studyApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: [{type: "Study"}]
     }),
 
     // study 리더 수정
@@ -46,6 +49,7 @@ export const studyApi = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: [{type: "Study"}]
     }),
   }),
 });
