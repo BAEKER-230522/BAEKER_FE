@@ -6,8 +6,12 @@ import Tab from "@/components/tab/Tab";
 import Board from "@/components/common/board/Board";
 import SolvedRecord from "@/components/tab/SolvedRecord";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
+
 
 const Member = () => {
+
+  
   const tabState = useSelector((state: any) => {
     return state.tab.memberTabState;
   });
@@ -19,7 +23,7 @@ const Member = () => {
       case 0:
         return (
           <>
-            <SolvedRecord />
+            <SolvedRecord id={1}/>
             <LineChart />
           </>
         );
