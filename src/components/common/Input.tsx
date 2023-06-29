@@ -6,18 +6,11 @@ interface IInput {
   title: string;
   size: string;
   value : string;
-  userInfo : IUserInfo;
-  setUserInfo: React.Dispatch<React.SetStateAction<IUserInfo>>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input = ({ title, size, value, setUserInfo, userInfo }: IInput) => {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if(title === "이름"){
-      setUserInfo({...userInfo, nickname:e.target.value})
-    }else{
-      setUserInfo({...userInfo, about: e.target.value})
-    }
-  }
+const Input = ({ title, size, value, onChange }: IInput) => {
+  
   return (
     <S.InputContainer size={size}>
       <S.Title>{title}</S.Title>
