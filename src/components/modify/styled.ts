@@ -25,7 +25,7 @@ const ImgContainer = styled.div`
   }
 `;
 
-const Button = styled.button`
+const Button = styled.input`
   width: 25%;
   height: 50px;
   border-radius: 10px;

@@ -1,7 +1,7 @@
 import { S } from "./styled";
 
 const ModifyButton = () => {
-  return <S.Button>수정하기</S.Button>;
+  return <S.Button type="submit"/>
 };
 
 export default ModifyButton;

@@ -1,52 +1,66 @@
 import { S } from "./styled";
+import { memberApi } from "@/api/memberApi";
 
-const SolvedRecord = () => {
+interface IMemberData{
+  bronze: number;
+  diamond: number;
+  silver:number;
+  gold: number;
+  platinum: number;
+  ruby: number;
+}
+
+const SolvedRecord = ({id}:{id : number}) => {
+  const {data, isLoading, isFetching} = memberApi.useGetMemberQuery(id);
+  console.log(data, isLoading, isFetching);
+  
+  if(isFetching) return <div>Loading...</div>
   return (
     <S.RecordContainer>
       <S.RecordWrapper>
         <S.RecordElement>
           <span>BRONZE</span>
           <div>
-            <h1>99</h1>
+            <h1>{data.data.bronze}</h1>
             <h3>solved</h3>
           </div>
         </S.RecordElement>
         <S.RecordElement>
-          <span>BRONZE</span>
+          <span>DIAMOND</span>
           <div>
-            <h1>99</h1>
-            <h3>solved</h3>
-          </div>
-        </S.RecordElement>
-      </S.RecordWrapper>
-      <S.RecordWrapper>
-        <S.RecordElement>
-          <span>BRONZE</span>
-          <div>
-            <h1>99</h1>
-            <h3>solved</h3>
-          </div>
-        </S.RecordElement>
-        <S.RecordElement>
-          <span>BRONZE</span>
-          <div>
-            <h1>99</h1>
+            <h1>{data.data.diamond}</h1>
             <h3>solved</h3>
           </div>
         </S.RecordElement>
       </S.RecordWrapper>
       <S.RecordWrapper>
         <S.RecordElement>
-          <span>BRONZE</span>
+          <span>SILVER</span>
           <div>
-            <h1>99</h1>
+            <h1>{data.data.silver}</h1>
             <h3>solved</h3>
           </div>
         </S.RecordElement>
         <S.RecordElement>
-          <span>BRONZE</span>
+          <span>RUBY</span>
           <div>
-            <h1>99</h1>
+            <h1>{data.data.ruby}</h1>
+            <h3>solved</h3>
+          </div>
+        </S.RecordElement>
+      </S.RecordWrapper>
+      <S.RecordWrapper>
+        <S.RecordElement>
+          <span>GOLD</span>
+          <div>
+            <h1>{data.data.gold}</h1>
+            <h3>solved</h3>
+          </div>
+        </S.RecordElement>
+        <S.RecordElement>
+          <span>PLATINUM</span>
+          <div>
+            <h1>{data.data.platinum}</h1>
             <h3>solved</h3>
           </div>
         </S.RecordElement>
