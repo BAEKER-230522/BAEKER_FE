@@ -18,7 +18,7 @@ export const memberApi = createApi({
     getMember: builder.query({
       query: (id) => `${END_POINT}/get/v1/id?id=${id}`,
       providesTags: [{type: "Member"}]
-    }),
+    }), 
 
     // 멤버 생성
     createMember: builder.mutation({
