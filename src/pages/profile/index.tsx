@@ -6,12 +6,13 @@ import Tab from "@/components/tab/Tab";
 import SolvedRecord from "@/components/tab/SolvedRecord";
 import Board from "@/components/common/board/Board";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/router";
+import { studyApi } from "@/api/studyApi";
 const flag = 0;
 
 const Profile = () => {
-  // const {query: {detail : param}}  = useRouter();
-  
+
+  const {data, isLoading} = studyApi.useGetUserStudyListQuery(1);
+  console.log(data);
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
   });
@@ -30,9 +31,9 @@ const Profile = () => {
       case 1:
         return <div>programmers</div>;
       case 2:
-        return <Board category={["스터디", "소개", "인원", "스터디 장", "랭킹"]} widthRatio={[1, 2, 1, 1, 1]} />;
+        return <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"],[ "스터디 장", "leader"],["랭킹", "xp"]]} widthRatio={[1, 2, 1, 1, 1]} data={data.data}/>;
       case 3:
-        return <Board category={["스터디", "소개", "인원", "스터디 장", "상태"]} widthRatio={[1, 2, 1, 1, 1]} />;
+        return <Board type={"study"} category={["스터디", "소개", "인원", "스터디 장", "상태"]} widthRatio={[1, 2, 1, 1, 1]} data={data.data}/>;
     }
   };
   return (
