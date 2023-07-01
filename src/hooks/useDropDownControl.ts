@@ -5,7 +5,6 @@ import * as userActions from "../store/modules/dropdown";
 export const useDropDownControl = () => {
   const dropdownRef = useRef<HTMLElement>(null);
   const iconRef = useRef<HTMLElement>(null);
-  console.log("drop:", dropdownRef, "icon:", iconRef);
 
   const dispatch = useDispatch();
   const dropdownState = useSelector((state: any) => {

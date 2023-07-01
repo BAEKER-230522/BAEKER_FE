@@ -12,8 +12,7 @@ interface IMemberData{
 
 const SolvedRecord = ({id}:{id : number}) => {
   const {data, isLoading, isFetching} = memberApi.useGetMemberQuery(id);
-  console.log(data, isLoading, isFetching);
-  
+
   if(isFetching) return <div>Loading...</div>
   return (
     <S.RecordContainer>
