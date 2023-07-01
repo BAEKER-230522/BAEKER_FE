@@ -51,4 +51,27 @@ const InputContainer = styled.div`
   align-items: center;
 `;
 
-export const S = { Container, Input, Button, SearchSVG, CreateButton, InputContainer };
+const RadioBtnGroupContainer = styled.div`
+  display: flex;
+  flex-direction : row;
+`
+
+const Label = styled.label`
+  color : #9da4b2;
+  font-weight: 700;
+  font-size: 1.2rem;
+`
+
+const RadioContainer = styled.div`
+  margin-right: 7px;
+  margin-bottom : 30px;
+`
+
+const Title = styled.span`
+font-size: 1rem;
+font-weight: 700;
+color: #a6adbb;
+margin-bottom: 20px;
+`;
+
+export const S = { Container, Input, Button, SearchSVG, CreateButton, InputContainer,RadioBtnGroupContainer, Label, RadioContainer, Title};
