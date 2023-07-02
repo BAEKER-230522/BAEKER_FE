@@ -10,12 +10,13 @@ import logger from "redux-logger";
 import reducer from "./modules";
 import { memberApi } from "@/api/memberApi";
 import { studyApi } from "@/api/studyApi";
+import { ruleApi } from "@/api/ruleApi";
 const makeStore = (context: any) =>
   configureStore({
     // configureStore: store 를 생성
     reducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(memberApi.middleware).concat(studyApi.middleware),
+      getDefaultMiddleware().concat(memberApi.middleware).concat(studyApi.middleware).concat(ruleApi.middleware),
 
     // redux-toolkit 은 devTools 등의 미들웨어들을 기본적으로 제공 (사용하고 싶은 미들웨어가 있다면 추가로 정의 ex.logger)
     devTools: process.env.NODE_ENV !== "production",

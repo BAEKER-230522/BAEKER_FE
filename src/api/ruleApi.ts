@@ -48,7 +48,7 @@ export const ruleApi = createApi({
       }),
       invalidatesTags: [{type: "Rule"}]
     }),
-
-    
   }),
 });
+
+export const {useDeleteRuleMutation, useCreateRuleMutation, useGetSearchRuleQuery, useGetRuleQuery, useGetAllRulesQuery } = ruleApi
