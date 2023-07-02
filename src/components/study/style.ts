@@ -49,4 +49,15 @@ const ButtonWrapper = styled.div`
   justify-content: space-around;
 `
 
-export const S = { Container, Img, StudyInfoContainer, ButtonWrapper, Title, About};
+const SelectBoxContainer = styled.select`
+  width: 40%;
+  
+  height: 50px;
+  margin-bottom : 30px;
+  background-color: transparent;
+  color : white;
+  padding: 10px;
+  
+`
+
+export const S = { Container, Img, StudyInfoContainer, ButtonWrapper, Title, About, SelectBoxContainer};
