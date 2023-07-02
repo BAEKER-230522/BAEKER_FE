@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { S } from './style';
-const RadioButtonGroup = () => {
+
+interface IProps {
+  setLevelValue: React.Dispatch<React.SetStateAction<string>>
+}
+
+const RadioButtonGroup = ({setLevelValue}:IProps) => {
   const [selectedValue, setSelectedValue] = useState<string>('option1');
 
   const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    setLevelValue(event.target.value)
     setSelectedValue(event.target.value);
   };
 
