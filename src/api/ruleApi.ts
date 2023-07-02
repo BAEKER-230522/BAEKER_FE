@@ -48,7 +48,17 @@ export const ruleApi = createApi({
       }),
       invalidatesTags: [{type: "Rule"}]
     }),
+
+    // 규칙 수정
+    updateRule: builder.mutation({
+      query: ({id, body}) => ({
+        url: `${END_POINT}/v1/${id}`,
+        method: "PUT",
+        body
+      }),
+      invalidatesTags: [{type: "Rule"}]
+    })
   }),
 });
 
-export const {useDeleteRuleMutation, useCreateRuleMutation, useGetSearchRuleQuery, useGetRuleQuery, useGetAllRulesQuery } = ruleApi
+export const {useDeleteRuleMutation, useCreateRuleMutation, useGetSearchRuleQuery, useGetRuleQuery, useGetAllRulesQuery, useUpdateRuleMutation} = ruleApi
