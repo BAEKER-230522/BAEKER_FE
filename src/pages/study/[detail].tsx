@@ -45,7 +45,7 @@ const StudyDetail = () => {
   //   }
   // };
   return ( 
-    <S.Container>
+    <S.StudyContainer>
       <StudyInfo />
       <Tab elements={TAB_ELEMENTS} type="study" />
       {/* <S.ContentContainer>{Component(tabState)}</S.ContentContainer> */}
@@ -66,7 +66,7 @@ const StudyDetail = () => {
         {tabState === 2 && <Board type={"member"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["가입한 스터디", "id"]]} widthRatio={[2, 1, 1]} data={stduyMemberList.data}/>}
         {tabState === 3 && <Board type={"join"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["상태", "about"]]} widthRatio={[1, 1, 1]} data={studyPedingList.data.pending} />}
       </S.ContentContainer>
-    </S.Container>
+    </S.StudyContainer>
   );
 };
 

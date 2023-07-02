@@ -3,13 +3,22 @@ import { RecordContainer } from "../profile/style";
 
 const Container = styled.form`
   width: 100vw;
-  height: 100vh;  
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background-color: #2a303c;
 `;
+
+const StudyContainer = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #2a303c;
+`
 
 // const Container = styled.div`
 //   width: 100vw;
@@ -52,4 +61,4 @@ const Button = styled.input`
 `;
 
 
-export const S = { Container, ContentContainer, ChartContainer, StatusContainer,Button };
+export const S = { Container, ContentContainer, ChartContainer, StatusContainer,Button, StudyContainer };
