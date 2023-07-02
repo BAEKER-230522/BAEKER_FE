@@ -5,6 +5,7 @@ import Slider from "@/components/slider/slider";
 import useInput from "@/hooks/useInput";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { toast } from 'react-toastify'
 
 const CreateStudy = () => {
   const [nameValue, setNameValue, nameHandler] = useInput('')  
@@ -12,8 +13,28 @@ const CreateStudy = () => {
   const [memberCount, setMemberCount] = useState<number>(1);
   const router = useRouter();
   const isEditMode = Object.keys(router.query).length !== 0 ? true : false;
-  const [createStudy] = studyApi.useCreateStudyMutation();
-  const [updateStudy] = studyApi.useUpdateStudyMutation();
+  const [createStudy, {isSuccess: isCreateStudySuccess}] = studyApi.useCreateStudyMutation();
+  const [updateStudy, {isSuccess: isUpdateStudySuccess}] = studyApi.useUpdateStudyMutation();
+
+  const handleCreateStudy = async() => {
+    try{
+      await createStudy({"member":1, "name":nameValue, "about":aboutValue, "leader":"leader","capacity":memberCount});
+      toast('스터디 생성 완료')
+      router.push({pathname:"/profile"})
+    }catch(err){
+      console.log(err)
+    }
+  }
+  
+  const handleUpdateStudy = async() => {
+    try{
+      await updateStudy({"id": router.query.id, "name":nameValue, "about":aboutValue,"capacity":memberCount})
+      toast('스터디 수정 완료')
+      router.push({pathname:`${router.query.id}`})
+    }catch(err){
+      console.log(err)
+    }
+  }
 
   useEffect(() => {
     setNameValue(router.query.name)
@@ -23,13 +44,12 @@ const CreateStudy = () => {
   
 
   const handleSubmit = (e:any) => {
+
     e.preventDefault(); 
     if(isEditMode){
-      updateStudy({"id": router.query.id, "name":nameValue, "about":aboutValue,"capacity":memberCount})
-      router.push({pathname:`${router.query.id}`})
+      handleUpdateStudy()
     }else{
-      createStudy({"member":1, "name":nameValue, "about":aboutValue, "leader":"leader","capacity":memberCount})
-      router.push({pathname:"/profile"})
+      handleCreateStudy()
     }
   }
   return (
