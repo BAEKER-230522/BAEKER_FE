@@ -18,7 +18,7 @@ const CreateStudy = () => {
 
   const handleCreateStudy = (e:any) => {
     e.preventDefault(); 
-    createRule({"name":nameValue, "about":aboutValue, "xp":xpValue, "count":countValue, "provide":"BaekJoon", "difficulty":levelValue})
+    createRule({"name":nameValue, "about":aboutValue, "xp":xpValue, "count":countValue, "provider":"BaekJoon", "difficulty":levelValue})
     router.push({pathname:"/rule/list"})
 }
   return (
@@ -28,7 +28,7 @@ const CreateStudy = () => {
       <Input title={"경험치"} size={"40%"} value={xpValue} onChange={xpHandler}/>
       <Input title={"문제 풀이 수"} size={"40%"} value={countValue} onChange={countHandler}/>
       <RadioButtonGroup setLevelValue={setLevelValue}/>
-      <S.Button type="submit" value={'스터디 생성'}/>
+      <S.Button type="submit" value={'규칙 생성'}/>
     </S.Container>
   );
 };
