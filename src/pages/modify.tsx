@@ -1,4 +1,5 @@
 import { S } from "./modify.styled";
+import { toast } from 'react-toastify'
 import ModifyImg from "@/components/modify/Img";
 import Input from "@/components/common/Input";
 import ModifyButton from "@/components/modify/button";
@@ -6,6 +7,7 @@ import { memberApi } from "@/api/memberApi";
 import {  useEffect } from "react";
 import {  useRouter } from "next/router";
 import useInput from "@/hooks/useInput";
+
 
 export interface IUserInfo {
   nickname: string;
@@ -25,12 +27,23 @@ const Modify = () => {
       setAboutValue(data.data.about)
     } 
   }, [isLoading])
+
+  const handleUpdateUserInfo = async() => {
+    try{
+      await updateUserInfo({"id":1, "nickname":nameValue, "about":aboutValue})
+      toast('정보 수정 완료')
+    }catch(err){
+      console.log(err);
+      
+    }
+    
+  }
   
   if(isLoading) return <div>Loading...</div>
   return (
     <S.Container onSubmit={(e) => {
       e.preventDefault();
-      updateUserInfo({"id":1, "nickname":nameValue, "about":aboutValue})
+      handleUpdateUserInfo()
       router.push({pathname:"/profile"})
     }}>
       <ModifyImg />
