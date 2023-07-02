@@ -1,9 +1,8 @@
 import { S } from "../study/style";
 import Input from "@/components/common/Input";
-import Slider from "@/components/slider/slider";
 import useInput from "@/hooks/useInput";
 import RadioButtonGroup from "@/components/rule/radioButtonGroup";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";
 const CreateStudy = () => {
@@ -12,13 +11,29 @@ const CreateStudy = () => {
   const [xpValue, setXpValue, xpHandler] = useInput('')
   const [countValue, setCountValue, countHandler] = useInput('')
   const [levelValue, setLevelValue] = useState('')
-  const [createRule, {isLoading}] = ruleApi.useCreateRuleMutation()
+  const [createRule] = ruleApi.useCreateRuleMutation()
+  const [modifyRule] = ruleApi.useUpdateRuleMutation()
   const router = useRouter();
+  const isEditMode = Object.keys(router.query).length !== 0 ? true : false;
   
+  // Object.keys(router.query).length !== 0 경우는 rule 수정하는 상태이다.
+  useEffect(() => {
+    if(isEditMode){
+      setNameValue(router.query?.name!);
+      setAboutValue(router.query?.about!);
+      setXpValue(router.query?.xp!);
+      setCountValue(router.query?.count)
+      setLevelValue(router.query.level)
+    }
+  }, [])
 
   const handleCreateStudy = (e:any) => {
     e.preventDefault(); 
-    createRule({"name":nameValue, "about":aboutValue, "xp":xpValue, "count":countValue, "provider":"BaekJoon", "difficulty":levelValue})
+    if(isEditMode){
+      modifyRule({id:router.query.id, body:{"name":nameValue, "about":aboutValue, "xp":xpValue, "count":countValue, "provider":"BaekJoon", "difficulty":levelValue}})
+    }else{
+      createRule({"name":nameValue, "about":aboutValue, "xp":xpValue, "count":countValue, "provider":"BaekJoon", "difficulty":levelValue})
+    }
     router.push({pathname:"/rule/list"})
 }
   return (
@@ -28,7 +43,8 @@ const CreateStudy = () => {
       <Input title={"경험치"} size={"40%"} value={xpValue} onChange={xpHandler}/>
       <Input title={"문제 풀이 수"} size={"40%"} value={countValue} onChange={countHandler}/>
       <RadioButtonGroup setLevelValue={setLevelValue}/>
-      <S.Button type="submit" value={'규칙 생성'}/>
+      {isEditMode ? <S.Button type="submit" value={'규칙 수정'}/> : <S.Button type="submit" value={'규칙 생성'}/>}
+      
     </S.Container>
   );
 };
