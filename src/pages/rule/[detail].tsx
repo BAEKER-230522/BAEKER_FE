@@ -39,7 +39,7 @@ const RuleDetail = () => {
         
       </S.Wrapper>
       <S.ButtonContainer>
-        <S.Button>목록</S.Button>
+        <S.Button onClick={() => router.push({pathname:"/rule/list"})}>목록</S.Button>
         <AlertModal id={param} title={'규칙 삭제'} text={'삭제하시겠습니까 ?'} >삭제</AlertModal>
         <S.Button onClick={() => router.push({pathname:"/rule/create", query:{name: data.data.name, count: data.data.count, level: data.data.difficulty, xp: data.data.xp, about: data.data.about, id:param}})}>수정</S.Button>
       </S.ButtonContainer>
