@@ -5,6 +5,7 @@ import RadioButtonGroup from "@/components/rule/radioButtonGroup";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";
+import { toast } from "react-toastify";
 const CreateStudy = () => {
   const [nameValue, setNameValue, nameHandler] = useInput('')  
   const [aboutValue, setAboutValue, aboutHandler] = useInput('')
@@ -31,8 +32,10 @@ const CreateStudy = () => {
     e.preventDefault(); 
     if(isEditMode){
       modifyRule({id:router.query.id, body:{"name":nameValue, "about":aboutValue, "xp":xpValue, "count":countValue, "provider":"BaekJoon", "difficulty":levelValue}})
+      toast('규칙 수정 완료')
     }else{
       createRule({"name":nameValue, "about":aboutValue, "xp":xpValue, "count":countValue, "provider":"BaekJoon", "difficulty":levelValue})
+      toast('규칙 생성 완료')
     }
     router.push({pathname:"/rule/list"})
 }
