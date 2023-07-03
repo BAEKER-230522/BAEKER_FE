@@ -1,17 +1,18 @@
 import { useRouter } from "next/router";
 import { S } from "./style";
 import { ruleApi } from "@/api/ruleApi";
+import AlertModal from "@/components/common/Modal/AlertModal";
 const RuleDetail = () => {
   const router = useRouter()
   const {detail : param} = router.query
   const {data, isLoading} = ruleApi.useGetRuleQuery(param)
-  const [deleteRule, {isLoading:deleteLoading}] = ruleApi.useDeleteRuleMutation();
+  
   if(isLoading) return <div>Loading...</div>
-  console.log(data)
-  const handleDelete = () => {
-    deleteRule(param);
-    router.push({pathname:"/rule/list"})
-  }
+  // console.log(data)
+  // const handleDelete = () => {
+  //   deleteRule(param);
+  //   router.push({pathname:"/rule/list"})
+  // }
   return (
     <S.Container>
       <S.Wrapper>
@@ -39,7 +40,7 @@ const RuleDetail = () => {
       </S.Wrapper>
       <S.ButtonContainer>
         <S.Button>목록</S.Button>
-        <S.Button onClick={handleDelete}>삭제</S.Button>
+        <AlertModal id={param} title={'규칙 삭제'} text={'삭제하시겠습니까 ?'} >삭제</AlertModal>
         <S.Button onClick={() => router.push({pathname:"/rule/create", query:{name: data.data.name, count: data.data.count, level: data.data.difficulty, xp: data.data.xp, about: data.data.about, id:param}})}>수정</S.Button>
       </S.ButtonContainer>
     </S.Container>
