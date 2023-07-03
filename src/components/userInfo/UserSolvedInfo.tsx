@@ -1,17 +1,19 @@
 import { S } from "./styled";
+import { IUserData } from "@/pages/member/[detail]";
 
-const UserSolvedInfo = () => {
+const UserSolvedInfo = ({userData}: any) => {
+  const SOLVEDCOUNT = userData.bronze + userData.diamond + userData.gold + userData.ruby + userData.silver + userData.platinum
   return (
     <S.Container>
       <div>
         <S.Title>Ranking</S.Title>
-        <S.BigFont>31th</S.BigFont>
+        <S.BigFont>{userData.id}th</S.BigFont>
       </div>
       <S.Line></S.Line>
       <div>
         <S.Title>백준</S.Title>
         <div style={{ display: "flex", alignContent: "center" }}>
-          <S.BigFont>341</S.BigFont>
+          <S.BigFont>{SOLVEDCOUNT}</S.BigFont>
           <S.SmallFont>문제 해결</S.SmallFont>
         </div>
       </div>

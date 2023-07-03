@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const END_POINT = "api/study/v1";
 const END_POINT_2 = "api/my-study/v1"
+const END_POINT_3 = "api/studyrule/v1"
 const BASE_URL = "http://101.101.208.240:9000/";
 
 // baseQuery, reducerPath, tagTypes, endpoints,
@@ -39,6 +40,28 @@ export const studyApi = createApi({
       query: (id) => `${END_POINT}/candidate-list/${id}`,
       providesTags: ["Study"],
     }),
+
+
+    // 스터디 미션 스터디 Id로 조회
+    getStudyRuleList: builder.query({
+      query: (id) => ({
+        url: `${END_POINT_3}/studyrules/${id}`,
+        method: "GET",
+        providesTags: ["Study"],
+      }),
+    }),
+
+    // 스터디 미션
+    createStudyMission: builder.mutation({
+      query: (body) => ({
+        url: `${END_POINT_3}/studyrules`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: [{type: "Study"}]
+    }),
+    
+
 
     // study 생성
     createStudy: builder.mutation({
@@ -81,8 +104,9 @@ export const studyApi = createApi({
       invalidatesTags: [{type: "Study"}]
     }),
 
+    
 
   }),
 });
 
-export const { useGetStudyInfoListQuery, useGetStudyInfoQuery, useCreateStudyMutation, useGetUserStudyListQuery, useGetStudyMemberListQuery, useGetPendingListQuery } = studyApi;
+export const { useGetStudyInfoListQuery, useGetStudyInfoQuery, useCreateStudyMutation, useGetUserStudyListQuery, useGetStudyMemberListQuery, useGetPendingListQuery, useCreateStudyMissionMutation, useGetStudyRuleListQuery } = studyApi;

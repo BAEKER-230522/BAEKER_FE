@@ -4,7 +4,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 35vh;
+  height: 40vh;
   margin-bottom: 50px;
   background-color: #242933;
 `;
@@ -23,10 +23,6 @@ const StudyInfoContainer = styled.div`
   height: 35%;
   justify-content: space-between;
 
-  div {
-    font-size: 2.4rem;
-    color: #a6adbb;
-  }
   button {
     height: 40px;
     border-radius: 10px;
@@ -37,4 +33,31 @@ const StudyInfoContainer = styled.div`
   }
 `;
 
-export const S = { Container, Img, StudyInfoContainer };
+const Title = styled.div`
+  font-size: 2.4rem;
+  color: #a6adbb;
+  margin-bottom : 20px;
+`
+
+const About = styled.p`
+  margin-bottom : 20px;
+`
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  width: 200px;
+  justify-content: space-around;
+`
+
+const SelectBoxContainer = styled.select`
+  width: 40%;
+  
+  height: 50px;
+  margin-bottom : 30px;
+  background-color: transparent;
+  color : white;
+  padding: 10px;
+  
+`
+
+export const S = { Container, Img, StudyInfoContainer, ButtonWrapper, Title, About, SelectBoxContainer};

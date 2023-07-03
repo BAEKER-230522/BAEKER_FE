@@ -1,10 +1,15 @@
 import { S } from "./style";
 import Board from "@/components/common/board/Board";
+import { memberApi } from "@/api/memberApi";
 
 const AlgorithmRank = () => {
+  const {data, isLoading} = memberApi.useGetAllMembersQuery({});
+
+  console.log(data);
+  if(isLoading) return <div>Loading...</div>
   return (
     <S.Container>
-      {/* <Board category={["랭킹", "이름", "가입한 스터디"]} widthRatio={[1, 1, 1]} />; */}
+      <Board category={[["랭킹", "id"], ["이름", "nickname"]]} widthRatio={[1, 1]} data={data.data} type={"member"}/>
     </S.Container>
   );
 };
