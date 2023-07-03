@@ -10,7 +10,7 @@ const Rule = () => {
   return (
     <S.Container>
       <Search />
-      <Board category={[["제목", "name"], ["소개", "about"], ["OB","provider" ]]} widthRatio={[1, 2, 1]} data={data.data} type={"rule"}/>;
+      <Board category={[["제목", "name"], ["소개", "about"], ["OB","provider" ]]} widthRatio={[1, 2, 1]} data={data.data} type={"rule"}/>
     </S.Container>
   );
 };
