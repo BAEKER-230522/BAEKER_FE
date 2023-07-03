@@ -26,7 +26,7 @@ const Mission = () => {
   const isEditMode = Object.keys(router.query).length !== 0 ? true : false;
   const {data, isLoading} = ruleApi.useGetAllRulesQuery({});
   const [selectedOption, setSelectedOption] = useState<ISelectOption>({value: '', id:0});
-  const [createMission] = ruleApi.useCreateRuleMutation()
+  const [createMission] = studyApi.useCreateStudyMissionMutation()
   
   const handleCreateMission = async() => {
     try{
