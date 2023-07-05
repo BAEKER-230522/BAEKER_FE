@@ -11,6 +11,8 @@ interface IProps{
 interface Option {
   value: string;
   id: number;
+  data: any;
+  isLoading: boolean
 }
 
 interface OptionElement extends HTMLOptionElement {
@@ -20,8 +22,8 @@ interface OptionElement extends HTMLOptionElement {
 }
 
 
-const SelectBox = ({selectedOption, setSelectedOption}:IProps) => {
-  const {data, isLoading} = ruleApi.useGetAllRulesQuery({});
+const SelectBox = ({selectedOption, setSelectedOption, data, isLoading}:IProps) => {
+  console.log(data);
   
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedOption = JSON.parse((event.target.selectedOptions[0] as OptionElement).dataset.option) as Option;
