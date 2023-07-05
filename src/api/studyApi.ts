@@ -104,6 +104,38 @@ export const studyApi = createApi({
       invalidatesTags: [{type: "Study"}]
     }),
 
+    // 스터디 가입 초대
+    inviteStudy: builder.mutation({
+      query: (body) => ({
+        url: `${END_POINT_2}/invite`,
+        method: "POST",
+        body
+      }),
+      invalidatesTags: [{type: "Study"}]
+    }),
+
+     // 스터디 가입 승인
+     acceptStudy: builder.mutation({
+      query: (body) => ({
+        url: `${END_POINT_2}/accept`,
+        method: "POST",
+        body
+      }),
+      invalidatesTags: [{type: "Study"}]
+    }),
+
+    // 스터디 가입 거절
+      refuseStudy: builder.mutation({
+      query: (body) => ({
+        url: `${END_POINT_2}`,
+        method: "DELETE",
+        body
+      }),
+      invalidatesTags: [{type: "Study"}]
+    }),
+
+
+
     
 
   }),
