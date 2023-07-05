@@ -24,7 +24,7 @@ export interface IUserData {
 interface IUserInfo {
   data: IUserData
 }
-
+ 
 const Profile = () => {
   const router = useRouter();
   const {detail: param} = router.query;

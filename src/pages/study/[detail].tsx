@@ -15,12 +15,14 @@ const StudyDetail = () => {
   const {data:studyMissionList, isLoading:getStudyMissionListLoading} = studyApi.useGetStudyRuleListQuery(param);
   const {data:stduyMemberList, isLoading:getMemberListLoading} = studyApi.useGetStudyMemberListQuery(param);
   const {data:studyPedingList, isLoading:getPedingListLoading} = studyApi.useGetPendingListQuery(param);
+  const {data:studyInfo, isLoading:getStudyInfoLoading} = studyApi.useGetStudyInfoQuery(param);
+  
   const tabState = useSelector((state: any) => {
     return state.tab.studyTabState;
   });
   const TAB_ELEMENTS = ["현황", "미션", "멤버", "가입요청"];
 
-  if(getMemberListLoading || getPedingListLoading ||getStudyMissionListLoading) return <div>Loading ... </div>
+  if(getMemberListLoading || getPedingListLoading ||getStudyMissionListLoading || getStudyInfoLoading) return <div>Loading ... </div>
 
   // switch문으로 할 경우 pagination을 공유하게 된다. 왜그럴까 ?
   // const Component = (num: number) => {
@@ -54,7 +56,7 @@ const StudyDetail = () => {
             <S.StatusContainer  >
               <SolveStatus />
               <S.ChartContainer>
-                <SolvedRecord id={param}/> 
+                <SolvedRecord id={param} data={studyInfo}/> 
                 <LineChart />
               </S.ChartContainer>
             </S.StatusContainer>

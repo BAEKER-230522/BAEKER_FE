@@ -29,7 +29,7 @@ const Profile = () => {
       case 0:
         return (
           <>
-            <SolvedRecord id={1}/>
+            <SolvedRecord id={1} data={userData}/>
             <LineChart />
           </>
         );
