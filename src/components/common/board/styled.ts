@@ -92,6 +92,11 @@ const PaginationElement = styled.span`
   cursor: pointer;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+`
 export const S = {
   Container,
   HeaderContainer,
@@ -101,4 +106,5 @@ export const S = {
   PrevBtn,
   NextBtn,
   PaginationElement,
+  ButtonWrapper,
 };
