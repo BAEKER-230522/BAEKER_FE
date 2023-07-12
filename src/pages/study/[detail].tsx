@@ -15,13 +15,16 @@ const StudyDetail = () => {
   const {data:studyMissionList, isLoading:getStudyMissionListLoading} = studyApi.useGetStudyRuleListQuery(param);
   const {data:stduyMemberList, isLoading:getMemberListLoading} = studyApi.useGetStudyMemberListQuery(param);
   const {data:studyPedingList, isLoading:getPedingListLoading} = studyApi.useGetPendingListQuery(param);
+  const {data:studyInfo, isLoading:getStudyInfoLoading} = studyApi.useGetStudyInfoQuery(param);
+  
+  
   const tabState = useSelector((state: any) => {
     return state.tab.studyTabState;
   });
   const TAB_ELEMENTS = ["현황", "미션", "멤버", "가입요청"];
 
-  if(getMemberListLoading || getPedingListLoading ||getStudyMissionListLoading) return <div>Loading ... </div>
-
+  if(getMemberListLoading || getPedingListLoading ||getStudyMissionListLoading || getStudyInfoLoading) return <div>Loading ... </div>
+  console.log(studyMissionList);
   // switch문으로 할 경우 pagination을 공유하게 된다. 왜그럴까 ?
   // const Component = (num: number) => {
   //   switch (num) {
@@ -54,16 +57,16 @@ const StudyDetail = () => {
             <S.StatusContainer  >
               <SolveStatus />
               <S.ChartContainer>
-                <SolvedRecord id={param}/> 
+                <SolvedRecord id={param} data={studyInfo}/> 
                 <LineChart />
               </S.ChartContainer>
             </S.StatusContainer>
           </>
-        )}
+        )} 
         
-        {tabState === 1 && <Board type={"mission"} category={[["규칙", "name"], ["소개", "about"], ["작성일", "createDate"]]} widthRatio={[1, 2, 1]}  data={studyMissionList.data}/>}
+        {tabState === 1 && <Board type={"study/mission"} category={[["규칙", "name"], ["소개", "about"], ["작성일", "createDate"]]} widthRatio={[1, 2, 1]}  data={studyMissionList.data}/>}
         {tabState === 2 && <Board type={"member"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["가입한 스터디", "id"]]} widthRatio={[2, 1, 1]} data={stduyMemberList.data}/>}
-        {tabState === 3 && <Board type={"join"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["상태", "about"]]} widthRatio={[1, 1, 1]} data={studyPedingList.data.pending} />}
+        {tabState === 3 && <Board type={"join"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["상태", "invite"]]} widthRatio={[1, 1, 1]} data={studyPedingList.data.pending} />}
       </S.ContentContainer>
     </S.StudyContainer>
   );

@@ -10,10 +10,9 @@ interface IMemberData{
   ruby: number;
 }
 
-const SolvedRecord = ({id}:{id : number}) => {
-  const {data, isLoading, isFetching} = memberApi.useGetMemberQuery(id);
-
-  if(isFetching) return <div>Loading...</div>
+const SolvedRecord = ({id,data}: any) => {
+  console.log(data);
+  
   return (
     <S.RecordContainer>
       <S.RecordWrapper>

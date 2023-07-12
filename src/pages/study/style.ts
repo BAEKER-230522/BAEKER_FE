@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { RecordContainer } from "../profile/style";
-
-const Container = styled.form`
+import { Title } from "@/components/common/styled";
+const Container = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -10,6 +10,15 @@ const Container = styled.form`
   flex-direction: column;
   background-color: #2a303c;
 `;
+
+const FormContainer = styled.form`
+  width: 80%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
 
 const StudyContainer = styled.div`
   width: 100vw;
@@ -60,5 +69,12 @@ const Button = styled.input`
   border: none;
 `;
 
+const SelectorWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom : 15px;
+  width: 40%;
+`
 
-export const S = { Container, ContentContainer, ChartContainer, StatusContainer,Button, StudyContainer };
+
+export const S = { Container, ContentContainer, ChartContainer, StatusContainer,Button, StudyContainer ,FormContainer, Title, SelectorWrapper};

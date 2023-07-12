@@ -5,6 +5,7 @@ import RadioButtonGroup from "@/components/rule/radioButtonGroup";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";
+import { toast } from "react-toastify";
 const CreateStudy = () => {
   const [nameValue, setNameValue, nameHandler] = useInput('')  
   const [aboutValue, setAboutValue, aboutHandler] = useInput('')
@@ -28,23 +29,28 @@ const CreateStudy = () => {
   }, [])
 
   const handleCreateStudy = (e:any) => {
+    console.log('click');
+    
     e.preventDefault(); 
     if(isEditMode){
       modifyRule({id:router.query.id, body:{"name":nameValue, "about":aboutValue, "xp":xpValue, "count":countValue, "provider":"BaekJoon", "difficulty":levelValue}})
+      toast('규칙 수정 완료')
     }else{
       createRule({"name":nameValue, "about":aboutValue, "xp":xpValue, "count":countValue, "provider":"BaekJoon", "difficulty":levelValue})
+      toast('규칙 생성 완료')
     }
     router.push({pathname:"/rule/list"})
 }
   return (
-    <S.Container onSubmit={(e) => handleCreateStudy(e)}>
-      <Input title={"규칙 명"} size={"40%"} value={nameValue} onChange={nameHandler}/>
-      <Input title={"규칙 소개"} size={"40%"} value={aboutValue} onChange={aboutHandler}/>
-      <Input title={"경험치"} size={"40%"} value={xpValue} onChange={xpHandler}/>
-      <Input title={"문제 풀이 수"} size={"40%"} value={countValue} onChange={countHandler}/>
-      <RadioButtonGroup setLevelValue={setLevelValue}/>
-      {isEditMode ? <S.Button type="submit" value={'규칙 수정'}/> : <S.Button type="submit" value={'규칙 생성'}/>}
-      
+    <S.Container>
+      <S.FormContainer onSubmit={(e) => handleCreateStudy(e)}>
+        <Input title={"규칙 명"} size={"40%"} value={nameValue} onChange={nameHandler}/>
+        <Input title={"규칙 소개"} size={"40%"} value={aboutValue} onChange={aboutHandler}/>
+        <Input title={"경험치"} size={"40%"} value={xpValue} onChange={xpHandler}/>
+        <Input title={"문제 풀이 수"} size={"40%"} value={countValue} onChange={countHandler}/>
+        <RadioButtonGroup setLevelValue={setLevelValue}/>
+        {isEditMode ? <S.Button type="submit" value={'규칙 수정'}/> : <S.Button type="submit" value={'규칙 생성'}/>}
+      </S.FormContainer>
     </S.Container>
   );
 };

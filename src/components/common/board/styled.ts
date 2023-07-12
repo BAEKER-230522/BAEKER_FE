@@ -34,7 +34,7 @@ const HeaderContainer = styled.div<IRatios>`
   display: flex;
   width: 100%;
   align-items: center;
-  background-color: #242933;
+  
   border-radius: 5px 5px 0px 0px;
 
   height: 70px;
@@ -92,6 +92,11 @@ const PaginationElement = styled.span`
   cursor: pointer;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 200px;
+`
 export const S = {
   Container,
   HeaderContainer,
@@ -101,4 +106,5 @@ export const S = {
   PrevBtn,
   NextBtn,
   PaginationElement,
+  ButtonWrapper,
 };

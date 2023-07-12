@@ -4,6 +4,7 @@ import Link from "next/link";
 import { memberApi } from "@/api/memberApi";
 import { IUserData } from "@/pages/member/[detail]";
 import { useRouter } from "next/router";
+import JoinRequestModal from "../common/Modal/JoinRequestModal";
 
 const UserInfo = ({userData}:any) => {
   const router = useRouter()
@@ -15,9 +16,7 @@ const UserInfo = ({userData}:any) => {
       <S.Image src={IMG_URL} />
       <S.Name>{userData.nickname}</S.Name>
       <S.Introduce>{userData.about}</S.Introduce>
-      <Link href={"/modify"}>
-        {isMypage? <S.Button>프로필 수정</S.Button> : <S.Button>스터디 초대하기</S.Button>}
-      </Link>
+      {isMypage? <S.Button onClick={() => router.push({pathname:"/member/modify"})}>프로필 수정</S.Button> : <JoinRequestModal name={userData.nickname} title={"초대하기"} text={"누구누구 초대하기"} id={userData.id}/>}
     </S.Container>
   );
 };
