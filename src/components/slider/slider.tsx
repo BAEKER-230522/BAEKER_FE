@@ -6,8 +6,9 @@ interface IProps {
   setMemberCount: React.Dispatch<React.SetStateAction<number>>
 }
 const Slider = ({...props}:IProps) => {
-  
+  console.log(props);
   const test = (e: any) => {
+    console.log('test');
     props.setMemberCount(e.target.value);
   };
 

@@ -2,35 +2,50 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import { useRouter } from "next/router";
 import { ruleApi } from '@/api/ruleApi';
+import { studyApi } from '@/api/studyApi';
+import { toast } from 'react-toastify';
 
 interface IProps {
   title: string;
   text : string;
   id : number;
+  type: string;
 }
 
-const AlertModal = ({title, text, id}: IProps) => {
-  const [deleteRule, {isLoading:deleteLoading}] = ruleApi.useDeleteRuleMutation();
+const AlertModal = ({title, text, id, type}: IProps) => {
+  const [deleteRule, {isLoading:deleteRuleLoading}] = ruleApi.useDeleteRuleMutation();
+  const [deleteMission, {isLoading:deleteMissionLoading}] = studyApi.useDeleteStudyMissionMutation();
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState('Content of the modal');
   const router = useRouter()
   const showModal = () => {
-    setOpen(true);
+    setOpen(true); 
   };
 
   const handleOk = async() => {
     try{
       setModalText('삭제 중입니다');
       setConfirmLoading(true);
-      await deleteRule(id)
+      if(type==="rule"){
+        await deleteRule(id)
+      }
+      if(type==="mission"){
+        await deleteMission(id)
+      }
     }catch(err){
       console.log(err);
     }finally{
+      toast('삭제 완료')
       setConfirmLoading(false)
-      router.push({pathname:"/rule/list"})
+      if(type==="rule"){
+        router.push({pathname:"/rule/list"})
+      }
+      if(type==="mission"){
+        router.push({pathname:"/study/1"})
+      }
+      
     }
-    
   };
 
   const handleCancel = () => {

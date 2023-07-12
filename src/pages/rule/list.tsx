@@ -2,11 +2,13 @@ import Board from "@/components/common/board/Board";
 import Search from "@/components/rule/search";
 import { S } from "./style";
 import { ruleApi } from "@/api/ruleApi";
+import EmptyList from "@/components/EmptyList/EmptyList";
 
 const Rule = () => {
   const {data, isLoading} = ruleApi.useGetAllRulesQuery({});
   
   if(isLoading) return <div>Loading...</div>
+  if(data.length === 0) return <EmptyList/>
   return (
     <S.Container>
       <Search />

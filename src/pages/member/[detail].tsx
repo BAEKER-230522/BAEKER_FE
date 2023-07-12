@@ -28,7 +28,7 @@ interface IUserInfo {
 const Profile = () => {
   const router = useRouter();
   const {detail: param} = router.query;
-  const {data: userStudyList, isLoading: isGetUserStudyListLoading} = studyApi.useGetUserStudyListQuery(param);
+  const {data: userStudyList, isLoading: isGetUserStudyListLoading} = studyApi.useGetUserStudyListQuery({memberId:param, status:1});
   const {data:userData, isLoading:isGetUserInfoLoading} = memberApi.useGetMemberQuery(param);
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
@@ -43,16 +43,16 @@ const Profile = () => {
       case 0:
         return (
           <>
-            <SolvedRecord id={Number(param)}/>
+            <SolvedRecord id={Number(param)} data={userData}/>
             <LineChart />
           </>
         );
       case 1:
         return <div>programmers</div>;
       case 2:
-        return <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"],[ "스터디 장", "leader"],["랭킹", "xp"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data}/>;
+        return <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"],[ "스터디 장", "leader"],["랭킹", "xp"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.studyList}/>;
       case 3:
-        return <Board type={"study"} category={["스터디", "소개", "인원", "스터디 장", "상태"]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data}/>;
+        return <Board type={"study"} category={["스터디", "소개", "인원", "스터디 장", "상태"]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.studyList}/>;
     }
   };
   return (

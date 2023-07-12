@@ -25,7 +25,7 @@ export const studyApi = createApi({
 
     // member id로 가입한 모든 study 조회하기
     getUserStudyList: builder.query({
-      query: (id) => `${END_POINT}/member/${id}`,
+      query: ({memberId, status}) => `${END_POINT}/member/${memberId}?status=${status}`,
       providesTags: ["Study"],
     }),
     
@@ -47,8 +47,9 @@ export const studyApi = createApi({
       query: (id) => ({
         url: `${END_POINT_3}/studyrules/${id}`,
         method: "GET",
-        providesTags: ["Study"],
       }),
+      providesTags: (result:any, err:any, arg:any) => { console.log('result:',result,'arg:', arg, 'provide');
+        return [{type: "Study", id:Number(arg.id)}]},
     }),
 
     // 스터디 미션
@@ -58,7 +59,9 @@ export const studyApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: [{type: "Study"}]
+      invalidatesTags: (result:any, err:any, arg:any) => {
+         console.log('result:',result, 'arg:', arg, 'invalid')
+         return [{type: "Study", id:Number(arg.studyId)}]},
     }),
     
 
@@ -134,6 +137,32 @@ export const studyApi = createApi({
       invalidatesTags: [{type: "Study"}]
     }),
 
+    // 스터디 미션 수정
+      updateStudyMission: builder.mutation({
+      query: ({id, body}) => ({
+        url: `${END_POINT_3}/${id}`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: [{type: "Study"}]
+    }),
+
+    // 스터디 미션 삭제
+    deleteStudyMission: builder.mutation({
+      query: (missionId) => ({
+        url: `${END_POINT_3}/studyrules/${missionId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [{type: "Study"}]
+    }),
+
+
+    // 스터디 미션 개별 조회
+    getStudyMission : builder.query({
+      query: (id) => `${END_POINT_3}/search/${id}`,
+      providesTags: ["Study"],
+    }),
+
 
 
     
@@ -141,4 +170,4 @@ export const studyApi = createApi({
   }),
 });
 
-export const { useGetStudyInfoListQuery, useGetStudyInfoQuery, useCreateStudyMutation, useGetUserStudyListQuery, useGetStudyMemberListQuery, useGetPendingListQuery, useCreateStudyMissionMutation, useGetStudyRuleListQuery } = studyApi;
+export const { useGetStudyInfoListQuery, useGetStudyInfoQuery, useCreateStudyMutation, useGetUserStudyListQuery, useGetStudyMemberListQuery, useGetPendingListQuery, useCreateStudyMissionMutation, useGetStudyRuleListQuery, useGetStudyMissionQuery } = studyApi;

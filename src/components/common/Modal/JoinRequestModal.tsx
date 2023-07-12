@@ -5,7 +5,10 @@ import { studyApi } from '@/api/studyApi';
 import Selector from '../Selector';
 import { Input } from 'antd';
 import { toast } from 'react-toastify';
+import { USER_NUMBER } from '@/util/constant';
+
 const { TextArea } = Input;
+
 
 interface IProps {
   title: string;
@@ -21,19 +24,25 @@ const JoinRequestModal = ({title, text, id, name}: IProps) => {
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState('Content of the modal');
   const router = useRouter()
-  const {data: getStudyList, isLoading} = studyApi.useGetStudyInfoListQuery(1)
+  const {data: getStudyList, isLoading} = studyApi.useGetUserStudyListQuery({memberId:6, status:1})
+  console.log(getStudyList);
+  
   const [handleInvite] = studyApi.useInviteStudyMutation()
   const showModal = () => {
     setOpen(true);
   };
 
+  
   // 스터디 초대 
 
   const handleOk = async() => {
+    console.log(studyId, USER_NUMBER, id, message);
     try{
       setModalText('삭제 중입니다');
       setConfirmLoading(true);
-      await handleInvite({'study':studyId, 'inviter':1, 'invitee':id, 'msg':message})
+      
+      
+      await handleInvite({'study':studyId, 'inviter':6, 'invitee':id, 'msg':message})
       setMessage('')
       toast('스터디 초대 완료')
       setOpen(false);
@@ -54,6 +63,8 @@ const JoinRequestModal = ({title, text, id, name}: IProps) => {
     setMessage(e.target.value)
   };
 
+  if(isLoading) return <div>Loading...</div>
+  console.log(getStudyList);
   return (
     <>
       <Button type="primary" onClick={showModal}>
@@ -68,7 +79,7 @@ const JoinRequestModal = ({title, text, id, name}: IProps) => {
         
       >
         <div style={{ display:'flex', flexDirection:'column'}}>
-          <Selector data={getStudyList} setStudyId={setStudyId}/>
+          <Selector data={getStudyList.data} setStudyId={setStudyId}/>
           <TextArea
             showCount
             maxLength={100}

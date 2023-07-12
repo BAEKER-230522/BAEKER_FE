@@ -29,6 +29,8 @@ const CreateStudy = () => {
   }, [])
 
   const handleCreateStudy = (e:any) => {
+    console.log('click');
+    
     e.preventDefault(); 
     if(isEditMode){
       modifyRule({id:router.query.id, body:{"name":nameValue, "about":aboutValue, "xp":xpValue, "count":countValue, "provider":"BaekJoon", "difficulty":levelValue}})
@@ -40,14 +42,15 @@ const CreateStudy = () => {
     router.push({pathname:"/rule/list"})
 }
   return (
-    <S.Container onSubmit={(e) => handleCreateStudy(e)}>
-      <Input title={"규칙 명"} size={"40%"} value={nameValue} onChange={nameHandler}/>
-      <Input title={"규칙 소개"} size={"40%"} value={aboutValue} onChange={aboutHandler}/>
-      <Input title={"경험치"} size={"40%"} value={xpValue} onChange={xpHandler}/>
-      <Input title={"문제 풀이 수"} size={"40%"} value={countValue} onChange={countHandler}/>
-      <RadioButtonGroup setLevelValue={setLevelValue}/>
-      {isEditMode ? <S.Button type="submit" value={'규칙 수정'}/> : <S.Button type="submit" value={'규칙 생성'}/>}
-      
+    <S.Container>
+      <S.FormContainer onSubmit={(e) => handleCreateStudy(e)}>
+        <Input title={"규칙 명"} size={"40%"} value={nameValue} onChange={nameHandler}/>
+        <Input title={"규칙 소개"} size={"40%"} value={aboutValue} onChange={aboutHandler}/>
+        <Input title={"경험치"} size={"40%"} value={xpValue} onChange={xpHandler}/>
+        <Input title={"문제 풀이 수"} size={"40%"} value={countValue} onChange={countHandler}/>
+        <RadioButtonGroup setLevelValue={setLevelValue}/>
+        {isEditMode ? <S.Button type="submit" value={'규칙 수정'}/> : <S.Button type="submit" value={'규칙 생성'}/>}
+      </S.FormContainer>
     </S.Container>
   );
 };

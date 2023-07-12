@@ -35,7 +35,7 @@ const SolvedRecord = ({id,data}: any) => {
         <S.RecordElement>
           <span>SILVER</span>
           <div>
-            <h1>{data.data.sliver}</h1>
+            <h1>{data.data.silver}</h1>
             <h3>solved</h3>
           </div>
         </S.RecordElement>

@@ -3,6 +3,7 @@ import { S } from './styled';
 import { Button } from 'antd';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import { studyApi } from '@/api/studyApi';
+import { toast } from 'react-toastify';
 
 interface IProps{
   memberId: number;
@@ -15,22 +16,34 @@ const BoardButton = ({memberId, studyId}: IProps) => {
   const [refuseStudy] = studyApi.useRefuseStudyMutation()
 
 
-  const handleStudyInviteAccept = async (memberId:number, studyId:number) => {
+  const handleStudyInviteAccept = async (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>, memberId:number, studyId:number) => {
     console.log('accept');
-    
-    // await acceptStudy({"memberId":memberId, "studyId":studyId})
+    e.stopPropagation()
+    try{
+      toast('가입 승인')
+      await acceptStudy({"memberId":memberId, "studyId":studyId})
+    }catch(err){
+      console.log(err); 
+    }
   }
 
-  const handleStudyInviteRefuse = async (memberId:number, studyId:number) => {
+  const handleStudyInviteRefuse = async (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>, memberId:number, studyId:number) => {
     console.log('refuse');
-    // await refuseStudy({"memberId":memberId, "studyId":studyId})
+    e.stopPropagation()
+    try{
+      toast('가입 거절')
+      await refuseStudy({"memberId":memberId, "studyId":studyId})
+    }catch(err){
+      console.log(err); 
+    }
   }
+
   return (
         <S.ButtonWrapper>
-          <Button type="primary" size={size} onClick={() => handleStudyInviteAccept(memberId, studyId)}>
+          <Button type="primary" size={size} onClick={(e) => handleStudyInviteAccept(e, memberId, studyId)}>
             승낙
           </Button>
-          <Button type="primary" size={size} onClick={() => handleStudyInviteRefuse(memberId, studyId)}>
+          <Button type="primary" size={size} onClick={(e) => handleStudyInviteRefuse(e, memberId, studyId)}>
             거절
           </Button>
         </S.ButtonWrapper>
