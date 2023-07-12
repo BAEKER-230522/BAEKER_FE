@@ -62,7 +62,7 @@ export const Input = styled.input`
   outline: none;
 `;
 
-const Title = styled.span`
+export const Title = styled.span`
   font-size: 1rem;
   font-weight: 700;
   color: #a6adbb;

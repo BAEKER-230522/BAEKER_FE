@@ -34,7 +34,7 @@ const HeaderContainer = styled.div<IRatios>`
   display: flex;
   width: 100%;
   align-items: center;
-  background-color: #242933;
+  
   border-radius: 5px 5px 0px 0px;
 
   height: 70px;
