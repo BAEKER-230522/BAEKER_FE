@@ -1,14 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const END_POINT = "api/rule";
-const BASE_URL = "http://101.101.208.240:9000/";
 
 interface IGetSearchRuleParams {
   page : number;
   keyword: string;
 };
 export const ruleApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL }),
   reducerPath: "ruleApi",
   tagTypes: ["Rule"],
   endpoints: (builder) => ({
