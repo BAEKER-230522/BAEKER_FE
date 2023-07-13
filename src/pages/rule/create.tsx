@@ -1,7 +1,7 @@
 import { S } from "../study/style";
 import Input from "@/components/common/Input";
 import useInput from "@/hooks/useInput";
-import RadioButtonGroup from "@/components/rule/radioButtonGroup";
+import RadioButtonGroup from "@/components/Rule/radioButtonGroup";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";

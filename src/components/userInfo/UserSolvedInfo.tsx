@@ -1,4 +1,4 @@
-import { S } from "./styled";
+import { S } from "./style";
 import { IUserData } from "@/pages/member/[detail]";
 
 const UserSolvedInfo = ({userData}: any) => {

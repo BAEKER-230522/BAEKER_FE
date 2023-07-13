@@ -1,5 +1,5 @@
-import Board from "@/components/common/board/Board";
-import Search from "@/components/rule/search";
+import Board from "@/components/common/Board/Board";
+import Search from "@/components/Rule/search";
 import { S } from "./style";
 import { ruleApi } from "@/api/ruleApi";
 import EmptyList from "@/components/EmptyList/EmptyList";

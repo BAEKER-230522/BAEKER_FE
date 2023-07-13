@@ -13,7 +13,6 @@ interface IArr{
 
 const Selector = ({data, setStudyId}:IProps) => {
   const data_arr:IArr[] = []
-  console.log(data);
   for(let i=0; i<data.data.length; i++){
     data_arr.push({value:data.data[i].id, label:data.data[i].name})
   }

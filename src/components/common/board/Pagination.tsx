@@ -1,4 +1,4 @@
-import { S } from "./styled";
+import { S } from "./style";
 
 interface IPagination {
   onClickNext: () => void;

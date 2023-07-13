@@ -1,4 +1,4 @@
-import { S } from "./styled";
+import { S } from "./style";
 import { IMG_URL } from "@/pages/mock";
 const ModifyImg = () => {
   return (

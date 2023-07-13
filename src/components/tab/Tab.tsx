@@ -1,5 +1,5 @@
 import { useChangeTabState } from "@/hooks/useChangeTabState";
-import { S } from "./styled";
+import { S } from "./style";
 
 interface ITab {
   elements: string[];

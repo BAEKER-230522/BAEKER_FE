@@ -1,4 +1,4 @@
-import { S } from "./styled";
+import { S } from "./style";
 import DropDown from "../dropdown/DropDown";
 import { useOncClickIcon } from "@/hooks/useOnClickIcon";
 import Link from "next/link";

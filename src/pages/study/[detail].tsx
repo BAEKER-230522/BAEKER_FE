@@ -1,11 +1,11 @@
 import { S } from "./style";
-import StudyInfo from "@/components/study/studyInfo";
-import Tab from "@/components/tab/Tab";
-import Board from "@/components/common/board/Board";
-import SolvedRecord from "@/components/tab/SolvedRecord";
-import LineChart from "@/components/chart/chart";
+import StudyInfo from "@/components/Study/StudyInfo";
+import Tab from "@/components/Tab/Tab";
+import Board from "@/components/common/Board/Board";
+import SolvedRecord from "@/components/Tab/SolvedRecord";
+import LineChart from "@/components/Chart/Chart";
 import { useSelector } from "react-redux";
-import SolveStatus from "@/components/common/solveStatus";
+import SolveStatus from "@/components/common/SolveStatus";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
 

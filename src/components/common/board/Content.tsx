@@ -1,4 +1,4 @@
-import { S } from "./styled";
+import { S } from "./style";
 import { IBoard } from "./Board";
 import { useRouter } from "next/router";
 import BoardButton from "./Button";

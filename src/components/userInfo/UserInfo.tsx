@@ -1,5 +1,5 @@
 import { IMG_URL } from "@/pages/mock";
-import { S } from "./styled";
+import { S } from "./style";
 import Link from "next/link";
 import { memberApi } from "@/api/memberApi";
 import { IUserData } from "@/pages/member/[detail]";
