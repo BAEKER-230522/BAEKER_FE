@@ -1,4 +1,4 @@
-import { S } from "./modify.styled";
+import { S } from "./style";
 import { toast } from 'react-toastify'
 import ModifyImg from "@/components/Modify/Img";
 import Input from "@/components/common/Input";

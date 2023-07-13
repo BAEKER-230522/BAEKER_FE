@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { RecordContainer } from "../profile/profile.style";
+import { RecordContainer } from "../profile/style";
 import { Title } from "@/components/common/style";
 const Container = styled.div`
   width: 100vw;
