@@ -1,5 +1,5 @@
 import { S } from "./style";
-import DropDown from "../dropdown/DropDown";
+import DropDown from "../Dropdown/Dropdown";
 import { useOncClickIcon } from "@/hooks/useOnClickIcon";
 import Link from "next/link";
 

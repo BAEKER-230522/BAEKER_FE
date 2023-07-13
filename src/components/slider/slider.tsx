@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { S } from "./style";
+import { S } from "./Slider.style";
 
 interface IProps {
   memberCount: number;

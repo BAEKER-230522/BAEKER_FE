@@ -1,7 +1,7 @@
 import { studyApi } from "@/api/studyApi";
 import { S } from "./style";
 import Input from "@/components/common/Input";
-import Slider from "@/components/slider/slider";
+import Slider from "@/components/Slider/Slider";
 import useInput from "@/hooks/useInput";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";

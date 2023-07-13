@@ -1,4 +1,4 @@
-import { S } from "./home.styled";
+import { S } from "./home.style";
 
 const Home = () => {
   return (

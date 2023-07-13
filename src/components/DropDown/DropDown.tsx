@@ -1,4 +1,4 @@
-import { S } from "./styled";
+import { S } from "./Dropdown.style";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 const DropDown = ({ type }: { type: "rank" | "menu" }) => {
