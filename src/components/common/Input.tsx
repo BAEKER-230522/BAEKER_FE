@@ -1,6 +1,5 @@
 import React from "react";
 import { S } from "./style";
-import { IUserInfo } from "@/pages/modify";
 
 interface IInput {
   title: string;
