@@ -1,5 +1,4 @@
 import { S } from "./style";
-import { toast } from 'react-toastify'
 import ModifyImg from "@/components/Modify/Img";
 import Input from "@/components/common/Input";
 import ModifyButton from "@/components/Modify/Button";
@@ -7,18 +6,14 @@ import { memberApi } from "@/api/memberApi";
 import {  useEffect } from "react";
 import {  useRouter } from "next/router";
 import useInput from "@/hooks/useInput";
-
-
-export interface IUserInfo {
-  nickname: string;
-  about : string;
-}
+import { USER_NUMBER } from "@/util/constant";
+import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
 
 const Modify = () => {
-  const {data, isLoading} = memberApi.useGetMemberQuery(1);
-  const [updateUserInfo, {isLoading: isUpdating}] = memberApi.useUpdateMemberMutation();
-  const [nameValue, setNameValue, nameHandler] = useInput('')  
-  const [aboutValue, setAboutValue, aboutHandler] = useInput('')
+  const {data, isLoading} = memberApi.useGetMemberQuery(USER_NUMBER);
+  const [nameValue, setNameValue, onChangeName] = useInput('')  
+  const [aboutValue, setAboutValue, onChangeAbout] = useInput('')
+  const {handleUpdateUserInfo} = useUpdateUserInfo();
   const router = useRouter();
   
   useEffect(() => {
@@ -28,27 +23,19 @@ const Modify = () => {
     } 
   }, [isLoading])
 
-  const handleUpdateUserInfo = async() => {
-    try{
-      await updateUserInfo({"id":1, "nickname":nameValue, "about":aboutValue})
-      toast('정보 수정 완료')
-    }catch(err){
-      console.log(err);
-      
-    }
-    
+  const onSubmitUpdateUserInfo = (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    handleUpdateUserInfo({nameValue, aboutValue})
+    router.push({pathname:"/profile"})
   }
   
   if(isLoading) return <div>Loading...</div>
+
   return (
-    <S.Container onSubmit={(e) => {
-      e.preventDefault();
-      handleUpdateUserInfo()
-      router.push({pathname:"/profile"})
-    }}>
+    <S.Container onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
       <ModifyImg />
-      <Input title={"이름"} size={"25%"} value={nameValue} onChange={nameHandler} />
-      <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={aboutHandler}/>
+      <Input title={"이름"} size={"25%"} value={nameValue} onChange={onChangeName} />
+      <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={onChangeAbout}/>
       <ModifyButton />
     </S.Container>
   );
