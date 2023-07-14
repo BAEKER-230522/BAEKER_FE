@@ -25,8 +25,6 @@ const JoinRequestModal = ({title, text, id, name}: IProps) => {
   const [modalText, setModalText] = useState('Content of the modal');
   const router = useRouter()
   const {data: getStudyList, isLoading} = studyApi.useGetUserStudyListQuery({memberId:6, status:1})
-  console.log(getStudyList);
-  
   const [handleInvite] = studyApi.useInviteStudyMutation()
   const showModal = () => {
     setOpen(true);
@@ -36,7 +34,6 @@ const JoinRequestModal = ({title, text, id, name}: IProps) => {
   // 스터디 초대 
 
   const handleOk = async() => {
-    console.log(studyId, USER_NUMBER, id, message);
     try{
       setModalText('삭제 중입니다');
       setConfirmLoading(true);
@@ -64,7 +61,6 @@ const JoinRequestModal = ({title, text, id, name}: IProps) => {
   };
 
   if(isLoading) return <div>Loading...</div>
-  console.log(getStudyList);
   return (
     <>
       <Button type="primary" onClick={showModal}>

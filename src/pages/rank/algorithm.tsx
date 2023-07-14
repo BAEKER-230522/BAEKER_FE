@@ -4,8 +4,6 @@ import { memberApi } from "@/api/memberApi";
 
 const AlgorithmRank = () => {
   const {data, isLoading} = memberApi.useGetAllMembersQuery({});
-
-  console.log(data);
   if(isLoading) return <div>Loading...</div>
   return (
     <S.Container>

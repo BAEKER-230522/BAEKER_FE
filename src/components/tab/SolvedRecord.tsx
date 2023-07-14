@@ -11,8 +11,6 @@ interface IMemberData{
 }
 
 const SolvedRecord = ({id,data}: any) => {
-  console.log(data);
-  
   return (
     <S.RecordContainer>
       <S.RecordWrapper>

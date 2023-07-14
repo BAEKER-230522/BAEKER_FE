@@ -13,7 +13,6 @@ const RuleDetail = () => {
   const onClickRuleDetail = () => {
     router.push({pathname:`/rule/${studyMission.data.ruleId}`})
   }
-  console.log(studyMission);
   
   return (
     <S.Container>

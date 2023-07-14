@@ -23,8 +23,6 @@ interface OptionElement extends HTMLOptionElement {
 
 
 const SelectBox = ({selectedOption, setSelectedOption, data, isLoading}:IProps) => {
-  console.log(data);
-  
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedOption = JSON.parse((event.target.selectedOptions[0] as OptionElement).dataset.option) as Option;
     setSelectedOption(selectedOption);

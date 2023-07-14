@@ -47,8 +47,7 @@ export const studyApi = createApi({
         url: `${END_POINT_3}/studyrules/${id}`,
         method: "GET",
       }),
-      providesTags: (result:any, err:any, arg:any) => { console.log('result:',result,'arg:', arg, 'provide');
-        return [{type: "Study", id:Number(arg.id)}]},
+      providesTags: (result:any, err:any, arg:any) => {return [{type: "Study", id:Number(arg.id)}]},
     }),
 
     // 스터디 미션
@@ -58,9 +57,7 @@ export const studyApi = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: (result:any, err:any, arg:any) => {
-         console.log('result:',result, 'arg:', arg, 'invalid')
-         return [{type: "Study", id:Number(arg.studyId)}]},
+      invalidatesTags: (result:any, err:any, arg:any) => {return [{type: "Study", id:Number(arg.studyId)}]},
     }),
     
 

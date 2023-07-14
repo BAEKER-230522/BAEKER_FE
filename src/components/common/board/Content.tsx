@@ -14,11 +14,7 @@ interface IContentProps{
   category: string[];
 }
 
-const RequestStatus = ({status}:{status:string}) => {
-  
-  
-  console.log(status);
-  
+const RequestStatus = ({status}:{status:string}) => {  
   return status === "ok" ? <div>가입 완료</div> : <div>대기</div>
 }
 

@@ -17,7 +17,6 @@ const BoardButton = ({memberId, studyId}: IProps) => {
 
 
   const handleStudyInviteAccept = async (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>, memberId:number, studyId:number) => {
-    console.log('accept');
     e.stopPropagation()
     try{
       toast('가입 승인')
@@ -28,7 +27,6 @@ const BoardButton = ({memberId, studyId}: IProps) => {
   }
 
   const handleStudyInviteRefuse = async (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>, memberId:number, studyId:number) => {
-    console.log('refuse');
     e.stopPropagation()
     try{
       toast('가입 거절')

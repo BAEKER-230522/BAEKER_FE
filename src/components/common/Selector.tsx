@@ -23,7 +23,6 @@ const Selector = ({data, setId}:IProps) => {
   
   const handleChange = (value: number) => {
     setId(value)
-    console.log(`selected ${value}`);
   };
 
   if(data_arr.length === 0) return <div>스터디가 없습니다</div>

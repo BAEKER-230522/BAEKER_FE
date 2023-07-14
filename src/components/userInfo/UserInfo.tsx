@@ -9,8 +9,7 @@ import JoinRequestModal from "../common/Modal/JoinRequestModal";
 const UserInfo = ({userData}:any) => {
   const router = useRouter()
   const isMypage = Object.keys(router.query).length === 0 ? true : false;
-  console.log(isMypage);
-  
+
   return (
     <S.Container>
       <S.Image src={IMG_URL} />
