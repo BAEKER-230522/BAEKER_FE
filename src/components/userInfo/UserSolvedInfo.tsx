@@ -17,11 +17,6 @@ const UserSolvedInfo = ({userData}: any) => {
           <S.SmallFont>문제 해결</S.SmallFont>
         </div>
       </div>
-      <S.Line></S.Line>
-      <div>
-        <S.Title>프로그래머스</S.Title>
-        <S.SmallFont>BAEKER 연동하기</S.SmallFont>
-      </div>
     </S.Container>
   );
 };

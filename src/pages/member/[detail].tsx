@@ -33,11 +33,11 @@ const Profile = () => {
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
   });
-  const TAB_ELEMENTS_MY = ["백준", "프로그래머스", "스터디", "가입 대기"];
-  const TAB_ELEMENTS_OTHER = ["백준", "프로그래머스", "스터디"];
+  const TAB_ELEMENTS_MY = ["백준","스터디", "가입 대기"];
+  const TAB_ELEMENTS_OTHER = ["백준", "스터디"];
   
   if(isGetUserStudyListLoading || isGetUserInfoLoading) return <div>Loading...</div>
-  console.log(userData.data);
+  
   const Component = (num: number) => {
     switch (num) {
       case 0:
@@ -48,10 +48,8 @@ const Profile = () => {
           </>
         );
       case 1:
-        return <div>programmers</div>;
-      case 2:
         return <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"],[ "스터디 장", "leader"],["랭킹", "xp"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.studyList}/>;
-      case 3:
+      case 2:
         return <Board type={"study"} category={["스터디", "소개", "인원", "스터디 장", "상태"]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.studyList}/>;
     }
   };
