@@ -23,7 +23,7 @@ const StudyInfo = () => {
         {/* <RequestModal/> */}
         <S.ButtonWrapper>
           <button onClick={(e) =>{e.preventDefault(); router.push({pathname:"/study/rule", query:{param: param }})}}>미션 만들기</button>
-          <button onClick={(e) =>{e.preventDefault(); router.push({pathname:"/study/create", query:{name:data.data.name, id:param, about:data.data.about, capacity: data.data.capacity }})}}>스터디 수정하기</button>
+          <button onClick={(e) =>{e.preventDefault(); router.push({pathname:"/study/manage", query:{name:data.data.name, id:param, about:data.data.about, capacity: data.data.capacity }})}}>스터디 수정하기</button>
         </S.ButtonWrapper>
       </S.StudyInfoContainer>
     </S.Container>
