@@ -6,14 +6,8 @@ const RuleDetail = () => {
   const router = useRouter()
   const {detail : param} = router.query
   const {data, isLoading} = ruleApi.useGetRuleQuery(param)
-  console.log(data);
   
   if(isLoading) return <div>Loading...</div>
-  // console.log(data)
-  // const handleDelete = () => {
-  //   deleteRule(param);
-  //   router.push({pathname:"/rule/list"})
-  // }
   return (
     <S.Container>
       <S.Wrapper>
