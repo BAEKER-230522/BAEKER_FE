@@ -1,4 +1,4 @@
-import { S } from "./styled";
+import { S } from "./style";
 import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 import { Line } from "react-chartjs-2";

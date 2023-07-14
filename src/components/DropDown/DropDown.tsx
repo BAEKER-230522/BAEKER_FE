@@ -1,4 +1,4 @@
-import { S } from "./styled";
+import { S } from "./style";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 const DropDown = ({ type }: { type: "rank" | "menu" }) => {
@@ -17,7 +17,7 @@ const DropDown = ({ type }: { type: "rank" | "menu" }) => {
     menu: {
       items: [
         { name: "마이페이지", link: "profile" },
-        { name: "스터디 만들기", link: "study/create" },
+        { name: "스터디 만들기", link: "study/manage" },
         { name: "로그아웃", link: "logout" },
       ],
     },
@@ -27,7 +27,7 @@ const DropDown = ({ type }: { type: "rank" | "menu" }) => {
     <S.Position>
       <S.Container dropdownState={dropdownState} styledProp={styledProp}>
         {info[type].items.map((e) => (
-          <Link key={e.name} href={`/${e.link}`}>
+          <Link key={e.name} href={`/${e.link}`} legacyBehavior>
             <S.Item>{e.name}</S.Item>
           </Link>
         ))}

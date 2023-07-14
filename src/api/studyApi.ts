@@ -3,11 +3,10 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const END_POINT = "api/study/v1";
 const END_POINT_2 = "api/my-study/v1"
 const END_POINT_3 = "api/studyrule/v1"
-const BASE_URL = "http://101.101.208.240:9000/";
 
 // baseQuery, reducerPath, tagTypes, endpoints,
 export const studyApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL }),
   reducerPath: "studyApi",
   tagTypes: ["Study"],
   endpoints: (builder) => ({

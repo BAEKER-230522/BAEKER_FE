@@ -3,7 +3,7 @@ import { Select, Space } from 'antd';
 
 interface IProps{
   data: any;
-  setStudyId : React.Dispatch<React.SetStateAction<number | undefined>>
+  setId : React.Dispatch<React.SetStateAction<number | undefined>>
 }
 
 interface IArr{
@@ -11,19 +11,18 @@ interface IArr{
   label : number;
 }
 
-const Selector = ({data, setStudyId}:IProps) => {
+const Selector = ({data, setId}:IProps) => {
   const data_arr:IArr[] = []
-  console.log(data);
   for(let i=0; i<data.data.length; i++){
     data_arr.push({value:data.data[i].id, label:data.data[i].name})
   }
 
   useEffect(() => {
-    setStudyId(data_arr[0].value)
+    setId(data_arr[0].value)
   }, [])
   
   const handleChange = (value: number) => {
-    setStudyId(value)
+    setId(value)
     console.log(`selected ${value}`);
   };
 

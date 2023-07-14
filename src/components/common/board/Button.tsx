@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { S } from './styled';
+import { S } from './style';
 import { Button } from 'antd';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import { studyApi } from '@/api/studyApi';

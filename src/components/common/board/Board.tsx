@@ -1,4 +1,4 @@
-import { S } from "./styled";
+import { S } from "./style";
 import Header from "./Header";
 import Content from "./Content";
 import Pagination from "./Pagination";

@@ -1,5 +1,5 @@
-import { S } from "./styled";
-import DropDown from "../dropdown/DropDown";
+import { S } from "./style";
+import DropDown from "../Dropdown/Dropdown";
 import { useOncClickIcon } from "@/hooks/useOnClickIcon";
 import Link from "next/link";
 
@@ -7,7 +7,7 @@ const Header = () => {
   const { dropdownState, changeDropdownState } = useOncClickIcon();
   return (
     <S.HeaderContainer>
-      <Link href={"/home"}>
+      <Link href="/home" legacyBehavior>
         <S.Logo>BAEKER</S.Logo>
       </Link>
       <S.IconContainer>

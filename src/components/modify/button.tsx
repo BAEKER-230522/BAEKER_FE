@@ -1,4 +1,4 @@
-import { S } from "./styled";
+import { S } from "./style";
 
 const ModifyButton = () => {
   return <S.Button type="submit"/>

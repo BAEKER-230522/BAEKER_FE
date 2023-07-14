@@ -1,4 +1,4 @@
-import { S } from "./styled";
+import { S } from "./style";
 import { IUserData } from "@/pages/member/[detail]";
 
 const UserSolvedInfo = ({userData}: any) => {
@@ -16,11 +16,6 @@ const UserSolvedInfo = ({userData}: any) => {
           <S.BigFont>{SOLVEDCOUNT}</S.BigFont>
           <S.SmallFont>문제 해결</S.SmallFont>
         </div>
-      </div>
-      <S.Line></S.Line>
-      <div>
-        <S.Title>프로그래머스</S.Title>
-        <S.SmallFont>BAEKER 연동하기</S.SmallFont>
       </div>
     </S.Container>
   );
