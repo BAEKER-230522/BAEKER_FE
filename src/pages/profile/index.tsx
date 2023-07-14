@@ -17,6 +17,7 @@ const Profile = () => {
   const {data: userStudyJoinRequestList, isLoading: isStudyJoinRequestListLoading} = useFetchUserStudyList({memberId:USER_NUMBER,status:2});
   const {data: userStudyInviteList, isLoading: isStudyInviteListLoading} = useFetchUserStudyList({memberId:USER_NUMBER,status:3});
   const {data: userData, isLoading:isUserDataLoading} = useFetchUserData(USER_NUMBER);
+  
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
   });
