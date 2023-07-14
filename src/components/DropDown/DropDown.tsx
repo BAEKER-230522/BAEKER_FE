@@ -27,7 +27,7 @@ const DropDown = ({ type }: { type: "rank" | "menu" }) => {
     <S.Position>
       <S.Container dropdownState={dropdownState} styledProp={styledProp}>
         {info[type].items.map((e) => (
-          <Link key={e.name} href={`/${e.link}`}>
+          <Link key={e.name} href={`/${e.link}`} legacyBehavior>
             <S.Item>{e.name}</S.Item>
           </Link>
         ))}
