@@ -4,8 +4,6 @@ import { studyApi } from "@/api/studyApi";
 
 const StudyRank = () => {
   const {data, isLoading} = studyApi.useGetStudyInfoListQuery(0)
-  console.log(data);
-
   if(isLoading) return <div>Loading...</div>
   
   return (

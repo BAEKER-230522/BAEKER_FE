@@ -14,11 +14,7 @@ interface IContentProps{
   category: string[];
 }
 
-const RequestStatus = ({status}:{status:string}) => {
-  
-  
-  console.log(status);
-  
+const RequestStatus = ({status}:{status:string}) => {  
   return status === "ok" ? <div>가입 완료</div> : <div>대기</div>
 }
 
@@ -34,7 +30,7 @@ const Content = ({ target_nth, ratio, crntPage, data, type, category }: IContent
       {test.map((e:any, idx:number) => (
         <S.ContentWrapper key={idx} target_nth={target_nth!} ratio={ratio!} onClick={() => {router.push({pathname:`/${type}/${e.id}`})}}>
           {category.map((elem, idx) => 
-            (elem[1] === "request" ? <RequestStatus status={"pending"}/> : elem[1] === "invite" ? <BoardButton memberId={e.id} studyId={paramAsNumber}/> : <div>{e[elem[1]]}</div>)
+            (elem[1] === "request" ? <RequestStatus status={"pending"} key={idx}/> : elem[1] === "invite" ? <BoardButton memberId={e.id} studyId={paramAsNumber} key={idx}/> : <div key={idx}>{e[elem[1]]}</div>)
           )}
         </S.ContentWrapper>
       ))}

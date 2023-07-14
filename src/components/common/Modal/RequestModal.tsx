@@ -20,10 +20,6 @@ const RequestModal = () => {
   const showModal = () => {
     setOpen(true);
   };
-  console.log(param);
-  
-  
-  
   // 스터디 가입 
 
   const handleOk = async() => {
