@@ -1,41 +1,69 @@
-import { useRouter } from "next/router";
-import { S } from "../../rule/style";
-import AlertModal from "@/components/common/Modal/AlertModal";
+import { S } from "../style";
 import { Button } from 'antd';
-import { studyApi } from "@/api/studyApi";
-const RuleDetail = () => {
-  const router = useRouter()
-  const {detail: param} = router.query
-  const {data:studyMission, isLoading:isStudyMissionLoading} = studyApi.useGetStudyMissionQuery(param)
-
-  if(isStudyMissionLoading) return <div>Loading...</div>
-  
-  const onClickRuleDetail = () => {
-    router.push({pathname:`/rule/${studyMission.data.ruleId}`})
+const MissionDetail = () => {
+  const ALPHA = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+  const PROBLEM_COUNT = 3;
+  const NUM_COLUMN = 3;
+  const PROBLEM_NAME = ['HASH', '피보나치 함수', '어린 왕자']
+  const ALPHA_ARR = Array.from({length:PROBLEM_COUNT}, (_, i) => ALPHA[i])
+  const HEADER_ARR = ['랭킹', '아이디']
+  for(let i=0; i<NUM_COLUMN; i++){
+    HEADER_ARR.push(ALPHA[i])
   }
+
+  const USER_STATUS = [
+    {
+      rank: 1,
+      nickname : 'chumjio1o',
+      problem_status: [true, true, true]
+    },
+    {
+      rank: 2,
+      nickname : 'jeongdo',
+      problem_status: [false, false, true]
+    }
+  ]
+
   
   return (
     <S.Container>
-      <S.Wrapper style={{height:"40%"}}>
-        <S.ContentWrapper>
-          <S.Title>미션 명</S.Title>
-          <S.Content>{studyMission.data.name}</S.Content>
-        </S.ContentWrapper>
-        <S.ContentWrapper>
-          <S.Title>미션 소개</S.Title>
-          <S.Content>{studyMission.data.about}</S.Content>
-        </S.ContentWrapper>
-      </S.Wrapper>
-      <S.ButtonContainer>
-        <Button type="primary" style={{width:"100px"}} onClick={() => router.push({pathname:`/study/${param}`})}>목록</Button>
-        <AlertModal style={{width:"100px"}} id={param} title={'미션 삭제'} text={'삭제하시겠습니까 ?'} type={"mission"}>삭제</AlertModal>
-        <Button style={{width:"100px"}} type="primary"
-        onClick={(e) =>{e.preventDefault(); router.push({pathname:"/study/rule", query:{name:studyMission.data.name, id:param, about:studyMission.data.about}})}}
-        >수정</Button>
-        <Button style={{width:"100px"}} type="primary" onClick={onClickRuleDetail}>규칙 상세보기</Button>
-      </S.ButtonContainer>
+      <S.MissionStatusContainer>
+        <S.MissionProblemListContainer numColumn={NUM_COLUMN}>
+          {ALPHA_ARR.map((e) => <div>{e}</div>)}
+          {PROBLEM_NAME.map((e) => <div>{e}</div>)}
+        </S.MissionProblemListContainer>
+        <S.MemberSolvingStatusContainer>
+          <S.MissionProblemListContainer numColumn={NUM_COLUMN+2}>
+            {HEADER_ARR.map((e) => <div>{e}</div>)}
+            {USER_STATUS.map((e,idx) => (
+              <>
+                <div>{idx+1}</div>
+                <div>{e.nickname}</div>
+                {
+                  e.problem_status.map((p_status) => {
+                    return p_status ? 
+                    <div>
+                      <S.Dot color={'#5bc59c'}/>
+                    </div> 
+                      :
+                    <div>
+                      <S.Dot color={'#e31d2e'}/>
+                    </div>
+                  })
+                }
+              </>
+            ))}
+          </S.MissionProblemListContainer>
+        </S.MemberSolvingStatusContainer>
+        <S.ButtonContainer>
+          <Button type="primary" style={{width:"100px", height:"40px"}}>목록</Button>
+          <Button style={{width:"100px", height:"40px"}} type="primary">수정</Button>
+          <Button style={{width:"100px", height:"40px"}} type="primary">삭제</Button>
+          <Button style={{width:"100px", height:"40px"}} type="primary">규칙 상세보기</Button>
+        </S.ButtonContainer>
+      </S.MissionStatusContainer>
     </S.Container>
-  );
-};
+  )
+}
 
-export default RuleDetail;
+export default MissionDetail;

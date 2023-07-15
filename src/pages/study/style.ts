@@ -70,9 +70,19 @@ const SelectorWrapper = styled.div`
   margin-bottom : 50px;
 `
 
+const ButtonContainer = styled.div`
+  display: flex;
+  width: 50%;
+  justify-content: space-around;
+  height: 40px;
+  margin-top: 10px;
+`;
+
+
 const MissionInputContainer = styled.div`
   display: flex;
   width: 90%;
+
 `
 
 const MissionInputWrapper = styled.div`
@@ -95,4 +105,52 @@ const MissionInputRightContainer = styled(MissionInputWrapper)`
 
 const MissionInputInnerWrapper = styled.div``
 
-export const S = { Container, MissionInputLeftContainer, MissionInputInnerWrapper,MissionInputRightContainer,ContentContainer, ChartContainer, StatusContainer,Button, StudyContainer ,FormContainer, Title, SelectorWrapper, MissionInputContainer,MissionInputWrapper } ;
+interface MissionProblemListContainerProps{
+  numColumn : number;
+}
+const MissionProblemListContainer = styled.div<MissionProblemListContainerProps>`
+  border-radius: 10px;
+  display: grid;  
+  background-color : white;
+  grid-template-columns: ${props => `repeat(${props.numColumn}, 150px)`};
+  div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    background-color : #e7e3e3;
+    border-radius : 5px;
+    margin: 2px;
+    
+  }
+`
+interface ColorProp {
+  color : string;
+}
+
+const Dot = styled.span<ColorProp>`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: ${props => props.color};
+`
+
+const MemberSolvingStatusContainer = styled.div`
+  border-radius: 10px;
+  background-color: white;
+  margin-top : 50px;
+  margin-bottom : 50px;
+`
+
+const MissionStatusContainer = styled.div`
+  display: flex;
+  width: 65%;
+  height: 75%;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+`
+
+export const S = {Dot,MissionStatusContainer, ButtonContainer,Container, MemberSolvingStatusContainer,MissionProblemListContainer,MissionInputLeftContainer, MissionInputInnerWrapper,MissionInputRightContainer,ContentContainer, ChartContainer, StatusContainer,Button, StudyContainer ,FormContainer, Title, SelectorWrapper, MissionInputContainer,MissionInputWrapper } ;
