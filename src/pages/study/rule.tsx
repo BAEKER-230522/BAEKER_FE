@@ -1,11 +1,15 @@
 import { S } from "./style";
 import Input from "@/components/common/Input";
 import useInput from "@/hooks/useInput";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";
 import Selector from "@/components/common/Selector";
 import useMissionEdit from "@/hooks/useMissionEdit";
+import StartToEndRangeDatePicker from "@/components/Calendar/RangeDatePicker";
+import Board from "@/components/common/Board/Board";
+import AddProblemInputBox from "@/components/Study/AddProblemInputBox";
+import { useDispatch, useSelector } from "react-redux";
 
 const Mission = () => {
   const router = useRouter();
@@ -14,8 +18,21 @@ const Mission = () => {
   const {handleCreateMission, handleUpdateStudy, setRuleId} = useMissionEdit()
   const [nameValue, setNameValue, nameHandler] = useInput('')
   const [aboutValue, setAboutValue, aboutHandler] = useInput('')
+  const [problemValue, setProblemValue, problemHandler] = useInput('')
   const {data, isLoading} = ruleApi.useGetAllRulesQuery({});
-  
+  // const [missionProblem, setMissionProblem] = useState([{"idx":1, "num":1000, "link":"https://www.acmicpc.net/problem/1001", "remove":'삭제'}]);
+
+  const dispatch = useDispatch();
+  const missionProblemState = useSelector((state:any) => {
+    return state.missionProblem.missionProblemState
+  })
+  // [{
+  //  "idx" : 1,
+  //  "num" : 1000,  
+  //  "link" : "https://www.acmicpc.net/problem/1001",
+  //  "remove" : "삭제"
+  // }]
+  //
   useEffect(() => {
     setNameValue(router.query.name)
     setAboutValue(router.query.about)
@@ -33,14 +50,28 @@ const Mission = () => {
   if(isLoading) return <div>Loading...</div>
 
   return (
-    <S.Container >
+    <S.Container>
       <S.FormContainer onSubmit={(e) => handleSubmit(e)}>
-        <S.SelectorWrapper>
-          <S.Title style={{marginRight: 'auto'}}>미션 선택</S.Title>
-          <Selector data={data} setId={setRuleId}/>
-        </S.SelectorWrapper>
-        <Input title={"미션 이름"} size={"40%"} value={nameValue} onChange={nameHandler}/>
-        <Input title={"미션 소개"} size={"40%"} value={aboutValue} onChange={aboutHandler}/>
+        <S.MissionInputContainer>
+          <S.MissionInputLeftContainer>
+            <S.MissionInputInnerWrapper>
+              <S.SelectorWrapper>
+                <S.Title style={{marginRight: 'auto'}}>미션 선택</S.Title>
+                <Selector data={data} setId={setRuleId}/>
+              </S.SelectorWrapper>
+              <Input title={"미션 이름"} size={"60%"} value={nameValue} onChange={nameHandler}/>
+              <Input title={"미션 소개"} size={"60%"} value={aboutValue} onChange={aboutHandler}/>
+              <S.SelectorWrapper>
+                <S.Title style={{marginRight: 'auto'}}>미션 기간</S.Title>
+                <StartToEndRangeDatePicker/>
+              </S.SelectorWrapper>
+            </S.MissionInputInnerWrapper>
+          </S.MissionInputLeftContainer>
+          <S.MissionInputRightContainer>
+            <AddProblemInputBox title={"문제 추가"} size={"60%"} value={problemValue} onChange={problemHandler} setProblemValue={setProblemValue} />
+            <Board category={[["번호", "idx"], ["문제 번호", "num"], ["링크", "link"], ["삭제", "remove"]]} widthRatio={[1, 1, 2, 1]} data={missionProblemState} type={'problem'}/>
+          </S.MissionInputRightContainer>
+        </S.MissionInputContainer>
         {isEditMode ? <S.Button type="submit" value={'수정'}/> : <S.Button type="submit" value={'미션 생성'}/>}
       </S.FormContainer>
     </S.Container>
