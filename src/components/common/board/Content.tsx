@@ -23,18 +23,26 @@ const Content = ({ target_nth, ratio, crntPage, data, type, category }: IContent
   const test = data.slice(crntPage! * 5, crntPage! * 5 + 5);
   const router = useRouter()
   const {detail: param} = router.query; 
-  const paramAsNumber = Number(param);
-
+  
+  const navigateToPage = (id:number) => {
+    if(type==="study/mission"){
+      router.push({pathname:`/${type}/${id}`, query:{studyId:param}})  
+    }else{
+      router.push({pathname:`/${type}/${id}`})
+    }
+    // router.push({pathname:`hello`})
+  }
+  
 
   return (
     <S.ContentContainer >
       {test.map((e:any, idx:number) => (
-        <S.ContentWrapper key={idx} target_nth={target_nth!} ratio={ratio!} onClick={() => {router.push({pathname:`/${type}/${e.id}`})}}>
+        <S.ContentWrapper key={idx} target_nth={target_nth!} ratio={ratio!} onClick={() => navigateToPage(e.id)}>
           {category.map((elem, inner_idx) => 
             (
               elem[1] === "request" ? <RequestStatus status={"pending"} key={inner_idx}/> 
               :
-              elem[1] === "invite" ? <InviteAcceptButton memberId={e.id} studyId={paramAsNumber} key={inner_idx}/> 
+              elem[1] === "invite" ? <InviteAcceptButton memberId={USER_NUMBER} studyId={e.id} key={inner_idx}/> 
               :
               elem[1] === "remove" ? <RemoveProblemButton key={inner_idx} idx={idx+1}/>
               : 
