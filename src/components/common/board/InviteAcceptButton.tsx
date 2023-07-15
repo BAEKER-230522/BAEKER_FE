@@ -10,7 +10,7 @@ interface IProps{
   studyId: number;
 }
 
-const BoardButton = ({memberId, studyId}: IProps) => {
+const InviteAcceptButton = ({memberId, studyId}: IProps) => {
   const [size, setSize] = useState<SizeType>('middle'); // default is 'middle'
   const [acceptStudy] = studyApi.useAcceptStudyMutation()
   const [refuseStudy] = studyApi.useRefuseStudyMutation()
@@ -47,4 +47,4 @@ const BoardButton = ({memberId, studyId}: IProps) => {
         </S.ButtonWrapper>
 )};
 
-export default BoardButton;
+export default InviteAcceptButton;

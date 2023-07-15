@@ -23,6 +23,15 @@ const Board = ({ category, widthRatio, data, type}: IBoard) => {
   const { crntPage, onClickNext, onClickPrev, crntPageArray, onClickPage } = usePagination(_test!);
   
   if(data.length === 0) return <EmptyList/>
+
+  if(type === "problem") {
+    return (
+      <S.Container>
+        <Header category={category} target_nth={target_nth} ratio={ratio} />
+        <Content target_nth={target_nth} ratio={ratio} crntPage={crntPage} data={data} type={type} category={category}/>
+      </S.Container>
+    )
+  }
   
   return ( 
     <S.Container>

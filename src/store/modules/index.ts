@@ -5,6 +5,7 @@ import { HYDRATE } from "next-redux-wrapper";
 import dropdown from "./dropdown";
 import tab from "./tab";
 import modify from "./modify";
+import missionProblem from "./missionProblem";
 import { memberApi } from "@/api/memberApi";
 import { studyApi } from "@/api/studyApi";
 import { ruleApi } from "@/api/ruleApi";
@@ -21,6 +22,7 @@ const reducer = (state: any, action: any) => {
     dropdown,
     tab,
     modify,
+    missionProblem,
     [memberApi.reducerPath]: memberApi.reducer,
     [studyApi.reducerPath]: studyApi.reducer,
     [ruleApi.reducerPath]: ruleApi.reducer,

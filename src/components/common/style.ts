@@ -53,7 +53,7 @@ const MedalIcon = styled(FaMedal)`
 export const Input = styled.input`
   width: 100%;
   height: 40px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
   border-radius: 7px;
   border: 0.6px solid #a6adbb;
   background-color: transparent;
@@ -74,6 +74,17 @@ const InputContainer = styled.div<{ size: string }>`
   display: flex;
   flex-direction: column;
 `;
+
+const InputWrapper = styled.div`
+  display: flex;
+`
+const Button = styled.button`
+  width: 80px;
+  height: 40px;
+  border-radius: 7px;
+  outline: none;
+  margin-left: 15px;
+`
 
 const StatusContainer = styled.div`
   width: 100%;
@@ -123,4 +134,6 @@ export const S = {
   StatusElement,
   StatusTitle,
   StatusNumber,
+  InputWrapper,
+  Button
 };

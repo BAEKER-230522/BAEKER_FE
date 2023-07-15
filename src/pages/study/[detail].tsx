@@ -9,10 +9,32 @@ import SolveStatus from "@/components/common/SolveStatus";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
 
+const mock_data = [
+  {
+    id : 1,
+    name : "실버 5문제",
+    about : "실버 5문제 풀이",
+    start : '23/7/15',
+    end : '23/7/16',
+    status : '진행'
+  },
+  {
+    id : 6,
+    name : "골드 5문제",
+    about : "골드 5문제 풀이",
+    start : '23/7/13',
+    end : '23/7/14',
+    status : '종료'
+  }
+]
 const StudyDetail = () => {
   const router = useRouter();
+  console.log(router.query);
+  
   const {detail: param} = router.query;  
   const {data:studyMissionList, isLoading:getStudyMissionListLoading} = studyApi.useGetStudyRuleListQuery(Number(param));
+  console.log(studyMissionList);
+  
   const {data:stduyMemberList, isLoading:getMemberListLoading} = studyApi.useGetStudyMemberListQuery(Number(param));
   const {data:studyPedingList, isLoading:getPedingListLoading} = studyApi.useGetPendingListQuery(Number(param));
   const {data:studyInfo, isLoading:getStudyInfoLoading} = studyApi.useGetStudyInfoQuery(Number(param));
@@ -41,7 +63,7 @@ const StudyDetail = () => {
             </S.StatusContainer>
           </>
         )} 
-        {tabState === 1 && <Board type={"study/mission"} category={[["규칙", "name"], ["소개", "about"], ["작성일", "createDate"]]} widthRatio={[1, 2, 1]}  data={studyMissionList.data}/>}
+        {tabState === 1 && <Board type={"study/mission"} category={[["규칙", "name"], ["소개", "about"], ["시작일", "start"], ["종료일", "end"], ["상태", "status"]]} widthRatio={[1, 2, 1, 1, 1]}  data={mock_data}/>}
         {tabState === 2 && <Board type={"member"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["가입한 스터디", "id"]]} widthRatio={[2, 1, 1]} data={stduyMemberList.data}/>}
         {tabState === 3 && <Board type={"join"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["상태", "invite"]]} widthRatio={[1, 1, 1]} data={studyPedingList.data.pending} />}
       </S.ContentContainer>
@@ -50,3 +72,4 @@ const StudyDetail = () => {
 };
 
 export default StudyDetail;
+
