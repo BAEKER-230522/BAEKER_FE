@@ -18,13 +18,13 @@ interface IProps {
 }
 
 const JoinRequestModal = ({title, text, id, name}: IProps) => {
-  const [studyId, setStudyId] = useState<number>(); 
+  const [studyId, setId] = useState<number>(); 
   const [message, setMessage] = useState<string>('');
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState('Content of the modal');
   const router = useRouter()
-  const {data: getStudyList, isLoading} = studyApi.useGetUserStudyListQuery({memberId:6, status:1})
+  const {data: getStudyList, isLoading} = studyApi.useGetUserStudyListQuery({memberId:USER_NUMBER, status:1})
   const [handleInvite] = studyApi.useInviteStudyMutation()
   const showModal = () => {
     setOpen(true);
@@ -39,7 +39,7 @@ const JoinRequestModal = ({title, text, id, name}: IProps) => {
       setConfirmLoading(true);
       
       
-      await handleInvite({'study':studyId, 'inviter':6, 'invitee':id, 'msg':message})
+      await handleInvite({'study':studyId, 'inviter':USER_NUMBER, 'invitee':id, 'msg':message})
       setMessage('')
       toast('스터디 초대 완료')
       setOpen(false);
@@ -75,7 +75,7 @@ const JoinRequestModal = ({title, text, id, name}: IProps) => {
         
       >
         <div style={{ display:'flex', flexDirection:'column'}}>
-          <Selector data={getStudyList.data} setStudyId={setStudyId}/>
+          <Selector data={getStudyList.data} setId={setId}/>
           <TextArea
             showCount
             maxLength={100}
