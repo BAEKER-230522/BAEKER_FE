@@ -6,7 +6,7 @@ import { USER_NUMBER } from "@/util/constant";
 import RequestModal from "../common/Modal/RequestModal";
 const StudyInfo = () => {
   const router = useRouter();
-  const {detail : studyId} = router.query;  
+  const {studyId} = router.query;  
   const {data, isLoading} = studyApi.useGetStudyInfoQuery(studyId)
   
   const [joinStudy] = studyApi.useJoinStudyMutation()

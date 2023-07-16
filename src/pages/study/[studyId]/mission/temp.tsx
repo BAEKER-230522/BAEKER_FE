@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { S } from "../../rule/style";
+import { S } from "../../../rule/style";
 import AlertModal from "@/components/common/Modal/AlertModal";
 import { Button } from 'antd';
 import { studyApi } from "@/api/studyApi";
