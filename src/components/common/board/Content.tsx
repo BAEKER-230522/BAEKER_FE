@@ -22,15 +22,14 @@ const RequestStatus = ({status}:{status:string}) => {
 const Content = ({ target_nth, ratio, crntPage, data, type, category }: IContentProps) => {
   const test = data.slice(crntPage! * 5, crntPage! * 5 + 5);
   const router = useRouter()
-  const {detail: param} = router.query; 
   
   const navigateToPage = (id:number) => {
-    if(type==="study/mission"){
-      router.push({pathname:`/${type}/${id}`, query:{studyId:param}})  
+    const basePath = router.asPath;
+    if(type === 'mission'){
+      router.push(`${basePath}/${type}/${id}`)
     }else{
-      router.push({pathname:`/${type}/${id}`})
+      router.push({pathname:`${type}/${id}`})
     }
-    // router.push({pathname:`hello`})
   }
   
 
