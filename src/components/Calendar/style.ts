@@ -1,4 +1,14 @@
 import styled from "styled-components";
+import DatePicker from 'react-datepicker';
+
+
+const CustomDatePicker = styled(DatePicker)`
+  height: 30px;
+  width: 150px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+`
 
 const Container = styled.div`
   display: flex;
@@ -7,4 +17,4 @@ const Container = styled.div`
   align-items: center;
 `
 
-export const S = {Container}
+export const S = {Container, CustomDatePicker}

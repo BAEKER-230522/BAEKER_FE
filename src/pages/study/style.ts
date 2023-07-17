@@ -89,21 +89,27 @@ const MissionInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 50%;
 `
 
 const MissionInputLeftContainer = styled(MissionInputWrapper)`
-  width: 40%;
-  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
 `
 
 const MissionInputRightContainer = styled(MissionInputWrapper)`
-  width: 60%;
+  width: 50%;
   display: flex;
   flex-direction : column;
 `
 
-const MissionInputInnerWrapper = styled.div``
+const MissionInputInnerWrapper = styled.div`
+  width: 50%;
+`
 
 interface MissionProblemListContainerProps{
   numColumn : number;

@@ -11,7 +11,7 @@ const StartToEndRangeDatePicker = () => {
   
   return (
     <S.Container>
-      <DatePicker
+      <S.CustomDatePicker
         selected={startDate}
         onChange={(date:Date) => setStartDate(date)}
         selectsStart
@@ -20,7 +20,7 @@ const StartToEndRangeDatePicker = () => {
         locale={ko}
       />
       <div style={{color:'white'}}>ㅡ</div>
-      <DatePicker
+      <S.CustomDatePicker
         selected={endDate}
         onChange={(date:Date) => setEndDate(date)}
         selectsEnd
