@@ -1,4 +1,4 @@
-import { S } from "./style";
+import { S } from "../style";
 import StudyInfo from "@/components/Study/StudyInfo";
 import Tab from "@/components/Tab/Tab";
 import Board from "@/components/common/Board/Board";
@@ -16,22 +16,22 @@ const mock_data = [
     about : "실버 5문제 풀이",
     start : '23/7/15',
     end : '23/7/16',
-    status : '진행'
+    status : '진행',
   },
   {
     id : 6,
     name : "골드 5문제",
     about : "골드 5문제 풀이",
     start : '23/7/13',
-    end : '23/7/14',
-    status : '종료'
+    end : '23/7/15',
+    status : '종료',
   }
 ]
 const StudyDetail = () => {
   const router = useRouter();
   console.log(router.query);
   
-  const {detail: param} = router.query;  
+  const {studyId: param} = router.query;
   const {data:studyMissionList, isLoading:getStudyMissionListLoading} = studyApi.useGetStudyRuleListQuery(Number(param));
   console.log(studyMissionList);
   
@@ -63,7 +63,7 @@ const StudyDetail = () => {
             </S.StatusContainer>
           </>
         )} 
-        {tabState === 1 && <Board type={"study/mission"} category={[["규칙", "name"], ["소개", "about"], ["시작일", "start"], ["종료일", "end"], ["상태", "status"]]} widthRatio={[1, 2, 1, 1, 1]}  data={mock_data}/>}
+        {tabState === 1 && <Board type={"mission"} category={[["규칙", "name"], ["소개", "about"], ["시작일", "start"], ["종료일", "end"], ["상태", "status"]]} widthRatio={[1, 2, 1, 1, 1]}  data={mock_data}/>}
         {tabState === 2 && <Board type={"member"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["가입한 스터디", "id"]]} widthRatio={[2, 1, 1]} data={stduyMemberList.data}/>}
         {tabState === 3 && <Board type={"join"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["상태", "invite"]]} widthRatio={[1, 1, 1]} data={studyPedingList.data.pending} />}
       </S.ContentContainer>

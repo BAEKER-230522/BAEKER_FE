@@ -59,8 +59,8 @@ const Mission = () => {
                 <S.Title style={{marginRight: 'auto'}}>미션 선택</S.Title>
                 <Selector data={data} setId={setRuleId}/>
               </S.SelectorWrapper>
-              <Input title={"미션 이름"} size={"60%"} value={nameValue} onChange={nameHandler}/>
-              <Input title={"미션 소개"} size={"60%"} value={aboutValue} onChange={aboutHandler}/>
+              <Input title={"미션 이름"} size={"100%"} value={nameValue} onChange={nameHandler}/>
+              <Input title={"미션 소개"} size={"100%"} value={aboutValue} onChange={aboutHandler}/>
               <S.SelectorWrapper>
                 <S.Title style={{marginRight: 'auto'}}>미션 기간</S.Title>
                 <StartToEndRangeDatePicker/>

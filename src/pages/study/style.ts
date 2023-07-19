@@ -89,21 +89,27 @@ const MissionInputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 50%;
 `
 
 const MissionInputLeftContainer = styled(MissionInputWrapper)`
-  width: 40%;
-  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
 `
 
 const MissionInputRightContainer = styled(MissionInputWrapper)`
-  width: 60%;
+  width: 50%;
   display: flex;
   flex-direction : column;
 `
 
-const MissionInputInnerWrapper = styled.div``
+const MissionInputInnerWrapper = styled.div`
+  width: 50%;
+`
 
 interface MissionProblemListContainerProps{
   numColumn : number;
@@ -113,6 +119,7 @@ const MissionProblemListContainer = styled.div<MissionProblemListContainerProps>
   display: grid;  
   background-color : white;
   grid-template-columns: ${props => `repeat(${props.numColumn}, 150px)`};
+  margin-bottom : 20px;
   div{
     display: flex;
     justify-content: center;
@@ -121,7 +128,6 @@ const MissionProblemListContainer = styled.div<MissionProblemListContainerProps>
     background-color : #e7e3e3;
     border-radius : 5px;
     margin: 2px;
-    
   }
 `
 interface ColorProp {
@@ -139,7 +145,6 @@ const MemberSolvingStatusContainer = styled.div`
   border-radius: 10px;
   background-color: white;
   margin-top : 50px;
-  margin-bottom : 50px;
 `
 
 const MissionStatusContainer = styled.div`
