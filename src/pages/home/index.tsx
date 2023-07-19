@@ -1,17 +1,9 @@
-import axios from "axios";
 import { S } from "./style";
-import Link from "next/link";
 
 const Home = () => {
 
-  // const KAKAO_REST_API_KEY = 502e1203fe869885c48c863f2eda58bf;
-  const KAKAO_REDIRECT_URI = "http://localhost:3000/login/kakao";
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=502e1203fe869885c48c863f2eda58bf&redirect_uri=http://localhost:3000/login/kakao&response_type=code`;
-
   const onClick = async() => {
-    // const res = await axios({method:'get', url:"http://101.101.208.240:9000/oauth2/authorization/kakao"})
-    window.location.href = KAKAO_AUTH_URL
-    // console.log(res)
+    window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}oauth2/authorization/kakao`
   }
 
   return (
@@ -29,5 +21,4 @@ const Home = () => {
     </S.Container>
   );
 };
-// dev branch 원격 저장소로
 export default Home;
