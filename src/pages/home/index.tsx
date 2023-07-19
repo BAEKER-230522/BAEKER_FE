@@ -1,6 +1,11 @@
 import { S } from "./style";
 
 const Home = () => {
+
+  const onClick = async() => {
+    window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}oauth2/authorization/kakao`
+  }
+
   return (
     <S.Container>
       <S.Wrapper>
@@ -11,10 +16,9 @@ const Home = () => {
           <br />
           다양한 규칙 수행 보상을 통해 스터디 랭커에 도전해 보세요!
         </div>
-        <S.KakaoButton />
+        <S.KakaoButton onClick={onClick}/>
       </S.Wrapper>
     </S.Container>
   );
 };
-// dev branch 원격 저장소로
 export default Home;
