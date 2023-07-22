@@ -2,7 +2,16 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const END_POINT = "api/member";
 export const memberApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL}),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
+    prepareHeaders: (headers, { getState }) => {
+      const token = localStorage.getItem('token');
+      if(token) {
+        headers.set('authorization', `${token}`);
+      }
+
+      return headers;
+    }
+  }),
   reducerPath: "memberApi",
   tagTypes: ["Member"],
   endpoints: (builder) => ({
