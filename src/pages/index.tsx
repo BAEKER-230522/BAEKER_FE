@@ -1,10 +1,27 @@
 import { S } from "./style";
-
+import { useEffect } from "react";
+import { login } from "@/store/modules/user";
+import { useDispatch, useSelector } from "react-redux";
 const Home = () => {
+  const dispatch = useDispatch()
+  const userId = useSelector((state:any) => {return state.user.userId})
 
   const onClick = async() => {
-    window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}oauth2/authorization/kakao`
+    window.location.href = `${process.env.NEXT_PUBLIC_LOGIN_URL}oauth2/authorization/kakao`
   }
+
+  useEffect(() => {
+    // fetch('http://localhost:3000', {
+    //   method: 'GET'
+    // }).then((resp) => {
+    //   console.log(resp.headers.get('Date'));
+    // });
+    console.log(userId);
+    const TOKEN = new URL(window.location.href).searchParams.get("accessToken");
+    if(TOKEN){
+      localStorage.setItem('token', TOKEN)
+    }
+  }, [])
 
   return (
     <S.Container>
