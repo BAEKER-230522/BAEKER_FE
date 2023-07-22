@@ -8,16 +8,25 @@ interface IInput {
   value : string;
   setProblemValue: React.Dispatch<React.SetStateAction<string>>;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setProblemList : React.Dispatch<React.SetStateAction<any>>;
+  problemList: any;
 }
 
 
-const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue }: IInput) => {
+const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue, setProblemList, problemList }: IInput) => {
   const dispatch = useDispatch();
   const missionProblemState = useSelector((state:any) => {
     return state.missionProblem.missionProblemState
   })
   
   const handleAddProblem = (e:React.MouseEvent<HTMLButtonElement>) => {
+    setProblemList([
+      ...problemList,
+      {
+        problemName : null,
+        problemNumber : value
+      }
+    ])
     e.preventDefault();
     const newProblem = {
       idx: missionProblemState.length + 1,
