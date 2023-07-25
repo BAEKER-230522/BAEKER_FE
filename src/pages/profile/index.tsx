@@ -10,6 +10,7 @@ import { USER_NUMBER } from "@/util/constant";
 import useFetchUserStudyList from "@/hooks/queries/useFetchUserStudyList";
 import useFetchUserData from "@/hooks/queries/useFetchUserData";
 import useTabSwitch from "@/hooks/useTabSwitch";
+import Loading from "@/components/Loading/Loading";
 
 const Profile = () => {
   const TAB_ELEMENTS = ["백준", "스터디", "가입 신청", "가입 초대"];
@@ -22,7 +23,17 @@ const Profile = () => {
     return state.tab.profileTabState;
   });
 
-  if(isStudyListLoading || isStudyJoinRequestListLoading || isStudyInviteListLoading || isUserDataLoading) return <div>Loading...</div>
+  if(isStudyListLoading || isStudyJoinRequestListLoading || isStudyInviteListLoading || isUserDataLoading) return (
+    <S.Container>
+      <S.InfoContainer>
+        <Loading/>
+      </S.InfoContainer>
+      <Tab elements={TAB_ELEMENTS} type="profile" />
+      <S.RecordContainer>
+        <Loading/>
+      </S.RecordContainer>
+    </S.Container>
+  )
   
   const TabComponent = useTabSwitch([
     () => (

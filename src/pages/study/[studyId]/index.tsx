@@ -9,6 +9,7 @@ import SolveStatus from "@/components/common/SolveStatus";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
 import { mock_data } from "./mission.mock";
+import Loading from "@/components/Loading/Loading";
 
 const StudyDetail = () => {
   const router = useRouter();
@@ -28,7 +29,15 @@ const StudyDetail = () => {
   });
   const TAB_ELEMENTS = ["현황", "미션", "멤버", "가입요청"];
 
-  if(getMemberListLoading || getPedingListLoading || getStudyMissionListLoading || getStudyInfoLoading) return <div>Loading ... </div>
+  if(getMemberListLoading || getPedingListLoading || getStudyMissionListLoading || getStudyInfoLoading) return (
+    <S.StudyContainer>
+      <StudyInfo />
+      <Tab elements={TAB_ELEMENTS} type="study" />
+      <S.ContentContainer>
+        <Loading/>
+      </S.ContentContainer>
+    </S.StudyContainer>
+  )
   
   return ( 
     <S.StudyContainer>

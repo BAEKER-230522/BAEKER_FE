@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
 import { memberApi } from "@/api/memberApi";
+import Loading from "@/components/Loading/Loading";
 const flag = 0;
 
 export interface IUserData {
@@ -36,7 +37,16 @@ const Profile = () => {
   const TAB_ELEMENTS_MY = ["백준","스터디", "가입 대기"];
   const TAB_ELEMENTS_OTHER = ["백준", "스터디"];
   
-  if(isGetUserStudyListLoading || isGetUserInfoLoading) return <div>Loading...</div>
+  if(isGetUserStudyListLoading || isGetUserInfoLoading) return (
+    <S.Container>
+      <S.InfoContainer>
+        <Loading/>
+      </S.InfoContainer>
+      <S.RecordContainer>
+        <Loading/>
+      </S.RecordContainer>
+    </S.Container>
+  )
   
   const Component = (num: number) => {
     switch (num) {

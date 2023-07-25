@@ -6,6 +6,7 @@ import Selector from '../Selector';
 import { Input } from 'antd';
 import { toast } from 'react-toastify';
 import { USER_NUMBER } from '@/util/constant';
+import Loading from '@/components/Loading/Loading';
 
 const { TextArea } = Input;
 
@@ -60,7 +61,33 @@ const JoinRequestModal = ({title, text, id, name}: IProps) => {
     setMessage(e.target.value)
   };
 
-  if(isLoading) return <div>Loading...</div>
+  if(isLoading) return (
+    <>
+      <Button type="primary" onClick={showModal}>
+        스터디 초대하기
+      </Button>
+      <Modal
+        title={`${name} 초대하기`}
+        open={open}
+        onOk={handleOk}
+        confirmLoading={confirmLoading}
+        onCancel={handleCancel}
+        
+      >
+        <div style={{ display:'flex', flexDirection:'column'}}>
+          <Loading/>
+          <TextArea
+            showCount
+            maxLength={100}
+            style={{ height: 150, width:300 }}
+            onChange={onChange}
+            value={message}
+            placeholder="disable resize"
+          />
+        </div>
+      </Modal>
+    </>
+  )
   return (
     <>
       <Button type="primary" onClick={showModal}>

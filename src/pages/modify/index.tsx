@@ -8,6 +8,7 @@ import {  useRouter } from "next/router";
 import useInput from "@/hooks/useInput";
 import { USER_NUMBER } from "@/util/constant";
 import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
+import Loading from "@/components/Loading/Loading";
 
 const Modify = () => {
   const {data, isLoading} = memberApi.useGetMemberQuery(USER_NUMBER);
@@ -29,7 +30,12 @@ const Modify = () => {
     router.push({pathname:"/profile"})
   }
   
-  if(isLoading) return <div>Loading...</div>
+  if(isLoading) return (
+    <S.Container onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
+      <Loading/>
+      <ModifyButton />
+    </S.Container>
+  )
 
   return (
     <S.Container onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
