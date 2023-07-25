@@ -6,7 +6,16 @@ const END_POINT_3 = "api/studyrule/v1"
 
 // baseQuery, reducerPath, tagTypes, endpoints,
 export const studyApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
+    prepareHeaders: (headers, { getState }) => {
+      const token = localStorage.getItem('token');
+      if(token) {
+        headers.set('authorization', `${token}`);
+      }
+
+      return headers;
+    }
+  }),
   reducerPath: "studyApi",
   tagTypes: ["Study"],
   endpoints: (builder) => ({

@@ -9,6 +9,7 @@ const Container = styled.div`
   align-items: center;
   flex-direction: column;
   background-color: #2a303c;
+  
 `;
 
 const FormContainer = styled.form`
@@ -18,6 +19,7 @@ const FormContainer = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
 `
 
 const StudyContainer = styled.div`
@@ -149,13 +151,26 @@ const MemberSolvingStatusContainer = styled.div`
 
 const MissionStatusContainer = styled.div`
   display: flex;
-  width: 65%;
-  height: 75%;
+  width: 75%;
+  height: 85%;
   border-radius: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: white;
+  overflow-x: scroll;
 `
 
-export const S = {Dot,MissionStatusContainer, ButtonContainer,Container, MemberSolvingStatusContainer,MissionProblemListContainer,MissionInputLeftContainer, MissionInputInnerWrapper,MissionInputRightContainer,ContentContainer, ChartContainer, StatusContainer,Button, StudyContainer ,FormContainer, Title, SelectorWrapper, MissionInputContainer,MissionInputWrapper } ;
+const MissionProgressContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+`
+
+const Problem = styled.div`
+  cursor : pointer;
+  color : #6495Ed;
+`
+
+export const S = {Problem,Dot,MissionStatusContainer, MissionProgressContainer, ButtonContainer,Container, MemberSolvingStatusContainer,MissionProblemListContainer,MissionInputLeftContainer, MissionInputInnerWrapper,MissionInputRightContainer,ContentContainer, ChartContainer, StatusContainer,Button, StudyContainer ,FormContainer, Title, SelectorWrapper, MissionInputContainer,MissionInputWrapper } ;

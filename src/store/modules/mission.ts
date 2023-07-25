@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IinitialState {
-  missionProblemState:MissionProblem[]
+  missionProblemState : MissionProblem[]
+  missionData : {}
 }
 
 interface MissionProblem {
@@ -12,11 +13,12 @@ interface MissionProblem {
 }
 
 const initialState:IinitialState = {
-  missionProblemState : []
+  missionProblemState : [],
+  missionData : {}
 }
 
-const missionProblemSlice = createSlice({
-  name: 'missionProblem',
+const missionSlice = createSlice({
+  name: 'mission',
   initialState,
   reducers: {
     addProblem: (state, action: PayloadAction<MissionProblem>) => {
@@ -32,21 +34,15 @@ const missionProblemSlice = createSlice({
         console.log(e, idx);
         state.missionProblemState.push({ 'idx': idx+1, 'num':e.num, 'link':e.link, 'remove':e.remove });
       })
-
-      // [{
-      //  "idx" : 1,
-      //  "num" : 1000,  
-      //  "link" : "https://www.acmicpc.net/problem/1001",
-      //  "remove" : "삭제"
-      // }]
-      //
     },
     resetProblems: (state) => {
-      console.log('reset');
       state.missionProblemState = [];
     },
+    propMissionData: (state, action) => {
+      state.missionData = action.payload
+    }
   },
 });
 
-export const { addProblem, removeProblem, resetProblems } = missionProblemSlice.actions;
-export default missionProblemSlice.reducer;
+export const { addProblem, removeProblem, resetProblems, propMissionData } = missionSlice.actions;
+export default missionSlice.reducer;

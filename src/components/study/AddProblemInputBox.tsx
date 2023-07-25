@@ -1,23 +1,32 @@
 import React from "react";
 import { S } from "../common/style";
 import { useDispatch, useSelector } from "react-redux";
-import * as userAction from "@/store/modules/missionProblem";
+import * as userAction from "@/store/modules/mission";
 interface IInput {
   title: string;
   size: string;
   value : string;
   setProblemValue: React.Dispatch<React.SetStateAction<string>>;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setProblemList : React.Dispatch<React.SetStateAction<any>>;
+  problemList: any;
 }
 
 
-const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue }: IInput) => {
+const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue, setProblemList, problemList }: IInput) => {
   const dispatch = useDispatch();
   const missionProblemState = useSelector((state:any) => {
-    return state.missionProblem.missionProblemState
+    return state.mission.missionProblemState
   })
   
   const handleAddProblem = (e:React.MouseEvent<HTMLButtonElement>) => {
+    setProblemList([
+      ...problemList,
+      {
+        problemName : null,
+        problemNumber : value
+      }
+    ])
     e.preventDefault();
     const newProblem = {
       idx: missionProblemState.length + 1,

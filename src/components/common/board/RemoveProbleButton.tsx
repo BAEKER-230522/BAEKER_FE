@@ -3,7 +3,7 @@ import { S } from './style';
 import { Button } from 'antd';
 import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import { useDispatch } from 'react-redux';
-import * as userAction from "@/store/modules/missionProblem";
+import * as userAction from "@/store/modules/mission";
 
 const RemoveProblemButton = ({idx}:{idx:number}) => {
   const dispatch = useDispatch();

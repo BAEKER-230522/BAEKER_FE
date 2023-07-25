@@ -5,10 +5,18 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as userAction from "@/store/modules/missionProblem";
 
+interface IProblemList {
+  problemName : string;
+  problemNumber : number;
+}
+
 interface IArgument {
   nameValue : string;
   aboutValue : string;
   param : string | undefined | string[];
+  deadline : string;
+  startDate: string;
+  problemList : IProblemList[];
 }
 
 const useMissionEdit = () => {
@@ -18,14 +26,17 @@ const useMissionEdit = () => {
   const [createMission] = studyApi.useCreateStudyMissionMutation()
   const [updateMission] = studyApi.useUpdateStudyMissionMutation()
 
-  const handleCreateMission = async({nameValue, aboutValue, param} : IArgument) => {
+  const handleCreateMission = async({nameValue, aboutValue, param, startDate, deadline, problemList} : IArgument) => {
     try{
       await createMission(
         {
           "name": nameValue,
           "about": aboutValue,
           "studyId": param,
-          "ruleId": ruleId
+          "ruleId": ruleId,
+          "startDate": startDate,
+          "deadline": deadline,
+          "createProblemList": problemList,
         }
       )
       toast('미션 등록 완료')

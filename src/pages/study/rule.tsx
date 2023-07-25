@@ -19,20 +19,17 @@ const Mission = () => {
   const [nameValue, setNameValue, nameHandler] = useInput('')
   const [aboutValue, setAboutValue, aboutHandler] = useInput('')
   const [problemValue, setProblemValue, problemHandler] = useInput('')
+  const [missionStartDate, setMissionStartDate] = useState('')
+  const [missionEndDate, setMissionEndDate] = useState('')
+  const [problemList, setProblemList] = useState([])
   const {data, isLoading} = ruleApi.useGetAllRulesQuery({});
-  // const [missionProblem, setMissionProblem] = useState([{"idx":1, "num":1000, "link":"https://www.acmicpc.net/problem/1001", "remove":'삭제'}]);
+  
 
-  const dispatch = useDispatch();
+  
   const missionProblemState = useSelector((state:any) => {
     return state.missionProblem.missionProblemState
   })
-  // [{
-  //  "idx" : 1,
-  //  "num" : 1000,  
-  //  "link" : "https://www.acmicpc.net/problem/1001",
-  //  "remove" : "삭제"
-  // }]
-  //
+
   useEffect(() => {
     setNameValue(router.query.name)
     setAboutValue(router.query.about)
@@ -43,12 +40,14 @@ const Mission = () => {
     if(isEditMode){
       handleUpdateStudy({nameValue, aboutValue, router})
     }else{
-      handleCreateMission({nameValue, aboutValue, param})
+      handleCreateMission({nameValue, aboutValue, param, startDate:missionStartDate, deadline:missionEndDate, problemList})
     }
   }
+  console.log(missionProblemState);
+  
 
   if(isLoading) return <div>Loading...</div>
-
+  console.log(data);
   return (
     <S.Container>
       <S.FormContainer onSubmit={(e) => handleSubmit(e)}>
@@ -63,12 +62,12 @@ const Mission = () => {
               <Input title={"미션 소개"} size={"100%"} value={aboutValue} onChange={aboutHandler}/>
               <S.SelectorWrapper>
                 <S.Title style={{marginRight: 'auto'}}>미션 기간</S.Title>
-                <StartToEndRangeDatePicker/>
+                <StartToEndRangeDatePicker setMissionStartDate={setMissionStartDate} setMissionEndDate={setMissionEndDate}/>
               </S.SelectorWrapper>
             </S.MissionInputInnerWrapper>
           </S.MissionInputLeftContainer>
           <S.MissionInputRightContainer>
-            <AddProblemInputBox title={"문제 추가"} size={"60%"} value={problemValue} onChange={problemHandler} setProblemValue={setProblemValue} />
+            <AddProblemInputBox title={"문제 추가"} size={"60%"} value={problemValue} onChange={problemHandler} setProblemValue={setProblemValue} setProblemList={setProblemList} problemList={problemList}/>
             <Board category={[["번호", "idx"], ["문제 번호", "num"], ["링크", "link"], ["삭제", "remove"]]} widthRatio={[1, 1, 2, 1]} data={missionProblemState} type={'problem'}/>
           </S.MissionInputRightContainer>
         </S.MissionInputContainer>
