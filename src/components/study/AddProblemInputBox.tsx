@@ -1,7 +1,7 @@
 import React from "react";
 import { S } from "../common/style";
 import { useDispatch, useSelector } from "react-redux";
-import * as userAction from "@/store/modules/missionProblem";
+import * as userAction from "@/store/modules/mission";
 interface IInput {
   title: string;
   size: string;
@@ -16,7 +16,7 @@ interface IInput {
 const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue, setProblemList, problemList }: IInput) => {
   const dispatch = useDispatch();
   const missionProblemState = useSelector((state:any) => {
-    return state.missionProblem.missionProblemState
+    return state.mission.missionProblemState
   })
   
   const handleAddProblem = (e:React.MouseEvent<HTMLButtonElement>) => {

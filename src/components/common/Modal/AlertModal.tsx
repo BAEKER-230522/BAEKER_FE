@@ -10,9 +10,10 @@ interface IProps {
   text : string;
   id : number;
   type: string;
+  backId?: string;
 }
 
-const AlertModal = ({title, text, id, type}: IProps) => {
+const AlertModal = ({title, text, id, type, backId}: IProps) => {
   const [deleteRule, {isLoading:deleteRuleLoading}] = ruleApi.useDeleteRuleMutation();
   const [deleteMission, {isLoading:deleteMissionLoading}] = studyApi.useDeleteStudyMissionMutation();
   const [open, setOpen] = useState(false);
@@ -42,7 +43,7 @@ const AlertModal = ({title, text, id, type}: IProps) => {
         router.push({pathname:"/rule/list"})
       }
       if(type==="mission"){
-        router.push({pathname:"/study/1"})
+        router.push({pathname:`/study/${backId}`})
       }
       
     }

@@ -1,9 +1,11 @@
 import { S } from "./style";
-import { IBoard } from "./Board";
 import { useRouter } from "next/router";
 import InviteAcceptButton from "./InviteAcceptButton";
 import { USER_NUMBER } from "@/util/constant";
 import RemoveProblemButton from "./RemoveProbleButton";
+import { useDispatch } from "react-redux";
+import { propMissionData } from "@/store/modules/mission";
+import { FaDatabase } from "react-icons/fa";
 // get api로 데이터 받기.
 
 interface IContentProps{
@@ -20,15 +22,19 @@ const RequestStatus = ({status}:{status:string}) => {
 }
 
 const Content = ({ target_nth, ratio, crntPage, data, type, category }: IContentProps) => {
+  const dispatch = useDispatch();
+
   const test = data.slice(crntPage! * 5, crntPage! * 5 + 5);
   const router = useRouter()
   
-  const navigateToPage = (id:number) => {
+  const navigateToPage = (data:any) => {
+    console.log(data);    
     const basePath = router.asPath;
     if(type === 'mission'){
-      router.push(`${basePath}/${type}/${id}`)
+      dispatch(propMissionData(data))
+      router.push(`${basePath}/${type}/${data.id}`)
     }else{
-      router.push({pathname:`${type}/${id}`})
+      router.push({pathname:`/${type}/${data.id}`})
     }
   }
   
@@ -36,7 +42,7 @@ const Content = ({ target_nth, ratio, crntPage, data, type, category }: IContent
   return (
     <S.ContentContainer >
       {test.map((e:any, idx:number) => (
-        <S.ContentWrapper key={idx} target_nth={target_nth!} ratio={ratio!} onClick={() => navigateToPage(e.id)}>
+        <S.ContentWrapper key={idx} target_nth={target_nth!} ratio={ratio!} onClick={() => navigateToPage(e)}>
           {category.map((elem, inner_idx) => 
             (
               elem[1] === "request" ? <RequestStatus status={"pending"} key={inner_idx}/> 
