@@ -4,8 +4,7 @@ import { login } from "@/store/modules/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { GetServerSideProps } from 'next'
-import { API } from "@/api/cookie";
-import { ICookiesData } from "@/api/cookie";
+
 // Your page component here
 
 
@@ -22,10 +21,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   // context.res.setHeader('Set-Cookie', `accessToken=${accessToken}; Path=/; Max-Age=${30 * 24 * 60 * 60}; HttpOnly; Secure`);
   if(accessToken){
     res.setHeader('Set-Cookie', `accessToken=${accessToken}; Path=/; HttpOnly; Secure`);
-    console.log('access Token ok', accessToken);
-  }else{
-    console.log('access Token no', accessToken);
+    res.writeHead(302, { Location: '/rank/study' });
+    res.end();
+    return {props: {}};
+    // console.log('access Token ok', accessToken);
   }
+
 
   return {
     props: {}, // will be passed to the page component as props
@@ -44,8 +45,8 @@ const Home = () => {
       const accessToken:any = router.query.accessToken
       const refreshToken:any = router.query.refreshToken
       const memberId:any = router.query.memberId
-      // localStorage.setItem('token', ACCESS_TOKEN)
-      // localStorage.setItem('refresh_token', REFRESH_TOKEN)
+      localStorage.setItem('token', accessToken)
+      localStorage.setItem('refresh_token', refreshToken)
       // API.setAllCookies({accessToken, refreshToken, memberId});
       dispatch(login(memberId))
     }
