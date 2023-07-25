@@ -7,7 +7,7 @@ const Header = () => {
   const { dropdownState, changeDropdownState } = useOncClickIcon();
   return (
     <S.HeaderContainer>
-      <Link href="/home" legacyBehavior>
+      <Link href="/" legacyBehavior>
         <S.Logo>BAEKER</S.Logo>
       </Link>
       <S.IconContainer>
