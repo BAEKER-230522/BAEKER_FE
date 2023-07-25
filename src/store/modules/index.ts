@@ -1,11 +1,10 @@
 // 리듀서 통합 모듈
 import { combineReducers } from "redux";
 import { HYDRATE } from "next-redux-wrapper";
-
 import dropdown from "./dropdown";
 import tab from "./tab";
 import modify from "./modify";
-import missionProblem from "./missionProblem";
+import mission from "./mission";
 import user from "./user";
 import { memberApi } from "@/api/memberApi";
 import { studyApi } from "@/api/studyApi";
@@ -24,7 +23,7 @@ const reducer = (state: any, action: any) => {
     dropdown,
     tab,
     modify,
-    missionProblem,
+    mission,
     user,
     [memberApi.reducerPath]: memberApi.reducer,
     [studyApi.reducerPath]: studyApi.reducer,
