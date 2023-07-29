@@ -44,7 +44,6 @@ const Mission = () => {
       handleCreateMission({nameValue, aboutValue, param, startDate:missionStartDate, deadline:missionEndDate, problemList})
     }
   }
-  console.log(missionProblemState);
   
 
   if(isLoading) return (
@@ -74,7 +73,6 @@ const Mission = () => {
       </S.FormContainer>
     </S.Container>
   )
-  console.log(data);
   return (
     <S.Container>
       <S.FormContainer onSubmit={(e) => handleSubmit(e)}>

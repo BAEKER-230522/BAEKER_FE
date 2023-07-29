@@ -13,12 +13,8 @@ import Loading from "@/components/Loading/Loading";
 
 const StudyDetail = () => {
   const router = useRouter();
-  console.log(router.query);
-  
   const {studyId: param} = router.query;
   const {data:studyMissionList, isLoading:getStudyMissionListLoading} = studyApi.useGetStudyRuleListQuery(Number(param));
-  console.log(studyMissionList);
-  
   const {data:stduyMemberList, isLoading:getMemberListLoading} = studyApi.useGetStudyMemberListQuery(Number(param));
   const {data:studyPedingList, isLoading:getPedingListLoading} = studyApi.useGetPendingListQuery(Number(param));
   const {data:studyInfo, isLoading:getStudyInfoLoading} = studyApi.useGetStudyInfoQuery(Number(param));

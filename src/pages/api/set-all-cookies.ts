@@ -1,9 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === 'POST') {
-    console.log('hello set-all-cookies');
-    
+  if (req.method === 'POST') {  
     const encodedNickname = encodeURIComponent(req.body.nickname);
     res.setHeader('Set-Cookie', [
       `accessToken=${req.body.accessToken}; Path=/; HttpOnly; Secure; SameSite=Lax;`,

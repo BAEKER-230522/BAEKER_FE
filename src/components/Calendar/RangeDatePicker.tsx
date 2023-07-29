@@ -11,8 +11,6 @@ interface IProps{
 const StartToEndRangeDatePicker = ({ setMissionStartDate, setMissionEndDate } : IProps ) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-  console.log(startDate, endDate.toLocaleDateString());
-
   useEffect(() => {
     let start = startDate.toLocaleDateString().slice(0, -1).split('. ')
     
