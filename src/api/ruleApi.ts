@@ -8,10 +8,15 @@ interface IGetSearchRuleParams {
 };
 export const ruleApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const token = localStorage.getItem('token');
-      if(token) {
-        headers.set('authorization', `${token}`);
+    prepareHeaders: (headers) => {
+      if (typeof window !== 'undefined') { // 브라우저 환경 확인
+        const token = document.cookie
+          .split('; ')
+          .find(row => row.startsWith('accessToken='))
+          ?.split('=')[1];
+        if (token) {
+          headers.set('authorization', `${token}`);
+        }
       }
 
       return headers;
