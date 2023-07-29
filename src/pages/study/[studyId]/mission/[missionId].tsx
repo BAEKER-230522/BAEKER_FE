@@ -23,7 +23,6 @@ interface IMissionData {
 const MissionDetail = () => {
   // 미션 상태 ( 시작 전, 진행 중, 끝 )
   const missionData:IMissionData = useSelector((state:any) => {return state.mission.missionData})
-  console.log(missionData);
   //  "exception" | "active" | "success"
   const missionStatus = missionData.mission === "DONE" ? missionData.status === "FAIL" ? "exception" : "success" : "active"
   // 미션 문제 풀이 진행률

@@ -7,7 +7,7 @@ interface IArgument {
 }
 
 const useFetchUserStudyList = ({memberId, status} : IArgument) => {
-  const {data, isLoading} = studyApi.useGetUserStudyListQuery({memberId:USER_NUMBER,status});
+  const {data, isLoading} = studyApi.useGetUserStudyListQuery({memberId:memberId,status});
   return {data, isLoading}
 }
 

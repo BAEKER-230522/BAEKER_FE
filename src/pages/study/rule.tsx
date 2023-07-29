@@ -10,6 +10,7 @@ import StartToEndRangeDatePicker from "@/components/Calendar/RangeDatePicker";
 import Board from "@/components/common/Board/Board";
 import AddProblemInputBox from "@/components/Study/AddProblemInputBox";
 import { useDispatch, useSelector } from "react-redux";
+import Loading from "@/components/Loading/Loading";
 
 const Mission = () => {
   const router = useRouter();
@@ -43,11 +44,35 @@ const Mission = () => {
       handleCreateMission({nameValue, aboutValue, param, startDate:missionStartDate, deadline:missionEndDate, problemList})
     }
   }
-  console.log(missionProblemState);
   
 
-  if(isLoading) return <div>Loading...</div>
-  console.log(data);
+  if(isLoading) return (
+    <S.Container>
+      <S.FormContainer onSubmit={(e) => handleSubmit(e)}>
+        <S.MissionInputContainer>
+          <S.MissionInputLeftContainer>
+            <S.MissionInputInnerWrapper>
+              <S.SelectorWrapper>
+                <S.Title style={{marginRight: 'auto'}}>미션 선택</S.Title>
+                <Loading/>
+              </S.SelectorWrapper>
+              <Input title={"미션 이름"} size={"100%"} value={nameValue} onChange={nameHandler}/>
+              <Input title={"미션 소개"} size={"100%"} value={aboutValue} onChange={aboutHandler}/>
+              <S.SelectorWrapper>
+                <S.Title style={{marginRight: 'auto'}}>미션 기간</S.Title>
+                <StartToEndRangeDatePicker setMissionStartDate={setMissionStartDate} setMissionEndDate={setMissionEndDate}/>
+              </S.SelectorWrapper>
+            </S.MissionInputInnerWrapper>
+          </S.MissionInputLeftContainer>
+          <S.MissionInputRightContainer>
+            <AddProblemInputBox title={"문제 추가"} size={"60%"} value={problemValue} onChange={problemHandler} setProblemValue={setProblemValue} setProblemList={setProblemList} problemList={problemList}/>
+            <Loading/>
+          </S.MissionInputRightContainer>
+        </S.MissionInputContainer>
+        {isEditMode ? <S.Button type="submit" value={'수정'}/> : <S.Button type="submit" value={'미션 생성'}/>}
+      </S.FormContainer>
+    </S.Container>
+  )
   return (
     <S.Container>
       <S.FormContainer onSubmit={(e) => handleSubmit(e)}>

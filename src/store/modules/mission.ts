@@ -31,7 +31,6 @@ const missionSlice = createSlice({
       const temp = state.missionProblemState;
       state.missionProblemState = [];
       temp.forEach((e, idx) => {
-        console.log(e, idx);
         state.missionProblemState.push({ 'idx': idx+1, 'num':e.num, 'link':e.link, 'remove':e.remove });
       })
     },

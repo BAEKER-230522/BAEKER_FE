@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import wrapper from "@/store";
 import PropTypes from "prop-types";
 
-const App = ({ Component, ...pageProps }: any) => {
+const App = ({ Component, pageProps }: any) => {
   return (
     <React.Fragment>
       <ToastContainer position="top-right" autoClose={1500} />

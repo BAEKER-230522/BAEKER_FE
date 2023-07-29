@@ -48,7 +48,6 @@ const useMissionEdit = () => {
   }
 
   const handleUpdateStudy = async({nameValue, aboutValue, router} : any) => {
-    console.log(router.query);
     try{
       await updateMission({id: Number(router.query.id), body:{"name":nameValue, "about":aboutValue, "ruleId":ruleId}})
       toast('미션 수정 완료')

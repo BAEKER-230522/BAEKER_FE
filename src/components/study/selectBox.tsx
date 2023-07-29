@@ -2,6 +2,7 @@ import React, { ChangeEvent, FC, SetStateAction, useState } from 'react';
 import { S } from './style';
 import { ISelectOption } from '@/pages/study/rule';
 import { ruleApi } from '@/api/ruleApi';
+import Loading from '../Loading/Loading';
 
 interface IProps{
   selectedOption: ISelectOption;
@@ -28,7 +29,7 @@ const SelectBox = ({selectedOption, setSelectedOption, data, isLoading}:IProps) 
     setSelectedOption(selectedOption);
   };
 
-  if(isLoading) return <div>Loading...</div>
+  if(isLoading) return (<S.SelectBoxContainer><Loading/></S.SelectBoxContainer>) 
   
   return (
     <S.SelectBoxContainer value={selectedOption.value} onChange={handleChange}>

@@ -1,16 +1,23 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { GetServerSidePropsContext, GetServerSideProps } from 'next';
 
 const END_POINT = "api/study/v1";
 const END_POINT_2 = "api/my-study/v1"
 const END_POINT_3 = "api/studyrule/v1"
 
+
 // baseQuery, reducerPath, tagTypes, endpoints,
 export const studyApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const token = localStorage.getItem('token');
-      if(token) {
-        headers.set('authorization', `${token}`);
+    prepareHeaders: (headers) => {
+      if (typeof window !== 'undefined') { // 브라우저 환경 확인
+        const token = document.cookie
+          .split('; ')
+          .find(row => row.startsWith('accessToken='))
+          ?.split('=')[1];
+        if (token) {
+          headers.set('authorization', `${token}`);
+        }
       }
 
       return headers;

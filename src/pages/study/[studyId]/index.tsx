@@ -9,15 +9,12 @@ import SolveStatus from "@/components/common/SolveStatus";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
 import { mock_data } from "./mission.mock";
+import Loading from "@/components/Loading/Loading";
 
 const StudyDetail = () => {
   const router = useRouter();
-  console.log(router.query);
-  
   const {studyId: param} = router.query;
   const {data:studyMissionList, isLoading:getStudyMissionListLoading} = studyApi.useGetStudyRuleListQuery(Number(param));
-  console.log(studyMissionList);
-  
   const {data:stduyMemberList, isLoading:getMemberListLoading} = studyApi.useGetStudyMemberListQuery(Number(param));
   const {data:studyPedingList, isLoading:getPedingListLoading} = studyApi.useGetPendingListQuery(Number(param));
   const {data:studyInfo, isLoading:getStudyInfoLoading} = studyApi.useGetStudyInfoQuery(Number(param));
@@ -28,7 +25,15 @@ const StudyDetail = () => {
   });
   const TAB_ELEMENTS = ["현황", "미션", "멤버", "가입요청"];
 
-  if(getMemberListLoading || getPedingListLoading || getStudyMissionListLoading || getStudyInfoLoading) return <div>Loading ... </div>
+  if(getMemberListLoading || getPedingListLoading || getStudyMissionListLoading || getStudyInfoLoading) return (
+    <S.StudyContainer>
+      <StudyInfo />
+      <Tab elements={TAB_ELEMENTS} type="study" />
+      <S.ContentContainer>
+        <Loading/>
+      </S.ContentContainer>
+    </S.StudyContainer>
+  )
   
   return ( 
     <S.StudyContainer>

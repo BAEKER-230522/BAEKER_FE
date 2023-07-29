@@ -2,12 +2,24 @@ import { useRouter } from "next/router";
 import { S } from "./style";
 import { ruleApi } from "@/api/ruleApi";
 import AlertModal from "@/components/common/Modal/AlertModal";
+import Loading from "@/components/Loading/Loading";
 const RuleDetail = () => {
   const router = useRouter()
   const {detail : param} = router.query
   const {data, isLoading} = ruleApi.useGetRuleQuery(param)
   
-  if(isLoading) return <div>Loading...</div>
+  if(isLoading) return (
+    <S.Container>
+      <S.Wrapper>
+        <Loading/>
+      </S.Wrapper>
+      <S.ButtonContainer>
+        <S.Button onClick={() => router.push({pathname:"/rule/list"})}>목록</S.Button>
+        <AlertModal id={param} title={'규칙 삭제'} text={'삭제하시겠습니까 ?'} type={"rule"}>삭제</AlertModal>
+        <S.Button onClick={() => router.push({pathname:"/rule/create", query:{name: data.data.name, count: data.data.count, level: data.data.difficulty, xp: data.data.xp, about: data.data.about, id:param}})}>수정</S.Button>
+      </S.ButtonContainer>
+    </S.Container>
+  )
   return (
     <S.Container>
       <S.Wrapper>

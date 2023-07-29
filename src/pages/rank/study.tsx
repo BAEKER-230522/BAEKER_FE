@@ -1,10 +1,18 @@
 import { S } from "./style";
 import Board from "@/components/common/Board/Board";
 import { studyApi } from "@/api/studyApi";
+import Loading from "@/components/Loading/Loading";
 
 const StudyRank = () => {
   const {data, isLoading} = studyApi.useGetStudyInfoListQuery(0)
-  if(isLoading) return <div>Loading...</div>
+  
+  if(isLoading){
+    return (
+      <S.Container>
+        <Loading/>
+      </S.Container>
+    )
+  }
   
   return (
     <S.Container>

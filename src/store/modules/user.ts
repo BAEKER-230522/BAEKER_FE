@@ -8,7 +8,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    login: (state: any, action) => {
+    loginUser: (state: any, action) => {
       state.userId = action.payload;
     },
     logout: (state: any) => {
@@ -17,5 +17,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { login, logout } = userSlice.actions; // 액션 생성 함수
+export const { loginUser, logout } = userSlice.actions; // 액션 생성 함수
 export default userSlice.reducer; // 리듀성
