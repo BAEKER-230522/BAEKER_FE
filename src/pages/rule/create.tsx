@@ -29,7 +29,6 @@ const CreateStudy = () => {
   }, [])
 
   const handleCreateStudy = (e:any) => {
-    console.log('click');
     
     e.preventDefault(); 
     if(isEditMode){
