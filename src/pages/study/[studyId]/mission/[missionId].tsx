@@ -37,17 +37,19 @@ const MissionDetail = () => {
     {
       rank: 1, 
       nickname : 'chumjio1o',
-      problem_status: [true, true, true, false]
+      problem_status: Array.from({length:PROBLEM_COUNT}, () => true)
     },
     {
       rank: 2,
       nickname : 'jeongdo',
-      problem_status: [false, false, true, false]
+      problem_status: Array.from({length:PROBLEM_COUNT}, () => true)
     }
   ]
 
   for(let i=0; i<DATE_PROGRESS; i++){
+    if(i >= DURATION) break
     TIME_SPAN_STATUS[i] = true;
+    
   }
 
   for(let i=0; i<PROBLEM_COUNT; i++){
@@ -60,8 +62,15 @@ const MissionDetail = () => {
   
   const studyId = router.query.studyId
 
-  const movePage = () => {
-    router.push({pathname:`/study/${studyId}`})
+  const movePage = (type:'study'|'rule') => {
+    switch(type){
+      case 'study':
+        router.push({pathname:`/study/${studyId}`})
+        return
+      case 'rule':
+        router.push({pathname:`/rule/list`})
+        return
+    }
   }
   
   return (
@@ -107,10 +116,10 @@ const MissionDetail = () => {
           </S.MissionProblemListContainer>
         </S.MemberSolvingStatusContainer>
         <S.ButtonContainer>
-          <Button type="primary" style={{width:"100px", height:"40px"}} onClick={movePage}>목록</Button>
+          <Button type="primary" style={{width:"100px", height:"40px"}} onClick={() => movePage('study')}>목록</Button>
           <Button style={{width:"100px", height:"40px"}} type="primary">수정</Button>
           <AlertModal id={param.missionId} title={'미션 삭제'} text={'삭제하시겠습니까 ?'} type={"mission"} backId={param.studyId}>삭제</AlertModal>
-          <Button style={{width:"100px", height:"40px"}} type="primary">규칙 상세보기</Button>
+          <Button style={{width:"100px", height:"40px"}} type="primary" onClick={() => movePage('rule')}>규칙 상세보기</Button>
         </S.ButtonContainer>
       </S.MissionStatusContainer>
     </S.Container>
