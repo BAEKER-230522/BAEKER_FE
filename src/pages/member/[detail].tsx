@@ -10,6 +10,9 @@ import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
 import { memberApi } from "@/api/memberApi";
 import Loading from "@/components/Loading/Loading";
+import { GetServerSideProps } from "next";
+import { parseCookies } from "@/util/parseCookie";
+
 const flag = 0;
 
 export interface IUserData {
@@ -25,8 +28,23 @@ export interface IUserData {
 interface IUserInfo {
   data: IUserData
 }
+
+
+export const getServerSideProps : GetServerSideProps = async(context) => {
+  const {req, res} = context;
+  const cookies = parseCookies(req.headers.cookie)
+  const userId = Number(cookies.memberId)
+  
+  return {
+    props: {
+      userId,
+    },
+  };
+}
+
+
  
-const Profile = () => {
+const Profile = ({userId}:{userId : string}) => {
   const router = useRouter();
   const {detail: param} = router.query;
   const {data: userStudyList, isLoading: isGetUserStudyListLoading} = studyApi.useGetUserStudyListQuery({memberId:param, status:1});
@@ -58,7 +76,7 @@ const Profile = () => {
           </>
         );
       case 1:
-        return <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"],[ "스터디 장", "leader"],["랭킹", "xp"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.studyList}/>;
+        return <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"],[ "스터디 장", "leader"],["랭킹", "xp"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.data}/>;
       case 2:
         return <Board type={"study"} category={["스터디", "소개", "인원", "스터디 장", "상태"]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.studyList}/>;
     }
@@ -66,7 +84,7 @@ const Profile = () => {
   return (
     <S.Container>
       <S.InfoContainer>
-        <UserInfo userData={userData.data}/>
+        <UserInfo userData={userData.data} userId={userId}/>
         <UserSolvedInfo userData={userData.data}/>
       </S.InfoContainer>
       {flag ? <Tab elements={TAB_ELEMENTS_MY} type="profile" /> : <Tab elements={TAB_ELEMENTS_OTHER} type="profile" />}

@@ -2,8 +2,8 @@ import { studyApi } from "@/api/studyApi";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import * as userAction from "@/store/modules/missionProblem";
+import { useDispatch } from "react-redux";
+import * as userAction from "@/store/modules/mission";
 
 interface IProblemList {
   problemName : string;

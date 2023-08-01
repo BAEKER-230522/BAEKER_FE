@@ -1,17 +1,12 @@
 import { studyApi } from "@/api/studyApi";
 import { useState } from "react";
-import { USER_NUMBER } from "@/util/constant";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 interface IArgument {
   nameValue : string;
   aboutValue : string;
-}
-
-interface ISubmit {
-  e : React.FormEvent<HTMLFormElement>;
-  isEditMode : boolean;
+  userId : number;
 }
 
 const useStudyEdit = () => {
@@ -20,9 +15,9 @@ const useStudyEdit = () => {
   const [createStudy] = studyApi.useCreateStudyMutation();
   const [updateStudy] = studyApi.useUpdateStudyMutation();
 
-  const handleCreateStudy = async({nameValue, aboutValue}: IArgument) => {
+  const handleCreateStudy = async({nameValue, aboutValue, userId}: IArgument) => {
     try{
-      await createStudy({"member":USER_NUMBER, "name":nameValue, "about":aboutValue, "leader":"leader","capacity":maxStudyCapacity});
+      await createStudy({"member":userId, "name":nameValue, "about":aboutValue, "leader":"leader","capacity":maxStudyCapacity});
       toast('스터디 생성 완료')
       router.push({pathname:"/profile"})
     }catch(err){
@@ -30,7 +25,7 @@ const useStudyEdit = () => {
     }
   }
   
-  const handleUpdateStudy = async({nameValue, aboutValue}: IArgument) => {
+  const handleUpdateStudy = async({nameValue, aboutValue, userId}: IArgument) => {
     try{
       await updateStudy({"id": router.query.id, "name":nameValue, "about":aboutValue,"capacity":maxStudyCapacity})
       toast('스터디 수정 완료')

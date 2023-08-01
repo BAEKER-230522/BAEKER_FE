@@ -5,27 +5,25 @@ import { studyApi } from '@/api/studyApi';
 import Selector from '../Selector';
 import { Input } from 'antd';
 import { toast } from 'react-toastify';
-import { USER_NUMBER } from '@/util/constant';
 import Loading from '@/components/Loading/Loading';
-
 const { TextArea } = Input;
 
 
 interface IProps {
-  title: string;
-  text : string;
+  userId : number;
   id : number;
   name : string;
 }
 
-const JoinRequestModal = ({title, text, id, name}: IProps) => {
+const JoinRequestModal = ({userId, id, name}: IProps) => {
+
   const [studyId, setId] = useState<number>(); 
   const [message, setMessage] = useState<string>('');
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState('Content of the modal');
   const router = useRouter()
-  const {data: getStudyList, isLoading} = studyApi.useGetUserStudyListQuery({memberId:USER_NUMBER, status:1})
+  const {data: getStudyList, isLoading} = studyApi.useGetUserStudyListQuery({memberId:userId, status:1})
   const [handleInvite] = studyApi.useInviteStudyMutation()
   const showModal = () => {
     setOpen(true);
@@ -40,7 +38,7 @@ const JoinRequestModal = ({title, text, id, name}: IProps) => {
       setConfirmLoading(true);
       
       
-      await handleInvite({'study':studyId, 'inviter':USER_NUMBER, 'invitee':id, 'msg':message})
+      await handleInvite({'study':studyId, 'inviter':userId, 'invitee':id, 'msg':message})
       setMessage('')
       toast('스터디 초대 완료')
       setOpen(false);
