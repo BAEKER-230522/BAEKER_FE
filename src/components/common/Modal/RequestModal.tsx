@@ -4,18 +4,22 @@ import { useRouter } from "next/router";
 import { studyApi } from '@/api/studyApi';
 import { Input } from 'antd';
 import { toast } from 'react-toastify';
-import { USER_NUMBER } from '@/util/constant';
+
+interface IProps {
+  memberId : number;
+  studyId : string;
+}
 
 const { TextArea } = Input;
-
-const RequestModal = () => {
-  const [studyId, setStudyId] = useState<number>(); 
+const RequestModal = ({memberId, studyId}:IProps) => {
+  console.log(memberId);
+  
   const [message, setMessage] = useState<string>('');
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState('Content of the modal');
   const router = useRouter();
-  const {detail: param} = router.query;
+  
   const [handleJoinStudy] = studyApi.useJoinStudyMutation()
   const showModal = () => {
     setOpen(true);
@@ -23,9 +27,10 @@ const RequestModal = () => {
   // 스터디 가입 
 
   const handleOk = async() => {
+    
     try{
       setConfirmLoading(true);      
-      await handleJoinStudy({'study':Number(param), 'member':USER_NUMBER, 'msg':message})
+      await handleJoinStudy({'study':Number(studyId), 'member':memberId, 'msg':message})
       setMessage('')
       toast('스터디 가입 신청 완료')
       setOpen(false);

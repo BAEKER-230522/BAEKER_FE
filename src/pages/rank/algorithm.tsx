@@ -5,7 +5,7 @@ import Loading from "@/components/Loading/Loading";
 
 const AlgorithmRank = () => {
   const {data, isLoading} = memberApi.useGetAllMembersQuery({});
-  if(isLoading) return <(
+  if(isLoading) return (
     <S.Container>
       <Loading/>
     </S.Container>

@@ -6,15 +6,37 @@ import { memberApi } from "@/api/memberApi";
 import {  useEffect } from "react";
 import {  useRouter } from "next/router";
 import useInput from "@/hooks/useInput";
-import { USER_NUMBER } from "@/util/constant";
 import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
 import Loading from "@/components/Loading/Loading";
+import { parseCookies } from "@/util/parseCookie";
+import { GetServerSideProps } from "next";
 
-const Modify = () => {
-  const {data, isLoading} = memberApi.useGetMemberQuery(USER_NUMBER);
+interface LoginProps {
+  refreshToken: string;
+  memberId: number;
+}
+
+export const getServerSideProps : GetServerSideProps = async(context) => {
+  const {req, res} = context;
+  const cookies = parseCookies(req.headers.cookie)
+  const refreshToken = cookies.refreshToken
+  const memberId = Number(cookies.memberId)
+  
+  return {
+    props: {
+      refreshToken,
+      memberId,
+    },
+  };
+}
+
+
+const Modify = ({memberId, refreshToken}:LoginProps) => {
+  const {data, isLoading} = memberApi.useGetMemberQuery(memberId);
+  console.log(data);
   const [nameValue, setNameValue, onChangeName] = useInput('')  
   const [aboutValue, setAboutValue, onChangeAbout] = useInput('')
-  const {handleUpdateUserInfo} = useUpdateUserInfo();
+  const {handleUpdateUserInfo} = useUpdateUserInfo(memberId);
   const router = useRouter();
   
   useEffect(() => {
@@ -39,7 +61,7 @@ const Modify = () => {
 
   return (
     <S.Container onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
-      <ModifyImg />
+      <ModifyImg userImg={data.data.kakaoProfileImage}/>
       <Input title={"이름"} size={"25%"} value={nameValue} onChange={onChangeName} />
       <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={onChangeAbout}/>
       <ModifyButton />

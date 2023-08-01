@@ -26,10 +26,6 @@ export const getServerSideProps : GetServerSideProps = async(context) => {
   const cookies = parseCookies(req.headers.cookie)
   const refreshToken = cookies.refreshToken
   const memberId = Number(cookies.memberId)
-
-  console.log('refresh:', refreshToken);
-  console.log('memberId', memberId);
-  
   
   return {
     props: {

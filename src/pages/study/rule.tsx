@@ -28,7 +28,7 @@ const Mission = () => {
 
   
   const missionProblemState = useSelector((state:any) => {
-    return state.missionProblem.missionProblemState
+    return state.mission.missionProblemState
   })
 
   useEffect(() => {
