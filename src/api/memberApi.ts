@@ -13,7 +13,6 @@ export const memberApi = createApi({
           headers.set('authorization', `${token}`);
         }
       }
-
       return headers;
     }
   }),

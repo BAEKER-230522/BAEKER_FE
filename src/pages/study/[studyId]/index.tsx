@@ -71,7 +71,6 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
     </S.StudyContainer>
   )
 
-  
   return ( 
     <S.StudyContainer>
       <StudyInfo isUserStudy={isUserStudy} memberId={memberId}/>
@@ -90,7 +89,7 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
         )} 
         {tabState === 1 && <Board type={"mission"} category={[["규칙", "name"], ["소개", "about"], ["시작일", "startDate"], ["종료일", "deadline"], ["상태", "mission"]]} widthRatio={[1, 2, 1, 1, 1]}  data={studyMissionList.data}/>}
         {tabState === 2 && <Board type={"member"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["가입한 스터디", "id"]]} widthRatio={[2, 1, 1]} data={stduyMemberList.data}/>}
-        {tabState === 3 && <Board type={"join"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["상태", "invite"]]} widthRatio={[1, 1, 1]} data={studyPedingList.data.pending} />}
+        {tabState === 3 && <Board type={"join"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["상태", "study_invite"]]} widthRatio={[1, 1, 1]} data={studyPedingList.data.pending} />}
       </S.ContentContainer>
     </S.StudyContainer>
   );

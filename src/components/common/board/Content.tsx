@@ -24,11 +24,12 @@ const RequestStatus = ({status}:{status:string}) => {
 const Content = ({ target_nth, ratio, crntPage, data, type, category }: IContentProps) => {
   const dispatch = useDispatch();
 
-  const test = data.slice(crntPage! * 5, crntPage! * 5 + 5);
+  const CURRENT_DATA = data.slice(crntPage! * 5, crntPage! * 5 + 5);
+  console.log(CURRENT_DATA);
   const router = useRouter()
+  const { studyId } = router.query;
   
   const navigateToPage = (data:any) => {
-    console.log(data);    
     const basePath = router.asPath;
     if(type === 'mission'){
       dispatch(propMissionData(data))
@@ -41,16 +42,18 @@ const Content = ({ target_nth, ratio, crntPage, data, type, category }: IContent
 
   return (
     <S.ContentContainer >
-      {test.map((e:any, idx:number) => (
+      {CURRENT_DATA.map((e:any, idx:number) => (
         <S.ContentWrapper key={idx} target_nth={target_nth!} ratio={ratio!} onClick={() => navigateToPage(e)}>
           {category.map((elem, inner_idx) => 
             (
               elem[1] === "request" ? <RequestStatus status={"pending"} key={inner_idx}/> 
               :
-              elem[1] === "invite" ? <InviteAcceptButton memberId={USER_NUMBER} studyId={e.id} key={inner_idx}/> 
+              elem[1] === "study_invite" ? <InviteAcceptButton memberId={Number(localStorage.getItem('memberId'))} studyId={Number(studyId)} key={inner_idx}/> 
+              :
+              elem[1] === "user_invite" ? <InviteAcceptButton memberId={Number(localStorage.getItem('memberId'))} studyId={e.id} key={inner_idx}/> 
               :
               elem[1] === "remove" ? <RemoveProblemButton key={inner_idx} idx={idx+1}/>
-              : 
+              :
               <div key={inner_idx}>{e[elem[1]]}</div>)
           )}
         </S.ContentWrapper>

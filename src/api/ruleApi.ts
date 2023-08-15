@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const END_POINT = "api/rule";
+const END_POINT = "api/rule/v1";
 
 interface IGetSearchRuleParams {
   page : number;
@@ -27,13 +27,13 @@ export const ruleApi = createApi({
   endpoints: (builder) => ({
     // 모든 규칙 정보 가져오기
     getAllRules: builder.query({
-      query: () => `${END_POINT}/v1/search`,
+      query: () => `${END_POINT}/search`,
       providesTags : [{type:"Rule"}],
     }),
 
     // id로 규칙 정보 가져오기
     getRule: builder.query({
-      query: (id) => `${END_POINT}/v1/search/${id}`,
+      query: (id) => `${END_POINT}/search/${id}`,
       providesTags : [{type:"Rule"}],
     }),
 
@@ -46,7 +46,7 @@ export const ruleApi = createApi({
     // 규칙 생성
     createRule: builder.mutation({
       query: (body) => ({
-        url: `${END_POINT}/v1/rules`,
+        url: `${END_POINT}/rules`,
         method: "POST",
         body,
       }),
@@ -56,7 +56,7 @@ export const ruleApi = createApi({
     // 규칙 삭제
     deleteRule: builder.mutation({
       query: (id) => ({
-        url: `${END_POINT}/v1/rules/${id}`,
+        url: `${END_POINT}/rules/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: [{type: "Rule"}]
@@ -65,7 +65,7 @@ export const ruleApi = createApi({
     // 규칙 수정
     updateRule: builder.mutation({
       query: ({id, body}) => ({
-        url: `${END_POINT}/v1/${id}`,
+        url: `${END_POINT}/${id}`,
         method: "PUT",
         body
       }),

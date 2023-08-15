@@ -12,14 +12,11 @@ interface IProps {
 
 const { TextArea } = Input;
 const RequestModal = ({memberId, studyId}:IProps) => {
-  console.log(memberId);
-  
   const [message, setMessage] = useState<string>('');
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState('Content of the modal');
   const router = useRouter();
-  
   const [handleJoinStudy] = studyApi.useJoinStudyMutation()
   const showModal = () => {
     setOpen(true);
@@ -27,7 +24,6 @@ const RequestModal = ({memberId, studyId}:IProps) => {
   // 스터디 가입 
 
   const handleOk = async() => {
-    
     try{
       setConfirmLoading(true);      
       await handleJoinStudy({'study':Number(studyId), 'member':memberId, 'msg':message})

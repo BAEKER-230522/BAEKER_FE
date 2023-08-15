@@ -10,6 +10,7 @@ const userSlice = createSlice({
   reducers: {
     loginUser: (state: any, action) => {
       state.userId = action.payload;
+      state.user
     },
     logout: (state: any) => {
       state.userId = null;

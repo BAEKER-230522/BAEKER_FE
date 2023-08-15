@@ -4,7 +4,7 @@ import { studyApi } from "@/api/studyApi";
 import Loading from "@/components/Loading/Loading";
 
 const StudyRank = () => {
-  const {data, isLoading} = studyApi.useGetStudyInfoListQuery(0)
+  const {data, isLoading} = studyApi.useGetAllStudyListQuery({})
   
   if(isLoading){
     return (

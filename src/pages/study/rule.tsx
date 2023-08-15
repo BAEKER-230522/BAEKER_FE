@@ -93,7 +93,7 @@ const Mission = () => {
           </S.MissionInputLeftContainer>
           <S.MissionInputRightContainer>
             <AddProblemInputBox title={"문제 추가"} size={"60%"} value={problemValue} onChange={problemHandler} setProblemValue={setProblemValue} setProblemList={setProblemList} problemList={problemList}/>
-            <Board category={[["번호", "idx"], ["문제 번호", "num"], ["링크", "link"], ["삭제", "remove"]]} widthRatio={[1, 1, 2, 1]} data={missionProblemState} type={'problem'}/>
+            <Board category={[["번호", "idx"], ["문제 번호", "num"], ["문제 이름", "title"], ["삭제", "remove"]]} widthRatio={[1, 1, 2, 1]} data={missionProblemState} type={'problem'}/>
           </S.MissionInputRightContainer>
         </S.MissionInputContainer>
         {isEditMode ? <S.Button type="submit" value={'수정'}/> : <S.Button type="submit" value={'미션 생성'}/>}
