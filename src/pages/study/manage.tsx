@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import useStudyEdit from "@/hooks/useStudyEdit";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "@/util/parseCookie";
+import useFetchUserData from "@/hooks/queries/useFetchUserData";
 
 export const getServerSideProps : GetServerSideProps = async(context) => {
   const {req, res} = context;
@@ -27,7 +28,8 @@ const CreateStudy = ({userId}:{userId:number}) => {
   const [aboutValue, setAboutValue, aboutHandler] = useInput('')
   const router = useRouter();
   const isEditMode = Object.keys(router.query).length !== 0 ? true : false;
-
+  const {data: userData, isLoading:isUserDataLoading} = useFetchUserData(userId);
+  console.log(userData);
   useEffect(() => {
     if(isEditMode){
       setNameValue(router.query.name)
@@ -35,13 +37,15 @@ const CreateStudy = ({userId}:{userId:number}) => {
       setMaxStudyCapacity(router.query.capacity)
     }
   }, [])
+
+  if(isUserDataLoading) return <div>Loading..</div>
   
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if(isEditMode){
-      handleUpdateStudy({nameValue, aboutValue, userId})
+      handleUpdateStudy({nameValue, aboutValue})
     }else{
-      handleCreateStudy({nameValue, aboutValue, userId})
+      handleCreateStudy({nameValue, aboutValue, userId, nickname: userData.data.nickname})
     }
   }
 

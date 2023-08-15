@@ -1,10 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { GetServerSidePropsContext, GetServerSideProps } from 'next';
 
 const END_POINT = "api/study/v1";
 const END_POINT_2 = "api/my-study/v1"
 const END_POINT_3 = "api/studyrule/v1"
-
 
 // baseQuery, reducerPath, tagTypes, endpoints,
 export const studyApi = createApi({
@@ -29,6 +27,10 @@ export const studyApi = createApi({
     // 스터디 페이징 조회
     getStudyInfoList: builder.query({
       query: (page) => `${END_POINT}/list?page=${page}`,
+      providesTags: ["Study"],
+    }),
+    getAllStudyList: builder.query({
+      query: () => `${END_POINT}/all`,
       providesTags: ["Study"],
     }),
 
@@ -61,6 +63,15 @@ export const studyApi = createApi({
     getStudyRuleList: builder.query({
       query: (id) => ({
         url: `${END_POINT_3}/studyrules/${id}`,
+        method: "GET",
+      }),
+      providesTags: (result:any, err:any, arg:any) => {return [{type: "Study", id:Number(arg.id)}]},
+    }),
+
+    // 스터디 미션 Id로 조회
+    getStudyRule: builder.query({
+      query: (id) => ({
+        url: `${END_POINT_3}/search/${id}`,
         method: "GET",
       }),
       providesTags: (result:any, err:any, arg:any) => {return [{type: "Study", id:Number(arg.id)}]},
@@ -114,6 +125,16 @@ export const studyApi = createApi({
       query: (body) => ({
         url: `${END_POINT_2}/join`,
         method: "POST",
+        body
+      }),
+      invalidatesTags: [{type: "Study"}]
+    }),
+
+     // 스터디 탈퇴
+     resignStudy: builder.mutation({
+      query: (body) => ({
+        url: `${END_POINT_2}`,
+        method: "DELETE",
         body
       }),
       invalidatesTags: [{type: "Study"}]
@@ -182,4 +203,4 @@ export const studyApi = createApi({
   }),
 });
 
-export const { useGetStudyInfoListQuery, useGetStudyInfoQuery, useCreateStudyMutation, useGetUserStudyListQuery, useGetStudyMemberListQuery, useGetPendingListQuery, useCreateStudyMissionMutation, useGetStudyRuleListQuery, useGetStudyMissionQuery } = studyApi;
+export const { useGetStudyInfoListQuery, useGetStudyInfoQuery, useCreateStudyMutation, useGetUserStudyListQuery, useGetStudyMemberListQuery, useGetPendingListQuery, useCreateStudyMissionMutation, useGetStudyRuleListQuery, useGetStudyMissionQuery, useGetAllStudyListQuery, useAcceptStudyMutation, useDeleteStudyMissionMutation, useRefuseStudyMutation, useInviteStudyMutation, useJoinStudyMutation, useResignStudyMutation, useGetStudyRuleQuery  } = studyApi;

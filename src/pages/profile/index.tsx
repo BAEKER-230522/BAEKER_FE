@@ -37,20 +37,17 @@ export const getServerSideProps : GetServerSideProps = async(context) => {
 
 const Profile = ({ refreshToken, memberId }: LoginProps) => {
   const dispatch = useDispatch()
-  console.log('memberId:', memberId);
   
   useEffect(() => {
     localStorage.setItem('refreshToken', refreshToken)
-    dispatch(loginUser(memberId))
+    localStorage.setItem('memberId', String(memberId))
   }, [])
   
   const TAB_ELEMENTS = ["백준", "스터디", "가입 신청", "가입 초대"];
-  console.log(useSelector((state) => state.user.userId));
   const {data: userStudyList, isLoading: isStudyListLoading} = useFetchUserStudyList({memberId,status:1});
   const {data: userStudyJoinRequestList, isLoading: isStudyJoinRequestListLoading} = useFetchUserStudyList({memberId,status:2});
   const {data: userStudyInviteList, isLoading: isStudyInviteListLoading} = useFetchUserStudyList({memberId,status:3});
   const {data: userData, isLoading:isUserDataLoading} = useFetchUserData(memberId);
-  
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
   });
@@ -76,7 +73,7 @@ const Profile = ({ refreshToken, memberId }: LoginProps) => {
     ),
     () => <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"],[ "스터디 장", "leader"],["랭킹", "xp"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.data}/>,
     () => <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"], ["스터디 장", "leader"], ["상태", "request"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyJoinRequestList.data.data}/>,
-    () => <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"], ["스터디 장", "leader"], ["상태", "invite"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyInviteList.data.data}/>,
+    () => <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"], ["스터디 장", "leader"], ["상태", "user_invite"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyInviteList.data.data}/>,
   ])
 
   return (

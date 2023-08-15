@@ -7,6 +7,7 @@ interface IArgument {
   nameValue : string;
   aboutValue : string;
   userId : number;
+  nickname: string;
 }
 
 const useStudyEdit = () => {
@@ -15,9 +16,9 @@ const useStudyEdit = () => {
   const [createStudy] = studyApi.useCreateStudyMutation();
   const [updateStudy] = studyApi.useUpdateStudyMutation();
 
-  const handleCreateStudy = async({nameValue, aboutValue, userId}: IArgument) => {
+  const handleCreateStudy = async({nameValue, aboutValue, userId, nickname}: IArgument) => {
     try{
-      await createStudy({"member":userId, "name":nameValue, "about":aboutValue, "leader":"leader","capacity":maxStudyCapacity});
+      await createStudy({"member":userId, "name":nameValue, "about":aboutValue, "leader":nickname,"capacity":maxStudyCapacity});
       toast('스터디 생성 완료')
       router.push({pathname:"/profile"})
     }catch(err){
@@ -25,7 +26,7 @@ const useStudyEdit = () => {
     }
   }
   
-  const handleUpdateStudy = async({nameValue, aboutValue, userId}: IArgument) => {
+  const handleUpdateStudy = async({nameValue, aboutValue}: IArgument) => {
     try{
       await updateStudy({"id": router.query.id, "name":nameValue, "about":aboutValue,"capacity":maxStudyCapacity})
       toast('스터디 수정 완료')
