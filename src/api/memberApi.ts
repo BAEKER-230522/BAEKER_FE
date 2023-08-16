@@ -51,7 +51,16 @@ export const memberApi = createApi({
       }),
       invalidatesTags: [{type: "Member"}]
     }),
+    // http://bk.1ll.ca/api/member/v1/connect/baekjoon/2?name=chumjio1o
+    // 백준 연동
+    connectBaekjoon: builder.mutation({
+      query: ({memberId, baekjoonId}) => ({
+        url: `${END_POINT}/v1/connect/baekjoon/${memberId}?name=${baekjoonId}`,
+        method: "POST",
+      }),
+      invalidatesTags: [{type: "Member"}]
+    }),
   }),
 });
 
-export const { useGetAllMembersQuery, useGetMemberQuery, useCreateMemberMutation } = memberApi;
+export const { useGetAllMembersQuery, useGetMemberQuery, useCreateMemberMutation, useConnectBaekjoonMutation } = memberApi;

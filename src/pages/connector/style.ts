@@ -8,7 +8,7 @@ const Container = styled.form`
   align-items: center;
   flex-direction: column;
   background-color: #2a303c;
-  padding-bottom: 50px;
+  padding-bottom : 50px;
 `;
 
 export const S = { Container };

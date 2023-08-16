@@ -1,5 +1,4 @@
 import { S } from "./style";
-import Image from "next/image";
 
 const ModifyImg = ({userImg}:{userImg:string}) => {
   return (

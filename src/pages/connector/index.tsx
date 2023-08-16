@@ -1,7 +1,7 @@
 import { S } from "./style";
 import ModifyImg from "@/components/Modify/Img";
 import Input from "@/components/common/Input";
-import ModifyButton from "@/components/Modify/button";
+import ModifyButton from "@/components/Modify/Button";
 import { memberApi } from "@/api/memberApi";
 import {  useEffect } from "react";
 import {  useRouter } from "next/router";
@@ -10,6 +10,7 @@ import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
 import Loading from "@/components/Loading/Loading";
 import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
+import { useConnectBaekjoonMutation } from "@/api/memberApi";
 
 interface LoginProps {
   refreshToken: string;
@@ -33,9 +34,12 @@ export const getServerSideProps : GetServerSideProps = async(context) => {
 
 const Modify = ({memberId, refreshToken}:LoginProps) => {
   const {data, isLoading} = memberApi.useGetMemberQuery(memberId);
+  console.log(data);
   const [nameValue, setNameValue, onChangeName] = useInput('')  
   const [aboutValue, setAboutValue, onChangeAbout] = useInput('')
+  const [baekjoonIdValue, setBaekjoonIdValue, onChangebaekjoonId] = useInput('')
   const {handleUpdateUserInfo} = useUpdateUserInfo(memberId);
+  const [connectBaekJoon] = memberApi. useConnectBaekjoonMutation();
   const router = useRouter();
   
   useEffect(() => {
@@ -48,6 +52,7 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
   const onSubmitUpdateUserInfo = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleUpdateUserInfo({nameValue, aboutValue})
+    connectBaekJoon({memberId, baekjoonIdValue})
     router.push({pathname:"/profile"})
   }
   
@@ -63,6 +68,7 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
       <ModifyImg userImg={data.data.kakaoProfileImage}/>
       <Input title={"이름"} size={"25%"} value={nameValue} onChange={onChangeName} />
       <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={onChangeAbout}/>
+      <Input title={"백준 연동 ID"} size={"25%"} value={baekjoonIdValue} onChange={onChangebaekjoonId}/>
       <ModifyButton />
     </S.Container>
   );

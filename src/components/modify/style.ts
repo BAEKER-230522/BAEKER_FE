@@ -8,9 +8,9 @@ const ImgContainer = styled.div`
   align-items: center;
 
   img {
-    width: 200px;
-    height: 200px;
-    border-radius: 20px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
   }
   button {
     margin-top: 20px;
