@@ -10,7 +10,7 @@ import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
 import Loading from "@/components/Loading/Loading";
 import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
-import { useConnectBaekjoonMutation } from "@/api/memberApi";
+import LocalStorage from "@/util/localstorage";
 
 interface LoginProps {
   refreshToken: string;
@@ -32,16 +32,16 @@ export const getServerSideProps : GetServerSideProps = async(context) => {
 }
 
 
-const Modify = ({memberId, refreshToken}:LoginProps) => {
+const Connector = ({memberId, refreshToken}:LoginProps) => {
+  
   const {data, isLoading} = memberApi.useGetMemberQuery(memberId);
-  console.log(data);
   const [nameValue, setNameValue, onChangeName] = useInput('')  
   const [aboutValue, setAboutValue, onChangeAbout] = useInput('')
   const [baekjoonIdValue, setBaekjoonIdValue, onChangebaekjoonId] = useInput('')
   const {handleUpdateUserInfo} = useUpdateUserInfo(memberId);
-  const [connectBaekJoon] = memberApi. useConnectBaekjoonMutation();
+  const [connectBaekJoon] = memberApi.useConnectBaekjoonMutation();
   const router = useRouter();
-  
+  console.log(baekjoonIdValue);
   useEffect(() => {
     if(isLoading === false){
       setNameValue(data.data.nickname)
@@ -49,10 +49,15 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
     } 
   }, [isLoading])
 
+  useEffect(() => {
+    LocalStorage.setItem('refreshToken', refreshToken)
+    LocalStorage.setItem('memberId', String(memberId))
+  }, [])
+
   const onSubmitUpdateUserInfo = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleUpdateUserInfo({nameValue, aboutValue})
-    connectBaekJoon({memberId, baekjoonIdValue})
+    connectBaekJoon({memberId, baekjoonId:baekjoonIdValue})
     router.push({pathname:"/profile"})
   }
   
@@ -74,4 +79,4 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
   );
 };
 
-export default Modify;
+export default Connector;

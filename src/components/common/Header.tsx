@@ -2,9 +2,18 @@ import { S } from "./style";
 import DropDown from "../Dropdown/Dropdown";
 import { useOncClickIcon } from "@/hooks/useOnClickIcon";
 import Link from "next/link";
+import LocalStorage from "@/util/localstorage";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   const { dropdownState, changeDropdownState } = useOncClickIcon();
+  const [isLogin, setIsLogin] = useState<string | null>()
+  useEffect(() => {
+    const isLogin = LocalStorage.getItem('memberId')
+    setIsLogin(isLogin)
+  }, [LocalStorage.getItem('memberId')])
+  
+  
   return (
     <S.HeaderContainer>
       <Link href="/" legacyBehavior>
@@ -14,9 +23,11 @@ const Header = () => {
         <S.DropDownIcon onClick={() => changeDropdownState(0)}>
           {dropdownState[0] === 1 && <DropDown type={"rank"} />}
         </S.DropDownIcon>
-        <S.DropDownIcon onClick={() => changeDropdownState(1)}>
-          {dropdownState[1] === 1 && <DropDown type={"menu"} />}
-        </S.DropDownIcon>
+        {isLogin !== null &&
+          <S.DropDownIcon onClick={() => changeDropdownState(1)}>
+            {dropdownState[1] === 1 && <DropDown type={"menu"} />}
+          </S.DropDownIcon>
+        }
       </S.IconContainer>
     </S.HeaderContainer>
   );

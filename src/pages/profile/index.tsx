@@ -15,6 +15,7 @@ import useTabSwitch from "@/hooks/useTabSwitch";
 import Loading from "@/components/Loading/Loading";
 import { loginUser } from '@/store/modules/user';
 import { useEffect, useState } from 'react';
+import LocalStorage from '@/util/localstorage';
 
 interface LoginProps {
   refreshToken: string;
@@ -39,8 +40,8 @@ const Profile = ({ refreshToken, memberId }: LoginProps) => {
   const dispatch = useDispatch()
   
   useEffect(() => {
-    localStorage.setItem('refreshToken', refreshToken)
-    localStorage.setItem('memberId', String(memberId))
+    LocalStorage.setItem('refreshToken', refreshToken)
+    LocalStorage.setItem('memberId', String(memberId))
   }, [])
   
   const TAB_ELEMENTS = ["백준", "스터디", "가입 신청", "가입 초대"];
@@ -48,6 +49,7 @@ const Profile = ({ refreshToken, memberId }: LoginProps) => {
   const {data: userStudyJoinRequestList, isLoading: isStudyJoinRequestListLoading} = useFetchUserStudyList({memberId,status:2});
   const {data: userStudyInviteList, isLoading: isStudyInviteListLoading} = useFetchUserStudyList({memberId,status:3});
   const {data: userData, isLoading:isUserDataLoading} = useFetchUserData(memberId);
+  console.log(userData);
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
   });
