@@ -1,23 +1,12 @@
 import { GetServerSideProps } from 'next'
-import { ParsedUrlQuery } from 'querystring';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '@/store/modules/user';
-
-
-interface QueryParams extends ParsedUrlQuery {
-  accessToken: string;
-  refreshToken: string;
-  memberId: string;
-}
-
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req, res } = context;
-  const { accessToken, refreshToken, memberId } = context.query  as { 
+  const { accessToken, refreshToken, memberId, baekJoonConnect } = context.query  as { 
     accessToken: string; 
     refreshToken: string; 
     memberId: string; 
+    baekJoonConnect: string;
   };
   
   if(accessToken){
@@ -25,11 +14,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     res.setHeader('Set-Cookie', [
       `accessToken=${accessToken}; Path=/; Secure`,
       `refreshToken=${refreshToken}; Path=/; Secure`,
-      `memberId=${memberId}; Path=/; Secure`
+      `memberId=${memberId}; Path=/; Secure`,
+      `baekJoonConnect=${baekJoonConnect}; Path=/; Secure`,
     ]);
-    res.writeHead(302, { Location: '/profile' });
-    res.end()
-    return {props:{}};
+    // 백준 연동 여부에 따른 페이지 이동
+    if(baekJoonConnect === 'true'){
+      console.log('baekJoonConnect',baekJoonConnect, 'true');
+      res.writeHead(302, { Location: '/profile' });
+      res.end()
+      return {props:{}};
+    }else{
+      console.log('baekJoonConnect', baekJoonConnect, 'false');
+      res.writeHead(302, { Location: '/connector' });
+      res.end()
+      return {props:{}};
+    }
   }
   return {props:{}};
 }
