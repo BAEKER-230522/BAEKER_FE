@@ -47,7 +47,7 @@ const DropDown = ({ type }: { type: "rank" | "menu" }) => {
         {info[type].items.map((e) => {
           if (e.name === "로그아웃") {
             return (
-              <S.Item key={e.name} onClick={handleLogout}>{e.link}</S.Item>
+              <S.Item key={e.name} onClick={handleLogout}>{e.name}</S.Item>
             );
           } else {
             return (
