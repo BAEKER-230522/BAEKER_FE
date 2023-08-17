@@ -1,71 +1,82 @@
 import { useRouter } from "next/router";
 import { S } from "../../style";
 import { Button, Progress, Space } from 'antd';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AlertModal from "@/components/common/Modal/AlertModal";
-import { useSelector } from "react-redux";
 import { calculateDuration, getTodayDateFormatted} from "../../../../util/date"
 import { studyApi } from "@/api/studyApi";
-interface IProblem {
-  problemName : string;
-  problemNumber : number;
+import Loading from "@/components/Loading/Loading";
+
+interface IProblemStatusQueryDtos{
+  memberId: number;
+  problemName: string;
+  problemNumber: number;
+  problemStatus: string;
 }
 
-interface IMissionData {
-    id: number;
-    mission: string;
-    status: string;
-    startDate: string;
-    deadline: string;
-    problems: IProblem[]
+interface IPersonStudyRuleDtst{
+  memberId : number;
+  personalStudyRuleStatus: string;
+  problemStatusQueryDtos: IProblemStatusQueryDtos[];
 }
-
 const MissionDetail = () => {
   const router = useRouter()
   const param = router.query;
   const studyId = router.query.studyId
   const missionId = router.query.missionId
-  const {data: missionData, isLoading} = studyApi.useGetStudyRuleQuery(missionId)
-  console.log(missionData);
+  const {data: missionData, isLoading: getMissionDataLoading} = studyApi.useGetStudyRuleQuery(missionId)
+  const {data: memberList, isLoading: getMemberListLoading} = studyApi.useGetStudyMemberListQuery(studyId)
   
+  const [memberStatus, setMemberStatus] = useState<IPersonStudyRuleDtst[]>()
+  const [missionStatus, setMissionState] = useState<string>()
+  const [missionProgress, setMissionProgress] = useState(0);
+  const [userSolvedStatus, setUserSolvedStatus] = useState<any>();
+  const [HEADER_ARR, setHEADER_ARR] = useState(['랭킹', '아이디'])
+  const [TIME_SPAN_STATUS, setTIME_SPAN_STATUS] = useState<any>();
+  const [PERIOD_HEADER, setPERIOD_HEADER] = useState<any>();
+  useEffect(() => {
+    if(missionData !== undefined && memberList !== undefined){
+      setMemberStatus(missionData.data.personalStudyRuleDtos)
+      setMissionState(missionData.data.mission)
+      setTIME_SPAN_STATUS(Array.from({length:calculateDuration(missionData.data.startDate, missionData.data.deadline)+1}, () => false))
+      const USER_STATUS = [];
+      for(let i=0; i<memberList.data.length; i++){
+        for(let k=0; k<missionData.data.personalStudyRuleDtos.length; k++){
+          if(missionData.data.personalStudyRuleDtos[k].memberId === memberList.data[i].id){
+            const PROBLEM_STATUS = [];
+            for(let j=0; j<missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos.length; j++){
+              if(missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos[j] === "COMPLETE"){
+                PROBLEM_STATUS.push(true)
+              }else{
+                PROBLEM_STATUS.push(false)
+              }
+            }
+            USER_STATUS.push({
+              nickname : memberList.data[i].nickname,
+              problem_status : PROBLEM_STATUS
+            })
+          }
+        }
+      }
+      setUserSolvedStatus(USER_STATUS)
 
-  // // 미션 상태 ( 시작 전, 진행 중, 끝 )
-  // const missionData:IMissionData = useSelector((state:any) => {return state.mission.missionData})
-  // //  "exception" | "active" | "success"
-  // const missionStatus = missionData.mission === "DONE" ? missionData.status === "FAIL" ? "exception" : "success" : "active"
-  // // 미션 문제 풀이 진행률
-  // const [missionProgress, setMissionProgress] = useState(60);
-  // const HEADER_ARR = ['랭킹', '아이디']
-  // const DURATION = calculateDuration(missionData.startDate, missionData.deadline)+1;
-  // const TIME_SPAN_STATUS = Array.from({length:DURATION}, () => false)  // 기간 
-  // const DATE_PROGRESS = calculateDuration(missionData.startDate, getTodayDateFormatted())+1
-  // const PROBLEM = missionData.problems // 문제
-  // const PROBLEM_COUNT = missionData.problems.length; // 문제 개수
-  // const USER_STATUS = [   
-  //   {
-  //     rank: 1, 
-  //     nickname : 'chumjio1o',
-  //     problem_status: Array.from({length:PROBLEM_COUNT}, () => true)
-  //   },
-  //   {
-  //     rank: 2,
-  //     nickname : 'jeongdo',
-  //     problem_status: Array.from({length:PROBLEM_COUNT}, () => true)
-  //   }
-  // ]
+      let newStatus = [...Array.from({length:calculateDuration(missionData.data.startDate, missionData.data.deadline)+1}, () => false)]; // 기존 배열 복사
+      for(let i=0; i<calculateDuration(missionData.data.startDate, getTodayDateFormatted())+1; i++){
+        if(i >= calculateDuration(missionData.data.startDate, missionData.data.deadline)+1) break
+        newStatus[i] = true;
+      }
+      setTIME_SPAN_STATUS(newStatus)
 
-  // for(let i=0; i<DATE_PROGRESS; i++){
-  //   if(i >= DURATION) break
-  //   TIME_SPAN_STATUS[i] = true;
-    
-  // }
-
-  // for(let i=0; i<PROBLEM_COUNT; i++){
-  //   HEADER_ARR.push(PROBLEM[i].problemName)
-  // }
-
-  // const PERIOD_HEADER = Array.from({length:DURATION}, (_,i) => `${i+1}일차`)
-
+      const NEW_HEADER = [...HEADER_ARR];
+      for(let i=0; i<missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length; i++){
+        NEW_HEADER.push(missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos[i].problemName)
+      }
+      setHEADER_ARR(NEW_HEADER)
+      setPERIOD_HEADER(Array.from({length:calculateDuration(missionData.data.startDate, missionData.data.deadline)+1}, (_,i) => `${i+1}일차`))
+    }
+  }, [missionData, memberList])
+  console.log(memberStatus, missionStatus, userSolvedStatus, HEADER_ARR, PERIOD_HEADER);
+  
   const movePage = (type:'study'|'rule') => {
     switch(type){
       case 'study':
@@ -76,16 +87,24 @@ const MissionDetail = () => {
         return
     }
   }
+
+  if(getMissionDataLoading || getMemberListLoading || userSolvedStatus === undefined) return <Loading/>
   
   return (
     <S.Container>
-      {/* <S.MissionStatusContainer>
+      <S.MissionStatusContainer>
         <S.MissionProgressContainer>
+          <div>
+            시작 : {missionData.data.startDate}
+          </div>
+          <div>
+            끝 : {missionData.data.deadline}
+          </div>
           <Space wrap style={{marginBottom:"30px"}}>
             <Progress type="circle" percent={missionProgress} status={missionStatus}/>
           </Space>
         </S.MissionProgressContainer>
-        <S.MissionProblemListContainer numColumn={DURATION}>
+        <S.MissionProblemListContainer numColumn={calculateDuration(missionData.data.startDate, missionData.data.deadline)+1}>
           {PERIOD_HEADER.map((e) => <div>{e}</div>)}
           {TIME_SPAN_STATUS.map((e) => {
             return e ?
@@ -97,9 +116,9 @@ const MissionDetail = () => {
           })}
         </S.MissionProblemListContainer>
         <S.MemberSolvingStatusContainer>
-          <S.MissionProblemListContainer numColumn={PROBLEM_COUNT+2}>
-            {HEADER_ARR.map((e, idx) => { return idx <= 1 ? <div>{e}</div> : <S.Problem onClick={() => window.open(`https://www.acmicpc.net/problem/${PROBLEM[idx-2].problemNumber}`, '_blank')}>{e}</S.Problem>})}
-            {USER_STATUS.map((e,idx) => (
+          <S.MissionProblemListContainer numColumn={missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length+2}>
+            {HEADER_ARR.map((e, idx) => { return idx <= 1 ? <div>{e}</div> : <S.Problem onClick={() => window.open(`https://www.acmicpc.net/problem/${memberStatus[0].problemStatusQueryDtos[idx-2].problemNumber}`, '_blank')}>{e}</S.Problem>})}
+            {userSolvedStatus.map((e,idx) => (
               <>
                 <div>{idx+1}</div>
                 <div>{e.nickname}</div>
@@ -125,7 +144,7 @@ const MissionDetail = () => {
           <AlertModal id={param.missionId} title={'미션 삭제'} text={'삭제하시겠습니까 ?'} type={"mission"} backId={param.studyId}>삭제</AlertModal>
           <Button style={{width:"100px", height:"40px"}} type="primary" onClick={() => movePage('rule')}>규칙 상세보기</Button>
         </S.ButtonContainer>
-      </S.MissionStatusContainer> */}
+      </S.MissionStatusContainer>
     </S.Container>
   )
 }
