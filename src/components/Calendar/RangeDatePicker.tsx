@@ -21,7 +21,7 @@ const StartToEndRangeDatePicker = ({ setMissionStartDate, setMissionEndDate } : 
     }
     setMissionStartDate(start.join('-'))
     
-  }, [startDate])
+  }, [startDate, setMissionStartDate]) // 의존성 배열에 setMissionStartDate 추가
 
   useEffect(() => {
     let end = endDate.toLocaleDateString().slice(0, -1).split('. ')
@@ -31,7 +31,7 @@ const StartToEndRangeDatePicker = ({ setMissionStartDate, setMissionEndDate } : 
       }
     }
     setMissionEndDate(end.join('-'))
-  }, [endDate])
+  }, [endDate, setMissionEndDate]) // 의존성 배열에 setMissionEndDate 추가
   
   return (
     <S.Container>

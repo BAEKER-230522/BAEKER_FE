@@ -3,16 +3,12 @@ import DropDown from "../Dropdown/Dropdown";
 import { useOncClickIcon } from "@/hooks/useOnClickIcon";
 import Link from "next/link";
 import LocalStorage from "@/util/localstorage";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const { dropdownState, changeDropdownState } = useOncClickIcon();
-  const [isLogin, setIsLogin] = useState<string | null>()
-  useEffect(() => {
-    const isLogin = LocalStorage.getItem('memberId')
-    setIsLogin(isLogin)
-  }, [LocalStorage.getItem('memberId')])
-  
+  const isLogin = useSelector((state:any) => {return state.user.isLogin})
   
   return (
     <S.HeaderContainer>
@@ -23,7 +19,7 @@ const Header = () => {
         <S.DropDownIcon onClick={() => changeDropdownState(0)}>
           {dropdownState[0] === 1 && <DropDown type={"rank"} />}
         </S.DropDownIcon>
-        {isLogin !== null &&
+        {isLogin &&
           <S.DropDownIcon onClick={() => changeDropdownState(1)}>
             {dropdownState[1] === 1 && <DropDown type={"menu"} />}
           </S.DropDownIcon>
