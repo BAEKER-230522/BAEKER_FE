@@ -37,7 +37,6 @@ const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue, set
     }); 
       
       const result = await response.json();
-      console.log(result.data.subject);
       
       setProblemList([
         ...problemList,

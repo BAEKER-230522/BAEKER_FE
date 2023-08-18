@@ -19,12 +19,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     ]);
     // 백준 연동 여부에 따른 페이지 이동
     if(baekJoonConnect === 'true'){
-      console.log('baekJoonConnect',baekJoonConnect, 'true');
       res.writeHead(302, { Location: '/profile' });
       res.end()
       return {props:{}};
     }else{
-      console.log('baekJoonConnect', baekJoonConnect, 'false');
       res.writeHead(302, { Location: '/connector' });
       res.end()
       return {props:{}};

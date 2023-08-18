@@ -76,7 +76,6 @@ const MissionDetail = () => {
       setPERIOD_HEADER(Array.from({length:calculateDuration(missionData.data.startDate, missionData.data.deadline)+1}, (_,i) => `${i+1}일차`))
     }
   }, [missionData, memberList])
-  console.log(memberStatus, missionStatus, userSolvedStatus, HEADER_ARR, PERIOD_HEADER);
   
   const movePage = (type:'study'|'rule') => {
     switch(type){

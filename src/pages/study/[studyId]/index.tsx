@@ -1,11 +1,11 @@
 import { S } from "../style";
-import StudyInfo from "@/components/Study/StudyInfo";
+import StudyInfo from "@/components/Study/studyInfo";
 import Tab from "@/components/Tab/Tab";
 import Board from "@/components/common/Board/Board";
 import SolvedRecord from "@/components/Tab/SolvedRecord";
-import LineChart from "@/components/Chart/Chart";
+import LineChart from "@/components/Chart/chart";
 import { useSelector } from "react-redux";
-import SolveStatus from "@/components/common/SolveStatus";
+import SolveStatus from "@/components/common/solveStatus";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
 import Loading from "@/components/Loading/Loading";
@@ -18,9 +18,15 @@ interface IServerSideProp {
   memberId: number;
 }
 
+interface IParsedCookies {
+  refreshToken?: string;
+  memberId?: string;
+};
+
+
 export const getServerSideProps : GetServerSideProps = async(context) => {
   const {req, res} = context;
-  const cookies = parseCookies(req.headers.cookie)
+  const cookies:IParsedCookies = parseCookies(req.headers.cookie)
   const refreshToken = cookies.refreshToken ? cookies.refreshToken : null
   const memberId = Number(cookies.memberId) ? Number(cookies.memberId) : null
   
@@ -50,7 +56,6 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
     if(memberId === null) setIsUserStudy(true)
     if(!getMemberListLoading){
       for(let i=0; i<stduyMemberList.data.length; i++){
-        console.log(stduyMemberList.data[i].id, memberId);
         if(memberId === stduyMemberList.data[i].id){
           setIsUserStudy(true)
           break

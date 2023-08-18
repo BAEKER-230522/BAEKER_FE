@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 interface IArgument {
   nameValue : string;
   aboutValue : string;
-  userId : number;
-  nickname: string;
+  userId? : number;
+  nickname?: string;
 }
 
 const useStudyEdit = () => {

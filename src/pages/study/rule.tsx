@@ -32,8 +32,8 @@ const Mission = () => {
   })
 
   useEffect(() => {
-    setNameValue(router.query.name)
-    setAboutValue(router.query.about)
+    setNameValue(String(router.query.name))
+    setAboutValue(String(router.query.about))
   }, [])
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {

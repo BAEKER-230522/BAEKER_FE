@@ -16,9 +16,15 @@ interface LoginProps {
   memberId: number;
 }
 
+interface IParsedCookies {
+  refreshToken?:string;
+  memberId?: string;
+};
+
+
 export const getServerSideProps : GetServerSideProps = async(context) => {
   const {req, res} = context;
-  const cookies = parseCookies(req.headers.cookie)
+  const cookies:IParsedCookies = parseCookies(req.headers.cookie)
   const refreshToken = cookies.refreshToken
   const memberId = Number(cookies.memberId)
   

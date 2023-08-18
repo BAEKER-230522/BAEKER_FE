@@ -20,11 +20,11 @@ const CreateStudy = () => {
   // Object.keys(router.query).length !== 0 경우는 rule 수정하는 상태이다.
   useEffect(() => {
     if(isEditMode){
-      setNameValue(router.query?.name!);
-      setAboutValue(router.query?.about!);
-      setXpValue(router.query?.xp!);
-      setCountValue(router.query?.count)
-      setLevelValue(router.query.level)
+      setNameValue(String(router.query?.name!));
+      setAboutValue(String(router.query?.about!));
+      setXpValue(String(router.query?.xp!));
+      setCountValue(String(router.query?.count))
+      setLevelValue(String(router.query.level))
     }
   }, [])
 

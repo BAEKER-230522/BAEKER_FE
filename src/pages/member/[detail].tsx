@@ -1,5 +1,5 @@
 import { S } from "../profile/style";
-import LineChart from "@/components/Chart/Chart";
+import LineChart from "@/components/Chart/chart";
 import UserInfo from "@/components/UserInfo/UserInfo";
 import UserSolvedInfo from "@/components/UserInfo/UserSolvedInfo";
 import Tab from "@/components/Tab/Tab";
@@ -25,26 +25,27 @@ export interface IUserData {
   platinum: number;
 }
 
-interface IUserInfo {
-  data: IUserData
-}
+interface IParsedCookies {
+  refreshToken?:string;
+  memberId?: string;
+};
 
 
 export const getServerSideProps : GetServerSideProps = async(context) => {
   const {req, res} = context;
-  const cookies = parseCookies(req.headers.cookie)
-  const userId = Number(cookies.memberId) ? Number(cookies.memberId) : null
+  const cookies:IParsedCookies = parseCookies(req.headers.cookie)
+  const memberId = Number(cookies.memberId) ? Number(cookies.memberId) : null
   
   return {
     props: {
-      userId,
+      memberId,
     },
   };
 }
 
 
  
-const Profile = ({userId}:{userId : string}) => {
+const Profile = ({memberId}:{memberId : number}) => {
   const router = useRouter();
   const {detail: param} = router.query;
   const {data: userStudyList, isLoading: isGetUserStudyListLoading} = studyApi.useGetUserStudyListQuery({memberId:param, status:1});
@@ -84,7 +85,7 @@ const Profile = ({userId}:{userId : string}) => {
   return (
     <S.Container>
       <S.InfoContainer>
-        <UserInfo userData={userData.data} userId={userId}/>
+        <UserInfo userData={userData.data} userId={memberId}/>
         <UserSolvedInfo userData={userData.data}/>
       </S.InfoContainer>
       {flag ? <Tab elements={TAB_ELEMENTS_MY} type="profile" /> : <Tab elements={TAB_ELEMENTS_OTHER} type="profile" />}

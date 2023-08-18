@@ -3,10 +3,21 @@ import { S } from "./style";
 import { ruleApi } from "@/api/ruleApi";
 import AlertModal from "@/components/common/Modal/AlertModal";
 import Loading from "@/components/Loading/Loading";
+
+interface RuleData {
+  data: {
+    name: string;
+    count: number;
+    difficulty: string;
+    xp: number;
+    about: string;
+  };
+}
+
 const RuleDetail = () => {
   const router = useRouter()
   const {detail : param} = router.query
-  const {data, isLoading} = ruleApi.useGetRuleQuery(param)
+  const {data, isLoading} = ruleApi.useGetRuleQuery(param) as {data: RuleData; isLoading: boolean};
   
   if(isLoading) return (
     <S.Container>
@@ -15,8 +26,8 @@ const RuleDetail = () => {
       </S.Wrapper>
       <S.ButtonContainer>
         <S.Button onClick={() => router.push({pathname:"/rule/list"})}>목록</S.Button>
-        <AlertModal id={param} title={'규칙 삭제'} text={'삭제하시겠습니까 ?'} type={"rule"}>삭제</AlertModal>
-        <S.Button onClick={() => router.push({pathname:"/rule/create", query:{name: data.data.name, count: data.data.count, level: data.data.difficulty, xp: data.data.xp, about: data.data.about, id:param}})}>수정</S.Button>
+        <AlertModal id={Number(param)} title={'규칙 삭제'} text={'삭제하시겠습니까 ?'} type={"rule"}>삭제</AlertModal>
+        <S.Button onClick={() => router.push({pathname:"/rule/create", query:{name: data!.data.name, count: data!.data.count, level: data!.data.difficulty, xp: data!.data.xp, about: data!.data.about, id:param}})}>수정</S.Button>
       </S.ButtonContainer>
     </S.Container>
   )
@@ -47,7 +58,7 @@ const RuleDetail = () => {
       </S.Wrapper>
       <S.ButtonContainer>
         <S.Button onClick={() => router.push({pathname:"/rule/list"})}>목록</S.Button>
-        <AlertModal id={param} title={'규칙 삭제'} text={'삭제하시겠습니까 ?'} type={"rule"}>삭제</AlertModal>
+        <AlertModal id={Number(param)} title={'규칙 삭제'} text={'삭제하시겠습니까 ?'} type={"rule"}>삭제</AlertModal>
         <S.Button onClick={() => router.push({pathname:"/rule/create", query:{name: data.data.name, count: data.data.count, level: data.data.difficulty, xp: data.data.xp, about: data.data.about, id:param}})}>수정</S.Button>
       </S.ButtonContainer>
     </S.Container>

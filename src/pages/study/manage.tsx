@@ -9,9 +9,15 @@ import { GetServerSideProps } from "next";
 import { parseCookies } from "@/util/parseCookie";
 import useFetchUserData from "@/hooks/queries/useFetchUserData";
 
+interface IParsedCookies {
+  refreshToken?: string;
+  memberId?: string;
+};
+
+
 export const getServerSideProps : GetServerSideProps = async(context) => {
   const {req, res} = context;
-  const cookies = parseCookies(req.headers.cookie)
+  const cookies:IParsedCookies = parseCookies(req.headers.cookie)
   const userId = Number(cookies.memberId)
   
   return {
@@ -29,12 +35,11 @@ const CreateStudy = ({userId}:{userId:number}) => {
   const router = useRouter();
   const isEditMode = Object.keys(router.query).length !== 0 ? true : false;
   const {data: userData, isLoading:isUserDataLoading} = useFetchUserData(userId);
-  console.log(userData);
   useEffect(() => {
     if(isEditMode){
-      setNameValue(router.query.name)
-      setAboutValue(router.query.about)
-      setMaxStudyCapacity(router.query.capacity)
+      setNameValue(String(router.query.name))
+      setAboutValue(String(router.query.about))
+      setMaxStudyCapacity(Number(router.query.capacity))
     }
   }, [])
 

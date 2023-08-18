@@ -25,7 +25,6 @@ const Content = ({ target_nth, ratio, crntPage, data, type, category }: IContent
   const dispatch = useDispatch();
   const memberId = useSelector((state:any) => {return state.user.memberId})
   const CURRENT_DATA = data.slice(crntPage! * 5, crntPage! * 5 + 5);
-  console.log(CURRENT_DATA);
   const router = useRouter()
   const { studyId } = router.query;
   
