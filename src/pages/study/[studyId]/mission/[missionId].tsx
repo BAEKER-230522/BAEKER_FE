@@ -6,6 +6,7 @@ import AlertModal from "@/components/common/Modal/AlertModal";
 import { calculateDuration, getTodayDateFormatted} from "../../../../util/date"
 import { studyApi } from "@/api/studyApi";
 import Loading from "@/components/Loading/Loading";
+import React, { Fragment } from "react";
 
 interface IProblemStatusQueryDtos{
   memberId: number;
@@ -105,36 +106,36 @@ const MissionDetail = () => {
           </Space>
         </S.MissionProgressContainer>
         <S.MissionProblemListContainer numColumn={calculateDuration(missionData.data.startDate, missionData.data.deadline)+1}>
-          {PERIOD_HEADER.map((e) => <div>{e}</div>)}
-          {TIME_SPAN_STATUS.map((e) => {
+          {PERIOD_HEADER.map((e, idx) => <div key={idx}>{e}</div>)}
+          {TIME_SPAN_STATUS.map((e, idx) => {
             return e ?
-            <div>
+            <div key={idx}>
               <S.Dot color={'#6495Ed'}/>
             </div> 
             :
-            <div></div>
+            <div key={idx}></div>
           })}
         </S.MissionProblemListContainer>
         <S.MemberSolvingStatusContainer>
           <S.MissionProblemListContainer numColumn={missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length+2}>
             {HEADER_ARR.map((e, idx) => { return idx <= 1 ? <div>{e}</div> : <S.Problem onClick={() => window.open(`https://www.acmicpc.net/problem/${memberStatus[0].problemStatusQueryDtos[idx-2].problemNumber}`, '_blank')}>{e}</S.Problem>})}
             {userSolvedStatus.map((e,idx) => (
-              <>
-                <div>{idx+1}</div>
-                <div>{e.nickname}</div>
-                {
-                  e.problem_status.map((p_status) => {
-                    return p_status ? 
-                    <div>
-                      <S.Dot color={'#5bc59c'}/>
-                    </div> 
-                      :
-                    <div>
-                      <S.Dot color={'#e31d2e'}/>
-                    </div>
-                  })
-                }
-              </>
+              <React.Fragment key={idx}>
+              <div>{idx+1}</div>
+              <div>{e.nickname}</div>
+              {
+                e.problem_status.map((p_status, i) => {
+                  return p_status ? 
+                  <div key={i}>
+                    <S.Dot color={'#5bc59c'}/>
+                  </div> 
+                    :
+                  <div key={i}>
+                    <S.Dot color={'#e31d2e'}/>
+                  </div>
+                })
+              }
+            </React.Fragment>
             ))}
           </S.MissionProblemListContainer>
         </S.MemberSolvingStatusContainer>

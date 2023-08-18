@@ -8,7 +8,7 @@ const LineChart = () => {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     datasets: [
       {
-        type: "line",
+        type: "line" as const,
         label: "1주간 문제 푼 현황",
         borderColor: "rgb(54, 162, 235)",
         borderWidth: 2,
