@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import InviteAcceptButton from "./InviteAcceptButton";
 import { USER_NUMBER } from "@/util/constant";
 import RemoveProblemButton from "./RemoveProbleButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { propMissionData } from "@/store/modules/mission";
 import { FaDatabase } from "react-icons/fa";
 // get api로 데이터 받기.
@@ -23,7 +23,7 @@ const RequestStatus = ({status}:{status:string}) => {
 
 const Content = ({ target_nth, ratio, crntPage, data, type, category }: IContentProps) => {
   const dispatch = useDispatch();
-
+  const memberId = useSelector((state:any) => {return state.user.memberId})
   const CURRENT_DATA = data.slice(crntPage! * 5, crntPage! * 5 + 5);
   console.log(CURRENT_DATA);
   const router = useRouter()
@@ -48,9 +48,9 @@ const Content = ({ target_nth, ratio, crntPage, data, type, category }: IContent
             (
               elem[1] === "request" ? <RequestStatus status={"pending"} key={inner_idx}/> 
               :
-              elem[1] === "study_invite" ? <InviteAcceptButton memberId={Number(localStorage.getItem('memberId'))} studyId={Number(studyId)} key={inner_idx}/> 
+              elem[1] === "study_invite" ? <InviteAcceptButton memberId={Number(memberId)} studyId={Number(studyId)} key={inner_idx}/> 
               :
-              elem[1] === "user_invite" ? <InviteAcceptButton memberId={Number(localStorage.getItem('memberId'))} studyId={e.id} key={inner_idx}/> 
+              elem[1] === "user_invite" ? <InviteAcceptButton memberId={Number(memberId)} studyId={e.id} key={inner_idx}/> 
               :
               elem[1] === "remove" ? <RemoveProblemButton key={inner_idx} idx={idx+1}/>
               :
