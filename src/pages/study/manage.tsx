@@ -1,6 +1,6 @@
 import { S } from "./style";
 import Input from "@/components/common/Input";
-import Slider from "@/components/Slider/slider";
+import Slider from "@/components/slider/slider";
 import useInput from "@/hooks/useInput";
 import { useEffect } from "react";
 import { useRouter } from "next/router";

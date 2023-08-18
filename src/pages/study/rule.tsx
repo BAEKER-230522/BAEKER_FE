@@ -8,7 +8,7 @@ import Selector from "@/components/common/Selector";
 import useMissionEdit from "@/hooks/useMissionEdit";
 import StartToEndRangeDatePicker from "@/components/Calendar/RangeDatePicker";
 import Board from "@/components/common/Board/Board";
-import AddProblemInputBox from "@/components/Study/AddProblemInputBox";
+import AddProblemInputBox from "@/components/study/AddProblemInputBox";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "@/components/Loading/Loading";
 

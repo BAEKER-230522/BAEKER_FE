@@ -1,9 +1,9 @@
 import { S } from "../profile/style";
-import LineChart from "@/components/Chart/chart";
-import UserInfo from "@/components/UserInfo/UserInfo";
-import UserSolvedInfo from "@/components/UserInfo/UserSolvedInfo";
-import Tab from "@/components/Tab/Tab";
-import SolvedRecord from "@/components/Tab/SolvedRecord";
+import LineChart from "@/components/chart/chart";
+import UserInfo from "@/components/userInfo/UserInfo";
+import UserSolvedInfo from "@/components/userInfo/UserSolvedInfo";
+import Tab from "@/components/tab/Tab";
+import SolvedRecord from "@/components/tab/SolvedRecord";
 import Board from "@/components/common/Board/Board";
 import { useSelector } from "react-redux";
 import { studyApi } from "@/api/studyApi";

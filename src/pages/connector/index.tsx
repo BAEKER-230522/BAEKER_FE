@@ -1,7 +1,7 @@
 import { S } from "./style";
-import ModifyImg from "@/components/Modify/Img";
+import ModifyImg from "@/components/modify/Img";
 import Input from "@/components/common/Input";
-import ModifyButton from "@/components/Modify/button";
+import ModifyButton from "@/components/modify/button";
 import { memberApi } from "@/api/memberApi";
 import {  useEffect } from "react";
 import {  useRouter } from "next/router";
