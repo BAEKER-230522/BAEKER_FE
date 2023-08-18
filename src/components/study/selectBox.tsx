@@ -1,13 +1,7 @@
 import React, { ChangeEvent, FC, SetStateAction, useState } from 'react';
-import { S } from './style';
-import { ISelectOption } from '@/pages/study/rule';
-import { ruleApi } from '@/api/ruleApi';
+import { S } from './style'
 import Loading from '../Loading/Loading';
 
-interface IProps{
-  selectedOption: ISelectOption;
-  setSelectedOption: React.Dispatch<SetStateAction<ISelectOption>>
-}
 
 interface Option {
   value: string;
@@ -23,7 +17,7 @@ interface OptionElement extends HTMLOptionElement {
 }
 
 
-const SelectBox = ({selectedOption, setSelectedOption, data, isLoading}:IProps) => {
+const SelectBox = ({selectedOption, setSelectedOption, data, isLoading}:any) => {
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedOption = JSON.parse((event.target.selectedOptions[0] as OptionElement).dataset.option) as Option;
     setSelectedOption(selectedOption);
