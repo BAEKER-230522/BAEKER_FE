@@ -1,22 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  userId : null
+  isLogin: false,
+  memberId: null,
 };
-
+ 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    loginUser: (state: any, action) => {
-      state.userId = action.payload;
-      state.user
+    login: (state: any, action) => {
+      state.isLogin = true
+      state.memberId = action.payload;
     },
     logout: (state: any) => {
-      state.userId = null;
+      state.isLogin = false
+      state.memberId = null
     },
   },
 });
 
-export const { loginUser, logout } = userSlice.actions; // 액션 생성 함수
+export const { login, logout } = userSlice.actions; // 액션 생성 함수
 export default userSlice.reducer; // 리듀성

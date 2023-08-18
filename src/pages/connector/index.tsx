@@ -41,7 +41,6 @@ const Connector = ({memberId, refreshToken}:LoginProps) => {
   const {handleUpdateUserInfo} = useUpdateUserInfo(memberId);
   const [connectBaekJoon] = memberApi.useConnectBaekjoonMutation();
   const router = useRouter();
-  console.log(baekjoonIdValue);
   useEffect(() => {
     if(isLoading === false){
       setNameValue(data.data.nickname)
