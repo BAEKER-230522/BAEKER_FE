@@ -1,9 +1,7 @@
 import { S } from "./style";
-import DropDown from "../Dropdown/Dropdown";
+import DropDown from "../Dropdown";
 import { useOncClickIcon } from "@/hooks/useOnClickIcon";
 import Link from "next/link";
-import LocalStorage from "@/util/localstorage";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const Header = () => {
