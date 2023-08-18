@@ -33,7 +33,7 @@ interface IUserInfo {
 export const getServerSideProps : GetServerSideProps = async(context) => {
   const {req, res} = context;
   const cookies = parseCookies(req.headers.cookie)
-  const userId = Number(cookies.memberId)
+  const userId = Number(cookies.memberId) ? Number(cookies.memberId) : null
   
   return {
     props: {

@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import SolveStatus from "@/components/common/SolveStatus";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
-import useFetchUserStudyList from "@/hooks/queries/useFetchUserStudyList";
 import Loading from "@/components/Loading/Loading";
 import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
@@ -22,8 +21,8 @@ interface IServerSideProp {
 export const getServerSideProps : GetServerSideProps = async(context) => {
   const {req, res} = context;
   const cookies = parseCookies(req.headers.cookie)
-  const refreshToken = cookies.refreshToken
-  const memberId = Number(cookies.memberId)
+  const refreshToken = cookies.refreshToken ? cookies.refreshToken : null
+  const memberId = Number(cookies.memberId) ? Number(cookies.memberId) : null
   
   return {
     props: {
@@ -40,30 +39,38 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
   const {data:stduyMemberList, isLoading:getMemberListLoading} = studyApi.useGetStudyMemberListQuery(Number(param));
   const {data:studyPedingList, isLoading:getPedingListLoading} = studyApi.useGetPendingListQuery(Number(param));
   const {data:studyInfo, isLoading:getStudyInfoLoading} = studyApi.useGetStudyInfoQuery(Number(param));
-  // 로그인 유저의 스터디 목록
-  const {data: userStudyList, isLoading: isStudyListLoading} = useFetchUserStudyList({memberId,status:1});
   const [isUserStudy, setIsUserStudy] = useState<boolean>(false);
-
+  const [isLeader, setIsLeader] = useState<boolean>(false);
+  const [TAB_ELEMENTS, setTAB_ELEMENTS] = useState<string[]>(["현황", "미션", "멤버"])
   const tabState = useSelector((state: any) => {
     return state.tab.studyTabState;
   });
-  const TAB_ELEMENTS = ["현황", "미션", "멤버", "가입요청"];
-  
-  // 해당 스터디가 현재 유저가 가입된 스터디인지 순회하며 체크
+
   useEffect(() => {
-    if(!isStudyListLoading){
-      for(let i=0; i<userStudyList.data.data.length; i++){
-        if(Number(param) === userStudyList.data.data[i].id){
+    if(memberId === null) setIsUserStudy(true)
+    if(!getMemberListLoading){
+      for(let i=0; i<stduyMemberList.data.length; i++){
+        console.log(stduyMemberList.data[i].id, memberId);
+        if(memberId === stduyMemberList.data[i].id){
           setIsUserStudy(true)
           break
         }
       }
     }
-  }, [isStudyListLoading])
+  }, [getMemberListLoading])
 
-  if(getMemberListLoading || getPedingListLoading || getStudyMissionListLoading || getStudyInfoLoading || isStudyListLoading) return (
+  useEffect(() => {
+    if(!getStudyInfoLoading){
+      if(studyInfo.data.leader === memberId){
+        setIsLeader(true)
+        setTAB_ELEMENTS(["현황", "미션", "멤버", "가입요청"])
+      }
+    } 
+  }, [getStudyInfoLoading])
+
+  if(getMemberListLoading || getPedingListLoading || getStudyMissionListLoading || getStudyInfoLoading ) return (
     <S.StudyContainer>
-      <StudyInfo isUserStudy={isUserStudy} memberId={memberId}/>
+      <StudyInfo isUserStudy={isUserStudy} isLeader={isLeader} memberId={memberId}/>
       <Tab elements={TAB_ELEMENTS} type="study" />
       <S.ContentContainer>
         <Loading/>
@@ -73,7 +80,7 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
 
   return ( 
     <S.StudyContainer>
-      <StudyInfo isUserStudy={isUserStudy} memberId={memberId}/>
+      <StudyInfo isUserStudy={isUserStudy} isLeader={isLeader} memberId={memberId}/>
       <Tab elements={TAB_ELEMENTS} type="study" />
       <S.ContentContainer>
         {tabState === 0 && (
