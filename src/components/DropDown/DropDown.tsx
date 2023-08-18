@@ -3,8 +3,11 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import LocalStorage from "@/util/localstorage";
+import { useDispatch } from "react-redux";
 import { MouseEvent } from 'react';
+import { logout } from "@/store/modules/user";
 const DropDown = ({ type }: { type: "rank" | "menu" }) => {
+  const dispatch = useDispatch()
   const styledProp = type === "rank" ? 0 : 1;
   const dropdownState = useSelector((state: any) => {
     return state.dropdown.dropdownState;
@@ -30,13 +33,14 @@ const DropDown = ({ type }: { type: "rank" | "menu" }) => {
   const router = useRouter();
   const handleLogout = (event:MouseEvent<HTMLElement>) => {
     event.preventDefault();
-    
+    dispatch(logout());
     LocalStorage.removeItem('refreshToken');
     LocalStorage.removeItem('memberId');
     document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     document.cookie = 'baekJoonConnect=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     document.cookie = 'memberId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    
     router.push('/');
   };
 
