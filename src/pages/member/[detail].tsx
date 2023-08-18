@@ -4,7 +4,7 @@ import UserInfo from "@/components/userInfo/UserInfo";
 import UserSolvedInfo from "@/components/userInfo/UserSolvedInfo";
 import Tab from "@/components/tab/Tab";
 import SolvedRecord from "@/components/tab/SolvedRecord";
-import Board from "@/components/common/Board/Board";
+import Board from "@/components/common/board/Board";
 import { useSelector } from "react-redux";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";

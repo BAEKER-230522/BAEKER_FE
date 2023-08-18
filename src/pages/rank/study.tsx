@@ -1,5 +1,5 @@
 import { S } from "./style";
-import Board from "@/components/common/Board/Board";
+import Board from "@/components/common/board/Board";
 import { studyApi } from "@/api/studyApi";
 import Loading from "@/components/Loading/Loading";
 

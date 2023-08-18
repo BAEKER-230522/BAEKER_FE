@@ -1,7 +1,7 @@
 import { S } from "../style";
 import StudyInfo from "@/components/study/studyInfo";
 import Tab from "@/components/tab/Tab";
-import Board from "@/components/common/Board/Board";
+import Board from "@/components/common/board/Board";
 import SolvedRecord from "@/components/tab/SolvedRecord";
 import LineChart from "@/components/chart/chart";
 import { useSelector } from "react-redux";

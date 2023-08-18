@@ -7,7 +7,7 @@ import { ruleApi } from "@/api/ruleApi";
 import Selector from "@/components/common/Selector";
 import useMissionEdit from "@/hooks/useMissionEdit";
 import StartToEndRangeDatePicker from "@/components/Calendar/RangeDatePicker";
-import Board from "@/components/common/Board/Board";
+import Board from "@/components/common/board/Board";
 import AddProblemInputBox from "@/components/study/AddProblemInputBox";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "@/components/Loading/Loading";
