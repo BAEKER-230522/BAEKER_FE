@@ -2,6 +2,10 @@ import React, { ChangeEvent, FC, SetStateAction, useState } from 'react';
 import { S } from './style'
 import Loading from '../Loading/Loading';
 
+interface IOption {
+  name : string;
+  id: number;
+}
 
 interface Option {
   value: string;
@@ -28,7 +32,7 @@ const SelectBox = ({selectedOption, setSelectedOption, data, isLoading}:any) => 
   return (
     <S.SelectBoxContainer value={selectedOption.value} onChange={handleChange}>
       <option value="">미션 선택</option>
-      {data.data.map((option, idx) => (
+      {data.data.map((option:IOption, idx:number) => (
         <option key={idx} data-option={JSON.stringify({ value: option.name, id: option.id })}>
         {option.name}
       </option>

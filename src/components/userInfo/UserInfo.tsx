@@ -5,7 +5,7 @@ import JoinRequestModal from "../common/Modal/JoinRequestModal";
 
 interface IProps {
   userData : any;
-  userId : string;
+  userId : number;
 }
 
 const UserInfo = ({userData, userId}:IProps) => {

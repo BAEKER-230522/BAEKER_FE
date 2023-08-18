@@ -6,7 +6,7 @@ import AlertModal from "@/components/common/Modal/AlertModal";
 import { calculateDuration, getTodayDateFormatted} from "../../../../util/date"
 import { studyApi } from "@/api/studyApi";
 import Loading from "@/components/Loading/Loading";
-import React, { Fragment } from "react";
+import React from "react";
 
 interface IProblemStatusQueryDtos{
   memberId: number;
@@ -102,12 +102,12 @@ const MissionDetail = () => {
             끝 : {missionData.data.deadline}
           </div>
           <Space wrap style={{marginBottom:"30px"}}>
-            <Progress type="circle" percent={missionProgress} status={missionStatus}/>
+            <Progress type="circle" percent={missionProgress} status={'active'}/>
           </Space>
         </S.MissionProgressContainer>
         <S.MissionProblemListContainer numColumn={calculateDuration(missionData.data.startDate, missionData.data.deadline)+1}>
-          {PERIOD_HEADER.map((e, idx) => <div key={idx}>{e}</div>)}
-          {TIME_SPAN_STATUS.map((e, idx) => {
+          {PERIOD_HEADER.map((e:any, idx:number) => <div key={idx}>{e}</div>)}
+          {TIME_SPAN_STATUS.map((e:any, idx:number) => {
             return e ?
             <div key={idx}>
               <S.Dot color={'#6495Ed'}/>
@@ -118,13 +118,13 @@ const MissionDetail = () => {
         </S.MissionProblemListContainer>
         <S.MemberSolvingStatusContainer>
           <S.MissionProblemListContainer numColumn={missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length+2}>
-            {HEADER_ARR.map((e, idx) => { return idx <= 1 ? <div>{e}</div> : <S.Problem onClick={() => window.open(`https://www.acmicpc.net/problem/${memberStatus[0].problemStatusQueryDtos[idx-2].problemNumber}`, '_blank')}>{e}</S.Problem>})}
-            {userSolvedStatus.map((e,idx) => (
+            {HEADER_ARR.map((e, idx) => { return idx <= 1 ? <div>{e}</div> : <S.Problem onClick={() => window.open(`https://www.acmicpc.net/problem/${memberStatus![0].problemStatusQueryDtos[idx-2].problemNumber}`, '_blank')}>{e}</S.Problem>})}
+            {userSolvedStatus.map((e:any,idx:number) => (
               <React.Fragment key={idx}>
               <div>{idx+1}</div>
               <div>{e.nickname}</div>
               {
-                e.problem_status.map((p_status, i) => {
+                e.problem_status.map((p_status:any, i:number) => {
                   return p_status ? 
                   <div key={i}>
                     <S.Dot color={'#5bc59c'}/>
@@ -142,7 +142,7 @@ const MissionDetail = () => {
         <S.ButtonContainer>
           <Button type="primary" style={{width:"100px", height:"40px"}} onClick={() => movePage('study')}>목록</Button>
           <Button style={{width:"100px", height:"40px"}} type="primary">수정</Button>
-          <AlertModal id={param.missionId} title={'미션 삭제'} text={'삭제하시겠습니까 ?'} type={"mission"} backId={param.studyId}>삭제</AlertModal>
+          <AlertModal id={Number(param.missionId)} title={'미션 삭제'} text={'삭제하시겠습니까 ?'} type={"mission"} backId={Number(param.studyId)}>삭제</AlertModal>
           <Button style={{width:"100px", height:"40px"}} type="primary" onClick={() => movePage('rule')}>규칙 상세보기</Button>
         </S.ButtonContainer>
       </S.MissionStatusContainer>

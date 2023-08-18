@@ -10,7 +10,8 @@ interface IProps {
   text : string;
   id : number;
   type: string;
-  backId?: string;
+  backId?: number;
+  children: string;
 }
 
 const AlertModal = ({title, text, id, type, backId}: IProps) => {

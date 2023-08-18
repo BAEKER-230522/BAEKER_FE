@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { parseCookies } from '@/util/parseCookie';
 import { S } from "./style";
-import LineChart from "@/components/Chart/Chart";
+import LineChart from '@/components/Chart/chart';
 import UserInfo from "@/components/UserInfo/UserInfo";
 import UserSolvedInfo from "@/components/UserInfo/UserSolvedInfo";
 import Tab from "@/components/Tab/Tab";
@@ -18,9 +18,14 @@ interface LoginProps {
   memberId: number;
 }
 
+interface IParsedCookies {
+  refreshToken?: string;
+  memberId?: string;
+};
+
 export const getServerSideProps : GetServerSideProps = async(context) => {
   const {req, res} = context;
-  const cookies = parseCookies(req.headers.cookie)
+  const cookies:IParsedCookies = parseCookies(req.headers.cookie)
   const refreshToken = cookies.refreshToken
   const memberId = Number(cookies.memberId)
   
@@ -32,7 +37,7 @@ export const getServerSideProps : GetServerSideProps = async(context) => {
   };
 }
 
-const Profile = ({ refreshToken, memberId }: LoginProps) => {
+const Profile = ({ memberId }: LoginProps) => {
   
   const TAB_ELEMENTS = ["현황", "스터디", "가입 신청", "가입 초대"];
   const {data: userStudyList, isLoading: isStudyListLoading} = useFetchUserStudyList({memberId,status:1});
@@ -58,7 +63,7 @@ const Profile = ({ refreshToken, memberId }: LoginProps) => {
   return (
     <S.Container>
       <S.InfoContainer>
-        <UserInfo userData={userData.data}/>
+        <UserInfo userData={userData.data} userId={memberId}/>
         <UserSolvedInfo userData={userData.data}/>
       </S.InfoContainer>
       <Tab elements={TAB_ELEMENTS} type="profile" />
