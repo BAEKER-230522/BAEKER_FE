@@ -7,14 +7,17 @@ import Loading from "../Loading/Loading";
 
 interface IProps{
   isUserStudy: boolean;
+  isLeader: boolean;
   memberId: number;
 }
 
-const StudyInfo = ({isUserStudy, memberId}:IProps) => {
+// 리더일 경우 -> 미션 만들기, 스터디 수정하기, 가입요청 탭
+// 스터디원일 경우, 비로그인 -> 오직 GET 요청
+// 스터디원 아닌 로그인 유저 -> 스터디 가입하기
+const StudyInfo = ({isLeader, isUserStudy, memberId}:IProps) => {
   const router = useRouter();
-  const {studyId} = router.query;  
-  const {data, isLoading} = studyApi.useGetStudyInfoQuery(studyId)
-
+  const {studyId} = router.query;
+  const {data, isLoading} = studyApi.useGetStudyInfoQuery(studyId);
   if(isLoading) return (
     <S.Container>
       <S.Img src={IMG_URL} />
@@ -30,12 +33,13 @@ const StudyInfo = ({isUserStudy, memberId}:IProps) => {
         <S.Title>{data.data.name}</S.Title>
         <S.About style={{color:'white'}}>{data.data.about}</S.About>
         {
-          isUserStudy ? 
+          isLeader ? 
           <S.ButtonWrapper>
             <button onClick={(e) =>{e.preventDefault(); router.push({pathname:"/study/rule", query:{param: studyId }})}}>미션 만들기</button>
             <button onClick={(e) =>{e.preventDefault(); router.push({pathname:"/study/manage", query:{name:data.data.name, id:studyId, about:data.data.about, capacity: data.data.capacity }})}}>스터디 수정하기</button>
           </S.ButtonWrapper>
         :
+          isUserStudy ? null : 
           <RequestModal memberId={memberId} studyId={String(studyId)}/>
         }
       </S.StudyInfoContainer>
