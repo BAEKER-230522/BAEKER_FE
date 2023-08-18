@@ -7,15 +7,11 @@ import UserSolvedInfo from "@/components/UserInfo/UserSolvedInfo";
 import Tab from "@/components/Tab/Tab";
 import SolvedRecord from "@/components/Tab/SolvedRecord";
 import Board from "@/components/common/Board/Board";
-import { useDispatch, useSelector } from "react-redux";
-import { USER_NUMBER } from "@/util/constant";
+import { useSelector } from "react-redux";
 import useFetchUserStudyList from "@/hooks/queries/useFetchUserStudyList";
 import useFetchUserData from "@/hooks/queries/useFetchUserData";
-import useTabSwitch from "@/hooks/useTabSwitch";
 import Loading from "@/components/Loading/Loading";
-import { loginUser } from '@/store/modules/user';
-import { useEffect, useState } from 'react';
-import LocalStorage from '@/util/localstorage';
+
 
 interface LoginProps {
   refreshToken: string;
@@ -38,7 +34,7 @@ export const getServerSideProps : GetServerSideProps = async(context) => {
 
 const Profile = ({ refreshToken, memberId }: LoginProps) => {
   
-  const TAB_ELEMENTS = ["백준", "스터디", "가입 신청", "가입 초대"];
+  const TAB_ELEMENTS = ["현황", "스터디", "가입 신청", "가입 초대"];
   const {data: userStudyList, isLoading: isStudyListLoading} = useFetchUserStudyList({memberId,status:1});
   const {data: userStudyJoinRequestList, isLoading: isStudyJoinRequestListLoading} = useFetchUserStudyList({memberId,status:2});
   const {data: userStudyInviteList, isLoading: isStudyInviteListLoading} = useFetchUserStudyList({memberId,status:3});
@@ -59,18 +55,6 @@ const Profile = ({ refreshToken, memberId }: LoginProps) => {
     </S.Container>
   )
   
-  const TabComponent = useTabSwitch([
-    () => (
-      <>
-        <SolvedRecord id={1} data={userData}/>
-        <LineChart />
-      </>
-    ),
-    () => <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"],[ "스터디 장", "leader"],["랭킹", "xp"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.data}/>,
-    () => <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"], ["스터디 장", "leader"], ["상태", "request"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyJoinRequestList.data.data}/>,
-    () => <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"], ["스터디 장", "leader"], ["상태", "user_invite"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyInviteList.data.data}/>,
-  ])
-
   return (
     <S.Container>
       <S.InfoContainer>
@@ -79,7 +63,15 @@ const Profile = ({ refreshToken, memberId }: LoginProps) => {
       </S.InfoContainer>
       <Tab elements={TAB_ELEMENTS} type="profile" />
       <S.RecordContainer>
-        <TabComponent num={tabState}/>
+        {tabState === 0 && (
+            <>
+              <SolvedRecord data={userData}/>
+              <LineChart />
+            </>
+          )} 
+        {tabState === 1 && <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"],[ "스터디 장", "leader"],["랭킹", "xp"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.data}/>}
+        {tabState === 2 && <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"], ["스터디 장", "leader"], ["상태", "request"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyJoinRequestList.data.data}/>}
+        {tabState === 3 && <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"], ["스터디 장", "leader"], ["상태", "user_invite"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyInviteList.data.data}/>}
       </S.RecordContainer>
     </S.Container>
   );

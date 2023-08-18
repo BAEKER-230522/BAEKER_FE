@@ -10,7 +10,7 @@ interface IMemberData{
   ruby: number;
 }
 
-const SolvedRecord = ({id,data}: any) => {
+const SolvedRecord = ({data}: any) => {
   return (
     <S.RecordContainer>
       <S.RecordWrapper>
