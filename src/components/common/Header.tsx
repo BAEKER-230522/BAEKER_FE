@@ -1,5 +1,5 @@
 import { S } from "./style";
-import DropDown from "@/components/Dropdown/index";
+import DropDown from "../Dropdown/index";
 import { useOncClickIcon } from "@/hooks/useOnClickIcon";
 import Link from "next/link";
 import { useSelector } from "react-redux";
