@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";
 import Selector from "@/components/common/Selector";
 import useMissionEdit from "@/hooks/useMissionEdit";
-import StartToEndRangeDatePicker from "@/components/Calendar/RangeDatePicker";
+// import StartToEndRangeDatePicker from "@/components/Calendar/RangeDatePicker";
 import Board from "@/components/common/board/Board";
 import AddProblemInputBox from "@/components/study/AddProblemInputBox";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,7 +60,7 @@ const Mission = () => {
               <Input title={"미션 소개"} size={"100%"} value={aboutValue} onChange={aboutHandler}/>
               <S.SelectorWrapper>
                 <S.Title style={{marginRight: 'auto'}}>미션 기간</S.Title>
-                <StartToEndRangeDatePicker setMissionStartDate={setMissionStartDate} setMissionEndDate={setMissionEndDate}/>
+                {/* <StartToEndRangeDatePicker setMissionStartDate={setMissionStartDate} setMissionEndDate={setMissionEndDate}/> */}
               </S.SelectorWrapper>
             </S.MissionInputInnerWrapper>
           </S.MissionInputLeftContainer>
@@ -87,7 +87,7 @@ const Mission = () => {
               <Input title={"미션 소개"} size={"100%"} value={aboutValue} onChange={aboutHandler}/>
               <S.SelectorWrapper>
                 <S.Title style={{marginRight: 'auto'}}>미션 기간</S.Title>
-                <StartToEndRangeDatePicker setMissionStartDate={setMissionStartDate} setMissionEndDate={setMissionEndDate}/>
+                {/* <StartToEndRangeDatePicker setMissionStartDate={setMissionStartDate} setMissionEndDate={setMissionEndDate}/> */}
               </S.SelectorWrapper>
             </S.MissionInputInnerWrapper>
           </S.MissionInputLeftContainer>
