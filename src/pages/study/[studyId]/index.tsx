@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { RecordContainer } from "@/pages/profile/style";
 import StudyInfo from "@/components/study/studyInfo";
 import Tab from "@/components/tab/Tab";
 import Board from "@/components/common/board/Board";
@@ -161,6 +160,18 @@ const Button = styled.input`
   cursor: pointer;
   border: none;
   margin-top : 50px;
+`;
+
+const RecordContainer = styled.div`
+  width: 80%;
+  padding: 20px;
+  height: 65vh;
+  display: flex;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 100px;
 `;
 
 const S = {Container,ContentContainer, ChartContainer, StatusContainer,Button, StudyContainer} ;

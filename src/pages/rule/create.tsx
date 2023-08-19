@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { RecordContainer } from "../profile/style";
 import { Title } from "@/components/common/style";
 import Input from "@/components/common/Input";
 import useInput from "@/hooks/useInput";
@@ -58,6 +57,18 @@ const CreateStudy = () => {
 };
 
 export default CreateStudy;
+
+const RecordContainer = styled.div`
+  width: 80%;
+  padding: 20px;
+  height: 65vh;
+  display: flex;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 100px;
+`;
 
 const Container = styled.div`
   width: 100vw;
