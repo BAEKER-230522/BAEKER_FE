@@ -1,4 +1,3 @@
-/* eslint-disable rule-name */
 import { S } from "../study/style";
 import Input from "@/components/common/Input";
 import useInput from "@/hooks/useInput";
@@ -26,8 +25,8 @@ const CreateStudy = () => {
       setXpValue(String(router.query?.xp!));
       setCountValue(String(router.query?.count))
       setLevelValue(String(router.query.level))
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleCreateStudy = (e:any) => {
