@@ -6,10 +6,13 @@ interface IParsedCookies {
 };
 
 const getMemberId = (req: NextApiRequest, res: NextApiResponse) => {
-  const cookies:IParsedCookies = parseCookies(req.headers.cookie)
-  const memberId = Number(cookies.memberId)
-
-  res.status(200).json({ memberId });
+  if(req.method === 'GET'){
+    const cookies:IParsedCookies = parseCookies(req.headers.cookie)
+    const memberId = Number(cookies.memberId)
+    res.status(200).json({ memberId });
+  }else{
+    res.status(405).json({ message: 'Method Not Allowed' });
+  }
 };
 
 export default getMemberId
