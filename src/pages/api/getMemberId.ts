@@ -9,9 +9,9 @@ const getMemberId = (req: NextApiRequest, res: NextApiResponse) => {
   if(req.method === 'GET'){
     const cookies:IParsedCookies = parseCookies(req.headers.cookie)
     const memberId = Number(cookies.memberId)
-    res.status(200).json({ memberId });
+    return res.status(200).json({ memberId });
   }else{
-    res.status(405).json({ message: 'Method Not Allowed' });
+    return res.status(405).json({ message: 'Method Not Allowed' });
   }
 };
 
