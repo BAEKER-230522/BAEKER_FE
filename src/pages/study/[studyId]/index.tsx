@@ -131,6 +131,18 @@ const StudyContainer = styled.div`
   background-color: #2a303c;
 `
 
+const RecordContainer = styled.div`
+  width: 80%;
+  padding: 20px;
+  height: 65vh;
+  display: flex;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 100px;
+`;
+
 const ContentContainer = styled(RecordContainer)`
   width: 60%;
   height: 60vh;
@@ -162,16 +174,5 @@ const Button = styled.input`
   margin-top : 50px;
 `;
 
-const RecordContainer = styled.div`
-  width: 80%;
-  padding: 20px;
-  height: 65vh;
-  display: flex;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: 100px;
-`;
 
 const S = {Container,ContentContainer, ChartContainer, StatusContainer,Button, StudyContainer} ;

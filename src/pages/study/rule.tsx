@@ -192,17 +192,7 @@ const Dot = styled.span<ColorProp>`
   border-radius: 50%;
   background-color: ${props => props.color};
 `
-const RecordContainer = styled.div`
-  width: 80%;
-  padding: 20px;
-  height: 65vh;
-  display: flex;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: 100px;
-`;
+
 
 
 const S = {Dot,Container,MissionInputLeftContainer, MissionInputInnerWrapper,MissionInputRightContainer,Button ,FormContainer, Title, SelectorWrapper, MissionInputContainer, MissionInputWrapper } ;
