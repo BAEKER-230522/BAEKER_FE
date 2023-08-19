@@ -1,4 +1,5 @@
-import { S } from "../style";
+import styled from "styled-components";
+import { RecordContainer } from "@/pages/profile/style";
 import StudyInfo from "@/components/study/studyInfo";
 import Tab from "@/components/tab/Tab";
 import Board from "@/components/common/board/Board";
@@ -111,3 +112,55 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
 
 export default StudyDetail;
 
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #2a303c;
+  
+`;
+
+const StudyContainer = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #2a303c;
+`
+
+const ContentContainer = styled(RecordContainer)`
+  width: 60%;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ChartContainer = styled.div`
+  display: flex;
+  margin-top: 20px;
+`;
+
+const StatusContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+
+const Button = styled.input`
+  width: 40%;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #661ae6;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  margin-top : 50px;
+`;
+
+const S = {Container,ContentContainer, ChartContainer, StatusContainer,Button, StudyContainer} ;

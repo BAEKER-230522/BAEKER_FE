@@ -1,4 +1,4 @@
-import { S } from "../profile/style";
+import styled from "styled-components";
 import LineChart from "@/components/chart/chart";
 import UserInfo from "@/components/userInfo/UserInfo";
 import UserSolvedInfo from "@/components/userInfo/UserSolvedInfo";
@@ -95,3 +95,37 @@ const Profile = ({memberId}:{memberId : number}) => {
 };
 
 export default Profile;
+
+const Container = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #2a303c;
+`;
+
+const InfoContainer = styled.div`
+  margin: 60px 0px 40px 0px;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+`;
+
+export const RecordContainer = styled.div`
+  width: 80%;
+  padding: 20px;
+  height: 65vh;
+  display: flex;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 100px;
+`;
+
+const S = {
+  Container,
+  InfoContainer,
+  RecordContainer,
+};

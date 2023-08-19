@@ -1,4 +1,4 @@
-import { S } from "./style";
+import styled from "styled-components";
 import ModifyImg from "@/components/modify/Img";
 import Input from "@/components/common/Input";
 import ModifyButton from "@/components/modify/button";
@@ -76,3 +76,16 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
 };
 
 export default Modify;
+
+const Container = styled.form`
+  width: 100vw;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #2a303c;
+  padding-bottom: 50px;
+`;
+
+const S = { Container };

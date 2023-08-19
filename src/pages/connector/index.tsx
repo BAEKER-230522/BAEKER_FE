@@ -1,4 +1,3 @@
-import { S } from "./style";
 import ModifyImg from "@/components/modify/Img";
 import Input from "@/components/common/Input";
 import ModifyButton from "@/components/modify/button";
@@ -11,6 +10,7 @@ import Loading from "@/components/Loading/Loading";
 import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
 import LocalStorage from "@/util/localstorage";
+import styled from "styled-components";
 // deploy test
 interface LoginProps {
   refreshToken: string;
@@ -86,3 +86,16 @@ const Connector = ({memberId, refreshToken}:LoginProps) => {
 };
 
 export default Connector;
+
+const Container = styled.form`
+  width: 100vw;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #2a303c;
+  padding-bottom : 50px;
+`;
+
+const S = { Container };

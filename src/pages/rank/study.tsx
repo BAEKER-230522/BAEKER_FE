@@ -1,4 +1,4 @@
-import { S } from "./style";
+import styled from "styled-components";
 import Board from "@/components/common/board/Board";
 import { studyApi } from "@/api/studyApi";
 import Loading from "@/components/Loading/Loading";
@@ -22,3 +22,15 @@ const StudyRank = () => {
 };
 
 export default StudyRank;
+
+const Container = styled.div`
+  width: 100vw;
+  height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #2a303c;
+`;
+
+const S = { Container };

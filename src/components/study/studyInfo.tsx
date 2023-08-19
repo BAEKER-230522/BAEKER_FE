@@ -1,4 +1,4 @@
-import { IMG_URL } from "@/pages/mock";
+import { IMG_URL } from "../../../public/mock";
 import { S } from "./style";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
