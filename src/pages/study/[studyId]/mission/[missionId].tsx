@@ -163,48 +163,6 @@ const Container = styled.div`
   
 `;
 
-const FormContainer = styled.form`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-`
-
-const StudyContainer = styled.div`
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #2a303c;
-`
-
-const ChartContainer = styled.div`
-  display: flex;
-  margin-top: 20px;
-`;
-
-const StatusContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-
-const Button = styled.input`
-  width: 40%;
-  height: 50px;
-  border-radius: 10px;
-  background-color: #661ae6;
-  color: white;
-  font-weight: 500;
-  cursor: pointer;
-  border: none;
-  margin-top : 50px;
-`;
-
 const SelectorWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -235,24 +193,6 @@ const MissionInputWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
-`
-
-const MissionInputLeftContainer = styled(MissionInputWrapper)`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-`
-
-const MissionInputRightContainer = styled(MissionInputWrapper)`
-  width: 50%;
-  display: flex;
-  flex-direction : column;
-`
-
-const MissionInputInnerWrapper = styled.div`
   width: 50%;
 `
 
@@ -316,4 +256,4 @@ const Problem = styled.div`
   color : #6495Ed;
 `
 
-const S = {Problem,Dot,MissionStatusContainer, MissionProgressContainer, ButtonContainer,Container, MemberSolvingStatusContainer,MissionProblemListContainer,MissionInputLeftContainer, MissionInputInnerWrapper,MissionInputRightContainer, ChartContainer, StatusContainer,Button, StudyContainer ,FormContainer, SelectorWrapper, MissionInputContainer,MissionInputWrapper } ;
+const S = {Problem,Dot,MissionStatusContainer, MissionProgressContainer, ButtonContainer,Container, MemberSolvingStatusContainer,MissionProblemListContainer , SelectorWrapper, MissionInputContainer,MissionInputWrapper } ;
