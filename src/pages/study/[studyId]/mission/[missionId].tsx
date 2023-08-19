@@ -75,6 +75,7 @@ const MissionDetail = () => {
       setHEADER_ARR(NEW_HEADER)
       setPERIOD_HEADER(Array.from({length:calculateDuration(missionData.data.startDate, missionData.data.deadline)+1}, (_,i) => `${i+1}일차`))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [missionData, memberList])
   
   const movePage = (type:'study'|'rule') => {

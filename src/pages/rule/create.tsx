@@ -1,7 +1,7 @@
 import { S } from "../study/style";
 import Input from "@/components/common/Input";
 import useInput from "@/hooks/useInput";
-import RadioButtonGroup from "@/components/rule/radioButtonGroup";
+import RadioButtonGroup from "@/components/rule/RadioButtonGroup";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";
@@ -25,6 +25,7 @@ const CreateStudy = () => {
       setXpValue(String(router.query?.xp!));
       setCountValue(String(router.query?.count))
       setLevelValue(String(router.query.level))
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }
   }, [])
 

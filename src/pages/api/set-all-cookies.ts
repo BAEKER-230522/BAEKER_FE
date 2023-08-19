@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const setAllCookies = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'POST') {  
     const encodedNickname = encodeURIComponent(req.body.nickname);
     res.setHeader('Set-Cookie', [
@@ -14,3 +14,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(405).json({ message: 'Method Not Allowed' });
   }
 };
+
+export default setAllCookies

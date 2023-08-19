@@ -62,6 +62,7 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getMemberListLoading])
 
   useEffect(() => {
@@ -71,6 +72,7 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
         setTAB_ELEMENTS(["현황", "미션", "멤버", "가입요청"])
       }
     } 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getStudyInfoLoading])
 
   if(getMemberListLoading || getPedingListLoading || getStudyMissionListLoading || getStudyInfoLoading ) return (

@@ -51,11 +51,13 @@ const Connector = ({memberId, refreshToken}:LoginProps) => {
       setNameValue(data.data.nickname)
       setAboutValue(data.data.about)
     } 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading])
 
   useEffect(() => {
     LocalStorage.setItem('refreshToken', refreshToken)
     LocalStorage.setItem('memberId', String(memberId))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const onSubmitUpdateUserInfo = (e:React.FormEvent<HTMLFormElement>) => {

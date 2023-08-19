@@ -34,6 +34,7 @@ const Mission = () => {
   useEffect(() => {
     setNameValue(String(router.query.name))
     setAboutValue(String(router.query.about))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {

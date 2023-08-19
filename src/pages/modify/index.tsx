@@ -49,6 +49,7 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
       setNameValue(data.data.nickname)
       setAboutValue(data.data.about)
     } 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading])
 
   const onSubmitUpdateUserInfo = (e:React.FormEvent<HTMLFormElement>) => {

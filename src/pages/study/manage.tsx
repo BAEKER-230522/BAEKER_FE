@@ -41,6 +41,7 @@ const CreateStudy = ({userId}:{userId:number}) => {
       setAboutValue(String(router.query.about))
       setMaxStudyCapacity(Number(router.query.capacity))
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if(isUserDataLoading) return <div>Loading..</div>

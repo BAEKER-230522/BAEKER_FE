@@ -1,4 +1,4 @@
-import React, { SetStateAction, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Select, Space } from 'antd';
 
 interface IProps{
@@ -19,6 +19,7 @@ const Selector = ({data, setId}:IProps) => {
 
   useEffect(() => {
     setId(data_arr[0].value)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   const handleChange = (value: number) => {
