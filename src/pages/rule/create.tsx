@@ -1,3 +1,4 @@
+/* eslint-disable rule-name */
 import { S } from "../study/style";
 import Input from "@/components/common/Input";
 import useInput from "@/hooks/useInput";
