@@ -5,10 +5,24 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import wrapper from "@/store";
 import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { login, logout } from "@/store/modules/user";
 
 const App = ({ Component, pageProps }: any) => {
 
+  const dispatch = useDispatch()
 
+  const fetchMemberId = async () => {
+    const res = await fetch("/api/getMemberId");
+    const {data} = await res.json();
+    if(data.memberId === null){
+      dispatch(logout())
+    }else{
+      dispatch(login(data.memberId))
+    }
+  };
+
+  fetchMemberId();
   return (
     <React.Fragment>
       <ToastContainer position="top-right" autoClose={1500} />
