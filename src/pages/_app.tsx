@@ -10,10 +10,9 @@ import { login, logout } from "@/store/modules/user";
 import axios from "axios";
 
 const App = ({ Component, pageProps }: any) => {
-
   const dispatch = useDispatch()
-
   const fetchMemberId = async () => {
+    console.log('fetch');
     const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/getMemberId`);
     if(res.data.memberId === null){
       dispatch(logout())
