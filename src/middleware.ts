@@ -6,11 +6,11 @@ export function middleware(request: NextRequest) {
   const currentPath = request.nextUrl.pathname;
 
   if(isLogin === undefined && restrictedPages.includes(currentPath)){
-    return NextResponse.redirect(`${request.nextUrl.origin}`);
+    return NextResponse.redirect(new URL('/', request.url))
   }
   if(isLogin !== undefined){
     if(currentPath === '/') {
-      return NextResponse.redirect(`${request.nextUrl.origin}/home`);
+      return NextResponse.redirect(new URL('/home', request.url))
     }
   }
   return NextResponse.next();
