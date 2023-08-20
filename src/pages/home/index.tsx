@@ -1,6 +1,22 @@
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { login, logout } from "@/store/modules/user";
+import axios from "axios";
 
 const Home = () => {
+
+  const dispatch = useDispatch()
+
+  const fetchMemberId = async () => {
+    const res = await axios.get("/api/getMemberId");
+    if(res.data.memberId === null){
+      dispatch(logout())
+    }else{
+      dispatch(login(res.data.memberId))
+    }
+  };
+
+  fetchMemberId();
   return (
     <S.Container>
       <S.Wrapper>
