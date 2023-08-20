@@ -13,16 +13,16 @@ import axios from "axios";
 const App = ({ Component, pageProps }: any) => {
   const dispatch = useDispatch()
 
-  // const fetchMemberId = async () => {
-  //   const res = await axios.get("/api/getMemberId");
-  //   if(res.data.memberId === null){
-  //     dispatch(logout())
-  //   }else{
-  //     dispatch(login(res.data.memberId))
-  //   }
-  // };
+  const fetchMemberId = async () => {
+    const res = await axios.get("/api/getMemberId");
+    if(res.data.memberId === null){
+      dispatch(logout())
+    }else{
+      dispatch(login(res.data.memberId))
+    }
+  };
 
-  // fetchMemberId();
+  fetchMemberId();
 
   return (
     <React.Fragment>
