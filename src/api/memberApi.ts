@@ -60,7 +60,12 @@ export const memberApi = createApi({
       }),
       invalidatesTags: [{type: "Member"}]
     }),
+    // 유저의 일주일 문제풀이 현황
+    weeklyUserProblemStatus: builder.query({
+      query: (id) => `${END_POINT}/get/v1/snapshot/week?id=${id}`,
+      providesTags: [{type: "Member"}]
+    }), 
   }),
 });
 
-export const { useGetAllMembersQuery, useGetMemberQuery, useCreateMemberMutation, useConnectBaekjoonMutation } = memberApi;
+export const { useGetAllMembersQuery, useGetMemberQuery, useCreateMemberMutation, useConnectBaekjoonMutation, useWeeklyUserProblemStatusQuery } = memberApi;

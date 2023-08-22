@@ -40,6 +40,11 @@ export const studyApi = createApi({
       query: (id) => `${END_POINT}/id?id=${id}`,
       providesTags: ["Study"],
     }),
+    // 스터디 일주일 문제풀이 현황
+    weeklyStudyProblemStatus: builder.query({
+      query: (id) => `${END_POINT}/snapshots?id=${id}`,
+      providesTags: ["Study"]
+    }), 
 
     // member id로 가입한 모든 study 조회하기
     getUserStudyList: builder.query({
@@ -204,4 +209,4 @@ export const studyApi = createApi({
   }),
 });
 
-export const { useGetStudyInfoListQuery, useGetStudyInfoQuery, useCreateStudyMutation, useGetUserStudyListQuery, useGetStudyMemberListQuery, useGetPendingListQuery, useCreateStudyMissionMutation, useGetStudyRuleListQuery, useGetStudyMissionQuery, useGetAllStudyListQuery, useAcceptStudyMutation, useDeleteStudyMissionMutation, useRefuseStudyMutation, useInviteStudyMutation, useJoinStudyMutation, useResignStudyMutation, useGetStudyRuleQuery, } = studyApi;
+export const { useWeeklyStudyProblemStatusQuery ,useGetStudyInfoListQuery, useGetStudyInfoQuery, useCreateStudyMutation, useGetUserStudyListQuery, useGetStudyMemberListQuery, useGetPendingListQuery, useCreateStudyMissionMutation, useGetStudyRuleListQuery, useGetStudyMissionQuery, useGetAllStudyListQuery, useAcceptStudyMutation, useDeleteStudyMissionMutation, useRefuseStudyMutation, useInviteStudyMutation, useJoinStudyMutation, useResignStudyMutation, useGetStudyRuleQuery, } = studyApi;

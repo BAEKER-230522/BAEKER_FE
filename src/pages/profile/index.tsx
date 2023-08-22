@@ -71,7 +71,7 @@ const Profile = ({ memberId }: LoginProps) => {
         {tabState === 0 && (
             <>
               <SolvedRecord data={userData}/>
-              <LineChart />
+              <LineChart id={memberId} type={"member"}/>
             </>
           )} 
         {tabState === 1 && <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"],[ "스터디 장", "leader"],["랭킹", "xp"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.data}/>}
