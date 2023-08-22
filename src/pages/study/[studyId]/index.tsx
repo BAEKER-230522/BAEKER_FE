@@ -45,7 +45,6 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
   const {data:stduyMemberList, isLoading:getMemberListLoading} = studyApi.useGetStudyMemberListQuery(Number(param));
   const {data:studyPedingList, isLoading:getPedingListLoading} = studyApi.useGetPendingListQuery(Number(param));
   const {data:studyInfo, isLoading:getStudyInfoLoading} = studyApi.useGetStudyInfoQuery(Number(param));
-  console.log(studyInfo);
   const [isUserStudy, setIsUserStudy] = useState<boolean>(false);
   const [isLeader, setIsLeader] = useState<boolean>(false);
   const [TAB_ELEMENTS, setTAB_ELEMENTS] = useState<string[]>(["현황", "미션", "멤버"])
