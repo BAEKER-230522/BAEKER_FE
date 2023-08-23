@@ -4,14 +4,16 @@ const TabContainer = styled.div<{ tabState: number }>`
   display: flex;
   height: 20px;
   width: 500px;
-  color: white;
+  color: ${(props) => props.theme.colors.black};
   justify-content: space-around;
   align-items: center;
   margin-bottom: 40px;
   div:nth-child(${(props) => props.tabState + 1}) {
     border-bottom: 3px solid black;
+    font-weight: 500;
   }
   div {
+    cursor: pointer;
     padding: 5px;
     transition: 0.3s ease-in-out;
     display: flex;
@@ -25,7 +27,7 @@ const TabContainer = styled.div<{ tabState: number }>`
 
 const RecordContainer = styled.div`
   width: 300px;
-  background-color: #2a303c;
+  background-color: ${(props) => props.theme.backgronudColors.white};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -37,11 +39,11 @@ const RecordWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 100px;
-  color: #a6adbb;
+  color: ${(props) => props.theme.backgronudColors.black};
 
   &:nth-child(2) {
-    border-bottom: 0.5px solid #a6adbb;
-    border-top: 0.5px solid #a6adbb;
+    border-bottom: 0.5px solid ${(props) => props.theme.backgronudColors.gray};
+    border-top: 0.5px solid ${(props) => props.theme.backgronudColors.gray};
   }
 `;
 
@@ -55,16 +57,7 @@ const RecordElement = styled.div`
   span {
     font-size: 1.3rem;
     margin-bottom: 10px;
-  }
-  h1 {
-    color: #f8f9fa;
-    font-size: 2rem;
-    font-weight: 600;
-  }
-
-  h3 {
-    color: #747b88;
-    font-size: 1.3rem;
+    color: ${(props) => props.theme.colors.black};
   }
 
   div {
@@ -72,7 +65,24 @@ const RecordElement = styled.div`
   }
 `;
 
+const BigFont = styled.div`
+    color: ${(props) => props.theme.backgronudColors.black};
+    font-size: 2rem;
+    font-weight: 600;
+`
+
+const SmallFont = styled.div`
+  display: flex;
+  align-items: center;
+  color: ${(props) => props.theme.backgronudColors.black};
+  font-size: 1rem;
+  margin-left: 2px;
+
+`
+
 export const S = {
+  BigFont,
+  SmallFont,
   TabContainer,
   RecordContainer,
   RecordWrapper,

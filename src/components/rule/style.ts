@@ -25,7 +25,7 @@ const Button = styled.button`
   width: 45px;
   height: 45px;
   border-radius: 5px;
-  background-color: #191d24;
+  background-color: ${(props) => props.theme.backgronudColors.blue};
   margin-left: 15px;
   border: none;
   cursor: pointer;
@@ -34,11 +34,11 @@ const Button = styled.button`
 const SearchSVG = styled(AiOutlineSearch)`
   width: 30px;
   height: 30px;
-  color: #9da4b2;
+  color: ${(props) => props.theme.backgronudColors.white};
 `;
 
 const CreateButton = styled(Button)`
-  background-color: #661ae6;
+  background-color: ${(props) => props.theme.backgronudColors.blue};
   width: 100px;
   color: white;
   font-weight: 600;

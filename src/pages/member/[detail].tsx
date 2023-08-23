@@ -101,7 +101,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #2a303c;
+  background-color: ${(props) => props.theme.backgronudColors.white};
 `;
 
 const InfoContainer = styled.div`

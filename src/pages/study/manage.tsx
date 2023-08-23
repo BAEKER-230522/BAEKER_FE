@@ -76,23 +76,25 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #2a303c;
+  background-color: ${(props) => props.theme.backgronudColors.white};
 `;
 
 const FormContainer = styled.form`
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: ${(props) => props.theme.borderRadius.primary};
+  background-color: ${(props) => props.theme.backgronudColors.gray};
 `
 
 const Button = styled.input`
   width: 40%;
   height: 50px;
   border-radius: 10px;
-  background-color: #661ae6;
+  background-color: ${(props) => props.theme.backgronudColors.blue};
   color: white;
   font-weight: 500;
   cursor: pointer;
