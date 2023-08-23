@@ -66,26 +66,38 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
   )
 
   return (
-    <S.Container onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
-      <ModifyImg userImg={data.data.kakaoProfileImage}/>
-      <Input title={"이름"} size={"25%"} value={nameValue} onChange={onChangeName} />
-      <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={onChangeAbout}/>
-      <ModifyButton />
+    <S.Container >
+      <S.FormContainer onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
+        <ModifyImg userImg={data.data.kakaoProfileImage}/>
+        <Input title={"이름"} size={"25%"} value={nameValue} onChange={onChangeName} />
+        <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={onChangeAbout}/>
+        <ModifyButton />
+      </S.FormContainer>
     </S.Container>
   );
 };
 
 export default Modify;
 
-const Container = styled.form`
+const Container = styled.div`
   width: 100vw;
-  height: 95vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #2a303c;
-  padding-bottom: 50px;
+  background-color: ${(props) => props.theme.backgronudColors.white};
 `;
 
-const S = { Container };
+const FormContainer = styled.form`
+  width: 50%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: ${(props) => props.theme.borderRadius.primary};
+  background-color: ${(props) => props.theme.backgronudColors.gray};
+`
+
+const S = { Container, FormContainer };
