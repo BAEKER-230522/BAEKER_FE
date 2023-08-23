@@ -59,9 +59,11 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
   }
   
   if(isLoading) return (
-    <S.Container onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
-      <Loading/>
-      <ModifyButton />
+    <S.Container>
+      <S.FormContainer onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
+        <Loading/>
+        <ModifyButton />
+      </S.FormContainer>
     </S.Container>
   )
 
