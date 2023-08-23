@@ -19,10 +19,8 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("http://ec2-3-39-24-149.ap-northeast-2.compute.amazonaws.com:8080/images/welcome.jpg") no-repeat
-    center fixed;
   background-size: cover;
-  background-color: #2a303c;
+  background-color: ${(props) => props.theme.backgronudColors.white};
 `;
 
 const Wrapper = styled.div`
