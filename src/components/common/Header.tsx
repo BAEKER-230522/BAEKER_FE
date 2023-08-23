@@ -1,12 +1,91 @@
 import { S } from "./style";
 import DropDown from "../DropDown/index";
+import { MouseEvent } from 'react';
 import { useOncClickIcon } from "@/hooks/useOnClickIcon";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import type { MenuProps } from 'antd';
+import { Button, Dropdown, Space } from 'antd';
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import LocalStorage from "@/util/localstorage";
+import { logout } from "@/store/modules/user";
 
 const Header = () => {
   const { dropdownState, changeDropdownState } = useOncClickIcon();
   const isLogin = useSelector((state:any) => {return state.user.isLogin})
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleLogout = (event:MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    dispatch(logout());
+    LocalStorage.removeItem('refreshToken');
+    LocalStorage.removeItem('memberId');
+    document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'baekJoonConnect=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'memberId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    
+    router.push('/');
+  }
+
+  
+
+const items_1: MenuProps['items'] = [
+  {
+    key: '1',
+    label: (
+      <Link href={`/rank/algorithm`} legacyBehavior>
+        알고리즘 랭킹
+      </Link>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <Link href={`/rank/study`} legacyBehavior>
+        스터디 랭킹
+      </Link>
+    ),
+  },
+];
+
+const items_2: MenuProps['items'] = [
+  {
+    key: '1',
+    label: (
+      <Link href={`/profile`} legacyBehavior>
+        마이페이지
+      </Link>
+    ),
+  },
+  {
+    key: '2',
+    label: (
+      <Link href={`/study/manage`} legacyBehavior>
+        스터디 만들기
+      </Link>
+    ),
+  },
+  {
+    key: '3',
+    label: (
+      <Link href={`/rule`} legacyBehavior>
+        규칙
+      </Link>
+    ),
+  },
+  {
+    key: '4',
+    label: (
+      <button onClick={handleLogout}>
+        로그아웃
+      </button>
+    ),
+  },
+];
+
   
   return (
     <S.HeaderContainer>
@@ -14,13 +93,13 @@ const Header = () => {
         <S.Logo>BAEKER</S.Logo>
       </Link>
       <S.IconContainer>
-        <S.DropDownIcon onClick={() => changeDropdownState(0)}>
-          {dropdownState[0] === 1 && <DropDown type={"rank"} />}
-        </S.DropDownIcon>
+        <Dropdown menu={{ items:items_1 }} placement="bottom">
+          <Button>랭킹</Button>
+        </Dropdown>
         {isLogin &&
-          <S.DropDownIcon onClick={() => changeDropdownState(1)}>
-            {dropdownState[1] === 1 && <DropDown type={"menu"} />}
-          </S.DropDownIcon>
+          <Dropdown menu={{ items:items_2 }} placement="bottom">
+            <Button>메뉴</Button>
+          </Dropdown>
         }
       </S.IconContainer>
     </S.HeaderContainer>
