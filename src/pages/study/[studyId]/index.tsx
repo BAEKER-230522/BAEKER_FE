@@ -93,10 +93,10 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
         {tabState === 0 && (
           <>
             <S.StatusContainer >
-              <SolveStatus />
+              <SolveStatus studyInfo={studyInfo}/>
               <S.ChartContainer>
                 <SolvedRecord id={param} data={studyInfo}/> 
-                <LineChart />
+                <LineChart id={Number(param)} type={"study"}/>
               </S.ChartContainer>
             </S.StatusContainer>
           </>

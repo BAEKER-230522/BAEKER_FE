@@ -45,7 +45,7 @@ export const getServerSideProps : GetServerSideProps = async(context) => {
 
 
  
-const Profile = ({memberId}:{memberId : number}) => {
+const Member = () => {
   const router = useRouter();
   const {detail: param} = router.query;
   const {data: userStudyList, isLoading: isGetUserStudyListLoading} = studyApi.useGetUserStudyListQuery({memberId:param, status:1});
@@ -53,7 +53,6 @@ const Profile = ({memberId}:{memberId : number}) => {
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
   });
-  const TAB_ELEMENTS_MY = ["백준","스터디", "가입 대기"];
   const TAB_ELEMENTS_OTHER = ["백준", "스터디"];
   
   if(isGetUserStudyListLoading || isGetUserInfoLoading) return (
@@ -73,7 +72,7 @@ const Profile = ({memberId}:{memberId : number}) => {
         return (
           <>
             <SolvedRecord id={Number(param)} data={userData}/>
-            <LineChart />
+            <LineChart id={Number(param)} type={'member'}/>
           </>
         );
       case 1:
@@ -85,16 +84,16 @@ const Profile = ({memberId}:{memberId : number}) => {
   return (
     <S.Container>
       <S.InfoContainer>
-        <UserInfo userData={userData.data} userId={memberId}/>
+        <UserInfo userData={userData.data} userId={Number(param)}/>
         <UserSolvedInfo userData={userData.data}/>
       </S.InfoContainer>
-      {flag ? <Tab elements={TAB_ELEMENTS_MY} type="profile" /> : <Tab elements={TAB_ELEMENTS_OTHER} type="profile" />}
+      <Tab elements={TAB_ELEMENTS_OTHER} type="profile"/>
       <S.RecordContainer>{Component(tabState)}</S.RecordContainer>
     </S.Container>
   );
 };
 
-export default Profile;
+export default Member;
 
 const Container = styled.div`
   width: 100vw;
