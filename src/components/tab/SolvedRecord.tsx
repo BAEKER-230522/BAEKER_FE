@@ -16,48 +16,48 @@ const SolvedRecord = ({data}: any) => {
       <S.RecordWrapper>
         <S.RecordElement>
           <span>BRONZE</span>
-          <div>
-            <h1>{data.data.bronze}</h1>
-            <h3>solved</h3>
+          <div style={{ display: "flex", alignContent: "center" }}>
+            <S.BigFont>{data.data.bronze}</S.BigFont>
+            <S.SmallFont>solved</S.SmallFont>
           </div>
         </S.RecordElement>
         <S.RecordElement>
           <span>DIAMOND</span>
-          <div>
-            <h1>{data.data.diamond}</h1>
-            <h3>solved</h3>
+          <div style={{ display: "flex", alignContent: "center" }}>
+            <S.BigFont>{data.data.diamond}</S.BigFont>
+            <S.SmallFont>solved</S.SmallFont>
           </div>
         </S.RecordElement>
       </S.RecordWrapper>
       <S.RecordWrapper>
         <S.RecordElement>
           <span>SILVER</span>
-          <div>
-            <h1>{data.data.silver}</h1>
-            <h3>solved</h3>
+          <div style={{ display: "flex", alignContent: "center" }}>
+            <S.BigFont>{data.data.silver}</S.BigFont>
+            <S.SmallFont>solved</S.SmallFont>
           </div>
         </S.RecordElement>
         <S.RecordElement>
           <span>RUBY</span>
-          <div>
-            <h1>{data.data.ruby}</h1>
-            <h3>solved</h3>
+          <div style={{ display: "flex", alignContent: "center" }}>
+            <S.BigFont>{data.data.ruby}</S.BigFont>
+            <S.SmallFont>solved</S.SmallFont>
           </div>
         </S.RecordElement>
       </S.RecordWrapper>
       <S.RecordWrapper>
         <S.RecordElement>
           <span>GOLD</span>
-          <div>
-            <h1>{data.data.gold}</h1>
-            <h3>solved</h3>
+          <div style={{ display: "flex", alignContent: "center" }}>
+            <S.BigFont>{data.data.gold}</S.BigFont>
+            <S.SmallFont>solved</S.SmallFont>
           </div>
         </S.RecordElement>
         <S.RecordElement>
           <span>PLATINUM</span>
-          <div>
-            <h1>{data.data.platinum}</h1>
-            <h3>solved</h3>
+          <div style={{ display: "flex", alignContent: "center" }}>
+            <S.BigFont>{data.data.platinum}</S.BigFont>
+            <S.SmallFont>solved</S.SmallFont>
           </div>
         </S.RecordElement>
       </S.RecordWrapper>

@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import { FaMedal } from "react-icons/fa";
+
 const HeaderContainer = styled.div`
   width: 100%;
-  height: 60px;
-  background-color: #4b5563;
+  height: 70px;
+  background-color: ${(props) => props.theme.backgronudColors.white};
   display: flex;
   align-items: center;
-  color: #a6adbb;
   font-weight: 700;
+  border-bottom: 2px solid #F4F4F4;
   a {
     text-decoration: none;
   }
@@ -21,7 +22,7 @@ const Logo = styled.a`
   align-items: center;
   margin-right: auto;
   margin-left: 20px;
-  color: #9da4b2;
+  color: ${(props) => props.theme.colors.black};
 `;
 
 const IconContainer = styled.div`

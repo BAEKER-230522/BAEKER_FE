@@ -18,7 +18,7 @@ const LineChart = () => {
   };
   return (
     <S.Wrapper>
-      <Line data={data} width="100px" height="100px" />
+      <Line data={data} width="100px" height="100px"/>
     </S.Wrapper>
   );
 };
