@@ -3,6 +3,9 @@ import { DefaultTheme } from "styled-components";
 const calcRem = (size:number) => `${size / 16}rem`;
 
 export const theme: DefaultTheme = {
+  border: {
+    gray: "#EEEEEE",
+  },
   colors : {
     black: "#000000",
     white: "#FFFFFF",
@@ -11,8 +14,12 @@ export const theme: DefaultTheme = {
     blue: "#1877FF",
     border: "#F4F4F4",
   },
+  borderRadius : {
+    primary : '7px',
+  },
   backgronudColors: {
     white: "#FFFFFF",
+    black: "#000000",
     red: "#F5222D",
     blue: "#1877FF",
     gray: "#EEEEEE",

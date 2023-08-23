@@ -15,7 +15,7 @@ const Slider = ({...props}:IProps) => {
 
   return (
     <S.Container>
-      <S.Title>스터디 최대 인원({props.maxStudyCapacity}/20)</S.Title>
+      <S.Title>스터디 최대 인원 ({props.maxStudyCapacity}/20)</S.Title>
       <S.Slider type="range" onChange={test} min={1} max={20} value={props.maxStudyCapacity} />
       <S.Value>{arr.map((e, idx) => (e === 1 ? <span key={idx}>{idx + 1}</span> : <span key={idx}></span>))}</S.Value>
     </S.Container>

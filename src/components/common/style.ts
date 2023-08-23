@@ -57,8 +57,8 @@ export const Input = styled.input`
   margin-bottom: 50px;
   border-radius: 7px;
   border: 0.6px solid #a6adbb;
-  background-color: transparent;
-  color: white;
+  background-color: ${(props) => props.theme.backgronudColors.white};
+  color: ${(props) => props.theme.colors.black};
   padding-left: 10px;
   outline: none;
 `;
@@ -66,7 +66,7 @@ export const Input = styled.input`
 export const Title = styled.span`
   font-size: 1rem;
   font-weight: 700;
-  color: #a6adbb;
+  color: ${(props) => props.theme.colors.black};
   margin-bottom: 10px;
 `;
 
@@ -90,7 +90,7 @@ const Button = styled.button`
 const StatusContainer = styled.div`
   width: 100%;
   height: 120px;
-  background-color: #2a303c;
+  background-color: ${(props) => props.theme.backgronudColors.white};
   border-radius: 10px;
   display: flex;
   justify-content: space-around;
@@ -105,13 +105,13 @@ const StatusElement = styled.div`
   &:last-child {
     border: none;
   }
-  border-right: 1px solid white;
+  border-right: 1px solid ${(props) => props.theme.backgronudColors.gray};
 `;
 
 const StatusTitle = styled.span`
   font-weight: 600;
   font-size: 1rem;
-  color: #a6adbb;
+  color: ${(props) => props.theme.colors.black};
 `;
 
 const StatusNumber = styled.span`

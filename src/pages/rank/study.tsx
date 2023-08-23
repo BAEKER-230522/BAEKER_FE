@@ -16,7 +16,9 @@ const StudyRank = () => {
   
   return (
     <S.Container>
-      <Board category={[ ["스터디", "name"], ["소개", "about"], ["인원", "capacity"], ["방장", "leader"]]} widthRatio={[1, 2, 1, 1]} data={data.data} type={"study"}/>
+      <S.Wrapper>
+        <Board category={[ ["스터디", "name"], ["소개", "about"], ["인원", "capacity"], ["방장", "leader"]]} widthRatio={[1, 2, 1, 1]} data={data.data} type={"study"}/>
+      </S.Wrapper>
     </S.Container>
   );
 };
@@ -30,7 +32,16 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #2a303c;
+  background-color: ${(props) => props.theme.backgronudColors.white};
 `;
 
-const S = { Container };
+const Wrapper = styled.div`
+  width: 80%;
+  height: 80%;
+  background-color: ${(props) => props.theme.backgronudColors.gray};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const S = { Container, Wrapper };

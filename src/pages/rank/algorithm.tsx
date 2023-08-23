@@ -12,7 +12,9 @@ const AlgorithmRank = () => {
   )
   return (
     <S.Container>
-      <Board category={[["랭킹", "id"], ["이름", "nickname"]]} widthRatio={[1, 1]} data={data.data} type={"member"}/>
+      <S.Wrapper>
+        <Board category={[["랭킹", "id"], ["이름", "nickname"]]} widthRatio={[1, 1]} data={data.data} type={"member"}/>
+      </S.Wrapper>
     </S.Container>
   );
 };
@@ -26,7 +28,16 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #2a303c;
+  background-color: ${(props) => props.theme.backgronudColors.white};
 `;
 
-const S = { Container };
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 80%;
+  background-color: ${(props) => props.theme.backgronudColors.gray};
+`
+
+const S = { Container, Wrapper };

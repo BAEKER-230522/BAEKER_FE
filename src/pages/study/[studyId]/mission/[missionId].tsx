@@ -159,7 +159,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #2a303c;
+  background-color: ${(props) => props.theme.backgronudColors.white};
   
 `;
 
@@ -202,7 +202,6 @@ interface MissionProblemListContainerProps{
 const MissionProblemListContainer = styled.div<MissionProblemListContainerProps>`
   border-radius: 10px;
   display: grid;  
-  background-color : white;
   grid-template-columns: ${props => `repeat(${props.numColumn}, 150px)`};
   margin-bottom : 20px;
   div{
@@ -228,19 +227,18 @@ const Dot = styled.span<ColorProp>`
 
 const MemberSolvingStatusContainer = styled.div`
   border-radius: 10px;
-  background-color: white;
   margin-top : 50px;
 `
 
 const MissionStatusContainer = styled.div`
   display: flex;
   width: 75%;
-  height: 85%;
+  height: 95%;
   border-radius: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: ${(props) => props.theme.backgronudColors.gray};
   overflow-x: scroll;
 `
 
