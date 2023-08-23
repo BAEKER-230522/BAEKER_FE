@@ -34,9 +34,10 @@ const HeaderContainer = styled.div<IRatios>`
   display: flex;
   width: 100%;
   align-items: center;
-  
   border-radius: 5px 5px 0px 0px;
-
+  background-color: ${(props) => props.theme.backgronudColors.gray_2};
+  color : ${(props) => props.theme.colors.black};
+  font-weight: 500;
   height: 70px;
   div {
     text-align: center;
@@ -52,7 +53,8 @@ const ContentContainer = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
-  background-color: #2a303c;
+  background-color: ${(props) => props.theme.backgronudColors.white};
+  color : ${(props) => props.theme.colors.black};
 `;
 
 const ContentWrapper = styled.div<IRatios>`
@@ -60,8 +62,11 @@ const ContentWrapper = styled.div<IRatios>`
   height: 70px;
   display: flex;
   align-items: center;
+  &:hover{
+    background-color: ${(props) => props.theme.backgronudColors.gray_2};
+  }
   &:last-child {
-    border-radius: 0 0 5px 5px;
+
     z-index: 50;
   }
   border-bottom: 0.5px solid #a6adbb;
@@ -77,13 +82,14 @@ const ContentWrapper = styled.div<IRatios>`
 `;
 
 const PaginationContainer = styled.div`
-  width: 40%;
-
+  width: 100%;
+  background-color: ${(props) => props.theme.backgronudColors.white};
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  border-radius: 0px 0px 7px 7px;
 `;
 
 const PaginationElement = styled.span`
