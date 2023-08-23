@@ -14,7 +14,7 @@ import { theme } from "@/style/theme";
 const App = ({ Component, pageProps }: any) => {
   const dispatch = useDispatch()
   const fetchMemberId = async () => {
-    const res = await axios.get('/api/getMemberId');
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/getMemberId`);
     if(res.data.memberId === null){
       dispatch(logout())
     }else{
