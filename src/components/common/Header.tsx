@@ -1,7 +1,5 @@
 import { S } from "./style";
-import DropDown from "../DropDown/index";
 import { MouseEvent } from 'react';
-import { useOncClickIcon } from "@/hooks/useOnClickIcon";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import type { MenuProps } from 'antd';
@@ -12,7 +10,6 @@ import LocalStorage from "@/util/localstorage";
 import { logout } from "@/store/modules/user";
 
 const Header = () => {
-  const { dropdownState, changeDropdownState } = useOncClickIcon();
   const isLogin = useSelector((state:any) => {return state.user.isLogin})
   const dispatch = useDispatch();
   const router = useRouter();
