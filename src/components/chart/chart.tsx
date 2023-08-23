@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Loading from "../Loading/Loading";
 
 interface IDatasets {
-  type: string;
+  type: 'line';
   label: string;
   borderColor: string;
   borderWidth: number;
@@ -59,6 +59,7 @@ const LineChart = ({id, type}:IProps) => {
       ]
     }
     setChartData(CHART_DATA)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoadingMember, isLoadingStudy])
 
   if(chartData === undefined) return <Loading/>
