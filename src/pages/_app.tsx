@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { login, logout } from "@/store/modules/user";
 import { ThemeProvider } from 'styled-components';
 import axios from "axios";
-import { theme } from "@/style/theme";
+import { theme } from "@/styles/theme";
 
 const App = ({ Component, pageProps }: any) => {
   const dispatch = useDispatch()

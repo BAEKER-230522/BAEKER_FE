@@ -10,6 +10,7 @@ import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
 import Loading from "@/components/common/loading/Loading";
 import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
+import { PageContainer } from "@/styles/common.style";
 
 interface LoginProps {
   refreshToken: string;
@@ -81,17 +82,10 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
 
 export default Modify;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+const Container = styled(PageContainer)`
 `;
 
-const FormContainer = styled.form`
+export const FormContainer = styled.form`
   width: 50%;
   height: 90%;
   display: flex;

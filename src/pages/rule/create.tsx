@@ -2,11 +2,12 @@ import styled from "styled-components";
 import { Title } from "@/components/common/style";
 import Input from "@/components/common/input";
 import useInput from "@/hooks/useInput";
-import RadioButtonGroup from "@/components/rule/radioButtonGroup";
+import RadioButtonGroup from "@/components/rule/radio-button-group";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";
 import { toast } from "react-toastify";
+import { PageContainer } from "@/styles/common.style";
 const CreateStudy = () => {
   const [nameValue, setNameValue, nameHandler] = useInput('')  
   const [aboutValue, setAboutValue, aboutHandler] = useInput('')
@@ -70,15 +71,7 @@ const RecordContainer = styled.div`
   margin-bottom: 100px;
 `;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #2a303c;
-  
+const Container = styled(PageContainer)`  
 `;
 
 const FormContainer = styled.form`

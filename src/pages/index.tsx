@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { PageContainer } from "@/styles/common.style";
 
 const Home = () => {
   const onClick = async() => {
@@ -22,14 +23,7 @@ const Home = () => {
 };
 export default Home;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 90vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: cover;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+const Container = styled(PageContainer)`
 `;
 
 const Wrapper = styled.div`

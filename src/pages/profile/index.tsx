@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import useFetchUserStudyList from "@/hooks/queries/useFetchUserStudyList";
 import useFetchUserData from "@/hooks/queries/useFetchUserData";
 import Loading from "@/components/common/loading/Loading";
+import { PageContainer } from "@/styles/common.style";
 
 
 interface LoginProps {
@@ -84,13 +85,7 @@ const Profile = ({ memberId }: LoginProps) => {
 
 export default Profile;
 
-const Container = styled.div`
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+const Container = styled(PageContainer)`
 `;
 
 const InfoContainer = styled.div`

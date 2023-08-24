@@ -7,11 +7,11 @@ import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";
 import Selector from "@/components/common/selector";
 import useMissionEdit from "@/hooks/useMissionEdit";
-// import StartToEndRangeDatePicker from "@/components/Calendar/RangeDatePicker";
 import Board from "@/components/common/board/Board";
 import AddProblemInputBox from "@/components/study/add-problem-button";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "@/components/common/loading/Loading";
+import { PageContainer } from "@/styles/common.style";
 
 const Mission = () => {
   const router = useRouter();
@@ -106,15 +106,7 @@ const Mission = () => {
 
 export default Mission;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #2a303c;
-  
+const Container = styled(PageContainer)`
 `;
 
 const FormContainer = styled.form`

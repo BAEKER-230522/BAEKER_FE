@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ruleApi } from "@/api/ruleApi";
 import AlertModal from "@/components/common/modal/AlertModal";
 import Loading from "@/components/common/loading/Loading";
+import { PageContainer } from "@/styles/common.style";
 
 interface RuleData {
   data: {
@@ -67,14 +68,7 @@ const RuleDetail = () => {
 
 export default RuleDetail;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 95vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #2a303c;
+const Container = styled(PageContainer)`
 `;
 
 const Wrapper = styled.div`

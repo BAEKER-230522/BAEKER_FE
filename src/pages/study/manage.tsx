@@ -8,6 +8,7 @@ import useStudyEdit from "@/hooks/useStudyEdit";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "@/util/parseCookie";
 import useFetchUserData from "@/hooks/queries/useFetchUserData";
+import { PageContainer } from "@/styles/common.style";
 
 interface IParsedCookies {
   refreshToken?: string;
@@ -69,14 +70,7 @@ const CreateStudy = ({userId}:{userId:number}) => {
 
 export default CreateStudy;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+const Container = styled(PageContainer)`
 `;
 
 const FormContainer = styled.form`

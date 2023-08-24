@@ -7,6 +7,7 @@ import { calculateDuration, getTodayDateFormatted} from "../../../../util/date"
 import { studyApi } from "@/api/studyApi";
 import Loading from "@/components/common/loading/Loading";
 import React from "react";
+import { PageContainer } from "@/styles/common.style";
 
 interface IProblemStatusQueryDtos{
   memberId: number;
@@ -152,15 +153,7 @@ const MissionDetail = () => {
 
 export default MissionDetail;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
-  
+const Container = styled(PageContainer)` 
 `;
 
 const SelectorWrapper = styled.div`
