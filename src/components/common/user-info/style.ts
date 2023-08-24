@@ -71,7 +71,7 @@ const Introduce = styled.p`
 const Line = styled.div`
   height: 1px;
   width: 100%;
-  background-color: ${({theme}) => theme.backgronudColor};
+  background-color: ${({theme}) => theme.backgroundColor};
 `;
 
 const InfoContainer = styled.div`

@@ -53,7 +53,7 @@ const ContentContainer = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
-  background-color: ${({theme}) => theme.backgronudColor};
+  background-color: ${({theme}) => theme.backgroundColor};
   color : ${({theme}) => theme.color};
 `;
 
@@ -83,7 +83,7 @@ const ContentWrapper = styled.div<IRatios>`
 
 const PaginationContainer = styled.div`
   width: 100%;
-  background-color: ${({theme}) => theme.backgronudColor};
+  background-color: ${({theme}) => theme.backgroundColor};
   height: 50px;
   display: flex;
   align-items: center;

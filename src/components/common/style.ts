@@ -4,7 +4,7 @@ import { FaMedal } from "react-icons/fa";
 const HeaderContainer = styled.div`
   width: 100%;
   height: 70px;
-  background-color: ${({theme}) => theme.backgronudColor};
+  background-color: ${({theme}) => theme.backgroundColor};
   display: flex;
   align-items: center;
   font-weight: 700;
@@ -57,7 +57,7 @@ export const Input = styled.input`
   margin-bottom: 50px;
   border-radius: 7px;
   border: 0.6px solid #a6adbb;
-  background-color: ${({theme}) => theme.backgronudColor};
+  background-color: ${({theme}) => theme.backgroundColor};
   color: ${({theme}) => theme.color};
   padding-left: 10px;
   outline: none;
@@ -90,7 +90,7 @@ const Button = styled.button`
 const StatusContainer = styled.div`
   width: 100%;
   height: 120px;
-  background-color: ${({theme}) => theme.backgronudColor};
+  background-color: ${({theme}) => theme.backgroundColor};
   border-radius: 10px;
   display: flex;
   justify-content: space-around;

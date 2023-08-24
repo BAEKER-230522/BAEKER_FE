@@ -27,7 +27,7 @@ const TabContainer = styled.div<{ tabState: number }>`
 
 const RecordContainer = styled.div`
   width: 300px;
-  background-color: ${({theme}) => theme.backgronudColor};
+  background-color: ${({theme}) => theme.backgroundColor};
   display: flex;
   flex-direction: column;
   justify-content: center;

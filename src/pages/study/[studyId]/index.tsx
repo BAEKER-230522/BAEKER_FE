@@ -121,7 +121,7 @@ const StudyContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${({theme}) => theme.backgronudColor};
+  background-color: ${({theme}) => theme.backgroundColor};
 `
 
 const RecordContainer = styled.div`

@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   justify-content: center;
   border-radius: 7px;
   padding: 10px;
-  background-color: ${({theme}) => theme.backgronudColor};
+  background-color: ${({theme}) => theme.backgroundColor};
 `;
 
 export const S = {

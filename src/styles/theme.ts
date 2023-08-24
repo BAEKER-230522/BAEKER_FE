@@ -1,7 +1,15 @@
-import { DefaultTheme } from "styled-components";
-
 const lightTheme = {
-  backgronudColor : "#FFFFFF",
+  backgroundColor : "#FFFFFF",
+  color: "#000000",
+  border: "#EEEEEE",
+  borderRadius: '7px',
+  button: "#1877FF",
+  wrapperBgColor : "#F0F2F5",
+  wrapperBgColor_2 : '#f8f9fa',
+}
+
+const darkTheme = {
+  backgroundColor : "#000000",
   color: "#000000",
   border: "#EEEEEE",
   borderRadius: '7px',
@@ -11,7 +19,8 @@ const lightTheme = {
 }
 
 export const theme = {
-  lightTheme
+  lightTheme,
+  darkTheme
 }
 
 // const calcRem = (size:number) => `${size / 16}rem`;
@@ -31,7 +40,7 @@ export const theme = {
 //   borderRadius : {
 //     primary : '7px',
 //   },
-//   backgronudColors: {
+//   backgroundColors: {
 //     white: "#FFFFFF",
 //     black: "#000000",
 //     red: "#F5222D",

@@ -34,7 +34,7 @@ const Button = styled.button`
 const SearchSVG = styled(AiOutlineSearch)`
   width: 30px;
   height: 30px;
-  color: ${({theme}) => theme.backgronudColor};
+  color: ${({theme}) => theme.backgroundColor};
 `;
 
 const CreateButton = styled(Button)`
