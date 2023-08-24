@@ -71,6 +71,7 @@ const CreateStudy = ({userId}:{userId:number}) => {
 export default CreateStudy;
 
 const Container = styled(PageContainer)`
+  height: 95vh;
 `;
 
 const FormContainer = styled.form`
@@ -80,15 +81,15 @@ const FormContainer = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: ${(props) => props.theme.borderRadius.primary};
-  background-color: ${(props) => props.theme.backgronudColors.gray};
+  border-radius: ${({theme}) => theme.borderRadius};
+  background-color: ${({theme}) => theme.wrapperBgColor};
 `
 
 const Button = styled.input`
   width: 40%;
   height: 50px;
   border-radius: 10px;
-  background-color: ${(props) => props.theme.backgronudColors.blue};
+  background-color: ${({theme}) => theme.button};
   color: white;
   font-weight: 500;
   cursor: pointer;

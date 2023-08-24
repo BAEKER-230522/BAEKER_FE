@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   justify-content: center;
   border-radius: 7px;
   padding: 10px;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+  background-color: ${({theme}) => theme.backgronudColor};
 `;
 
 export const S = {

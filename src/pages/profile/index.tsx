@@ -95,12 +95,13 @@ const InfoContainer = styled.div`
   justify-content: center;
 `;
 
+// check
 export const RecordContainer = styled.div`
   width: 80%;
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color : ${(props) => props.theme.backgronudColors.gray};
+  background-color : ${({theme}) => theme.wrapperBgColor_2};
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;

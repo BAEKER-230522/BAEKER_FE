@@ -19,7 +19,7 @@ const ImgContainer = styled.div`
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    background-color: ${(props) => props.theme.backgronudColors.blue};
+    background-color: ${({theme}) => theme.button};
     color: white;
     font-weight: 500;
   }
@@ -31,7 +31,7 @@ const Button = styled.input`
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  background-color: ${(props) => props.theme.backgronudColors.blue};
+  background-color: ${({theme}) => theme.button};
   color: white;
   font-weight: 500;
 `;

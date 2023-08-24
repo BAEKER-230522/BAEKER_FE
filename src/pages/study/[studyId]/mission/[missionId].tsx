@@ -231,7 +231,7 @@ const MissionStatusContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.backgronudColors.gray};
+  background-color: ${({theme}) => theme.wrapperBgColor};
   overflow-x: scroll;
 `
 

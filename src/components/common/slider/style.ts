@@ -10,15 +10,15 @@ const Container = styled.div`
 const Title = styled.span`
   font-size: 1rem;
   font-weight: 700;
-  color: ${(props) => props.theme.colors.black};
+  color: ${({theme}) => theme.color};
   margin-bottom: 20px;
 
 `;
 
 const Slider = styled.input`
-  accent-color: ${(props) => props.theme.backgronudColors.blue};
+  accent-color: ${({theme}) => theme.button};
   transition: 0.3s ease-in-out;
-  background: ${(props) => props.theme.backgronudColors.blue};
+  background: ${({theme}) => theme.button};
   width: 100%;
   margin-bottom: 10px;
   cursor: pointer;
@@ -32,7 +32,7 @@ const Value = styled.div`
   span {
     width: 5%;
     height: 10px;
-    color: ${(props) => props.theme.colors.blue};
+    color: ${({theme}) => theme.button};
   }
 `;
 

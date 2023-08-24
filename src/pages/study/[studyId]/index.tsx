@@ -121,7 +121,7 @@ const StudyContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+  background-color: ${({theme}) => theme.backgronudColor};
 `
 
 const RecordContainer = styled.div`
@@ -129,7 +129,7 @@ const RecordContainer = styled.div`
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color: #f8f9fa;
+  background-color : #f8f9fa;
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;

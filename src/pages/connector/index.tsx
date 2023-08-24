@@ -12,7 +12,6 @@ import { GetServerSideProps } from "next";
 import LocalStorage from "@/util/localstorage";
 import styled from "styled-components";
 import { PageContainer } from "@/styles/common.style";
-// deploy test
 interface LoginProps {
   refreshToken: string;
   memberId: number;
@@ -102,7 +101,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-border-radius: ${(props) => props.theme.borderRadius.primary};
-background-color: ${(props) => props.theme.backgronudColors.gray};
+border-radius: ${({theme}) => theme.borderRadius};
+background-color: ${({theme}) => theme.wrapperBgColor};
 `
 const S = { Container, FormContainer };

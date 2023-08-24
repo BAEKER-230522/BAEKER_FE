@@ -35,8 +35,8 @@ const HeaderContainer = styled.div<IRatios>`
   width: 100%;
   align-items: center;
   border-radius: 5px 5px 0px 0px;
-  background-color: ${(props) => props.theme.backgronudColors.gray_2};
-  color : ${(props) => props.theme.colors.black};
+  background-color: ${({theme}) => theme.wrapperBgColor};
+  color : ${({theme}) => theme.color};
   font-weight: 500;
   height: 70px;
   div {
@@ -53,8 +53,8 @@ const ContentContainer = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
-  color : ${(props) => props.theme.colors.black};
+  background-color: ${({theme}) => theme.backgronudColor};
+  color : ${({theme}) => theme.color};
 `;
 
 const ContentWrapper = styled.div<IRatios>`
@@ -63,7 +63,7 @@ const ContentWrapper = styled.div<IRatios>`
   display: flex;
   align-items: center;
   &:hover{
-    background-color: ${(props) => props.theme.backgronudColors.gray_2};
+    background-color: ${({theme}) => theme.wrapperBgColor};
   }
   &:last-child {
 
@@ -83,7 +83,7 @@ const ContentWrapper = styled.div<IRatios>`
 
 const PaginationContainer = styled.div`
   width: 100%;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+  background-color: ${({theme}) => theme.backgronudColor};
   height: 50px;
   display: flex;
   align-items: center;

@@ -28,16 +28,16 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+  background-color: ${({theme}) => theme.backgronudColor};
 `;
-
+// check
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 80%;
   height: 80%;
-  background-color: ${(props) => props.theme.backgronudColors.gray};
+  background-color: ${({theme}) => theme.wrapperBgColor_2};
 `
 
 const S = { Container, Wrapper };
