@@ -21,6 +21,7 @@ const Rule = () => {
 export default Rule;
 
 const Container = styled(PageContainer)`
+height: 95vh;
 `;
 
 const S = { Container };

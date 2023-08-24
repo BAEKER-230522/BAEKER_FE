@@ -52,7 +52,7 @@ const LineChart = ({id, type}:IProps) => {
         {
           type: "line" as const,
           label: "1주간 문제 푼 현황",
-          borderColor: "rgb(54, 162, 235)",
+          borderColor: '#BB86FC',
           borderWidth: 2,
           data: SOLVED_RECORD,
         }

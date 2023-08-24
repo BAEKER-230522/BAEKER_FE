@@ -4,18 +4,22 @@ const lightTheme = {
   border: "#EEEEEE",
   borderRadius: '7px',
   button: "#1877FF",
-  wrapperBgColor : "#F0F2F5",
+  buttonColor: "#000000",
+  wrapperBgColor : "#EEEEEE",
   wrapperBgColor_2 : '#f8f9fa',
-}
+  wrapperBgColor_3 : '#f8f9fa',
+} 
 
 const darkTheme = {
-  backgroundColor : "#000000",
-  color: "#000000",
-  border: "#EEEEEE",
+  backgroundColor : "#121212",
+  color: "#E1E1E1",
+  border: "#555555",
   borderRadius: '7px',
-  button: "#1877FF",
-  wrapperBgColor : "#F0F2F5",
-  wrapperBgColor_2 : '#f8f9fa',
+  button: "#BB86FC",
+  buttonColor : "#000000",
+  wrapperBgColor : "#1E1E1E",
+  wrapperBgColor_2 : '#1B1B1B',
+  wrapperBgColor_3 : '#383838',
 }
 
 export const theme = {

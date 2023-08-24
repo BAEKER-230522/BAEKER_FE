@@ -20,7 +20,7 @@ const ImgContainer = styled.div`
     border: none;
     cursor: pointer;
     background-color: ${({theme}) => theme.button};
-    color: white;
+    color: ${({theme}) => theme.buttonColor};
     font-weight: 500;
   }
 `;
@@ -32,7 +32,7 @@ const Button = styled.input`
   border: none;
   cursor: pointer;
   background-color: ${({theme}) => theme.button};
-  color: white;
+  color: ${({theme}) => theme.buttonColor};
   font-weight: 500;
 `;
 

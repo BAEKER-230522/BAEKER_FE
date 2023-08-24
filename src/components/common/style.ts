@@ -8,7 +8,7 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   font-weight: 700;
-  border-bottom: 2px solid #F4F4F4;
+  border-bottom: 2px solid ${({theme}) => theme.border};;
   a {
     text-decoration: none;
   }
@@ -57,7 +57,7 @@ export const Input = styled.input`
   margin-bottom: 50px;
   border-radius: 7px;
   border: 0.6px solid #a6adbb;
-  background-color: ${({theme}) => theme.backgroundColor};
+  background-color: ${({theme}) => theme.wrapperBgColor};
   color: ${({theme}) => theme.color};
   padding-left: 10px;
   outline: none;
@@ -85,12 +85,13 @@ const Button = styled.button`
   border-radius: 7px;
   outline: none;
   margin-left: 15px;
+  
 `
 
 const StatusContainer = styled.div`
-  width: 100%;
+  width: 80%;
   height: 120px;
-  background-color: ${({theme}) => theme.backgroundColor};
+  background-color: ${({theme}) => theme.wrapperBgColor_2};
   border-radius: 10px;
   display: flex;
   justify-content: space-around;

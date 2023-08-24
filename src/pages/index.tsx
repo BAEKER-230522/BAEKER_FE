@@ -24,6 +24,7 @@ const Home = () => {
 export default Home;
 
 const Container = styled(PageContainer)`
+  height: 90vh;
 `;
 
 const Wrapper = styled.div`

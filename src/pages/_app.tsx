@@ -25,7 +25,7 @@ const App = ({ Component, pageProps }: any) => {
   fetchMemberId();
   return (
     <React.Fragment>
-      <ThemeProvider theme={theme.darkTheme}>
+      <ThemeProvider theme={theme.lightTheme}>
         <ToastContainer position="top-right" autoClose={1500} />
         <GlobalStyle />
         <Header />

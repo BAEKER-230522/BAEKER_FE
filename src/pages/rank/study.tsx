@@ -38,7 +38,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 80%;
   height: 80%;
-  background-color: ${({theme}) => theme.wrapperBgColor_2};
+  background-color: ${({theme}) => theme.wrapperBgColor};
   display: flex;
   justify-content: center;
   align-items: center;

@@ -6,5 +6,5 @@ export const PageContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${({theme}) => theme.backgroundColors};
+  background-color: ${({theme}) => theme.backgroundColor};
 `;

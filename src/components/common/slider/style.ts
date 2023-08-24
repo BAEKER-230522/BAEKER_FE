@@ -16,9 +16,9 @@ const Title = styled.span`
 `;
 
 const Slider = styled.input`
-  accent-color: ${({theme}) => theme.button};
+  accent-color: ${({theme}) => theme.wrapperBgColor_3};
   transition: 0.3s ease-in-out;
-  background: ${({theme}) => theme.button};
+  background: ${({theme}) => theme.wrapperBgColor_3};
   width: 100%;
   margin-bottom: 10px;
   cursor: pointer;
@@ -32,7 +32,7 @@ const Value = styled.div`
   span {
     width: 5%;
     height: 10px;
-    color: ${({theme}) => theme.button};
+    color: ${({theme}) => theme.color};
   }
 `;
 

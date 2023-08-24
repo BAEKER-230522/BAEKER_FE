@@ -37,7 +37,8 @@ const Wrapper = styled.div`
   align-items: center;
   width: 80%;
   height: 80%;
-  background-color: ${({theme}) => theme.wrapperBgColor_2};
+  border-radius : 7px;
+  background-color: ${({theme}) => theme.wrapperBgColor};
 `
 
 const S = { Container, Wrapper };

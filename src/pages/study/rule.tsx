@@ -9,9 +9,10 @@ import Selector from "@/components/common/selector";
 import useMissionEdit from "@/hooks/useMissionEdit";
 import Board from "@/components/common/board/Board";
 import AddProblemInputBox from "@/components/study/add-problem-button";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Loading from "@/components/common/loading/Loading";
 import { PageContainer } from "@/styles/common.style";
+import StartToEndRangeDatePicker from "@/components/common/calendar/RangeDatePicker";
 
 const Mission = () => {
   const router = useRouter();
@@ -32,11 +33,11 @@ const Mission = () => {
     return state.mission.missionProblemState
   })
 
-  useEffect(() => {
-    setNameValue(String(router.query.name))
-    setAboutValue(String(router.query.about))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // useEffect(() => {
+  //   setNameValue(String(router.query.name))
+  //   setAboutValue(String(router.query.about))
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
@@ -62,7 +63,7 @@ const Mission = () => {
               <Input title={"미션 소개"} size={"100%"} value={aboutValue} onChange={aboutHandler}/>
               <S.SelectorWrapper>
                 <S.Title style={{marginRight: 'auto'}}>미션 기간</S.Title>
-                {/* <StartToEndRangeDatePicker setMissionStartDate={setMissionStartDate} setMissionEndDate={setMissionEndDate}/> */}
+                <StartToEndRangeDatePicker setMissionStartDate={setMissionStartDate} setMissionEndDate={setMissionEndDate}/>
               </S.SelectorWrapper>
             </S.MissionInputInnerWrapper>
           </S.MissionInputLeftContainer>
@@ -89,7 +90,7 @@ const Mission = () => {
               <Input title={"미션 소개"} size={"100%"} value={aboutValue} onChange={aboutHandler}/>
               <S.SelectorWrapper>
                 <S.Title style={{marginRight: 'auto'}}>미션 기간</S.Title>
-                {/* <StartToEndRangeDatePicker setMissionStartDate={setMissionStartDate} setMissionEndDate={setMissionEndDate}/> */}
+                <StartToEndRangeDatePicker setMissionStartDate={setMissionStartDate} setMissionEndDate={setMissionEndDate}/>
               </S.SelectorWrapper>
             </S.MissionInputInnerWrapper>
           </S.MissionInputLeftContainer>
@@ -107,24 +108,26 @@ const Mission = () => {
 export default Mission;
 
 const Container = styled(PageContainer)`
+  height: 95vh;
 `;
 
 const FormContainer = styled.form`
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 90%;
+  background-color: ${({theme}) => theme.wrapperBgColor};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  border-radius: 7px;
 `
 
 const Button = styled.input`
-  width: 40%;
+  width: 30%;
   height: 50px;
   border-radius: 10px;
-  background-color: #661ae6;
-  color: white;
+  background-color: ${({theme}) => theme.button};
+  color: ${({theme}) => theme.buttonColor};
   font-weight: 500;
   cursor: pointer;
   border: none;

@@ -72,6 +72,7 @@ const RecordContainer = styled.div`
 `;
 
 const Container = styled(PageContainer)`  
+height: 95vh;
 `;
 
 const FormContainer = styled.form`
@@ -113,15 +114,14 @@ const StatusContainer = styled.div`
 
 
 const Button = styled.input`
-  width: 40%;
+  width: 30%;
   height: 50px;
   border-radius: 10px;
-  background-color: #661ae6;
-  color: white;
+  background-color: ${({theme}) => theme.button};
+  color: ${({theme}) => theme.buttonColor};
   font-weight: 500;
   cursor: pointer;
   border: none;
-  margin-top : 50px;
 `;
 
 const SelectorWrapper = styled.div`
@@ -131,7 +131,7 @@ const SelectorWrapper = styled.div`
   align-items: start;
   justify-content: start;
   width: 40%;
-  margin-bottom : 50px;
+  margin-bottom : 20px;
 `
 
 const ButtonContainer = styled.div`

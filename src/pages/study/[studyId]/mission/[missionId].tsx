@@ -154,6 +154,7 @@ const MissionDetail = () => {
 export default MissionDetail;
 
 const Container = styled(PageContainer)` 
+  height: 95vh;
 `;
 
 const SelectorWrapper = styled.div`

@@ -15,6 +15,7 @@ export default Home;
 
 
 const Container = styled(PageContainer)`
+  height: 95vh;
 `;
 
 const Wrapper = styled.div`

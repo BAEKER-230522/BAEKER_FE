@@ -35,7 +35,7 @@ const HeaderContainer = styled.div<IRatios>`
   width: 100%;
   align-items: center;
   border-radius: 5px 5px 0px 0px;
-  background-color: ${({theme}) => theme.wrapperBgColor};
+  background-color: ${({theme}) => theme.backgroundColor};
   color : ${({theme}) => theme.color};
   font-weight: 500;
   height: 70px;
@@ -63,7 +63,7 @@ const ContentWrapper = styled.div<IRatios>`
   display: flex;
   align-items: center;
   &:hover{
-    background-color: ${({theme}) => theme.wrapperBgColor};
+    background-color: ${({theme}) => theme.wrapperBgColor_2};
   }
   &:last-child {
 

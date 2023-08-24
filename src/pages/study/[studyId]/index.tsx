@@ -113,6 +113,7 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
 export default StudyDetail;
 
 const Container = styled(PageContainer)`
+  height: 95vh;
 `;
 
 const StudyContainer = styled.div`
@@ -129,7 +130,7 @@ const RecordContainer = styled.div`
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color : #f8f9fa;
+  background-color : ${({theme}) => theme.wrapperBgColor};
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;
@@ -140,17 +141,22 @@ const ContentContainer = styled(RecordContainer)`
   width: 70%;
   height: 70vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
 const ChartContainer = styled.div`
   display: flex;
+  width : 100%;
+  display: flex;
+  justify-content: space-evenly;
   margin-top: 20px;
 `;
 
 const StatusContainer = styled.div`
   display: flex;
+  width: 100%;
+  align-items: center;
   flex-direction: column;
 `;
 
@@ -159,8 +165,8 @@ const Button = styled.input`
   width: 40%;
   height: 50px;
   border-radius: 10px;
-  background-color: #661ae6;
-  color: white;
+  background-color: ${({theme}) => theme.button};
+  color: ${({theme}) => theme.buttonColor};
   font-weight: 500;
   cursor: pointer;
   border: none;

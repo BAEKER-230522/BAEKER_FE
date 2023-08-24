@@ -28,8 +28,8 @@ const StudyInfoContainer = styled.div`
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    background-color: #661ae6;
-    color: white;
+    background-color: ${({theme}) => theme.button};
+    color: ${({theme}) => theme.buttonColor};
   }
 `;
 
@@ -50,8 +50,7 @@ const ButtonWrapper = styled.div`
 `
 
 const SelectBoxContainer = styled.select`
-  width: 40%;
-  
+  width: 40%; 
   height: 50px;
   margin-bottom : 30px;
   background-color: transparent;

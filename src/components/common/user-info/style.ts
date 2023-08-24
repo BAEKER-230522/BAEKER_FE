@@ -41,7 +41,7 @@ const Button = styled.button`
   height: 40px;
   background-color: ${({theme}) => theme.button};
   border-radius: 10px;
-  color: white;
+  color: ${({theme}) => theme.buttonColor};
   font-weight: 600;
   border: none;
   cursor: pointer;
@@ -71,7 +71,7 @@ const Introduce = styled.p`
 const Line = styled.div`
   height: 1px;
   width: 100%;
-  background-color: ${({theme}) => theme.backgroundColor};
+  background-color: ${({theme}) => theme.border};
 `;
 
 const InfoContainer = styled.div`

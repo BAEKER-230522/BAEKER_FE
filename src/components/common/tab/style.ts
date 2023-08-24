@@ -22,12 +22,13 @@ const TabContainer = styled.div<{ tabState: number }>`
     justify-content: center;
     border-bottom: 3px solid white;
     height: 100%;
+    border-bottom : 3px solid ${({theme}) => theme.wrapperBgColor_3};
   }
 `;
 
 const RecordContainer = styled.div`
   width: 300px;
-  background-color: ${({theme}) => theme.backgroundColor};
+  background-color: ${({theme}) => theme.wrapperBgColor_2};
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -86,11 +86,11 @@ const FormContainer = styled.form`
 `
 
 const Button = styled.input`
-  width: 40%;
+  width: 30%;
   height: 50px;
   border-radius: 10px;
   background-color: ${({theme}) => theme.button};
-  color: white;
+  color: ${({theme}) => theme.buttonColor};
   font-weight: 500;
   cursor: pointer;
   border: none;
