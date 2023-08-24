@@ -5,7 +5,7 @@ import { Line } from "react-chartjs-2";
 import { memberApi } from "@/api/memberApi";
 import { studyApi } from "@/api/studyApi";
 import { useEffect, useState } from "react";
-import Loading from "../Loading/Loading";
+import Loading from "../loading/Loading";
 
 interface IDatasets {
   type: 'line';

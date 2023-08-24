@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "@/components/common/Header";
+import Header from "@/components/common/header";
 import { GlobalStyle } from "@/styles/global.styled";
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'

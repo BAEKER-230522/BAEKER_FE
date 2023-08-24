@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Board from "@/components/common/board/Board";
 import { memberApi } from "@/api/memberApi";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/common/loading/Loading";
 
 const AlgorithmRank = () => {
   const {data, isLoading} = memberApi.useGetAllMembersQuery({});

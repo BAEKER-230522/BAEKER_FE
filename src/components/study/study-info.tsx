@@ -2,8 +2,8 @@ import { IMG_URL } from "../../../public/mock";
 import { S } from "./style";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
-import RequestModal from "../common/Modal/RequestModal";
-import Loading from "../Loading/Loading";
+import RequestModal from "../common/modal/RequestModal";
+import Loading from "../common/loading/Loading";
 
 interface IProps{
   isUserStudy: boolean;

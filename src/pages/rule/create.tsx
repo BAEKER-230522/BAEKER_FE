@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Title } from "@/components/common/style";
-import Input from "@/components/common/Input";
+import Input from "@/components/common/input";
 import useInput from "@/hooks/useInput";
 import RadioButtonGroup from "@/components/rule/radioButtonGroup";
 import { useState, useEffect } from "react";

@@ -2,10 +2,10 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { Button, Progress, Space } from 'antd';
 import { useEffect, useState } from "react";
-import AlertModal from "@/components/common/Modal/AlertModal";
+import AlertModal from "@/components/common/modal/AlertModal";
 import { calculateDuration, getTodayDateFormatted} from "../../../../util/date"
 import { studyApi } from "@/api/studyApi";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/common/loading/Loading";
 import React from "react";
 
 interface IProblemStatusQueryDtos{

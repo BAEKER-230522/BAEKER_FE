@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import ModifyImg from "@/components/modify/Img";
-import Input from "@/components/common/Input";
+import Input from "@/components/common/input";
 import ModifyButton from "@/components/modify/button";
 import { memberApi } from "@/api/memberApi";
 import {  useEffect } from "react";
 import {  useRouter } from "next/router";
 import useInput from "@/hooks/useInput";
 import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/common/loading/Loading";
 import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
 

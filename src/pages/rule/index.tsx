@@ -2,7 +2,7 @@ import Board from "@/components/common/board/Board";
 import Search from "@/components/rule/search";
 import styled from "styled-components";
 import { ruleApi } from "@/api/ruleApi";
-import EmptyList from "@/components/EmptyList/EmptyList";
+import EmptyList from "@/components/common/empty/EmptyList";
 
 const Rule = () => {
   const {data, isLoading} = ruleApi.useGetAllRulesQuery({});

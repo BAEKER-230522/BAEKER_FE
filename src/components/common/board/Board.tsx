@@ -3,7 +3,7 @@ import Header from "./Header";
 import Content from "./Content";
 import Pagination from "./Pagination";
 import { usePagination } from "@/hooks/usePagination";
-import EmptyList from "@/components/EmptyList/EmptyList";
+import EmptyList from "@/components/common/empty/EmptyList";
 
 export interface IBoard {
   category?: any;

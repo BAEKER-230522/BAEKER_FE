@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { ruleApi } from "@/api/ruleApi";
-import AlertModal from "@/components/common/Modal/AlertModal";
-import Loading from "@/components/Loading/Loading";
+import AlertModal from "@/components/common/modal/AlertModal";
+import Loading from "@/components/common/loading/Loading";
 
 interface RuleData {
   data: {

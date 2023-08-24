@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, SetStateAction, useState } from 'react';
 import { S } from './style'
-import Loading from '../Loading/Loading';
+import Loading from '../common/loading/Loading';
 
 interface IOption {
   name : string;

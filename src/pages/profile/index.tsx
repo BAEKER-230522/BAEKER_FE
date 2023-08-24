@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import { GetServerSideProps } from 'next'
 import { parseCookies } from '@/util/parseCookie';
-import LineChart from '@/components/chart/chart';
-import UserInfo from "@/components/userInfo/UserInfo";
-import UserSolvedInfo from "@/components/userInfo/UserSolvedInfo";
-import Tab from "@/components/tab/Tab";
-import SolvedRecord from "@/components/tab/SolvedRecord";
+import LineChart from '@/components/common/chart/chart';
+import UserInfo from "@/components/common/user-info/user-info";
+import UserSolvedInfo from "@/components/common/user-info/user-solved-info";
+import Tab from "@/components/common/tab/tab";
+import SolvedRecord from "@/components/common/tab/solved-record";
 import Board from "@/components/common/board/Board";
 import { useSelector } from "react-redux";
 import useFetchUserStudyList from "@/hooks/queries/useFetchUserStudyList";
 import useFetchUserData from "@/hooks/queries/useFetchUserData";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/common/loading/Loading";
 
 
 interface LoginProps {

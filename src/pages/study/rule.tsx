@@ -1,17 +1,17 @@
 import styled from "styled-components";
 import { Title } from "@/components/common/style";
-import Input from "@/components/common/Input";
+import Input from "@/components/common/input";
 import useInput from "@/hooks/useInput";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";
-import Selector from "@/components/common/Selector";
+import Selector from "@/components/common/selector";
 import useMissionEdit from "@/hooks/useMissionEdit";
 // import StartToEndRangeDatePicker from "@/components/Calendar/RangeDatePicker";
 import Board from "@/components/common/board/Board";
-import AddProblemInputBox from "@/components/study/AddProblemInputBox";
+import AddProblemInputBox from "@/components/study/add-problem-button";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/common/loading/Loading";
 
 const Mission = () => {
   const router = useRouter();
