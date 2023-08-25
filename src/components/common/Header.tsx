@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import LocalStorage from "@/util/localstorage";
 import { logout } from "@/store/modules/user";
+import Toggle from "./toggle";
 
 const Header = () => {
   const isLogin = useSelector((state:any) => {return state.user.isLogin})
@@ -90,6 +91,7 @@ const items_2: MenuProps['items'] = [
         <S.Logo>BAEKER</S.Logo>
       </Link>
       <S.IconContainer> 
+        <Toggle/>
         <ConfigProvider theme={{
           token: {
               borderRadius: 7,

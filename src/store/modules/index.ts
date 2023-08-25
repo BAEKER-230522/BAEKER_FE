@@ -6,6 +6,7 @@ import tab from "./tab";
 import modify from "./modify";
 import mission from "./mission";
 import user from "./user";
+import darkmode from "./darkmode";
 import { memberApi } from "@/api/memberApi";
 import { studyApi } from "@/api/studyApi";
 import { ruleApi } from "@/api/ruleApi";
@@ -25,6 +26,7 @@ const reducer = (state: any, action: any) => {
     modify,
     mission,
     user,
+    darkmode,
     [memberApi.reducerPath]: memberApi.reducer,
     [studyApi.reducerPath]: studyApi.reducer,
     [ruleApi.reducerPath]: ruleApi.reducer,

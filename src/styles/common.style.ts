@@ -7,4 +7,5 @@ export const PageContainer = styled.div`
   align-items: center;
   flex-direction: column;
   background-color: ${({theme}) => theme.backgroundColor};
+  transition: background-color 0.2s ease;
 `;

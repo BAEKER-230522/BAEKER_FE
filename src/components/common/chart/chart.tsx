@@ -37,7 +37,6 @@ const LineChart = ({id, type}:IProps) => {
     let RECORD_DATA:any;
     if(type === "study") RECORD_DATA = studyWeeklyProblem
     if(type === "member") RECORD_DATA = userWeeklyProblem
-    console.log(RECORD_DATA, id);
     
     if(!isLoadingMember && !isLoadingStudy && RECORD_DATA !== undefined){
       for(let i=0; i<RECORD_DATA.data.length; i++){

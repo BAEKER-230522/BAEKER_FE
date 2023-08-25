@@ -5,6 +5,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   height: 70px;
   background-color: ${({theme}) => theme.backgroundColor};
+  transition: background-color 0.2s ease;
   display: flex;
   align-items: center;
   font-weight: 700;
@@ -26,7 +27,7 @@ const Logo = styled.a`
 `;
 
 const IconContainer = styled.div`
-  width: 150px;
+  width: 200px;
   height: 50px;
   display: flex;
   justify-content: space-around;
