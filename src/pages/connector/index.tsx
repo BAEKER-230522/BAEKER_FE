@@ -1,17 +1,16 @@
 import ModifyImg from "@/components/modify/Img";
-import Input from "@/components/common/Input";
+import Input from "@/components/common/input";
 import ModifyButton from "@/components/modify/button";
 import { memberApi } from "@/api/memberApi";
 import {  useEffect } from "react";
 import {  useRouter } from "next/router";
 import useInput from "@/hooks/useInput";
 import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/common/loading/Loading";
 import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
 import LocalStorage from "@/util/localstorage";
 import styled from "styled-components";
-// deploy test
 interface LoginProps {
   refreshToken: string;
   memberId: number;
@@ -68,34 +67,37 @@ const Connector = ({memberId, refreshToken}:LoginProps) => {
   }
   
   if(isLoading) return (
-    <S.Container onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
-      <Loading/>
-      <ModifyButton />
+    <S.Container>
+      <S.FormContainer onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
+        <Loading/>
+        <ModifyButton />
+      </S.FormContainer>
     </S.Container>
   )
 
   return (
-    <S.Container onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
-      <ModifyImg userImg={data.data.kakaoProfileImage}/>
-      <Input title={"이름"} size={"25%"} value={nameValue} onChange={onChangeName} />
-      <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={onChangeAbout}/>
-      <Input title={"백준 연동 ID"} size={"25%"} value={baekjoonIdValue} onChange={onChangebaekjoonId}/>
-      <ModifyButton />
+    <S.Container>
+      <S.FormContainer onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
+        <ModifyImg userImg={data.data.kakaoProfileImage}/>
+        <Input title={"이름"} size={"25%"} value={nameValue} onChange={onChangeName} />
+        <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={onChangeAbout}/>
+        <Input title={"백준 연동 ID"} size={"25%"} value={baekjoonIdValue} onChange={onChangebaekjoonId}/>
+        <ModifyButton />
+      </S.FormContainer>
     </S.Container>
   );
 };
 
 export default Connector;
 
-const Container = styled.form`
-  width: 100vw;
-  height: 95vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #2a303c;
-  padding-bottom : 50px;
-`;
-
-const S = { Container };
+const FormContainer = styled.form`
+width: 50%;
+height: 90%;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+border-radius: ${({theme}) => theme.borderRadius};
+background-color: ${({theme}) => theme.wrapperBgColor};
+`
+const S = { Container, FormContainer };

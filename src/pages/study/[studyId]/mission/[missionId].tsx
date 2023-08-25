@@ -2,11 +2,12 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { Button, Progress, Space } from 'antd';
 import { useEffect, useState } from "react";
-import AlertModal from "@/components/common/Modal/AlertModal";
+import AlertModal from "@/components/common/modal/AlertModal";
 import { calculateDuration, getTodayDateFormatted} from "../../../../util/date"
 import { studyApi } from "@/api/studyApi";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/common/loading/Loading";
 import React from "react";
+import { PageContainer } from "@/styles/common.style";
 
 interface IProblemStatusQueryDtos{
   memberId: number;
@@ -152,15 +153,8 @@ const MissionDetail = () => {
 
 export default MissionDetail;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
-  
+const Container = styled(PageContainer)` 
+  height: 95vh;
 `;
 
 const SelectorWrapper = styled.div`
@@ -238,7 +232,7 @@ const MissionStatusContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.backgronudColors.gray};
+  background-color: ${({theme}) => theme.wrapperBgColor};
   overflow-x: scroll;
 `
 

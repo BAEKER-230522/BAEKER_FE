@@ -1,7 +1,7 @@
-import { IMG_URL } from "../../../public/mock";
+import { IMG_URL } from "../../../../public/mock";
 import { S } from "./style";
 import { useRouter } from "next/router";
-import JoinRequestModal from "../common/Modal/JoinRequestModal";
+import JoinRequestModal from "../modal/JoinRequestModal";
 import { useSelector } from "react-redux";
 
 interface IProps {

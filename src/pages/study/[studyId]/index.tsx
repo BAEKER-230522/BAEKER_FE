@@ -1,17 +1,18 @@
 import styled from "styled-components";
-import StudyInfo from "@/components/study/studyInfo";
-import Tab from "@/components/tab/Tab";
+import StudyInfo from "@/components/study/study-info";
+import Tab from "@/components/common/tab/tab";
 import Board from "@/components/common/board/Board";
-import SolvedRecord from "@/components/tab/SolvedRecord";
-import LineChart from "@/components/chart/chart";
+import SolvedRecord from "@/components/common/tab/solved-record";
+import LineChart from "@/components/common/chart/chart";
 import { useSelector } from "react-redux";
-import SolveStatus from "@/components/common/solveStatus";
+import SolveStatus from "@/components/common/solve-status";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/common/loading/Loading";
 import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
 import { useState, useEffect } from "react";
+import { PageContainer } from "@/styles/common.style";
 
 interface IServerSideProp {
   refreshToken: string;
@@ -111,14 +112,8 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
 
 export default StudyDetail;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+const Container = styled(PageContainer)`
+  height: 95vh;
 `;
 
 const StudyContainer = styled.div`
@@ -127,7 +122,7 @@ const StudyContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+  background-color: ${({theme}) => theme.backgroundColor};
 `
 
 const RecordContainer = styled.div`
@@ -135,7 +130,7 @@ const RecordContainer = styled.div`
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color: #f8f9fa;
+  background-color : ${({theme}) => theme.wrapperBgColor};
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;
@@ -146,17 +141,22 @@ const ContentContainer = styled(RecordContainer)`
   width: 70%;
   height: 70vh;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 `;
 
 const ChartContainer = styled.div`
   display: flex;
+  width : 100%;
+  display: flex;
+  justify-content: space-evenly;
   margin-top: 20px;
 `;
 
 const StatusContainer = styled.div`
   display: flex;
+  width: 100%;
+  align-items: center;
   flex-direction: column;
 `;
 
@@ -165,8 +165,8 @@ const Button = styled.input`
   width: 40%;
   height: 50px;
   border-radius: 10px;
-  background-color: #661ae6;
-  color: white;
+  background-color: ${({theme}) => theme.button};
+  color: ${({theme}) => theme.buttonColor};
   font-weight: 500;
   cursor: pointer;
   border: none;

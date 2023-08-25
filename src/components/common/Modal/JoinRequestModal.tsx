@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import { useRouter } from "next/router";
 import { studyApi } from '@/api/studyApi';
-import Selector from '../Selector';
+import Selector from '../selector';
 import { Input } from 'antd';
 import { toast } from 'react-toastify';
-import Loading from '@/components/Loading/Loading';
+import Loading from '@/components/common/loading/Loading';
 const { TextArea } = Input;
 
 

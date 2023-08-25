@@ -1,15 +1,16 @@
 import styled from "styled-components";
 import ModifyImg from "@/components/modify/Img";
-import Input from "@/components/common/Input";
+import Input from "@/components/common/input";
 import ModifyButton from "@/components/modify/button";
 import { memberApi } from "@/api/memberApi";
 import {  useEffect } from "react";
 import {  useRouter } from "next/router";
 import useInput from "@/hooks/useInput";
 import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/common/loading/Loading";
 import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
+import { PageContainer } from "@/styles/common.style";
 
 interface LoginProps {
   refreshToken: string;
@@ -81,25 +82,18 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
 
 export default Modify;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+const Container = styled(PageContainer)`
 `;
 
-const FormContainer = styled.form`
+export const FormContainer = styled.form`
   width: 50%;
   height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: ${(props) => props.theme.borderRadius.primary};
-  background-color: ${(props) => props.theme.backgronudColors.gray};
+  border-radius: ${({theme}) => theme.borderRadius};
+  background-color:  ${({theme}) => theme.wrapperBgColor};
 `
 
 const S = { Container, FormContainer };

@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { Title } from "@/components/common/style";
-import Input from "@/components/common/Input";
+import Input from "@/components/common/input";
 import useInput from "@/hooks/useInput";
-import RadioButtonGroup from "@/components/rule/radioButtonGroup";
+import RadioButtonGroup from "@/components/rule/radio-button-group";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";
 import { toast } from "react-toastify";
+import { PageContainer } from "@/styles/common.style";
 const CreateStudy = () => {
   const [nameValue, setNameValue, nameHandler] = useInput('')  
   const [aboutValue, setAboutValue, aboutHandler] = useInput('')
@@ -63,22 +64,15 @@ const RecordContainer = styled.div`
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color: #f8f9fa;
+  background-color : ${({theme}) => theme.wrapperBgColor};
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 100px;
 `;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #2a303c;
-  
+const Container = styled(PageContainer)`  
+height: 95vh;
 `;
 
 const FormContainer = styled.form`
@@ -120,15 +114,14 @@ const StatusContainer = styled.div`
 
 
 const Button = styled.input`
-  width: 40%;
+  width: 30%;
   height: 50px;
   border-radius: 10px;
-  background-color: #661ae6;
-  color: white;
+  background-color: ${({theme}) => theme.button};
+  color: ${({theme}) => theme.buttonColor};
   font-weight: 500;
   cursor: pointer;
   border: none;
-  margin-top : 50px;
 `;
 
 const SelectorWrapper = styled.div`
@@ -138,7 +131,7 @@ const SelectorWrapper = styled.div`
   align-items: start;
   justify-content: start;
   width: 40%;
-  margin-bottom : 50px;
+  margin-bottom : 20px;
 `
 
 const ButtonContainer = styled.div`

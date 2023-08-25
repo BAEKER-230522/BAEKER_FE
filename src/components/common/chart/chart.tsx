@@ -5,7 +5,7 @@ import { Line } from "react-chartjs-2";
 import { memberApi } from "@/api/memberApi";
 import { studyApi } from "@/api/studyApi";
 import { useEffect, useState } from "react";
-import Loading from "../Loading/Loading";
+import Loading from "../loading/Loading";
 
 interface IDatasets {
   type: 'line';
@@ -37,7 +37,6 @@ const LineChart = ({id, type}:IProps) => {
     let RECORD_DATA:any;
     if(type === "study") RECORD_DATA = studyWeeklyProblem
     if(type === "member") RECORD_DATA = userWeeklyProblem
-    console.log(RECORD_DATA, id);
     
     if(!isLoadingMember && !isLoadingStudy && RECORD_DATA !== undefined){
       for(let i=0; i<RECORD_DATA.data.length; i++){
@@ -52,7 +51,7 @@ const LineChart = ({id, type}:IProps) => {
         {
           type: "line" as const,
           label: "1주간 문제 푼 현황",
-          borderColor: "rgb(54, 162, 235)",
+          borderColor: '#BB86FC',
           borderWidth: 2,
           data: SOLVED_RECORD,
         }

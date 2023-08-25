@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 280px;
   height: 300px;
-  background-color: ${(props) => props.theme.backgronudColors.gray};
+  background-color: ${({theme}) => theme.wrapperBgColor};
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -22,14 +22,14 @@ const Image = styled.img`
 const BigFont = styled.span`
   font-size: 2rem;
   font-weight: 700;
-  color: ${(props) => props.theme.colors.blue};
+  color: ${({theme}) => theme.button};
   margin-bottom: 20px;
 `;
 
 const SmallFont = styled.div`
   font-size: 1.2rem;
   font-weight: 500;
-  color: ${(props) => props.theme.colors.black};
+  color: ${({theme}) => theme.color};
   margin-bottom: 20px;
   margin-left: 3px;
   display: flex;
@@ -39,22 +39,22 @@ const SmallFont = styled.div`
 const Button = styled.button`
   width: 120px;
   height: 40px;
-  background-color: ${(props) => props.theme.backgronudColors.blue};
+  background-color: ${({theme}) => theme.button};
   border-radius: 10px;
-  color: white;
+  color: ${({theme}) => theme.buttonColor};
   font-weight: 600;
   border: none;
   cursor: pointer;
 `;
 
 const Name = styled.div`
-  color: ${(props) => props.theme.colors.black};
+  color: ${({theme}) => theme.color};
   font-size: 1.2rem;
   font-weight: 600;
 `;
 
 const Title = styled.div`
-  color: ${(props) => props.theme.colors.black};
+  color: ${({theme}) => theme.color};
   display: flex;
   justify-content: center;
   font-size: 1.2rem;
@@ -63,7 +63,7 @@ const Title = styled.div`
 `;
 
 const Introduce = styled.p`
-  color: ${(props) => props.theme.colors.black};
+  color: ${({theme}) => theme.color};
   font-size: 1rem;
   font-weight: 600;
 `;
@@ -71,7 +71,7 @@ const Introduce = styled.p`
 const Line = styled.div`
   height: 1px;
   width: 100%;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+  background-color: ${({theme}) => theme.border};
 `;
 
 const InfoContainer = styled.div`

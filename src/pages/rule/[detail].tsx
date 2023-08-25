@@ -1,8 +1,9 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { ruleApi } from "@/api/ruleApi";
-import AlertModal from "@/components/common/Modal/AlertModal";
-import Loading from "@/components/Loading/Loading";
+import AlertModal from "@/components/common/modal/AlertModal";
+import Loading from "@/components/common/loading/Loading";
+import { PageContainer } from "@/styles/common.style";
 
 interface RuleData {
   data: {
@@ -67,14 +68,8 @@ const RuleDetail = () => {
 
 export default RuleDetail;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 95vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: #2a303c;
+const Container = styled(PageContainer)`
+height: 95vh;
 `;
 
 const Wrapper = styled.div`
@@ -85,19 +80,19 @@ const Wrapper = styled.div`
   padding: 20px;
   width: 30%;
   height: 60%;
-  background-color: white;
+  background-color: ${({theme}) => theme.wrapperBgColor_3};
   border-radius: 10px;
 `;
 
 const Title = styled.span`
   font-weight: 700;
   font-size: 1.5rem;
-  color: #a6adbb;
+  color: ${({theme}) => theme.color};
 `;
 
 const Content = styled.span`
   font-size: 1.2rem;
-  color: #2a303c;
+  color: ${({theme}) => theme.color};
   margin-top: 10px;
 `;
 
@@ -119,8 +114,8 @@ const Button = styled.button`
   width: 31%;
   height: 40px;
   border-radius: 5px;
-  background-color: #661ae6;
-  color: white;
+  background-color: ${({theme}) => theme.button};
+  color: ${({theme}) => theme.buttonColor};
   font-weight: 700;
   border: none;
   cursor: pointer;

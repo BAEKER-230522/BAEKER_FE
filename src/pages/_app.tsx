@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "@/components/common/Header";
+import Header from "@/components/common/header";
 import { GlobalStyle } from "@/styles/global.styled";
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -9,9 +9,13 @@ import { useDispatch } from "react-redux";
 import { login, logout } from "@/store/modules/user";
 import { ThemeProvider } from 'styled-components';
 import axios from "axios";
-import { theme } from "@/style/theme";
+import { theme } from "@/styles/theme";
+import LocalStorage from "@/util/localstorage";
+import { useSelector } from "react-redux";
+
 
 const App = ({ Component, pageProps }: any) => {
+  const isDarkMode = JSON.parse(useSelector((state:any) => {return state.darkmode.isDarkMode}))
   const dispatch = useDispatch()
   const fetchMemberId = async () => {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/getMemberId`);
@@ -25,7 +29,7 @@ const App = ({ Component, pageProps }: any) => {
   fetchMemberId();
   return (
     <React.Fragment>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={isDarkMode ? theme.darkTheme : theme.lightTheme}>
         <ToastContainer position="top-right" autoClose={1500} />
         <GlobalStyle />
         <Header />

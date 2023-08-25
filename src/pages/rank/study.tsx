@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Board from "@/components/common/board/Board";
 import { studyApi } from "@/api/studyApi";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/common/loading/Loading";
 
 const StudyRank = () => {
   const {data, isLoading} = studyApi.useGetAllStudyListQuery({})
@@ -32,13 +32,13 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+  background-color: ${({theme}) => theme.backgroundColor};
 `;
-
+// check
 const Wrapper = styled.div`
   width: 80%;
   height: 80%;
-  background-color: ${(props) => props.theme.backgronudColors.gray};
+  background-color: ${({theme}) => theme.wrapperBgColor};
   display: flex;
   justify-content: center;
   align-items: center;

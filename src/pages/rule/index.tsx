@@ -2,7 +2,8 @@ import Board from "@/components/common/board/Board";
 import Search from "@/components/rule/search";
 import styled from "styled-components";
 import { ruleApi } from "@/api/ruleApi";
-import EmptyList from "@/components/EmptyList/EmptyList";
+import EmptyList from "@/components/common/empty/EmptyList";
+import { PageContainer } from "@/styles/common.style";
 
 const Rule = () => {
   const {data, isLoading} = ruleApi.useGetAllRulesQuery({});
@@ -19,14 +20,8 @@ const Rule = () => {
 
 export default Rule;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 95vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+const Container = styled(PageContainer)`
+height: 95vh;
 `;
 
 const S = { Container };

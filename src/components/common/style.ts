@@ -4,11 +4,12 @@ import { FaMedal } from "react-icons/fa";
 const HeaderContainer = styled.div`
   width: 100%;
   height: 70px;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+  background-color: ${({theme}) => theme.backgroundColor};
+  transition: background-color 0.2s ease;
   display: flex;
   align-items: center;
   font-weight: 700;
-  border-bottom: 2px solid #F4F4F4;
+  border-bottom: 2px solid ${({theme}) => theme.border};;
   a {
     text-decoration: none;
   }
@@ -22,11 +23,11 @@ const Logo = styled.a`
   align-items: center;
   margin-right: auto;
   margin-left: 20px;
-  color: ${(props) => props.theme.colors.black};
+  color: ${({theme}) => theme.color};
 `;
 
 const IconContainer = styled.div`
-  width: 150px;
+  width: 200px;
   height: 50px;
   display: flex;
   justify-content: space-around;
@@ -57,8 +58,8 @@ export const Input = styled.input`
   margin-bottom: 50px;
   border-radius: 7px;
   border: 0.6px solid #a6adbb;
-  background-color: ${(props) => props.theme.backgronudColors.white};
-  color: ${(props) => props.theme.colors.black};
+  background-color: ${({theme}) => theme.wrapperBgColor};
+  color: ${({theme}) => theme.color};
   padding-left: 10px;
   outline: none;
 `;
@@ -66,7 +67,7 @@ export const Input = styled.input`
 export const Title = styled.span`
   font-size: 1rem;
   font-weight: 700;
-  color: ${(props) => props.theme.colors.black};
+  color: ${({theme}) => theme.color};
   margin-bottom: 10px;
 `;
 
@@ -85,12 +86,13 @@ const Button = styled.button`
   border-radius: 7px;
   outline: none;
   margin-left: 15px;
+  
 `
 
 const StatusContainer = styled.div`
-  width: 100%;
+  width: 80%;
   height: 120px;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+  background-color: ${({theme}) => theme.wrapperBgColor_2};
   border-radius: 10px;
   display: flex;
   justify-content: space-around;
@@ -105,13 +107,13 @@ const StatusElement = styled.div`
   &:last-child {
     border: none;
   }
-  border-right: 1px solid ${(props) => props.theme.backgronudColors.gray};
+  border-right: 1px solid ${({theme}) => theme.wrapperBgColor};
 `;
 
 const StatusTitle = styled.span`
   font-weight: 600;
   font-size: 1rem;
-  color: ${(props) => props.theme.colors.black};
+  color: ${({theme}) => theme.color};
 `;
 
 const StatusNumber = styled.span`

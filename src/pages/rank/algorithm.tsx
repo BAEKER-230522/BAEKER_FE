@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Board from "@/components/common/board/Board";
 import { memberApi } from "@/api/memberApi";
-import Loading from "@/components/Loading/Loading";
+import Loading from "@/components/common/loading/Loading";
 
 const AlgorithmRank = () => {
   const {data, isLoading} = memberApi.useGetAllMembersQuery({});
@@ -28,16 +28,17 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+  background-color: ${({theme}) => theme.backgroundColor};
 `;
-
+// check
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 80%;
   height: 80%;
-  background-color: ${(props) => props.theme.backgronudColors.gray};
+  border-radius : 7px;
+  background-color: ${({theme}) => theme.wrapperBgColor};
 `
 
 const S = { Container, Wrapper };

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import Input from "@/components/common/Input";
-import Slider from "@/components/slider/slider";
+import Input from "@/components/common/input";
+import Slider from "@/components/common/slider/slider";
 import useInput from "@/hooks/useInput";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -8,6 +8,7 @@ import useStudyEdit from "@/hooks/useStudyEdit";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "@/util/parseCookie";
 import useFetchUserData from "@/hooks/queries/useFetchUserData";
+import { PageContainer } from "@/styles/common.style";
 
 interface IParsedCookies {
   refreshToken?: string;
@@ -69,14 +70,8 @@ const CreateStudy = ({userId}:{userId:number}) => {
 
 export default CreateStudy;
 
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: ${(props) => props.theme.backgronudColors.white};
+const Container = styled(PageContainer)`
+  height: 95vh;
 `;
 
 const FormContainer = styled.form`
@@ -86,16 +81,16 @@ const FormContainer = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: ${(props) => props.theme.borderRadius.primary};
-  background-color: ${(props) => props.theme.backgronudColors.gray};
+  border-radius: ${({theme}) => theme.borderRadius};
+  background-color: ${({theme}) => theme.wrapperBgColor};
 `
 
 const Button = styled.input`
-  width: 40%;
+  width: 30%;
   height: 50px;
   border-radius: 10px;
-  background-color: ${(props) => props.theme.backgronudColors.blue};
-  color: white;
+  background-color: ${({theme}) => theme.button};
+  color: ${({theme}) => theme.buttonColor};
   font-weight: 500;
   cursor: pointer;
   border: none;
