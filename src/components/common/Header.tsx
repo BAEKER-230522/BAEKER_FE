@@ -28,8 +28,6 @@ const Header = () => {
     router.push('/');
   }
 
-  
-
 const items_1: MenuProps['items'] = [
   {
     key: '1',
