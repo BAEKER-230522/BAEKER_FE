@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   width: 280px;
   height: 300px;
-  background-color: ${({theme}) => theme.wrapperBgColor};
+  background-color: ${({theme}) => theme.bg_element2};
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -22,14 +22,14 @@ const Image = styled.img`
 const BigFont = styled.span`
   font-size: 2rem;
   font-weight: 700;
-  color: ${({theme}) => theme.button};
+  color: ${({theme}) => theme.bg_element4};
   margin-bottom: 20px;
 `;
 
 const SmallFont = styled.div`
   font-size: 1.2rem;
   font-weight: 500;
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
   margin-bottom: 20px;
   margin-left: 3px;
   display: flex;
@@ -39,22 +39,22 @@ const SmallFont = styled.div`
 const Button = styled.button`
   width: 120px;
   height: 40px;
-  background-color: ${({theme}) => theme.button};
+  background-color: ${({theme}) => theme.bg_element4};
   border-radius: 10px;
-  color: ${({theme}) => theme.buttonColor};
+  color: ${({theme}) => theme.text2};
   font-weight: 600;
   border: none;
   cursor: pointer;
 `;
 
 const Name = styled.div`
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
   font-size: 1.2rem;
   font-weight: 600;
 `;
 
 const Title = styled.div`
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
   display: flex;
   justify-content: center;
   font-size: 1.2rem;
@@ -63,7 +63,7 @@ const Title = styled.div`
 `;
 
 const Introduce = styled.p`
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
   font-size: 1rem;
   font-weight: 600;
 `;

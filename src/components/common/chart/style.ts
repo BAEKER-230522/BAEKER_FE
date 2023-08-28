@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   justify-content: center;
   border-radius: 7px;
   padding: 10px;
-  background-color: ${({theme}) => theme.wrapperBgColor_2};
+  background-color: ${({theme}) => theme.bg_element3};
 `;
 
 export const S = {

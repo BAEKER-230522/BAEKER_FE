@@ -82,15 +82,15 @@ const FormContainer = styled.form`
   justify-content: center;
   align-items: center;
   border-radius: ${({theme}) => theme.borderRadius};
-  background-color: ${({theme}) => theme.wrapperBgColor};
+  background-color: ${({theme}) => theme.bg_element2};
 `
 
 const Button = styled.input`
   width: 30%;
   height: 50px;
   border-radius: 10px;
-  background-color: ${({theme}) => theme.button};
-  color: ${({theme}) => theme.buttonColor};
+  background-color: ${({theme}) => theme.bg_element4};
+  color: ${({theme}) => theme.text2};
   font-weight: 500;
   cursor: pointer;
   border: none;

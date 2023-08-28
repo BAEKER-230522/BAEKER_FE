@@ -80,19 +80,19 @@ const Wrapper = styled.div`
   padding: 20px;
   width: 30%;
   height: 60%;
-  background-color: ${({theme}) => theme.wrapperBgColor_3};
+  background-color: ${({theme}) => theme.bg_element3};
   border-radius: 10px;
 `;
 
 const Title = styled.span`
   font-weight: 700;
   font-size: 1.5rem;
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
 `;
 
 const Content = styled.span`
   font-size: 1.2rem;
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
   margin-top: 10px;
 `;
 
@@ -114,8 +114,8 @@ const Button = styled.button`
   width: 31%;
   height: 40px;
   border-radius: 5px;
-  background-color: ${({theme}) => theme.button};
-  color: ${({theme}) => theme.buttonColor};
+  background-color: ${({theme}) => theme.bg_element4};
+  color: ${({theme}) => theme.text2};
   font-weight: 700;
   border: none;
   cursor: pointer;

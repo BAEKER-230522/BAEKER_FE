@@ -4,7 +4,7 @@ const TabContainer = styled.div<{ tabState: number }>`
   display: flex;
   height: 20px;
   width: 500px;
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
   justify-content: space-around;
   align-items: center;
   margin-bottom: 40px;
@@ -22,13 +22,13 @@ const TabContainer = styled.div<{ tabState: number }>`
     justify-content: center;
     border-bottom: 3px solid white;
     height: 100%;
-    border-bottom : 3px solid ${({theme}) => theme.wrapperBgColor_3};
+    border-bottom : 3px solid ${({theme}) => theme.bg_element3};
   }
 `;
 
 const RecordContainer = styled.div`
   width: 300px;
-  background-color: ${({theme}) => theme.wrapperBgColor_2};
+  background-color: ${({theme}) => theme.bg_element3};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,7 +40,7 @@ const RecordWrapper = styled.div`
   display: flex;
   width: 100%;
   height: 100px;
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
 
   &:nth-child(2) {
     border-bottom: 0.5px solid ${({theme}) => theme.border};
@@ -58,7 +58,7 @@ const RecordElement = styled.div`
   span {
     font-size: 1.3rem;
     margin-bottom: 10px;
-    color: ${({theme}) => theme.color};
+    color: ${({theme}) => theme.text1};
   }
 
   div {
@@ -67,7 +67,7 @@ const RecordElement = styled.div`
 `;
 
 const BigFont = styled.div`
-    color: ${({theme}) => theme.color};
+    color: ${({theme}) => theme.text1};
     font-size: 2rem;
     font-weight: 600;
 `
@@ -75,7 +75,7 @@ const BigFont = styled.div`
 const SmallFont = styled.div`
   display: flex;
   align-items: center;
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
   font-size: 1rem;
   margin-left: 2px;
 

@@ -35,8 +35,8 @@ const HeaderContainer = styled.div<IRatios>`
   width: 100%;
   align-items: center;
   border-radius: 5px 5px 0px 0px;
-  background-color: ${({theme}) => theme.backgroundColor};
-  color : ${({theme}) => theme.color};
+  background-color: ${({theme}) => theme.bg_element};
+  color : ${({theme}) => theme.text1};
   font-weight: 500;
   height: 70px;
   div {
@@ -53,8 +53,8 @@ const ContentContainer = styled.div`
   width: 100%;
   align-items: center;
   flex-direction: column;
-  background-color: ${({theme}) => theme.backgroundColor};
-  color : ${({theme}) => theme.color};
+  background-color: ${({theme}) => theme.bg_element};
+  color : ${({theme}) => theme.text1};
 `;
 
 const ContentWrapper = styled.div<IRatios>`
@@ -63,7 +63,7 @@ const ContentWrapper = styled.div<IRatios>`
   display: flex;
   align-items: center;
   &:hover{
-    background-color: ${({theme}) => theme.wrapperBgColor_2};
+    background-color: ${({theme}) => theme.bg_element3};
   }
   &:last-child {
 
@@ -83,7 +83,7 @@ const ContentWrapper = styled.div<IRatios>`
 
 const PaginationContainer = styled.div`
   width: 100%;
-  background-color: ${({theme}) => theme.backgroundColor};
+  background-color: ${({theme}) => theme.bg_element};
   height: 50px;
   display: flex;
   align-items: center;

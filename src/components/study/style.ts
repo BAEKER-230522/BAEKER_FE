@@ -28,8 +28,8 @@ const StudyInfoContainer = styled.div`
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    background-color: ${({theme}) => theme.button};
-    color: ${({theme}) => theme.buttonColor};
+    background-color: ${({theme}) => theme.bg_element4};
+    color: ${({theme}) => theme.text2};
   }
 `;
 

@@ -1,25 +1,28 @@
+
 const lightTheme = {
-  backgroundColor : "#FFFFFF",
-  color: "#000000",
+  bg_element : "#FFFFFF",
+  bg_element2 : "#EEEEEE",
+  bg_element3 : '#f8f9fa',
+  bg_element4: "#1877FF", // (버튼)
+  text1: "#000000", 
+  text2: "#FFFFFF", // (버튼)
   border: "#EEEEEE",
   borderRadius: '7px',
-  button: "#1877FF",
-  buttonColor: "#000000",
-  wrapperBgColor : "#EEEEEE",
-  wrapperBgColor_2 : '#f8f9fa',
-  wrapperBgColor_3 : '#f8f9fa',
-} 
+  
+  
+}   
 
 const darkTheme = {
-  backgroundColor : "#121212",
-  color: "#E1E1E1",
+  bg_element : "#121212",
+  bg_element2 : "#1E1E1E",
+  bg_element3 : '#1B1B1B',
+  bg_element4: "#BB86FC",
+  text1: "#E1E1E1",
+  text2 : "#000000",
   border: "#555555",
   borderRadius: '7px',
-  button: "#BB86FC",
-  buttonColor : "#000000",
-  wrapperBgColor : "#1E1E1E",
-  wrapperBgColor_2 : '#1B1B1B',
-  wrapperBgColor_3 : '#383838',
+  
+  
 }
 
 export const theme = {
@@ -44,7 +47,7 @@ export const theme = {
 //   borderRadius : {
 //     primary : '7px',
 //   },
-//   backgroundColors: {
+//   bg_elements: {
 //     white: "#FFFFFF",
 //     black: "#000000",
 //     red: "#F5222D",

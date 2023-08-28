@@ -122,7 +122,7 @@ const StudyContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${({theme}) => theme.backgroundColor};
+  background-color: ${({theme}) => theme.bg_element};
 `
 
 const RecordContainer = styled.div`
@@ -130,7 +130,7 @@ const RecordContainer = styled.div`
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color : ${({theme}) => theme.wrapperBgColor};
+  background-color : ${({theme}) => theme.bg_element2};
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;
@@ -165,8 +165,8 @@ const Button = styled.input`
   width: 40%;
   height: 50px;
   border-radius: 10px;
-  background-color: ${({theme}) => theme.button};
-  color: ${({theme}) => theme.buttonColor};
+  background-color: ${({theme}) => theme.bg_element4};
+  color: ${({theme}) => theme.text2};
   font-weight: 500;
   cursor: pointer;
   border: none;

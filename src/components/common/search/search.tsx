@@ -72,7 +72,7 @@ const Input = styled.input`
   padding: 0px 10px;
   font-size: 1rem;
   font-weight: 500;
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
   outline: none;
 `;
 
@@ -83,7 +83,7 @@ const SearchSVG = styled(AiOutlineSearch)`
   left: 10px;
   width: 30px;
   height: 30px;
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
 `;
 
 const S = { Container, SearchSVG, Input }

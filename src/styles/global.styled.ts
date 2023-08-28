@@ -5,6 +5,6 @@ export const GlobalStyle = createGlobalStyle`
   ${reset};
 
   body {
-    background: ${({theme} : {theme: any}) => theme.backgroundColor};
+    background: ${({theme} : {theme: any}) => theme.bg_element};
   }
 `;

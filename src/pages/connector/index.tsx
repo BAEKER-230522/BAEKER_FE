@@ -98,6 +98,6 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 border-radius: ${({theme}) => theme.borderRadius};
-background-color: ${({theme}) => theme.wrapperBgColor};
+background-color: ${({theme}) => theme.bg_element2};
 `
 const S = { Container, FormContainer };

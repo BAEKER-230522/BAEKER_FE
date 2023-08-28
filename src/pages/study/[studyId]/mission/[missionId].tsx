@@ -232,7 +232,7 @@ const MissionStatusContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${({theme}) => theme.wrapperBgColor};
+  background-color: ${({theme}) => theme.bg_element2};
   overflow-x: scroll;
 `
 

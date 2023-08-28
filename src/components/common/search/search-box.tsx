@@ -115,8 +115,8 @@ const Container = styled.div`
   transform: translate(-50%, 0%);
   width: 100%;
   max-height: 300px;
-  background-color: ${({theme}) => theme.wrapperBgColor_3};
-  color: ${({theme}) => theme.color};
+  background-color: ${({theme}) => theme.bg_element3};
+  color: ${({theme}) => theme.text1};
   border-radius: 7px;
   padding : 1rem;
 `
@@ -134,7 +134,7 @@ const Li = styled.li`
   font-weight: 400;
   width : 100%;
   &:hover{
-    background-color: ${({theme}) => theme.wrapperBgColor};
+    background-color: ${({theme}) => theme.bg_element2};
   }
   cursor : pointer;
   display: flex;

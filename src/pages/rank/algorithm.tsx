@@ -29,7 +29,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${({theme}) => theme.backgroundColor};
+  background-color: ${({theme}) => theme.bg_element};
 `;
 // check
 const Wrapper = styled.div`
@@ -39,7 +39,7 @@ const Wrapper = styled.div`
   width: 80%;
   height: 80%;
   border-radius : 7px;
-  background-color: ${({theme}) => theme.wrapperBgColor};
+  background-color: ${({theme}) => theme.bg_element2};
 `
 
 const S = { Container, Wrapper };

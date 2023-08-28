@@ -102,7 +102,7 @@ export const RecordContainer = styled.div`
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color : ${({theme}) => theme.wrapperBgColor};
+  background-color : ${({theme}) => theme.bg_element2};
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;

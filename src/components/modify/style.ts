@@ -19,8 +19,8 @@ const ImgContainer = styled.div`
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    background-color: ${({theme}) => theme.button};
-    color: ${({theme}) => theme.buttonColor};
+    background-color: ${({theme}) => theme.bg_element4};
+    color: ${({theme}) => theme.text2};
     font-weight: 500;
   }
 `;
@@ -31,8 +31,8 @@ const Button = styled.input`
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  background-color: ${({theme}) => theme.button};
-  color: ${({theme}) => theme.buttonColor};
+  background-color: ${({theme}) => theme.bg_element4};
+  color: ${({theme}) => theme.text2};
   font-weight: 500;
 `;
 

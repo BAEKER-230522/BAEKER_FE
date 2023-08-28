@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  background-color: ${({theme}) => theme.backgroundColor};
+  background-color: ${({theme}) => theme.bg_element};
   width: 80%;
   height:200px;
   border-radius: 10px;
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
   font-size: 3rem;
   font-weight : 600;
   line-height: 200px;

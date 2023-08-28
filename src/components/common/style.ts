@@ -26,7 +26,7 @@ const Logo = styled.a`
   align-items: center;
   margin-right: auto;
   margin-left: 20px;
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
 `;
 
 const IconContainer = styled.div`
@@ -61,8 +61,8 @@ export const Input = styled.input`
   margin-bottom: 50px;
   border-radius: 7px;
   border: 0.6px solid #a6adbb;
-  background-color: ${({theme}) => theme.wrapperBgColor};
-  color: ${({theme}) => theme.color};
+  background-color: ${({theme}) => theme.bg_element2};
+  color: ${({theme}) => theme.text1};
   padding-left: 10px;
   outline: none;
 `;
@@ -70,7 +70,7 @@ export const Input = styled.input`
 export const Title = styled.span`
   font-size: 1rem;
   font-weight: 700;
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
   margin-bottom: 10px;
 `;
 
@@ -95,7 +95,7 @@ const Button = styled.button`
 const StatusContainer = styled.div`
   width: 80%;
   height: 120px;
-  background-color: ${({theme}) => theme.wrapperBgColor_2};
+  background-color: ${({theme}) => theme.bg_element3};
   border-radius: 10px;
   display: flex;
   justify-content: space-around;
@@ -110,13 +110,13 @@ const StatusElement = styled.div`
   &:last-child {
     border: none;
   }
-  border-right: 1px solid ${({theme}) => theme.wrapperBgColor};
+  border-right: 1px solid ${({theme}) => theme.bg_element2};
 `;
 
 const StatusTitle = styled.span`
   font-weight: 600;
   font-size: 1rem;
-  color: ${({theme}) => theme.color};
+  color: ${({theme}) => theme.text1};
 `;
 
 const StatusNumber = styled.span`
