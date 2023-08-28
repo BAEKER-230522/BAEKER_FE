@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "@/styles/theme";
 
 const ImgContainer = styled.div`
   display: flex;
@@ -19,8 +20,8 @@ const ImgContainer = styled.div`
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    background-color: ${({theme}) => theme.button};
-    color: ${({theme}) => theme.buttonColor};
+    background-color: ${themedPalette.bg_element4};
+    color: ${themedPalette.text2};
     font-weight: 500;
   }
 `;
@@ -31,8 +32,8 @@ const Button = styled.input`
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  background-color: ${({theme}) => theme.button};
-  color: ${({theme}) => theme.buttonColor};
+  background-color: ${themedPalette.bg_element4};
+  color: ${themedPalette.text2};
   font-weight: 500;
 `;
 

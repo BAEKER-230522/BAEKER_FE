@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "@/styles/theme";
 import LineChart from "@/components/common/chart/chart";
 import UserInfo from "@/components/common/user-info/user-info";
 import UserSolvedInfo from "@/components/common/user-info/user-solved-info";
@@ -112,7 +113,7 @@ export const RecordContainer = styled.div`
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color : ${({theme}) => theme.wrapperBgColor};
+  background-color : ${themedPalette.bg_element2};
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;

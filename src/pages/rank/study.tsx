@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "@/styles/theme";
 import Board from "@/components/common/board/Board";
 import { studyApi } from "@/api/studyApi";
 import Loading from "@/components/common/loading/Loading";
@@ -32,13 +33,13 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${({theme}) => theme.backgroundColor};
+  background-color: ${themedPalette.bg_element};
 `;
 // check
 const Wrapper = styled.div`
   width: 80%;
   height: 80%;
-  background-color: ${({theme}) => theme.wrapperBgColor};
+  background-color: ${themedPalette.bg_element2};
   display: flex;
   justify-content: center;
   align-items: center;

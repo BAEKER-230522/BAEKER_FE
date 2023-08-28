@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "@/styles/theme";
 import { Title } from "@/components/common/style";
 import Input from "@/components/common/input";
 import useInput from "@/hooks/useInput";
@@ -114,7 +115,7 @@ const Container = styled(PageContainer)`
 const FormContainer = styled.form`
   width: 80%;
   height: 90%;
-  background-color: ${({theme}) => theme.wrapperBgColor};
+  background-color: ${themedPalette.bg_element2};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -126,8 +127,8 @@ const Button = styled.input`
   width: 30%;
   height: 50px;
   border-radius: 10px;
-  background-color: ${({theme}) => theme.button};
-  color: ${({theme}) => theme.buttonColor};
+  background-color: ${themedPalette.bg_element4};
+  color: ${themedPalette.text2};
   font-weight: 500;
   cursor: pointer;
   border: none;

@@ -7,15 +7,11 @@ import wrapper from "@/store";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { login, logout } from "@/store/modules/user";
-import { ThemeProvider } from 'styled-components';
 import axios from "axios";
-import { theme } from "@/styles/theme";
-import LocalStorage from "@/util/localstorage";
-import { useSelector } from "react-redux";
 
 
 const App = ({ Component, pageProps }: any) => {
-  const isDarkMode = JSON.parse(useSelector((state:any) => {return state.darkmode.isDarkMode}))
+
   const dispatch = useDispatch()
   const fetchMemberId = async () => {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/getMemberId`);
@@ -29,12 +25,10 @@ const App = ({ Component, pageProps }: any) => {
   fetchMemberId();
   return (
     <React.Fragment>
-      <ThemeProvider theme={isDarkMode ? theme.darkTheme : theme.lightTheme}>
-        <ToastContainer position="top-right" autoClose={1500} />
-        <GlobalStyle />
-        <Header />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ToastContainer position="top-right" autoClose={1500} />
+      <GlobalStyle />
+      <Header />
+      <Component {...pageProps} />
     </React.Fragment>
   );
 };

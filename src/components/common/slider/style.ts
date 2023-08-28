@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "@/styles/theme";
 
 const Container = styled.div`
   display: flex;
@@ -10,15 +11,15 @@ const Container = styled.div`
 const Title = styled.span`
   font-size: 1rem;
   font-weight: 700;
-  color: ${({theme}) => theme.color};
+  color: ${themedPalette.text1};
   margin-bottom: 20px;
 
 `;
 
 const Slider = styled.input`
-  accent-color: ${({theme}) => theme.wrapperBgColor_3};
+  accent-color: ${themedPalette.bg_element3};
   transition: 0.3s ease-in-out;
-  background: ${({theme}) => theme.wrapperBgColor_3};
+  background: ${themedPalette.bg_element3};
   width: 100%;
   margin-bottom: 10px;
   cursor: pointer;
@@ -32,7 +33,7 @@ const Value = styled.div`
   span {
     width: 5%;
     height: 10px;
-    color: ${({theme}) => theme.color};
+    color: ${themedPalette.text1};
   }
 `;
 

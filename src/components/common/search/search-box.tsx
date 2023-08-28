@@ -3,6 +3,7 @@ import Loading from "../loading/Loading";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
+import { themedPalette } from "@/styles/theme";
 
 interface IMember {
   nickname: string;
@@ -115,15 +116,15 @@ const Container = styled.div`
   transform: translate(-50%, 0%);
   width: 100%;
   max-height: 300px;
-  background-color: ${({theme}) => theme.wrapperBgColor_3};
-  color: ${({theme}) => theme.color};
+  background-color: ${themedPalette.bg_element3};
+  color: ${themedPalette.text1};
   border-radius: 7px;
   padding : 1rem;
 `
 const Divider = styled.div`
   height: 1px;
   width : 100%;
-  background-color: ${({theme}) => theme.border};
+  background-color: ${themedPalette.border};
   margin-bottom : 10px;
 `
 
@@ -134,7 +135,7 @@ const Li = styled.li`
   font-weight: 400;
   width : 100%;
   &:hover{
-    background-color: ${({theme}) => theme.wrapperBgColor};
+    background-color: ${themedPalette.bg_element2};
   }
   cursor : pointer;
   display: flex;

@@ -1,26 +1,18 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { DarkModeSwitch } from 'react-toggle-dark-mode';
-import { useDispatch } from 'react-redux';
-import { changeDarkMode } from '@/store/modules/darkmode';
-import LocalStorage from '@/util/localstorage';
+import useTheme from '@/hooks/useTheme';
+
 const Toggle = () => {
-  const dispatch = useDispatch()
-  const isDarkMode = JSON.parse(useSelector((state:any) => {return state.darkmode.isDarkMode}))
-  console.log(isDarkMode);
-  
-  const toggleDarkMode = () => {
-    dispatch(changeDarkMode())
-    LocalStorage.setItem('isDarkMode', LocalStorage.getItem('isDarkMode')! === 'true' ? 'false' : 'true')
-  };
+  const { isDarkMode, toggleTheme, theme } = useTheme();
+
 
   return (
+    theme !== 'init' ?
     <DarkModeSwitch
       style={{ }}
       checked={isDarkMode}
-      onChange={toggleDarkMode}
+      onChange={toggleTheme}
       size={30}
-    />
+    /> : null
   )
 }
 

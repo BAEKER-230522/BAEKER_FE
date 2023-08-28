@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "@/styles/theme";
 import { AiOutlineSearch } from "react-icons/ai";
 const Container = styled.div`
   width: 80%;
@@ -25,8 +26,8 @@ const Button = styled.button`
   width: 45px;
   height: 45px;
   border-radius: 5px;
-  background-color: ${({theme}) => theme.button};
-  color : ${({theme}) => theme.buttonColor};
+  background-color: ${themedPalette.bg_element4};
+  color : ${themedPalette.text2};
   margin-left: 15px;
   border: none;
   cursor: pointer;
@@ -35,13 +36,13 @@ const Button = styled.button`
 const SearchSVG = styled(AiOutlineSearch)`
   width: 30px;
   height: 30px;
-  color: ${({theme}) => theme.backgroundColor};
+  color: ${themedPalette.bg_element};
 `;
 
 const CreateButton = styled(Button)`
-  background-color: ${({theme}) => theme.button};
+  background-color: ${themedPalette.bg_element4};
   width: 100px;
-  color: ${({theme}) => theme.buttonColor};
+  color: ${themedPalette.text2};
   font-weight: 600;
   margin-right: auto;
   margin-left: 0;

@@ -1,4 +1,5 @@
 import ModifyImg from "@/components/modify/Img";
+import { themedPalette } from "@/styles/theme";
 import Input from "@/components/common/input";
 import ModifyButton from "@/components/modify/button";
 import { memberApi } from "@/api/memberApi";
@@ -11,6 +12,7 @@ import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
 import LocalStorage from "@/util/localstorage";
 import styled from "styled-components";
+import { PageContainer } from "@/styles/common.style";
 interface LoginProps {
   refreshToken: string;
   memberId: number;
@@ -90,6 +92,10 @@ const Connector = ({memberId, refreshToken}:LoginProps) => {
 
 export default Connector;
 
+const Container = styled(PageContainer)`
+  height: 95vh;
+`
+
 const FormContainer = styled.form`
 width: 50%;
 height: 90%;
@@ -97,7 +103,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-border-radius: ${({theme}) => theme.borderRadius};
-background-color: ${({theme}) => theme.wrapperBgColor};
+border-radius: ${themedPalette.borderRadius};
+background-color: ${themedPalette.bg_element2};
 `
 const S = { Container, FormContainer };
