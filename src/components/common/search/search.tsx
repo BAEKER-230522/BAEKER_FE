@@ -3,6 +3,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import SearchBox from "./search-box";
 import useInput from "@/hooks/useInput";
 import { useEffect, useState } from "react";
+import { themedPalette } from "@/styles/theme";
 
 const Search = () => {
   const [searchValue, setSearchValue, onChangeSearch] = useInput('');
@@ -57,7 +58,7 @@ const Container = styled.div`
     width: 30%;
     height: 55px;
     border-radius: 20px;
-    border : 2px solid ${({theme}) => theme.border};
+    border : 2px solid ${themedPalette.border};
     position : relative;
 `
 const Input = styled.input`
@@ -72,7 +73,7 @@ const Input = styled.input`
   padding: 0px 10px;
   font-size: 1rem;
   font-weight: 500;
-  color: ${({theme}) => theme.text1};
+  color: ${themedPalette.text1};
   outline: none;
 `;
 
@@ -83,7 +84,7 @@ const SearchSVG = styled(AiOutlineSearch)`
   left: 10px;
   width: 30px;
   height: 30px;
-  color: ${({theme}) => theme.text1};
+  color: ${themedPalette.text1};
 `;
 
 const S = { Container, SearchSVG, Input }

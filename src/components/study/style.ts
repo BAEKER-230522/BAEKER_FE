@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "@/styles/theme";
 
 const Container = styled.div`
   display: flex;
@@ -28,8 +29,8 @@ const StudyInfoContainer = styled.div`
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    background-color: ${({theme}) => theme.bg_element4};
-    color: ${({theme}) => theme.text2};
+    background-color: ${themedPalette.bg_element4};
+    color: ${themedPalette.text2};
   }
 `;
 

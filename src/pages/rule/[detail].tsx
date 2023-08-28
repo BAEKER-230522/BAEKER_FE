@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { themedPalette } from "@/styles/theme";
 import styled from "styled-components";
 import { ruleApi } from "@/api/ruleApi";
 import AlertModal from "@/components/common/modal/AlertModal";
@@ -80,19 +81,19 @@ const Wrapper = styled.div`
   padding: 20px;
   width: 30%;
   height: 60%;
-  background-color: ${({theme}) => theme.bg_element3};
+  background-color: ${themedPalette.bg_element3};
   border-radius: 10px;
 `;
 
 const Title = styled.span`
   font-weight: 700;
   font-size: 1.5rem;
-  color: ${({theme}) => theme.text1};
+  color: ${themedPalette.text1};
 `;
 
 const Content = styled.span`
   font-size: 1.2rem;
-  color: ${({theme}) => theme.text1};
+  color: ${themedPalette.text1};
   margin-top: 10px;
 `;
 
@@ -114,8 +115,8 @@ const Button = styled.button`
   width: 31%;
   height: 40px;
   border-radius: 5px;
-  background-color: ${({theme}) => theme.bg_element4};
-  color: ${({theme}) => theme.text2};
+  background-color: ${themedPalette.bg_element4};
+  color: ${themedPalette.text2};
   font-weight: 700;
   border: none;
   cursor: pointer;

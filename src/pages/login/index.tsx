@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next'
+import { themedPalette } from "@/styles/theme";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req, res } = context;

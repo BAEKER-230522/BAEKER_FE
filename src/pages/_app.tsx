@@ -9,8 +9,6 @@ import { useDispatch } from "react-redux";
 import { login, logout } from "@/store/modules/user";
 import { ThemeProvider } from 'styled-components';
 import axios from "axios";
-import { theme } from "@/styles/theme";
-import LocalStorage from "@/util/localstorage";
 import { useSelector } from "react-redux";
 
 
@@ -29,12 +27,10 @@ const App = ({ Component, pageProps }: any) => {
   fetchMemberId();
   return (
     <React.Fragment>
-      <ThemeProvider theme={isDarkMode ? theme.darkTheme : theme.lightTheme}>
-        <ToastContainer position="top-right" autoClose={1500} />
-        <GlobalStyle />
-        <Header />
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <ToastContainer position="top-right" autoClose={1500} />
+      <GlobalStyle />
+      <Header />
+      <Component {...pageProps} />
     </React.Fragment>
   );
 };

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "./theme";
 
 export const PageContainer = styled.div`
   width: 100vw;
@@ -6,6 +7,6 @@ export const PageContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${({theme}) => theme.bg_element};
+  background-color: ${themedPalette.bg_element};
   transition: background-color 0.2s ease;
 `;

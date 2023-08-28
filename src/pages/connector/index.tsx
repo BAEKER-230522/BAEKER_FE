@@ -1,4 +1,5 @@
 import ModifyImg from "@/components/modify/Img";
+import { themedPalette } from "@/styles/theme";
 import Input from "@/components/common/input";
 import ModifyButton from "@/components/modify/button";
 import { memberApi } from "@/api/memberApi";
@@ -97,7 +98,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-border-radius: ${({theme}) => theme.borderRadius};
-background-color: ${({theme}) => theme.bg_element2};
+border-radius: ${themedPalette.borderRadius};
+background-color: ${themedPalette.bg_element2};
 `
 const S = { Container, FormContainer };

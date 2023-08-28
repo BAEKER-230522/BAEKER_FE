@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import DatePicker from 'react-datepicker';
+import { themedPalette } from "@/styles/theme";
 
 
 const CustomDatePicker = styled(DatePicker)`

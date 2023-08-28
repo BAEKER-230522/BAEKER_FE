@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { themedPalette } from "@/styles/theme";
 import styled from "styled-components";
 import { Button, Progress, Space } from 'antd';
 import { useEffect, useState } from "react";
@@ -232,7 +233,7 @@ const MissionStatusContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${({theme}) => theme.bg_element2};
+  background-color: ${themedPalette.bg_element2};
   overflow-x: scroll;
 `
 

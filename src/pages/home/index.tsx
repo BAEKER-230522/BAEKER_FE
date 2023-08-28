@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "@/styles/theme";
 import { PageContainer } from "@/styles/common.style";
 
 const Home = () => {

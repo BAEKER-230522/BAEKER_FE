@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { FaMedal } from "react-icons/fa";
+import { themedPalette } from "@/styles/theme";
 
 const HeaderContainer = styled.div`
   width: 100%;
@@ -8,7 +9,7 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   font-weight: 700;
-  border-bottom: 2px solid ${({theme}) => theme.border};
+  border-bottom: 2px solid ${themedPalette.border};
   position : sticky;
 	backdrop-filter: saturate(180%) blur(6px);
   top : 0;
@@ -26,7 +27,7 @@ const Logo = styled.a`
   align-items: center;
   margin-right: auto;
   margin-left: 20px;
-  color: ${({theme}) => theme.text1};
+  color: ${themedPalette.text1};
 `;
 
 const IconContainer = styled.div`
@@ -61,8 +62,8 @@ export const Input = styled.input`
   margin-bottom: 50px;
   border-radius: 7px;
   border: 0.6px solid #a6adbb;
-  background-color: ${({theme}) => theme.bg_element2};
-  color: ${({theme}) => theme.text1};
+  background-color: ${themedPalette.bg_element2};
+  color: ${themedPalette.text1};
   padding-left: 10px;
   outline: none;
 `;
@@ -70,7 +71,7 @@ export const Input = styled.input`
 export const Title = styled.span`
   font-size: 1rem;
   font-weight: 700;
-  color: ${({theme}) => theme.text1};
+  color: ${themedPalette.text1};
   margin-bottom: 10px;
 `;
 
@@ -95,7 +96,7 @@ const Button = styled.button`
 const StatusContainer = styled.div`
   width: 80%;
   height: 120px;
-  background-color: ${({theme}) => theme.bg_element3};
+  background-color: ${themedPalette.bg_element3};
   border-radius: 10px;
   display: flex;
   justify-content: space-around;
@@ -110,13 +111,13 @@ const StatusElement = styled.div`
   &:last-child {
     border: none;
   }
-  border-right: 1px solid ${({theme}) => theme.bg_element2};
+  border-right: 1px solid ${themedPalette.bg_element2};
 `;
 
 const StatusTitle = styled.span`
   font-weight: 600;
   font-size: 1rem;
-  color: ${({theme}) => theme.text1};
+  color: ${themedPalette.text1};
 `;
 
 const StatusNumber = styled.span`

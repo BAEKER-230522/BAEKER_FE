@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "@/styles/theme";
 import StudyInfo from "@/components/study/study-info";
 import Tab from "@/components/common/tab/tab";
 import Board from "@/components/common/board/Board";
@@ -122,7 +123,7 @@ const StudyContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${({theme}) => theme.bg_element};
+  background-color: ${themedPalette.bg_element};
 `
 
 const RecordContainer = styled.div`
@@ -130,7 +131,7 @@ const RecordContainer = styled.div`
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color : ${({theme}) => theme.bg_element2};
+  background-color : ${themedPalette.bg_element2};
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;
@@ -165,8 +166,8 @@ const Button = styled.input`
   width: 40%;
   height: 50px;
   border-radius: 10px;
-  background-color: ${({theme}) => theme.bg_element4};
-  color: ${({theme}) => theme.text2};
+  background-color: ${themedPalette.bg_element4};
+  color: ${themedPalette.text2};
   font-weight: 500;
   cursor: pointer;
   border: none;

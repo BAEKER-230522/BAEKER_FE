@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "@/styles/theme";
 import ModifyImg from "@/components/modify/Img";
 import Input from "@/components/common/input";
 import ModifyButton from "@/components/modify/button";
@@ -92,8 +93,8 @@ export const FormContainer = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: ${({theme}) => theme.borderRadius};
-  background-color:  ${({theme}) => theme.bg_element2};
+  border-radius: ${themedPalette.borderRadius};
+  background-color:  ${themedPalette.bg_element2};
 `
 
 const S = { Container, FormContainer };

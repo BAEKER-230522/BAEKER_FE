@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "@/styles/theme";
 import { GetServerSideProps } from 'next'
 import { parseCookies } from '@/util/parseCookie';
 import LineChart from '@/components/common/chart/chart';
@@ -102,7 +103,7 @@ export const RecordContainer = styled.div`
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color : ${({theme}) => theme.bg_element2};
+  background-color : ${themedPalette.bg_element2};
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;

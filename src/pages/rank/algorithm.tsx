@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { themedPalette } from "@/styles/theme";
 import Board from "@/components/common/board/Board";
 import { memberApi } from "@/api/memberApi";
 import Loading from "@/components/common/loading/Loading";
@@ -29,7 +30,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: ${({theme}) => theme.bg_element};
+  background-color: ${themedPalette.bg_element};
 `;
 // check
 const Wrapper = styled.div`
@@ -39,7 +40,7 @@ const Wrapper = styled.div`
   width: 80%;
   height: 80%;
   border-radius : 7px;
-  background-color: ${({theme}) => theme.bg_element2};
+  background-color: ${themedPalette.bg_element2};
 `
 
 const S = { Container, Wrapper };
