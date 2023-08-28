@@ -9,6 +9,7 @@ const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   font-weight: 700;
+  background-color: ${themedPalette.bg_element};
   border-bottom: 2px solid ${themedPalette.border};
   position : sticky;
 	backdrop-filter: saturate(180%) blur(6px);

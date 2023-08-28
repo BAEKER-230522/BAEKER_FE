@@ -12,6 +12,7 @@ import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
 import LocalStorage from "@/util/localstorage";
 import styled from "styled-components";
+import { PageContainer } from "@/styles/common.style";
 interface LoginProps {
   refreshToken: string;
   memberId: number;
@@ -90,6 +91,10 @@ const Connector = ({memberId, refreshToken}:LoginProps) => {
 };
 
 export default Connector;
+
+const Container = styled(PageContainer)`
+  height: 95vh;
+`
 
 const FormContainer = styled.form`
 width: 50%;
