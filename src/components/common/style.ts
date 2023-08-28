@@ -4,12 +4,15 @@ import { FaMedal } from "react-icons/fa";
 const HeaderContainer = styled.div`
   width: 100%;
   height: 70px;
-  background-color: ${({theme}) => theme.backgroundColor};
   transition: background-color 0.2s ease;
   display: flex;
   align-items: center;
   font-weight: 700;
-  border-bottom: 2px solid ${({theme}) => theme.border};;
+  border-bottom: 2px solid ${({theme}) => theme.border};
+  position : sticky;
+	backdrop-filter: saturate(180%) blur(6px);
+  top : 0;
+  z-index: 1000;
   a {
     text-decoration: none;
   }

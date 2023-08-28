@@ -68,4 +68,4 @@ export const memberApi = createApi({
   }),
 });
 
-export const { useGetAllMembersQuery, useGetMemberQuery, useCreateMemberMutation, useConnectBaekjoonMutation, useWeeklyUserProblemStatusQuery } = memberApi;
+export const { useGetMemberQuery, useCreateMemberMutation, useConnectBaekjoonMutation, useWeeklyUserProblemStatusQuery } = memberApi;

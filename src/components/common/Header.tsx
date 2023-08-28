@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import LocalStorage from "@/util/localstorage";
 import { logout } from "@/store/modules/user";
 import Toggle from "./toggle";
+import Search from "./search/search";
 
 const Header = () => {
   const isLogin = useSelector((state:any) => {return state.user.isLogin})
@@ -27,8 +28,6 @@ const Header = () => {
     
     router.push('/');
   }
-
-  
 
 const items_1: MenuProps['items'] = [
   {
@@ -90,6 +89,7 @@ const items_2: MenuProps['items'] = [
       <Link href="/" legacyBehavior>
         <S.Logo>BAEKER</S.Logo>
       </Link>
+      <Search/>
       <S.IconContainer> 
         <Toggle/>
         <ConfigProvider theme={{
