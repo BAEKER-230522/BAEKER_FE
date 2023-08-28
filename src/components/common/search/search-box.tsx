@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import Loading from "../loading/Loading";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { useEffect, useRef } from "react";
 
 interface IMember {
   nickname: string;
   id : number;
   ranking : number;
+  profileImg: string;
 }
 
 interface IStudy {
@@ -20,11 +24,32 @@ interface IResult {
 interface IProp {
   searchResult : IResult;
   isLoading : boolean;
+  setInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
+  focus:boolean;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 
-const SearchBox = ({searchResult, isLoading}:IProp) => {
-  
+const SearchBox = ({searchResult, isLoading, setInputFocused, focus, setSearchValue}:IProp) => {
+  const formRef = useRef<HTMLDivElement>(null);
+  const handleFocusOut = ({ target }: any) => {
+    if (!formRef.current?.contains(target) && !focus) {
+      setInputFocused(false);
+    }
+  };
+  const router = useRouter()
+  const movePage = (id:number, type:'member' | 'study') => {
+    setInputFocused(false);
+    setSearchValue('');
+    if(type === 'study') router.push(`/study/${id}`)
+    if(type === 'member') router.push(`/member/${id}`)
+  }
+  useEffect(() => {
+    window.addEventListener('click', handleFocusOut);
+    return () => {
+      window.removeEventListener('click', handleFocusOut);
+    };
+  });
   if(isLoading){
     return (
       <S.Container>
@@ -46,25 +71,42 @@ const SearchBox = ({searchResult, isLoading}:IProp) => {
     <div style={{width:"100%", textAlign:"center"}}>검색 결과가 없습니다</div>
   </S.Container>
   }
-  
+  3
   return(
-    <S.Container>
+    <S.Container ref={formRef}>
       <S.Ul>
-        <div>유저 ({searchResult.members.length})</div>
-        {searchResult.members.map((e, i) => (
-          <S.Li>{e.nickname}</S.Li>
-        ))}
+        <S.Title>유저 ({searchResult.members.length})</S.Title>
+        {
+          searchResult.members.length === 0 
+          ? <div style={{width:"100%", textAlign:"center"}}>해당 유저가 없습니다.</div>
+          : searchResult.members.map((e, i) => (
+              <S.Li key={i} onClick={() => movePage(e.id, 'member')}>
+                <Image src={e.profileImg} width={20} height={20} alt="user Image" style={{borderRadius:"100%"}}/>
+                <span>{e.nickname}</span>
+              </S.Li>
+            ))
+        }
       </S.Ul>
       <S.Divider></S.Divider>
       <S.Ul>
-        <div>스터디 ({searchResult.studies.length})</div>
-        {searchResult.studies.map((e, i) => (
-          <S.Li>{e.name}</S.Li>
-        ))}
+        <S.Title>스터디 ({searchResult.studies.length})</S.Title>
+        {
+          searchResult.studies.length === 0 
+          ? <div style={{width:"100%", textAlign:"center"}}>해당 스터디가 없습니다.</div>
+          : searchResult.studies.map((e, i) => (
+              <S.Li key={i} onClick={() => movePage(e.id, 'study')}>
+                <span>{e.name}</span>
+              </S.Li>
+            ))
+        }
       </S.Ul>
     </S.Container>
   )
 }
+
+const Title = styled.div`
+  font-size: 13px;
+`
 
 const Container = styled.div`
   position: absolute;
@@ -87,9 +129,21 @@ const Divider = styled.div`
 
 const Li = styled.li`
   font-size : 14px;
-  margin-bottom : 10px;
+  padding: 5px;
+  border-radius: 7px;
   font-weight: 400;
+  width : 100%;
+  &:hover{
+    background-color: ${({theme}) => theme.wrapperBgColor};
+  }
   cursor : pointer;
+  display: flex;
+  align-items: center;
+  span{
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: 16px;
+  }
 `
 
 const Ul = styled.ul`
@@ -100,6 +154,6 @@ const Ul = styled.ul`
   }
 `
 
-const S = {Container, Ul, Li, Divider}
+const S = {Container, Ul, Li, Divider, Title}
 
 export default SearchBox

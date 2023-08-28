@@ -9,18 +9,21 @@ const Search = () => {
   const [searchResult, setSearchResult] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [isInputFocused, setInputFocused] = useState(false);
+  const [focus, setFocus] = useState(false);
   const handleInputFocus = () => {
+    setFocus(true);
     setInputFocused(true);
   }
-  
+
   const handleInputBlur = () => {
-    setInputFocused(false);
+    setFocus(false);
   }
+  
   useEffect(() => {
     const debounceTimeout = setTimeout(async () => {
       try {
         setIsLoading(true)
-        const data = await fetch(`https://34.64.245.180:443/api/search/v1/${searchValue}`, {
+        const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/search/v1/${searchValue}`, {
           method: 'GET',
           headers: {
               'Content-Type': 'application/json',
@@ -45,7 +48,7 @@ const Search = () => {
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
       />
-      {isInputFocused && <SearchBox searchResult={searchResult} isLoading={isLoading} />}
+      {isInputFocused && <SearchBox searchResult={searchResult!} isLoading={isLoading} setInputFocused={setInputFocused} focus={focus} setSearchValue={setSearchValue}/>}
     </S.Container>
   )
 }
