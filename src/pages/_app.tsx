@@ -1,6 +1,6 @@
 import React from "react";
-import Header from "@/components/common/header";
-import { GlobalStyle } from "@/styles/global.styled";
+import Header from "@/components/common/Header";
+import { GlobalStyle } from "@/styles/global.style";
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import wrapper from "@/store";
