@@ -1,21 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import axiosBaseQuery from "./axiosBaseQuery";
 
 const END_POINT = "api/member";
 export const memberApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-    prepareHeaders: (headers) => {
-      if (typeof window !== 'undefined') { // 브라우저 환경 확인
-        const token = document.cookie
-          .split('; ')
-          .find(row => row.startsWith('accessToken='))
-          ?.split('=')[1];
-        if (token) {
-          headers.set('authorization', `${token}`);
-        }
-      }
-      return headers;
-    }
-  }),
+  baseQuery: axiosBaseQuery(),
   reducerPath: "memberApi",
   tagTypes: ["Member"],
   endpoints: (builder) => ({
