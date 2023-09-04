@@ -1,53 +1,47 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import axiosBaseQuery from "./axiosBaseQuery";
 
 const END_POINT = "api/member";
 export const memberApi = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-    prepareHeaders: (headers) => {
-      if (typeof window !== 'undefined') { // 브라우저 환경 확인
-        const token = document.cookie
-          .split('; ')
-          .find(row => row.startsWith('accessToken='))
-          ?.split('=')[1];
-        if (token) {
-          headers.set('authorization', `${token}`);
-        }
-      }
-      return headers;
-    }
-  }),
+  baseQuery: axiosBaseQuery(),
   reducerPath: "memberApi",
   tagTypes: ["Member"],
   endpoints: (builder) => ({
     // 모든 멤버 정보 가져오기
     getAllMembers: builder.query({
       // query가 없다면 ? 어떻게 해야할까 ?
-      query: () => `${END_POINT}/get/v1/all-members`,
+      query: () =>({
+        url:`${END_POINT}/get/v1/all-members`,
+        method:"GET"
+      }),
       providesTags: [{type: "Member"}]
     }),
 
     // id로 멤버 정보 가져오기
     getMember: builder.query({
-      query: (id) => `${END_POINT}/get/v1/id?id=${id}`,
+      query: (id) => ({
+        url:`${END_POINT}/get/v1/id?id=${id}`,
+        method:"GET"
+      }),
       providesTags: [{type: "Member"}]
     }), 
 
     // 멤버 생성
     createMember: builder.mutation({
-      query: (body) => ({
+      query: (data) => ({
         url: `${END_POINT}/v1/create`,
         method: "POST",
-        body,
+        data,
       }),
       invalidatesTags: [{type: "Member"}]
     }),
 
     // 멤버 정보 수정
     updateMember: builder.mutation({
-      query: (body) => ({
+      query: (data) => ({
         url: `${END_POINT}/v1/update`,
         method: "POST",
-        body,
+        data,
       }),
       invalidatesTags: [{type: "Member"}]
     }),
@@ -62,7 +56,10 @@ export const memberApi = createApi({
     }),
     // 유저의 일주일 문제풀이 현황
     weeklyUserProblemStatus: builder.query({
-      query: (id) => `${END_POINT}/get/v1/snapshot/week?id=${id}`,
+      query: (id) => ({
+        url:`${END_POINT}/get/v1/snapshot/week?id=${id}`,
+        method:"GET"
+      }),
       providesTags: [{type: "Member"}]
     }), 
   }),

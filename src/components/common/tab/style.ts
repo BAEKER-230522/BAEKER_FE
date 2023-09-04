@@ -10,7 +10,7 @@ const TabContainer = styled.div<{ tabState: number }>`
   align-items: center;
   margin-bottom: 40px;
   div:nth-child(${(props) => props.tabState + 1}) {
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid ${themedPalette.text1};
     font-weight: 500;
   }
   div {
@@ -21,7 +21,6 @@ const TabContainer = styled.div<{ tabState: number }>`
     align-items: center;
     width: 100%;
     justify-content: center;
-    border-bottom: 3px solid white;
     height: 100%;
     border-bottom : 3px solid ${themedPalette.bg_element3};
   }
