@@ -1,7 +1,6 @@
 import { S } from "./style";
-import { MouseEvent } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import Link from "next/link";
-import { useSelector } from "react-redux";
 import type { MenuProps } from 'antd';
 import { Button, Dropdown, ConfigProvider } from 'antd';
 import { useRouter } from "next/router";
@@ -12,7 +11,7 @@ import Toggle from "./toggle";
 import Search from "./search/search";
 
 const Header = () => {
-  const isLogin = useSelector((state:any) => {return state.user.isLogin})
+  const [isLogin, setIsLogin] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -28,6 +27,11 @@ const Header = () => {
     
     router.push('/');
   }
+
+  useEffect(() => {
+    const refreshToken = document.cookie.split('; ').find(row => row.startsWith('refreshToken='))?.split('=')[1]
+    setIsLogin(!!refreshToken)
+  }, [])
 
 const items_1: MenuProps['items'] = [
   {

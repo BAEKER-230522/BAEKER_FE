@@ -1,12 +1,13 @@
+import { deleteCookie } from "@/util/deleteCookie";
 import axios, { AxiosResponse } from "axios";
-
+import Router from "next/router";
 
 const twoWeeksFromNow = new Date();
 twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14); // 현재 날짜에서 14일(2주)를 더합니다.
 const utcDate = twoWeeksFromNow.toUTCString();
 let isRefreshing = false;
 let refreshedTokenPromise: Promise<any> | null = null;
-
+let isRefreshTokenExpired = false;
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
 });
@@ -58,8 +59,16 @@ instance.interceptors.response.use(
         // console.log('refreshedTokenPromise = null', '4');
         return res.data.data;
       }).catch(err => {
-        isRefreshing = false;
-        return Promise.reject(err);
+        console.log(err.response.status);
+        if(err.response.status === 403){
+          isRefreshing = false;
+          isRefreshTokenExpired = true;
+          console.log('여기가 refreshToken 만료 자리 ?');
+          Router.push('/')
+          deleteCookie('refreshToken')
+        }else{
+          return Promise.reject(err);
+        }
       });
                   
 
@@ -70,6 +79,7 @@ instance.interceptors.response.use(
         config.headers.Authorization = newToken.accessToken
         document.cookie = `accessToken=${newToken.accessToken}; path=/; samesite=strict`;
         document.cookie = `accessToken=${newToken.refreshToken}; path=/; samesite=strict; expires=${utcDate}`;
+        isRefreshTokenExpired = false;
       }
 
       // 원래 요청 다시 시도
@@ -87,7 +97,9 @@ instance.interceptors.response.use(
       // console.log(refreshedTokenPromise, config, '대기 요청 처리', '7');
       return instance(config);
     }
-
+    if(isRefreshTokenExpired){
+      return
+    }
     return Promise.reject(error);
   }
 );
