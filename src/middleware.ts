@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
-  const isLogin = request.cookies.get("accessToken")
+  const isLogin = request.cookies.get("refreshToken")
   const restrictedPages = ["/home", "/profile", "/study/manage", "/rule"];
   const currentPath = request.nextUrl.pathname;
 
