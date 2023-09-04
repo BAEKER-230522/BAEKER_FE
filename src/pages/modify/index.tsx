@@ -72,7 +72,7 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
   return (
     <S.Container >
       <S.FormContainer onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
-        <ModifyImg userImg={data.data.kakaoProfileImage}/>
+        <ModifyImg userImg={data.data.profileImg}/>
         <Input title={"이름"} size={"25%"} value={nameValue} onChange={onChangeName} />
         <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={onChangeAbout}/>
         <ModifyButton />
