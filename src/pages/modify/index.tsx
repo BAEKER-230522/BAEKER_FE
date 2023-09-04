@@ -4,7 +4,7 @@ import ModifyImg from "@/components/modify/Img";
 import Input from "@/components/common/input";
 import ModifyButton from "@/components/modify/button";
 import { memberApi } from "@/api/memberApi";
-import {  useEffect } from "react";
+import {  useEffect, useState } from "react";
 import {  useRouter } from "next/router";
 import useInput from "@/hooks/useInput";
 import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
@@ -25,24 +25,23 @@ interface IParsedCookies {
 
 
 export const getServerSideProps : GetServerSideProps = async(context) => {
-  const {req, res} = context;
+  const {req} = context;
   const cookies:IParsedCookies = parseCookies(req.headers.cookie)
-  const refreshToken = cookies.refreshToken
   const memberId = Number(cookies.memberId)
   
   return {
     props: {
-      refreshToken,
       memberId,
     },
   };
 }
 
 
-const Modify = ({memberId, refreshToken}:LoginProps) => {
+const Modify = ({memberId}:LoginProps) => {
   const {data, isLoading} = memberApi.useGetMemberQuery(memberId);
   const [nameValue, setNameValue, onChangeName] = useInput('')  
   const [aboutValue, setAboutValue, onChangeAbout] = useInput('')
+  const [img, setImg] = useState(data.data.profileImg)
   const {handleUpdateUserInfo} = useUpdateUserInfo(memberId);
   const router = useRouter();
   
@@ -56,7 +55,7 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
 
   const onSubmitUpdateUserInfo = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleUpdateUserInfo({nameValue, aboutValue})
+    handleUpdateUserInfo({nameValue, aboutValue, img})
     router.push({pathname:"/profile"})
   }
   
@@ -72,7 +71,7 @@ const Modify = ({memberId, refreshToken}:LoginProps) => {
   return (
     <S.Container >
       <S.FormContainer onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
-        <ModifyImg userImg={data.data.profileImg}/>
+        <ModifyImg img={img} setImg={setImg}/>
         <Input title={"이름"} size={"25%"} value={nameValue} onChange={onChangeName} />
         <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={onChangeAbout}/>
         <ModifyButton />
