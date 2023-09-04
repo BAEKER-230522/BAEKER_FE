@@ -78,7 +78,7 @@ instance.interceptors.response.use(
         console.log(newToken, 'new Tokwn', '5');
         config.headers.Authorization = newToken.accessToken
         document.cookie = `accessToken=${newToken.accessToken}; path=/; samesite=strict`;
-        document.cookie = `accessToken=${newToken.refreshToken}; path=/; samesite=strict; expires=${utcDate}`;
+        document.cookie = `refreshToken=${newToken.refreshToken}; path=/; samesite=strict; expires=${utcDate}`;
         isRefreshTokenExpired = false;
       }
 
