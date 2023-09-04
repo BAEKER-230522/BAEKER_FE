@@ -1,5 +1,9 @@
 import axios, { AxiosResponse } from "axios";
 
+
+const twoWeeksFromNow = new Date();
+twoWeeksFromNow.setDate(twoWeeksFromNow.getDate() + 14); // 현재 날짜에서 14일(2주)를 더합니다.
+const utcDate = twoWeeksFromNow.toUTCString();
 let isRefreshing = false;
 let refreshedTokenPromise: Promise<any> | null = null;
 
@@ -52,7 +56,7 @@ instance.interceptors.response.use(
         isRefreshing = false;
         refreshedTokenPromise = null;
         // console.log('refreshedTokenPromise = null', '4');
-        return res.data.data.accessToken;
+        return res.data.data;
       }).catch(err => {
         isRefreshing = false;
         return Promise.reject(err);
@@ -60,10 +64,12 @@ instance.interceptors.response.use(
                   
 
       const newToken = await refreshedTokenPromise
+      console.log(newToken);
       if(newToken){
-        // console.log(newToken, 'new Tokwn', '5');
-        config.headers.Authorization = newToken
-        document.cookie = `accessToken=${newToken}; path=/; samesite=strict`;
+        console.log(newToken, 'new Tokwn', '5');
+        config.headers.Authorization = newToken.accessToken
+        document.cookie = `accessToken=${newToken.accessToken}; path=/; samesite=strict`;
+        document.cookie = `accessToken=${newToken.refreshToken}; path=/; samesite=strict; expires=${utcDate}`;
       }
 
       // 원래 요청 다시 시도
