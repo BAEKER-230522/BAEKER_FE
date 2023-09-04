@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import axiosBaseQuery from "./axiosBaseQuery";
 const END_POINT = "api/study/v1";
 const END_POINT_2 = "api/my-study/v1"
@@ -13,40 +13,62 @@ export const studyApi = createApi({
   endpoints: (builder) => ({
     // 스터디 페이징 조회
     getStudyInfoList: builder.query({
-      query: (page) => `${END_POINT}/list?page=${page}`,
+      query: (page) => ({
+        url:`${END_POINT}/list?page=${page}`,
+        method:"GET"
+      }),
       providesTags: ["Study"],
     }),
     getAllStudyList: builder.query({
-      query: () => `${END_POINT}/all`,
+      query: () => ({
+        url:`${END_POINT}/all`,
+        method:"GET"
+      }),
       providesTags: ["Study"],
     }),
 
     // id로 스터디 조회
     getStudyInfo: builder.query({
-      query: (id) => `${END_POINT}/id?id=${id}`,
+      query: (id) => ({
+        url:`${END_POINT}/id?id=${id}`,
+        method:"GET"
+      }),
       providesTags: ["Study"],
     }),
     // 스터디 일주일 문제풀이 현황
     weeklyStudyProblemStatus: builder.query({
-      query: (id) => `${END_POINT}/snapshots?id=${id}`,
+      query: (id) => ({
+        url:`${END_POINT}/snapshots?id=${id}`,
+        method: "GET"
+      }),
       providesTags: ["Study"]
     }), 
 
     // member id로 가입한 모든 study 조회하기
     getUserStudyList: builder.query({
-      query: ({memberId, status}) => `${END_POINT}/member/${memberId}?status=${status}`,
+      query: ({memberId, status}) => ({
+        url:`${END_POINT}/member/${memberId}?status=${status}`,
+        method: "GET"
+      }),
+
       providesTags: ["Study"],
     }),
     
     // study id로 study member list 조회하기
     getStudyMemberList : builder.query({
-      query: (id) => `${END_POINT}/member-list/${id}`,
+      query: (id) => ({
+        url: `${END_POINT}/member-list/${id}`,
+        method: "GET",
+      }),
       providesTags: ["Study"],
     }),
 
     // 가입대기 리스트 조회하기
     getPendingList : builder.query({
-      query: (id) => `${END_POINT}/candidate-list/${id}`,
+      query: (id) => ({
+        url: `${END_POINT}/candidate-list/${id}`,
+        method: "GET",
+      }),
       providesTags: ["Study"],
     }),
 
@@ -71,10 +93,10 @@ export const studyApi = createApi({
 
     // 스터디 미션
     createStudyMission: builder.mutation({
-      query: (body) => ({
+      query: (data) => ({
         url: `${END_POINT_3}/studyrules`,
         method: "POST",
-        body,
+        data,
       }),
       invalidatesTags: (result:any, err:any, arg:any) => {return [{type: "Study", id:Number(arg.studyId)}]},
     }),
@@ -83,10 +105,10 @@ export const studyApi = createApi({
 
     // study 생성
     createStudy: builder.mutation({
-      query: (body) => ({
+      query: (data) => ({
         url: `${END_POINT}/create`,
         method: "POST",
-        body,
+        data,
       }),
       invalidatesTags: [{type: "Study"}]
     }),
@@ -94,80 +116,80 @@ export const studyApi = createApi({
 
     // study 이름/소개/인원 수정
     updateStudy: builder.mutation({
-      query: (body) => ({
+      query: (data) => ({
         url: `${END_POINT}/update`,
         method: "POST",
-        body,
+        data,
       }),
       invalidatesTags: [{type: "Study"}]
     }),
 
     // study 리더 수정
     updateStudyLeader: builder.mutation({
-      query: (body) => ({
+      query: (data) => ({
         url: `${END_POINT}/leader`,
         method: "POST",
-        body,
+        data,
       }),
       invalidatesTags: [{type: "Study"}]
     }),
 
     // 스터디 가입 신청
     joinStudy: builder.mutation({
-      query: (body) => ({
+      query: (data) => ({
         url: `${END_POINT_2}/join`,
         method: "POST",
-        body
+        data
       }),
       invalidatesTags: [{type: "Study"}]
     }),
 
      // 스터디 탈퇴
      resignStudy: builder.mutation({
-      query: (body) => ({
+      query: (data) => ({
         url: `${END_POINT_2}`,
         method: "DELETE",
-        body
+        data
       }),
       invalidatesTags: [{type: "Study"}]
     }),
 
     // 스터디 가입 초대
     inviteStudy: builder.mutation({
-      query: (body) => ({
+      query: (data) => ({
         url: `${END_POINT_2}/invite`,
         method: "POST",
-        body
+        data
       }),
       invalidatesTags: [{type: "Study"}]
     }),
 
      // 스터디 가입 승인
      acceptStudy: builder.mutation({
-      query: (body) => ({
+      query: (data) => ({
         url: `${END_POINT_2}/accept`,
         method: "POST",
-        body
+        data
       }),
       invalidatesTags: [{type: "Study"}]
     }),
 
     // 스터디 가입 거절
       refuseStudy: builder.mutation({
-      query: (body) => ({
+      query: (data) => ({
         url: `${END_POINT_2}`,
         method: "DELETE",
-        body
+        data
       }),
       invalidatesTags: [{type: "Study"}]
     }),
 
     // 스터디 미션 수정
       updateStudyMission: builder.mutation({
-      query: ({id, body}) => ({
+      query: ({id, data}) => ({
         url: `${END_POINT_3}/${id}`,
         method: "PATCH",
-        body,
+        data,
       }),
       invalidatesTags: [{type: "Study"}]
     }),
@@ -184,7 +206,10 @@ export const studyApi = createApi({
 
     // 스터디 미션 개별 조회
     getStudyMission : builder.query({
-      query: (id) => `${END_POINT_3}/search/${id}`,
+      query: (id) => ({
+        url:`${END_POINT_3}/search/${id}`,
+        method:"GET"
+      }),
       providesTags: ["Study"],
     }),
 
