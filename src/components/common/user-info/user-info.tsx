@@ -7,9 +7,10 @@ import { useSelector } from "react-redux";
 interface IProps {
   userData : any;
   userId : number;
+  loginUser: number;
 }
 
-const UserInfo = ({userData, userId}:IProps) => {
+const UserInfo = ({userData, userId, loginUser}:IProps) => {
   const router = useRouter()
   const id = useSelector((state:any) => {return state.user.memberId})
   return (
@@ -17,7 +18,7 @@ const UserInfo = ({userData, userId}:IProps) => {
       <S.Image src={userData.profileImg}/>
       <S.Name>{userData.nickname}</S.Name>
       <S.Introduce>{userData.about}</S.Introduce>
-      {id === userId ? <S.Button onClick={() => router.push({pathname:"/modify"})}>프로필 수정</S.Button> : userId === null ? null :  <JoinRequestModal name={userData.nickname} id={userData.id} userId={userId}/>}
+      {id === userId ? <S.Button onClick={() => router.push({pathname:"/modify"})}>프로필 수정</S.Button> : userId === null ? null :  <JoinRequestModal loginUser={loginUser} name={userData.nickname} id={userData.id} userId={userId}/>}
     </S.Container>
   );
 };

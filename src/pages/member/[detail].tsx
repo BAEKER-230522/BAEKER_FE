@@ -47,7 +47,7 @@ export const getServerSideProps : GetServerSideProps = async(context) => {
 
 
  
-const Member = () => {
+const Member = ({memberId}:{memberId:number}) => {
   const router = useRouter();
   const {detail: param} = router.query;
   const {data: userStudyList, isLoading: isGetUserStudyListLoading} = studyApi.useGetUserStudyListQuery({memberId:param, status:1});
@@ -86,7 +86,7 @@ const Member = () => {
   return (
     <S.Container>
       <S.InfoContainer>
-        <UserInfo userData={userData.data} userId={Number(param)}/>
+        <UserInfo userData={userData.data} userId={Number(param)} loginUser={memberId}/>
         <UserSolvedInfo userData={userData.data}/>
       </S.InfoContainer>
       <Tab elements={TAB_ELEMENTS_OTHER} type="profile"/>
