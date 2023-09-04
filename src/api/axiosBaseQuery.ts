@@ -1,78 +1,30 @@
-import type { BaseQueryApi, BaseQueryFn } from "@reduxjs/toolkit/query";
-import type { AxiosRequestConfig, AxiosRequestHeaders } from "axios";
-import instance from "./instance";
-import Axios from "axios";
-import { API } from "./api-types";
+import type { BaseQueryFn } from '@reduxjs/toolkit/query';
+import type { AxiosRequestConfig, AxiosError } from 'axios';
+import instance from './instance'; // 세 번째 코드에서 export된 instance를 가져옵니다.
 
-export interface AxiosBaseQueryArgs<Meta, Response = API.BaseResponse> {
-  meta?: Meta;
-  prepareHeaders?: (
-    headers: AxiosRequestHeaders,
-    api: BaseQueryApi
-  ) => AxiosRequestHeaders;
-  transformResponse?: (response: Response) => unknown;
-}
-
-export interface ServiceExtraOptions {
-  authRequired?: boolean;
-}
-
-const getRequestConfig = (args: string | AxiosRequestConfig) => {
-  if (typeof args === "string") {
-    return { url: args };
-  }
-
-  return args;
-};
-
-const axiosBaseQuery = <
-  Args extends AxiosRequestConfig | string = AxiosRequestConfig,
-  Result = unknown,
-  DefinitionExtraOptions extends ServiceExtraOptions = Record<string, unknown>,
-  Meta = Record<string, unknown>
->({
-  prepareHeaders,
-  meta,
-  transformResponse
-}: AxiosBaseQueryArgs<Meta> = {}): BaseQueryFn<
-  Args,
-  Result,
-  unknown,
-  DefinitionExtraOptions,
-  Meta
-> => {
-  return async (args, api, extraOptions) => {
+const axiosBaseQuery = (): BaseQueryFn<
+    {
+      url: string;
+      method: AxiosRequestConfig['method'];
+      data?: AxiosRequestConfig['data'];
+      params?: AxiosRequestConfig['params'];
+    },
+    unknown,
+    unknown
+  > =>
+  async ({ url, method, data, params }) => {
     try {
-      const requestConfig = getRequestConfig(args);
-      const result = await instance({
-        ...requestConfig,
-        headers: prepareHeaders
-          ? prepareHeaders(requestConfig.headers as AxiosRequestHeaders || {}, api)
-          : requestConfig.headers,
-        signal: api.signal,
-        ...extraOptions
-      });
-
-      return {
-        data: transformResponse ? transformResponse(result.data) : result.data
-      };
-    } catch (err) {
-      if (!Axios.isAxiosError(err)) {
-        return {
-          error: err,
-          meta
-        };
-      }
-
+      const result = await instance({ url, method, data, params });
+      return { data: result.data };
+    } catch (axiosError) {
+      let err = axiosError as AxiosError;
       return {
         error: {
           status: err.response?.status,
-          data: err.response?.data || err.message
+          data: err.response?.data || err.message,
         },
-        meta
       };
     }
   };
-};
 
 export default axiosBaseQuery;
