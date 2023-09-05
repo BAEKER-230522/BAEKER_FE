@@ -51,7 +51,7 @@ const StartToEndRangeDatePicker = ({ setMissionStartDate, setMissionEndDate } : 
         startDate={startDate}
         endDate={endDate}
         minDate={startDate}
-        locale={ko}
+        locale={enUS}
       />
     </S.Container>
   );
