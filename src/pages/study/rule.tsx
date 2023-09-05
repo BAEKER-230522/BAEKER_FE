@@ -6,7 +6,6 @@ import useInput from "@/hooks/useInput";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";
-import Selector from "@/components/common/selector";
 import useMissionEdit from "@/hooks/useMissionEdit";
 import Board from "@/components/common/board/Board";
 import AddProblemInputBox from "@/components/study/add-problem-button";
@@ -19,7 +18,7 @@ const Mission = () => {
   const router = useRouter();
   const {param} = router.query
   const isEditMode = Object.keys(router.query).length > 1 ? true : false;
-  const {handleCreateMission, handleUpdateStudy, setRuleId} = useMissionEdit()
+  const {handleCreateMission, handleUpdateStudy} = useMissionEdit()
   const [nameValue, setNameValue, nameHandler] = useInput('')
   const [aboutValue, setAboutValue, aboutHandler] = useInput('')
   const [problemValue, setProblemValue, problemHandler] = useInput('')
@@ -33,12 +32,6 @@ const Mission = () => {
   const missionProblemState = useSelector((state:any) => {
     return state.mission.missionProblemState
   })
-
-  // useEffect(() => {
-  //   setNameValue(String(router.query.name))
-  //   setAboutValue(String(router.query.about))
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
@@ -56,10 +49,6 @@ const Mission = () => {
         <S.MissionInputContainer>
           <S.MissionInputLeftContainer>
             <S.MissionInputInnerWrapper>
-              <S.SelectorWrapper>
-                <S.Title style={{marginRight: 'auto'}}>미션 선택</S.Title>
-                <Loading/>
-              </S.SelectorWrapper>
               <Input title={"미션 이름"} size={"100%"} value={nameValue} onChange={nameHandler}/>
               <Input title={"미션 소개"} size={"100%"} value={aboutValue} onChange={aboutHandler}/>
               <S.SelectorWrapper>
@@ -83,10 +72,6 @@ const Mission = () => {
         <S.MissionInputContainer>
           <S.MissionInputLeftContainer>
             <S.MissionInputInnerWrapper>
-              <S.SelectorWrapper>
-                <S.Title style={{marginRight: 'auto'}}>미션 선택</S.Title>
-                <Selector data={data} setId={setRuleId}/>
-              </S.SelectorWrapper>
               <Input title={"미션 이름"} size={"100%"} value={nameValue} onChange={nameHandler}/>
               <Input title={"미션 소개"} size={"100%"} value={aboutValue} onChange={aboutHandler}/>
               <S.SelectorWrapper>

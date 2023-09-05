@@ -22,7 +22,6 @@ interface IArgument {
 const useMissionEdit = () => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const [ruleId, setRuleId] = useState<number>();
   const [createMission] = studyApi.useCreateStudyMissionMutation()
   const [updateMission] = studyApi.useUpdateStudyMissionMutation()
 
@@ -33,7 +32,6 @@ const useMissionEdit = () => {
           "name": nameValue,
           "about": aboutValue,
           "studyId": param,
-          "ruleId": ruleId,
           "startDate": startDate,
           "deadline": deadline,
           "createProblemList": problemList,
@@ -49,7 +47,7 @@ const useMissionEdit = () => {
 
   const handleUpdateStudy = async({nameValue, aboutValue, router} : any) => {
     try{
-      await updateMission({id: Number(router.query.id), body:{"name":nameValue, "about":aboutValue, "ruleId":ruleId}})
+      await updateMission({id: Number(router.query.id), body:{"name":nameValue, "about":aboutValue,}})
       toast('미션 수정 완료')
       router.push({pathname:`/study/${router.query.id}`})
       dispatch(userAction.resetProblems());
@@ -58,7 +56,7 @@ const useMissionEdit = () => {
     }
   }
 
-  return {handleCreateMission, handleUpdateStudy, setRuleId}
+  return {handleCreateMission, handleUpdateStudy}
 }
 
 export default useMissionEdit
