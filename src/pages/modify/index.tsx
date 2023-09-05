@@ -42,7 +42,7 @@ const Modify = ({memberId}:LoginProps) => {
   const [nameValue, setNameValue, onChangeName] = useInput('')  
   const [aboutValue, setAboutValue, onChangeAbout] = useInput('')
   const [img, setImg] = useState(data.data.profileImg)
-  const {handleUpdateUserInfo} = useUpdateUserInfo(memberId);
+  const {handleUpdateUserInfo, updateImg} = useUpdateUserInfo(memberId);
   const router = useRouter();
   
   useEffect(() => {
@@ -55,6 +55,7 @@ const Modify = ({memberId}:LoginProps) => {
 
   const onSubmitUpdateUserInfo = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    updateImg(img)
     handleUpdateUserInfo({nameValue, aboutValue, img})
     router.push({pathname:"/profile"})
   }
