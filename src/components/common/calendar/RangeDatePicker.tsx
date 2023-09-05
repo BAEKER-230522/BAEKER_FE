@@ -1,4 +1,3 @@
-import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/esm/locale'; //한국어 설정
 import React, { useState, useEffect } from 'react';
@@ -8,6 +7,7 @@ interface IProps{
   setMissionStartDate : React.Dispatch<React.SetStateAction<string>>,
   setMissionEndDate : React.Dispatch<React.SetStateAction<string>>
 }
+
 const StartToEndRangeDatePicker = ({ setMissionStartDate, setMissionEndDate } : IProps ) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
@@ -35,7 +35,7 @@ const StartToEndRangeDatePicker = ({ setMissionStartDate, setMissionEndDate } : 
   
   return (
     <S.Container>
-      <DatePicker
+      <S.CustomDatePicker
         selected={startDate}
         onChange={(date:Date) => setStartDate(date)}
         selectsStart
@@ -44,7 +44,7 @@ const StartToEndRangeDatePicker = ({ setMissionStartDate, setMissionEndDate } : 
         locale={ko}
       />
       <div style={{color:'white'}}>ㅡ</div>
-      <DatePicker
+      <S.CustomDatePicker
         selected={endDate}
         onChange={(date:Date) => setEndDate(date)}
         selectsEnd

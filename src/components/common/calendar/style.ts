@@ -1,12 +1,17 @@
 import styled from "styled-components";
+import dynamic from 'next/dynamic';
 
-// const CustomDatePicker = styled(DatePicker)`
-//   height: 30px;
-//   width: 150px;
-//   border: none;
-//   border-radius: 5px;
-//   text-align: center;
-// `
+const DatePicker = dynamic(() => import('react-datepicker'), {
+  ssr: false // 서버 사이드 렌더링에서 제외
+});
+
+const CustomDatePicker = styled(DatePicker)`
+  height: 30px;
+  width: 150px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+`
 
 const Container = styled.div`
   display: flex;
@@ -15,4 +20,4 @@ const Container = styled.div`
   align-items: center;
 `
 
-export const S = {Container}
+export const S = {Container, CustomDatePicker}
