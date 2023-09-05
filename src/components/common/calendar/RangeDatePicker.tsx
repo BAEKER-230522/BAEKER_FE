@@ -1,6 +1,6 @@
 import 'react-datepicker/dist/react-datepicker.css';
-import { ko } from 'date-fns/esm/locale'; //한국어 설정
-import React, { useState, useEffect } from 'react';
+import { enUS } from 'date-fns/locale';
+import React, { useState, useEffect } from 'react'; 
 import { S } from './style';
 
 interface IProps{
@@ -41,7 +41,7 @@ const StartToEndRangeDatePicker = ({ setMissionStartDate, setMissionEndDate } : 
         selectsStart
         startDate={startDate}
         endDate={endDate}
-        locale={ko}
+        locale={enUS}
       />
       <div style={{color:'white'}}>ㅡ</div>
       <S.CustomDatePicker
