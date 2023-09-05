@@ -14,7 +14,7 @@ import Loading from "@/components/common/loading/Loading";
 import { PageContainer } from "@/styles/common.style";
 import StartToEndRangeDatePicker from "@/components/common/calendar/RangeDatePicker";
 
-const Mission = () => {
+const CreateMission = () => {
   const router = useRouter();
   const {param} = router.query
   const isEditMode = Object.keys(router.query).length > 1 ? true : false;
@@ -91,7 +91,7 @@ const Mission = () => {
   );
 };
 
-export default Mission;
+export default CreateMission;
 
 const Container = styled(PageContainer)`
   height: 95vh;
