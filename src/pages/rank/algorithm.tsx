@@ -5,17 +5,26 @@ import { memberApi } from "@/api/memberApi";
 import Loading from "@/components/common/loading/Loading";
 
 const AlgorithmRank = () => {
-  const {data, isLoading} = memberApi.useGetAllMembersQuery({});
+  const { data, isLoading } = memberApi.useGetAllMembersQuery({});
   console.log(data);
-  if(isLoading) return (
-    <S.Container>
-      <Loading/>
-    </S.Container>
-  )
+  if (isLoading)
+    return (
+      <S.Container>
+        <Loading />
+      </S.Container>
+    );
   return (
     <S.Container>
       <S.Wrapper>
-        <Board category={[["랭킹", "id"], ["이름", "nickname"]]} widthRatio={[1, 1]} data={data.data} type={"member"}/>
+        <Board
+          category={[
+            ["랭킹", "id"],
+            ["이름", "nickname"],
+          ]}
+          widthRatio={[1, 1]}
+          data={data.data}
+          type={"member"}
+        />
       </S.Wrapper>
     </S.Container>
   );
@@ -39,8 +48,8 @@ const Wrapper = styled.div`
   align-items: center;
   width: 80%;
   height: 80%;
-  border-radius : 7px;
+  border-radius: 7px;
   background-color: ${themedPalette.bg_element2};
-`
+`;
 
 const S = { Container, Wrapper };

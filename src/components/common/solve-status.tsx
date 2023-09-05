@@ -1,7 +1,6 @@
 import { S } from "./style";
 
-const SolveStatus = ({studyInfo}:any) => {
-  
+const SolveStatus = ({ studyInfo }: any) => {
   return (
     <S.StatusContainer>
       <S.StatusElement>

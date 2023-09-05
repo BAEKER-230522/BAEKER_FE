@@ -3,8 +3,8 @@ import { themedPalette } from "@/styles/theme";
 import Input from "@/components/common/input";
 import ModifyButton from "@/components/modify/button";
 import { memberApi } from "@/api/memberApi";
-import {  useEffect } from "react";
-import {  useRouter } from "next/router";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import useInput from "@/hooks/useInput";
 import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
 import Loading from "@/components/common/loading/Loading";
@@ -19,71 +19,86 @@ interface LoginProps {
 }
 
 interface IParsedCookies {
-  refreshToken?:string;
+  refreshToken?: string;
   memberId?: string;
-};
+}
 
-export const getServerSideProps : GetServerSideProps = async(context) => {
-  const {req, res} = context;
-  const cookies:IParsedCookies = parseCookies(req.headers.cookie)
-  const refreshToken = cookies.refreshToken
-  const memberId = Number(cookies.memberId)
-  
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { req, res } = context;
+  const cookies: IParsedCookies = parseCookies(req.headers.cookie);
+  const refreshToken = cookies.refreshToken;
+  const memberId = Number(cookies.memberId);
+
   return {
     props: {
       refreshToken,
       memberId,
     },
   };
-}
+};
 
-
-const Connector = ({memberId, refreshToken}:LoginProps) => {
-  
-  const {data, isLoading} = memberApi.useGetMemberQuery(memberId);
-  const [nameValue, setNameValue, onChangeName] = useInput('')  
-  const [aboutValue, setAboutValue, onChangeAbout] = useInput('')
-  const [baekjoonIdValue, setBaekjoonIdValue, onChangebaekjoonId] = useInput('')
-  const {handleUpdateUserInfo} = useUpdateUserInfo(memberId);
+const Connector = ({ memberId, refreshToken }: LoginProps) => {
+  const { data, isLoading } = memberApi.useGetMemberQuery(memberId);
+  const [nameValue, setNameValue, onChangeName] = useInput("");
+  const [aboutValue, setAboutValue, onChangeAbout] = useInput("");
+  const [baekjoonIdValue, setBaekjoonIdValue, onChangebaekjoonId] =
+    useInput("");
+  const { handleUpdateUserInfo } = useUpdateUserInfo(memberId);
   const [connectBaekJoon] = memberApi.useConnectBaekjoonMutation();
   const router = useRouter();
   useEffect(() => {
-    if(isLoading === false){
-      setNameValue(data.data.nickname)
-      setAboutValue(data.data.about)
-    } 
+    if (isLoading === false) {
+      setNameValue(data.data.nickname);
+      setAboutValue(data.data.about);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading])
+  }, [isLoading]);
 
   useEffect(() => {
-    LocalStorage.setItem('refreshToken', refreshToken)
-    LocalStorage.setItem('memberId', String(memberId))
+    LocalStorage.setItem("refreshToken", refreshToken);
+    LocalStorage.setItem("memberId", String(memberId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
-  const onSubmitUpdateUserInfo = (e:React.FormEvent<HTMLFormElement>) => {
+  const onSubmitUpdateUserInfo = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleUpdateUserInfo({nameValue, aboutValue})
-    connectBaekJoon({memberId, baekjoonId:baekjoonIdValue})
-    router.push({pathname:"/profile"})
-  }
-  
-  if(isLoading) return (
-    <S.Container>
-      <S.FormContainer onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
-        <Loading/>
-        <ModifyButton />
-      </S.FormContainer>
-    </S.Container>
-  )
+    handleUpdateUserInfo({ nameValue, aboutValue });
+    connectBaekJoon({ memberId, baekjoonId: baekjoonIdValue });
+    router.push({ pathname: "/profile" });
+  };
+
+  if (isLoading)
+    return (
+      <S.Container>
+        <S.FormContainer onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
+          <Loading />
+          <ModifyButton />
+        </S.FormContainer>
+      </S.Container>
+    );
 
   return (
     <S.Container>
       <S.FormContainer onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
-        <ModifyImg userImg={data.data.kakaoProfileImage}/>
-        <Input title={"이름"} size={"25%"} value={nameValue} onChange={onChangeName} />
-        <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={onChangeAbout}/>
-        <Input title={"백준 연동 ID"} size={"25%"} value={baekjoonIdValue} onChange={onChangebaekjoonId}/>
+        <ModifyImg userImg={data.data.kakaoProfileImage} />
+        <Input
+          title={"이름"}
+          size={"25%"}
+          value={nameValue}
+          onChange={onChangeName}
+        />
+        <Input
+          title={"자기소개"}
+          size={"25%"}
+          value={aboutValue}
+          onChange={onChangeAbout}
+        />
+        <Input
+          title={"백준 연동 ID"}
+          size={"25%"}
+          value={baekjoonIdValue}
+          onChange={onChangebaekjoonId}
+        />
         <ModifyButton />
       </S.FormContainer>
     </S.Container>
@@ -94,16 +109,16 @@ export default Connector;
 
 const Container = styled(PageContainer)`
   height: 95vh;
-`
+`;
 
 const FormContainer = styled.form`
-width: 50%;
-height: 90%;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-border-radius: ${themedPalette.borderRadius};
-background-color: ${themedPalette.bg_element2};
-`
+  width: 50%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: ${themedPalette.borderRadius};
+  background-color: ${themedPalette.bg_element2};
+`;
 const S = { Container, FormContainer };

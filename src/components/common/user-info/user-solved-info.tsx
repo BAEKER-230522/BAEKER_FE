@@ -1,7 +1,13 @@
 import { S } from "./style";
 
-const UserSolvedInfo = ({userData}: any) => {
-  const SOLVEDCOUNT = userData.bronze + userData.diamond + userData.gold + userData.ruby + userData.silver + userData.platinum
+const UserSolvedInfo = ({ userData }: any) => {
+  const SOLVEDCOUNT =
+    userData.bronze +
+    userData.diamond +
+    userData.gold +
+    userData.ruby +
+    userData.silver +
+    userData.platinum;
   return (
     <S.Container>
       <S.InfoContainer>

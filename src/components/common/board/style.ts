@@ -37,7 +37,7 @@ const HeaderContainer = styled.div<IRatios>`
   align-items: center;
   border-radius: 5px 5px 0px 0px;
   background-color: ${themedPalette.bg_element};
-  color : ${themedPalette.text1};
+  color: ${themedPalette.text1};
   font-weight: 500;
   height: 70px;
   div {
@@ -55,7 +55,7 @@ const ContentContainer = styled.div`
   align-items: center;
   flex-direction: column;
   background-color: ${themedPalette.bg_element};
-  color : ${themedPalette.text1};
+  color: ${themedPalette.text1};
 `;
 
 const ContentWrapper = styled.div<IRatios>`
@@ -63,11 +63,10 @@ const ContentWrapper = styled.div<IRatios>`
   height: 70px;
   display: flex;
   align-items: center;
-  &:hover{
+  &:hover {
     background-color: ${themedPalette.bg_element3};
   }
   &:last-child {
-
     z-index: 50;
   }
   border-bottom: 0.5px solid #a6adbb;
@@ -103,7 +102,7 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   width: 200px;
-`
+`;
 export const S = {
   Container,
   HeaderContainer,

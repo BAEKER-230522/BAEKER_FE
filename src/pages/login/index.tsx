@@ -1,39 +1,40 @@
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps } from "next";
 import { themedPalette } from "@/styles/theme";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { req, res } = context;
-  const { accessToken, refreshToken, memberId, baekJoonConnect } = context.query  as { 
-    accessToken: string; 
-    refreshToken: string; 
-    memberId: string; 
-    baekJoonConnect: string;
-  };
-  
-  if(accessToken){
+  const { accessToken, refreshToken, memberId, baekJoonConnect } =
+    context.query as {
+      accessToken: string;
+      refreshToken: string;
+      memberId: string;
+      baekJoonConnect: string;
+    };
+
+  if (accessToken) {
     // HttpOnly;
-    res.setHeader('Set-Cookie', [
+    res.setHeader("Set-Cookie", [
       `accessToken=${accessToken}; Path=/; Secure`,
       `refreshToken=${refreshToken}; Path=/; Secure`,
       `memberId=${memberId}; Path=/; Secure`,
       `baekJoonConnect=${baekJoonConnect}; Path=/; Secure`,
     ]);
     // 백준 연동 여부에 따른 페이지 이동
-    if(baekJoonConnect === 'true'){
-      res.writeHead(302, { Location: '/profile' });
-      res.end()
-      return {props:{}};
-    }else{
-      res.writeHead(302, { Location: '/connector' });
-      res.end()
-      return {props:{}};
+    if (baekJoonConnect === "true") {
+      res.writeHead(302, { Location: "/profile" });
+      res.end();
+      return { props: {} };
+    } else {
+      res.writeHead(302, { Location: "/connector" });
+      res.end();
+      return { props: {} };
     }
   }
-  return {props:{}};
-}
+  return { props: {} };
+};
 
 const Login = () => {
-  return <div>LOGIN PAGE</div>
-}
+  return <div>LOGIN PAGE</div>;
+};
 
-export default Login
+export default Login;

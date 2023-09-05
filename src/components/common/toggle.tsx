@@ -1,19 +1,17 @@
-import { DarkModeSwitch } from 'react-toggle-dark-mode';
-import useTheme from '@/hooks/useTheme';
+import { DarkModeSwitch } from "react-toggle-dark-mode";
+import useTheme from "@/hooks/useTheme";
 
 const Toggle = () => {
   const { isDarkMode, toggleTheme, theme } = useTheme();
 
-
-  return (
-    theme !== 'init' ?
+  return theme !== "init" ? (
     <DarkModeSwitch
-      style={{ }}
+      style={{}}
       checked={isDarkMode}
       onChange={toggleTheme}
       size={30}
-    /> : null
-  )
-}
+    />
+  ) : null;
+};
 
-export default Toggle 
+export default Toggle;

@@ -13,7 +13,6 @@ const Title = styled.span`
   font-weight: 700;
   color: ${themedPalette.text1};
   margin-bottom: 20px;
-
 `;
 
 const Slider = styled.input`

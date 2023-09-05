@@ -11,9 +11,9 @@ const HeaderContainer = styled.div`
   font-weight: 700;
   background-color: ${themedPalette.bg_element};
   border-bottom: 2px solid ${themedPalette.border};
-  position : sticky;
-	backdrop-filter: saturate(180%) blur(6px);
-  top : 0;
+  position: sticky;
+  backdrop-filter: saturate(180%) blur(6px);
+  top: 0;
   z-index: 1000;
   a {
     text-decoration: none;
@@ -84,15 +84,14 @@ const InputContainer = styled.div<{ size: string }>`
 
 const InputWrapper = styled.div`
   display: flex;
-`
+`;
 const Button = styled.button`
   width: 80px;
   height: 40px;
   border-radius: 7px;
   outline: none;
   margin-left: 15px;
-  
-`
+`;
 
 const StatusContainer = styled.div`
   width: 80%;
@@ -143,5 +142,5 @@ export const S = {
   StatusTitle,
   StatusNumber,
   InputWrapper,
-  Button
+  Button,
 };

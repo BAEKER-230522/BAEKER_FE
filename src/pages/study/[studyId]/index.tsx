@@ -23,89 +23,145 @@ interface IServerSideProp {
 interface IParsedCookies {
   refreshToken?: string;
   memberId?: string;
-};
+}
 
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { req, res } = context;
+  const cookies: IParsedCookies = parseCookies(req.headers.cookie);
+  const refreshToken = cookies.refreshToken ? cookies.refreshToken : null;
+  const memberId = Number(cookies.memberId) ? Number(cookies.memberId) : null;
 
-export const getServerSideProps : GetServerSideProps = async(context) => {
-  const {req, res} = context;
-  const cookies:IParsedCookies = parseCookies(req.headers.cookie)
-  const refreshToken = cookies.refreshToken ? cookies.refreshToken : null
-  const memberId = Number(cookies.memberId) ? Number(cookies.memberId) : null
-  
   return {
     props: {
       refreshToken,
       memberId,
     },
   };
-}
+};
 
 const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
   const router = useRouter();
-  const {studyId: param} = router.query;
-  const {data:studyMissionList, isLoading:getStudyMissionListLoading} = studyApi.useGetStudyRuleListQuery(Number(param));
-  const {data:stduyMemberList, isLoading:getMemberListLoading} = studyApi.useGetStudyMemberListQuery(Number(param));
-  const {data:studyPedingList, isLoading:getPedingListLoading} = studyApi.useGetPendingListQuery(Number(param));
-  const {data:studyInfo, isLoading:getStudyInfoLoading} = studyApi.useGetStudyInfoQuery(Number(param));
+  const { studyId: param } = router.query;
+  const { data: studyMissionList, isLoading: getStudyMissionListLoading } =
+    studyApi.useGetStudyRuleListQuery(Number(param));
+  const { data: stduyMemberList, isLoading: getMemberListLoading } =
+    studyApi.useGetStudyMemberListQuery(Number(param));
+  const { data: studyPedingList, isLoading: getPedingListLoading } =
+    studyApi.useGetPendingListQuery(Number(param));
+  const { data: studyInfo, isLoading: getStudyInfoLoading } =
+    studyApi.useGetStudyInfoQuery(Number(param));
   const [isUserStudy, setIsUserStudy] = useState<boolean>(false);
   const [isLeader, setIsLeader] = useState<boolean>(false);
-  const [TAB_ELEMENTS, setTAB_ELEMENTS] = useState<string[]>(["현황", "미션", "멤버"])
+  const [TAB_ELEMENTS, setTAB_ELEMENTS] = useState<string[]>([
+    "현황",
+    "미션",
+    "멤버",
+  ]);
   const tabState = useSelector((state: any) => {
     return state.tab.studyTabState;
   });
 
   useEffect(() => {
-    if(memberId === null) setIsUserStudy(true)
-    if(!getMemberListLoading){
-      for(let i=0; i<stduyMemberList.data.length; i++){
-        if(memberId === stduyMemberList.data[i].id){
-          setIsUserStudy(true)
-          break
+    if (memberId === null) setIsUserStudy(true);
+    if (!getMemberListLoading) {
+      for (let i = 0; i < stduyMemberList.data.length; i++) {
+        if (memberId === stduyMemberList.data[i].id) {
+          setIsUserStudy(true);
+          break;
         }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getMemberListLoading])
+  }, [getMemberListLoading]);
 
   useEffect(() => {
-    if(!getStudyInfoLoading){
-      if(studyInfo.data.leader === memberId){
-        setIsLeader(true)
-        setTAB_ELEMENTS(["현황", "미션", "멤버", "가입요청"])
+    if (!getStudyInfoLoading) {
+      if (studyInfo.data.leader === memberId) {
+        setIsLeader(true);
+        setTAB_ELEMENTS(["현황", "미션", "멤버", "가입요청"]);
       }
-    } 
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getStudyInfoLoading])
+  }, [getStudyInfoLoading]);
 
-  if(getMemberListLoading || getPedingListLoading || getStudyMissionListLoading || getStudyInfoLoading ) return (
-    <S.StudyContainer>
-      <StudyInfo isUserStudy={isUserStudy} isLeader={isLeader} memberId={memberId}/>
-      <Tab elements={TAB_ELEMENTS} type="study" />
-      <S.ContentContainer>
-        <Loading/>
-      </S.ContentContainer>
-    </S.StudyContainer>
+  if (
+    getMemberListLoading ||
+    getPedingListLoading ||
+    getStudyMissionListLoading ||
+    getStudyInfoLoading
   )
+    return (
+      <S.StudyContainer>
+        <StudyInfo
+          isUserStudy={isUserStudy}
+          isLeader={isLeader}
+          memberId={memberId}
+        />
+        <Tab elements={TAB_ELEMENTS} type="study" />
+        <S.ContentContainer>
+          <Loading />
+        </S.ContentContainer>
+      </S.StudyContainer>
+    );
 
-  return ( 
+  return (
     <S.StudyContainer>
-      <StudyInfo isUserStudy={isUserStudy} isLeader={isLeader} memberId={memberId}/>
+      <StudyInfo
+        isUserStudy={isUserStudy}
+        isLeader={isLeader}
+        memberId={memberId}
+      />
       <Tab elements={TAB_ELEMENTS} type="study" />
       <S.ContentContainer>
         {tabState === 0 && (
           <>
-            <S.StatusContainer >
-              <SolveStatus studyInfo={studyInfo}/>
+            <S.StatusContainer>
+              <SolveStatus studyInfo={studyInfo} />
               <S.ChartContainer>
-                <SolvedRecord id={param} data={studyInfo}/> 
-                <LineChart id={Number(param)} type={"study"}/>
+                <SolvedRecord id={param} data={studyInfo} />
+                <LineChart id={Number(param)} type={"study"} />
               </S.ChartContainer>
             </S.StatusContainer>
           </>
-        )} 
-        {tabState === 1 && <Board type={"mission"} category={[["규칙", "name"], ["소개", "about"], ["시작일", "startDate"], ["종료일", "deadline"], ["상태", "mission"]]} widthRatio={[1, 2, 1, 1, 1]}  data={studyMissionList.data}/>}
-        {tabState === 2 && <Board type={"member"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["가입한 스터디", "id"]]} widthRatio={[2, 1, 1]} data={stduyMemberList.data}/>}
-        {tabState === 3 && <Board type={"join"} category={[["이름", "nickname"], ["랭킹", "ruby"], ["상태", "study_invite"]]} widthRatio={[1, 1, 1]} data={studyPedingList.data.pending} />}
+        )}
+        {tabState === 1 && (
+          <Board
+            type={"mission"}
+            category={[
+              ["규칙", "name"],
+              ["소개", "about"],
+              ["시작일", "startDate"],
+              ["종료일", "deadline"],
+              ["상태", "mission"],
+            ]}
+            widthRatio={[1, 2, 1, 1, 1]}
+            data={studyMissionList.data}
+          />
+        )}
+        {tabState === 2 && (
+          <Board
+            type={"member"}
+            category={[
+              ["이름", "nickname"],
+              ["랭킹", "ruby"],
+              ["가입한 스터디", "id"],
+            ]}
+            widthRatio={[2, 1, 1]}
+            data={stduyMemberList.data}
+          />
+        )}
+        {tabState === 3 && (
+          <Board
+            type={"join"}
+            category={[
+              ["이름", "nickname"],
+              ["랭킹", "ruby"],
+              ["상태", "study_invite"],
+            ]}
+            widthRatio={[1, 1, 1]}
+            data={studyPedingList.data.pending}
+          />
+        )}
       </S.ContentContainer>
     </S.StudyContainer>
   );
@@ -124,14 +180,14 @@ const StudyContainer = styled.div`
   align-items: center;
   flex-direction: column;
   background-color: ${themedPalette.bg_element};
-`
+`;
 
 const RecordContainer = styled.div`
   width: 80%;
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color : ${themedPalette.bg_element2};
+  background-color: ${themedPalette.bg_element2};
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;
@@ -148,7 +204,7 @@ const ContentContainer = styled(RecordContainer)`
 
 const ChartContainer = styled.div`
   display: flex;
-  width : 100%;
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
   margin-top: 20px;
@@ -161,7 +217,6 @@ const StatusContainer = styled.div`
   flex-direction: column;
 `;
 
-
 const Button = styled.input`
   width: 40%;
   height: 50px;
@@ -171,8 +226,14 @@ const Button = styled.input`
   font-weight: 500;
   cursor: pointer;
   border: none;
-  margin-top : 50px;
+  margin-top: 50px;
 `;
 
-
-const S = {Container,ContentContainer, ChartContainer, StatusContainer,Button, StudyContainer} ;
+const S = {
+  Container,
+  ContentContainer,
+  ChartContainer,
+  StatusContainer,
+  Button,
+  StudyContainer,
+};

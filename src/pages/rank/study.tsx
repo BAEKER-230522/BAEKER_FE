@@ -5,20 +5,30 @@ import { studyApi } from "@/api/studyApi";
 import Loading from "@/components/common/loading/Loading";
 
 const StudyRank = () => {
-  const {data, isLoading} = studyApi.useGetAllStudyListQuery({})
-  
-  if(isLoading){
+  const { data, isLoading } = studyApi.useGetAllStudyListQuery({});
+
+  if (isLoading) {
     return (
       <S.Container>
-        <Loading/>
+        <Loading />
       </S.Container>
-    )
+    );
   }
-  
+
   return (
     <S.Container>
       <S.Wrapper>
-        <Board category={[ ["스터디", "name"], ["소개", "about"], ["인원", "capacity"], ["방장", "leader"]]} widthRatio={[1, 2, 1, 1]} data={data.data} type={"study"}/>
+        <Board
+          category={[
+            ["스터디", "name"],
+            ["소개", "about"],
+            ["인원", "capacity"],
+            ["방장", "leader"],
+          ]}
+          widthRatio={[1, 2, 1, 1]}
+          data={data.data}
+          type={"study"}
+        />
       </S.Wrapper>
     </S.Container>
   );
@@ -43,6 +53,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const S = { Container, Wrapper };

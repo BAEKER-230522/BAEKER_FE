@@ -8,40 +8,48 @@ import { useEffect, useState } from "react";
 import Loading from "../loading/Loading";
 
 interface IDatasets {
-  type: 'line';
+  type: "line";
   label: string;
   borderColor: string;
   borderWidth: number;
-  data: number[]
+  data: number[];
 }
 
 interface IChart {
   labels: string[];
-  datasets: IDatasets[]
+  datasets: IDatasets[];
 }
 
 interface IProps {
-  id : number;
-  type : "study" | "member";
+  id: number;
+  type: "study" | "member";
 }
 
-
-const LineChart = ({id, type}:IProps) => {
-  const label_obj:any = {THURSDAY:"Thu", FRIDAY:"Fri", SATURDAY:'Sat', MONDAY:'Mon', TUESDAY:'Tue', WEDNESDAY:'Wed'};
-  const {data: userWeeklyProblem, isLoading: isLoadingMember} = memberApi.useWeeklyUserProblemStatusQuery(id)
-  const {data: studyWeeklyProblem, isLoading: isLoadingStudy} = studyApi.useWeeklyStudyProblemStatusQuery(id)
+const LineChart = ({ id, type }: IProps) => {
+  const label_obj: any = {
+    THURSDAY: "Thu",
+    FRIDAY: "Fri",
+    SATURDAY: "Sat",
+    MONDAY: "Mon",
+    TUESDAY: "Tue",
+    WEDNESDAY: "Wed",
+  };
+  const { data: userWeeklyProblem, isLoading: isLoadingMember } =
+    memberApi.useWeeklyUserProblemStatusQuery(id);
+  const { data: studyWeeklyProblem, isLoading: isLoadingStudy } =
+    studyApi.useWeeklyStudyProblemStatusQuery(id);
   const [chartData, setChartData] = useState<IChart>();
   useEffect(() => {
     const LABELS = [];
     const SOLVED_RECORD = [];
-    let RECORD_DATA:any;
-    if(type === "study") RECORD_DATA = studyWeeklyProblem
-    if(type === "member") RECORD_DATA = userWeeklyProblem
-    
-    if(!isLoadingMember && !isLoadingStudy && RECORD_DATA !== undefined){
-      for(let i=0; i<RECORD_DATA.data.length; i++){
-        LABELS.push(label_obj[RECORD_DATA.data[i].dayOfWeek])
-        SOLVED_RECORD.push(RECORD_DATA.data[i].solvedCount)
+    let RECORD_DATA: any;
+    if (type === "study") RECORD_DATA = studyWeeklyProblem;
+    if (type === "member") RECORD_DATA = userWeeklyProblem;
+
+    if (!isLoadingMember && !isLoadingStudy && RECORD_DATA !== undefined) {
+      for (let i = 0; i < RECORD_DATA.data.length; i++) {
+        LABELS.push(label_obj[RECORD_DATA.data[i].dayOfWeek]);
+        SOLVED_RECORD.push(RECORD_DATA.data[i].solvedCount);
       }
     }
 
@@ -51,17 +59,17 @@ const LineChart = ({id, type}:IProps) => {
         {
           type: "line" as const,
           label: "1주간 문제 푼 현황",
-          borderColor: '#BB86FC',
+          borderColor: "#BB86FC",
           borderWidth: 2,
           data: SOLVED_RECORD,
-        }
-      ]
-    }
-    setChartData(CHART_DATA)
+        },
+      ],
+    };
+    setChartData(CHART_DATA);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoadingMember, isLoadingStudy])
+  }, [isLoadingMember, isLoadingStudy]);
 
-  if(chartData === undefined) return <Loading/>
+  if (chartData === undefined) return <Loading />;
   return (
     <S.Wrapper>
       <Line data={chartData} width="100px" height="100px" />

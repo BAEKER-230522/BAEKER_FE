@@ -1,6 +1,6 @@
 import { S } from "./style";
 
-interface IHeaderProps{
+interface IHeaderProps {
   category?: string[];
   target_nth?: number;
   ratio: number;

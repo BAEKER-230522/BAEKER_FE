@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import { AiOutlineSearch } from "react-icons/ai";
 import SearchBox from "./search-box";
 import useInput from "@/hooks/useInput";
@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { themedPalette } from "@/styles/theme";
 
 const Search = () => {
-  const [searchValue, setSearchValue, onChangeSearch] = useInput('');
+  const [searchValue, setSearchValue, onChangeSearch] = useInput("");
   const [searchResult, setSearchResult] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [isInputFocused, setInputFocused] = useState(false);
@@ -14,57 +14,68 @@ const Search = () => {
   const handleInputFocus = () => {
     setFocus(true);
     setInputFocused(true);
-  }
+  };
 
   const handleInputBlur = () => {
     setFocus(false);
-  }
-  
+  };
+
   useEffect(() => {
     const debounceTimeout = setTimeout(async () => {
       try {
-        setIsLoading(true)
-        const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/search/v1/${searchValue}`, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json',
+        setIsLoading(true);
+        const data = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}api/search/v1/${searchValue}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-        })
+        );
         const result = await data.json();
-        setSearchResult(result.data)
-      }catch(err){
-          console.log(err);
-        }finally{
-          setIsLoading(false)
-        }
-      }, 1000);
+        setSearchResult(result.data);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
+      }
+    }, 1000);
     return () => clearTimeout(debounceTimeout);
   }, [searchValue]);
   return (
     <S.Container>
-      <S.SearchSVG/>  
-      <S.Input 
-        value={searchValue} 
+      <S.SearchSVG />
+      <S.Input
+        value={searchValue}
         onChange={onChangeSearch}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
       />
-      {isInputFocused && <SearchBox searchResult={searchResult!} isLoading={isLoading} setInputFocused={setInputFocused} focus={focus} setSearchValue={setSearchValue}/>}
+      {isInputFocused && (
+        <SearchBox
+          searchResult={searchResult!}
+          isLoading={isLoading}
+          setInputFocused={setInputFocused}
+          focus={focus}
+          setSearchValue={setSearchValue}
+        />
+      )}
     </S.Container>
-  )
-}
+  );
+};
 
 const Container = styled.div`
-    width: 30%;
-    height: 55px;
-    border-radius: 20px;
-    border : 2px solid ${themedPalette.border};
-    position : relative;
-`
+  width: 30%;
+  height: 55px;
+  border-radius: 20px;
+  border: 2px solid ${themedPalette.border};
+  position: relative;
+`;
 const Input = styled.input`
-  position : absolute;
-  left : 50px;
-  top : 5px;
+  position: absolute;
+  left: 50px;
+  top: 5px;
   width: 80%;
   border: none;
   height: 45px;
@@ -77,17 +88,15 @@ const Input = styled.input`
   outline: none;
 `;
 
-
 const SearchSVG = styled(AiOutlineSearch)`
-  position : absolute;
-  top : 13px;
+  position: absolute;
+  top: 13px;
   left: 10px;
   width: 30px;
   height: 30px;
   color: ${themedPalette.text1};
 `;
 
-const S = { Container, SearchSVG, Input }
+const S = { Container, SearchSVG, Input };
 
-
-export default Search
+export default Search;

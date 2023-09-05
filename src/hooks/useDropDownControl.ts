@@ -13,7 +13,10 @@ export const useDropDownControl = () => {
 
   useEffect(() => {
     const handleOutSideClick = (e: any) => {
-      if (dropdownRef.current !== null && !dropdownRef.current.contains(e.target)) {
+      if (
+        dropdownRef.current !== null &&
+        !dropdownRef.current.contains(e.target)
+      ) {
         dispatch(userActions.initDropdownState());
       }
     };

@@ -3,22 +3,26 @@ import { toast } from "react-toastify";
 
 interface IArgument {
   nameValue: string;
-  aboutValue : string;
+  aboutValue: string;
 }
 
-const useUpdateUserInfo = (userId:number) => {
+const useUpdateUserInfo = (userId: number) => {
   const [updateUserInfo] = memberApi.useUpdateMemberMutation();
 
-  const handleUpdateUserInfo = async({nameValue, aboutValue}:IArgument) => {
-    try{
-      await updateUserInfo({"id":userId, "nickname":nameValue, "about":aboutValue})
-      toast('정보 등록 완료')
-    }catch(err){
-      console.log(err); 
+  const handleUpdateUserInfo = async ({ nameValue, aboutValue }: IArgument) => {
+    try {
+      await updateUserInfo({
+        id: userId,
+        nickname: nameValue,
+        about: aboutValue,
+      });
+      toast("정보 등록 완료");
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
-  return {handleUpdateUserInfo}
-}
+  return { handleUpdateUserInfo };
+};
 
-export default useUpdateUserInfo
+export default useUpdateUserInfo;

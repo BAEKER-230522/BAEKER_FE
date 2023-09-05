@@ -22,5 +22,9 @@ const tabSlice = createSlice({
   },
 });
 
-export const { changeProfileTabState, changeStudyTabState, changeMemberTabState } = tabSlice.actions;
+export const {
+  changeProfileTabState,
+  changeStudyTabState,
+  changeMemberTabState,
+} = tabSlice.actions;
 export default tabSlice.reducer;

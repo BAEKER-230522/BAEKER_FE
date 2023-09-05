@@ -1,4 +1,4 @@
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const spinner = keyframes`
   0% {
@@ -9,7 +9,7 @@ const spinner = keyframes`
   }
 `;
 
-const LoadingContainer = styled.div``
+const LoadingContainer = styled.div``;
 const Spinner = styled.div`
   width: 30px;
   height: 30px;
@@ -17,5 +17,5 @@ const Spinner = styled.div`
   border-top: 3px solid #383636; /* Black */
   border-radius: 50%;
   animation: ${spinner} 1.5s linear infinite;
-`
-export const S = {LoadingContainer, Spinner}
+`;
+export const S = { LoadingContainer, Spinner };

@@ -1,8 +1,7 @@
-import { S } from "./style"
-
+import { S } from "./style";
 
 const EmptyList = () => {
-  return <S.Container>No List</S.Container>
-}
+  return <S.Container>No List</S.Container>;
+};
 
-export default EmptyList
+export default EmptyList;

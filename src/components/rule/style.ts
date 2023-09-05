@@ -27,7 +27,7 @@ const Button = styled.button`
   height: 45px;
   border-radius: 5px;
   background-color: ${themedPalette.bg_element4};
-  color : ${themedPalette.text2};
+  color: ${themedPalette.text2};
   margin-left: 15px;
   border: none;
   cursor: pointer;
@@ -55,25 +55,36 @@ const InputContainer = styled.div`
 
 const RadioBtnGroupContainer = styled.div`
   display: flex;
-  flex-direction : row;
-`
+  flex-direction: row;
+`;
 
 const Label = styled.label`
-  color : #9da4b2;
+  color: #9da4b2;
   font-weight: 700;
   font-size: 1.2rem;
-`
+`;
 
 const RadioContainer = styled.div`
   margin-right: 7px;
-  margin-bottom : 30px;
-`
-
-const Title = styled.span`
-font-size: 1rem;
-font-weight: 700;
-color: #a6adbb;
-margin-bottom: 20px;
+  margin-bottom: 30px;
 `;
 
-export const S = { Container, Input, Button, SearchSVG, CreateButton, InputContainer,RadioBtnGroupContainer, Label, RadioContainer, Title};
+const Title = styled.span`
+  font-size: 1rem;
+  font-weight: 700;
+  color: #a6adbb;
+  margin-bottom: 20px;
+`;
+
+export const S = {
+  Container,
+  Input,
+  Button,
+  SearchSVG,
+  CreateButton,
+  InputContainer,
+  RadioBtnGroupContainer,
+  Label,
+  RadioContainer,
+  Title,
+};

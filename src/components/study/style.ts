@@ -37,27 +37,34 @@ const StudyInfoContainer = styled.div`
 const Title = styled.div`
   font-size: 2.4rem;
   color: #a6adbb;
-  margin-bottom : 20px;
-`
+  margin-bottom: 20px;
+`;
 
 const About = styled.p`
-  margin-bottom : 20px;
-`
+  margin-bottom: 20px;
+`;
 
 const ButtonWrapper = styled.div`
   display: flex;
   width: 200px;
   justify-content: space-around;
-`
+`;
 
 const SelectBoxContainer = styled.select`
-  width: 40%; 
+  width: 40%;
   height: 50px;
-  margin-bottom : 30px;
+  margin-bottom: 30px;
   background-color: transparent;
-  color : white;
+  color: white;
   padding: 10px;
-  
-`
+`;
 
-export const S = { Container, Img, StudyInfoContainer, ButtonWrapper, Title, About, SelectBoxContainer};
+export const S = {
+  Container,
+  Img,
+  StudyInfoContainer,
+  ButtonWrapper,
+  Title,
+  About,
+  SelectBoxContainer,
+};

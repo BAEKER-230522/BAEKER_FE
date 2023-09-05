@@ -28,68 +28,92 @@ export interface IUserData {
 }
 
 interface IParsedCookies {
-  refreshToken?:string;
+  refreshToken?: string;
   memberId?: string;
-};
+}
 
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { req, res } = context;
+  const cookies: IParsedCookies = parseCookies(req.headers.cookie);
+  const memberId = Number(cookies.memberId) ? Number(cookies.memberId) : null;
 
-export const getServerSideProps : GetServerSideProps = async(context) => {
-  const {req, res} = context;
-  const cookies:IParsedCookies = parseCookies(req.headers.cookie)
-  const memberId = Number(cookies.memberId) ? Number(cookies.memberId) : null
-  
   return {
     props: {
       memberId,
     },
   };
-}
+};
 
-
- 
-const Member = ({memberId}:{memberId:number}) => {
+const Member = ({ memberId }: { memberId: number }) => {
   const router = useRouter();
-  const {detail: param} = router.query;
-  const {data: userStudyList, isLoading: isGetUserStudyListLoading} = studyApi.useGetUserStudyListQuery({memberId:param, status:1});
-  const {data:userData, isLoading:isGetUserInfoLoading} = memberApi.useGetMemberQuery(param);
+  const { detail: param } = router.query;
+  const { data: userStudyList, isLoading: isGetUserStudyListLoading } =
+    studyApi.useGetUserStudyListQuery({ memberId: param, status: 1 });
+  const { data: userData, isLoading: isGetUserInfoLoading } =
+    memberApi.useGetMemberQuery(param);
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
   });
   const TAB_ELEMENTS_OTHER = ["백준", "스터디"];
-  
-  if(isGetUserStudyListLoading || isGetUserInfoLoading) return (
-    <S.Container>
-      <S.InfoContainer>
-        <Loading/>
-      </S.InfoContainer>
-      <S.RecordContainer>
-        <Loading/>
-      </S.RecordContainer>
-    </S.Container>
-  )
-  
+
+  if (isGetUserStudyListLoading || isGetUserInfoLoading)
+    return (
+      <S.Container>
+        <S.InfoContainer>
+          <Loading />
+        </S.InfoContainer>
+        <S.RecordContainer>
+          <Loading />
+        </S.RecordContainer>
+      </S.Container>
+    );
+
   const Component = (num: number) => {
     switch (num) {
       case 0:
         return (
           <>
-            <SolvedRecord id={Number(param)} data={userData}/>
-            <LineChart id={Number(param)} type={'member'}/>
+            <SolvedRecord id={Number(param)} data={userData} />
+            <LineChart id={Number(param)} type={"member"} />
           </>
         );
       case 1:
-        return <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"],[ "스터디 장", "leader"],["랭킹", "xp"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.data}/>;
+        return (
+          <Board
+            type={"study"}
+            category={[
+              ["스터디", "name"],
+              ["소개", "about"],
+              ["인원", "capacity"],
+              ["스터디 장", "leader"],
+              ["랭킹", "xp"],
+            ]}
+            widthRatio={[1, 2, 1, 1, 1]}
+            data={userStudyList.data.data}
+          />
+        );
       case 2:
-        return <Board type={"study"} category={["스터디", "소개", "인원", "스터디 장", "상태"]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.studyList}/>;
+        return (
+          <Board
+            type={"study"}
+            category={["스터디", "소개", "인원", "스터디 장", "상태"]}
+            widthRatio={[1, 2, 1, 1, 1]}
+            data={userStudyList.data.studyList}
+          />
+        );
     }
   };
   return (
     <S.Container>
       <S.InfoContainer>
-        <UserInfo userData={userData.data} userId={Number(param)} loginUser={memberId}/>
-        <UserSolvedInfo userData={userData.data}/>
+        <UserInfo
+          userData={userData.data}
+          userId={Number(param)}
+          loginUser={memberId}
+        />
+        <UserSolvedInfo userData={userData.data} />
       </S.InfoContainer>
-      <Tab elements={TAB_ELEMENTS_OTHER} type="profile"/>
+      <Tab elements={TAB_ELEMENTS_OTHER} type="profile" />
       <S.RecordContainer>{Component(tabState)}</S.RecordContainer>
     </S.Container>
   );
@@ -97,9 +121,7 @@ const Member = ({memberId}:{memberId:number}) => {
 
 export default Member;
 
-const Container = styled(PageContainer)`
-
-`;
+const Container = styled(PageContainer)``;
 
 const InfoContainer = styled.div`
   margin: 60px 0px 40px 0px;
@@ -113,7 +135,7 @@ export const RecordContainer = styled.div`
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color : ${themedPalette.bg_element2};
+  background-color: ${themedPalette.bg_element2};
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;

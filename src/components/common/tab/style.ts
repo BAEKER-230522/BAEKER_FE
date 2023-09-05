@@ -22,7 +22,7 @@ const TabContainer = styled.div<{ tabState: number }>`
     width: 100%;
     justify-content: center;
     height: 100%;
-    border-bottom : 3px solid ${themedPalette.bg_element3};
+    border-bottom: 3px solid ${themedPalette.bg_element3};
   }
 `;
 
@@ -67,10 +67,10 @@ const RecordElement = styled.div`
 `;
 
 const BigFont = styled.div`
-    color: ${themedPalette.text1};
-    font-size: 2rem;
-    font-weight: 600;
-`
+  color: ${themedPalette.text1};
+  font-size: 2rem;
+  font-weight: 600;
+`;
 
 const SmallFont = styled.div`
   display: flex;
@@ -78,8 +78,7 @@ const SmallFont = styled.div`
   color: ${themedPalette.text1};
   font-size: 1rem;
   margin-left: 2px;
-
-`
+`;
 
 export const S = {
   BigFont,

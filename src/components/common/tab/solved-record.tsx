@@ -1,16 +1,16 @@
 import { S } from "./style";
 import { memberApi } from "@/api/memberApi";
 
-interface IMemberData{
+interface IMemberData {
   bronze: number;
   diamond: number;
-  silver:number;
+  silver: number;
   gold: number;
   platinum: number;
   ruby: number;
 }
 
-const SolvedRecord = ({data}: any) => {
+const SolvedRecord = ({ data }: any) => {
   return (
     <S.RecordContainer>
       <S.RecordWrapper>

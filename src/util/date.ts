@@ -3,11 +3,13 @@ export const calculateDuration = (date1: string, date2: string): number => {
   const startDate = new Date(date1);
   const endDate = new Date(date2);
   // 두 날짜 간의 차이를 밀리초 단위로 계산
-  const differenceInMilliseconds = Math.abs(endDate.getTime() - startDate.getTime());
+  const differenceInMilliseconds = Math.abs(
+    endDate.getTime() - startDate.getTime()
+  );
   // 밀리초를 일 단위로 변환 (1일 = 24*60*60*1000 밀리초)
   const differenceInDays = differenceInMilliseconds / (24 * 60 * 60 * 1000);
   return Math.round(differenceInDays);
-}
+};
 
 export const getTodayDateFormatted = () => {
   const today = new Date();
@@ -18,12 +20,11 @@ export const getTodayDateFormatted = () => {
   let day = today.getDate().toString();
   // 월과 일이 한 자리일 경우 앞에 0을 붙여줍니다.
   if (month.length < 2) {
-      month = '0' + month;
+    month = "0" + month;
   }
   if (day.length < 2) {
-      day = '0' + day;
+    day = "0" + day;
   }
 
   return `${year}-${month}-${day}`;
-}
-
+};

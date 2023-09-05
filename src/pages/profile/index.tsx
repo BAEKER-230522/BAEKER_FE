@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { themedPalette } from "@/styles/theme";
-import { GetServerSideProps } from 'next'
-import { parseCookies } from '@/util/parseCookie';
-import LineChart from '@/components/common/chart/chart';
+import { GetServerSideProps } from "next";
+import { parseCookies } from "@/util/parseCookie";
+import LineChart from "@/components/common/chart/chart";
 import UserInfo from "@/components/common/user-info/user-info";
 import UserSolvedInfo from "@/components/common/user-info/user-solved-info";
 import Tab from "@/components/common/tab/tab";
@@ -14,7 +14,6 @@ import useFetchUserData from "@/hooks/queries/useFetchUserData";
 import Loading from "@/components/common/loading/Loading";
 import { PageContainer } from "@/styles/common.style";
 
-
 interface LoginProps {
   refreshToken: string;
   memberId: number;
@@ -23,63 +22,113 @@ interface LoginProps {
 interface IParsedCookies {
   refreshToken?: string;
   memberId?: string;
-};
+}
 
-export const getServerSideProps : GetServerSideProps = async(context) => {
-  const {req, res} = context;
-  const cookies:IParsedCookies = parseCookies(req.headers.cookie)
-  const refreshToken = cookies.refreshToken
-  const memberId = Number(cookies.memberId)
-  
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { req, res } = context;
+  const cookies: IParsedCookies = parseCookies(req.headers.cookie);
+  const refreshToken = cookies.refreshToken;
+  const memberId = Number(cookies.memberId);
+
   return {
     props: {
       refreshToken,
       memberId,
     },
   };
-}
+};
 
 const Profile = ({ memberId }: LoginProps) => {
-  
   const TAB_ELEMENTS = ["현황", "스터디", "가입 신청", "가입 초대"];
-  const {data: userStudyList, isLoading: isStudyListLoading} = useFetchUserStudyList({memberId,status:1});
-  const {data: userStudyJoinRequestList, isLoading: isStudyJoinRequestListLoading} = useFetchUserStudyList({memberId,status:2});
-  const {data: userStudyInviteList, isLoading: isStudyInviteListLoading} = useFetchUserStudyList({memberId,status:3});
-  const {data: userData, isLoading:isUserDataLoading} = useFetchUserData(memberId);
+  const { data: userStudyList, isLoading: isStudyListLoading } =
+    useFetchUserStudyList({ memberId, status: 1 });
+  const {
+    data: userStudyJoinRequestList,
+    isLoading: isStudyJoinRequestListLoading,
+  } = useFetchUserStudyList({ memberId, status: 2 });
+  const { data: userStudyInviteList, isLoading: isStudyInviteListLoading } =
+    useFetchUserStudyList({ memberId, status: 3 });
+  const { data: userData, isLoading: isUserDataLoading } =
+    useFetchUserData(memberId);
   console.log(userData);
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
   });
 
-  if(isStudyListLoading || isStudyJoinRequestListLoading || isStudyInviteListLoading || isUserDataLoading) return (
-    <S.Container>
-      <S.InfoContainer>
-        <Loading/>
-      </S.InfoContainer>
-      <Tab elements={TAB_ELEMENTS} type="profile" />
-      <S.RecordContainer>
-        <Loading/>
-      </S.RecordContainer>
-    </S.Container>
+  if (
+    isStudyListLoading ||
+    isStudyJoinRequestListLoading ||
+    isStudyInviteListLoading ||
+    isUserDataLoading
   )
-  
+    return (
+      <S.Container>
+        <S.InfoContainer>
+          <Loading />
+        </S.InfoContainer>
+        <Tab elements={TAB_ELEMENTS} type="profile" />
+        <S.RecordContainer>
+          <Loading />
+        </S.RecordContainer>
+      </S.Container>
+    );
+
   return (
     <S.Container>
       <S.InfoContainer>
-        <UserInfo userData={userData.data} userId={memberId}/>
-        <UserSolvedInfo userData={userData.data}/>
+        <UserInfo userData={userData.data} userId={memberId} />
+        <UserSolvedInfo userData={userData.data} />
       </S.InfoContainer>
       <Tab elements={TAB_ELEMENTS} type="profile" />
       <S.RecordContainer>
         {tabState === 0 && (
-            <>
-              <SolvedRecord data={userData}/>
-              <LineChart id={memberId} type={"member"}/>
-            </>
-          )} 
-        {tabState === 1 && <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"],[ "스터디 장", "leader"],["랭킹", "xp"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyList.data.data}/>}
-        {tabState === 2 && <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"], ["스터디 장", "leader"], ["상태", "request"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyJoinRequestList.data.data}/>}
-        {tabState === 3 && <Board type={"study"} category={[["스터디", "name"], ["소개", "about"], ["인원", "capacity"], ["스터디 장", "leader"], ["상태", "user_invite"]]} widthRatio={[1, 2, 1, 1, 1]} data={userStudyInviteList.data.data}/>}
+          <>
+            <SolvedRecord data={userData} />
+            <LineChart id={memberId} type={"member"} />
+          </>
+        )}
+        {tabState === 1 && (
+          <Board
+            type={"study"}
+            category={[
+              ["스터디", "name"],
+              ["소개", "about"],
+              ["인원", "capacity"],
+              ["스터디 장", "leader"],
+              ["랭킹", "xp"],
+            ]}
+            widthRatio={[1, 2, 1, 1, 1]}
+            data={userStudyList.data.data}
+          />
+        )}
+        {tabState === 2 && (
+          <Board
+            type={"study"}
+            category={[
+              ["스터디", "name"],
+              ["소개", "about"],
+              ["인원", "capacity"],
+              ["스터디 장", "leader"],
+              ["상태", "request"],
+            ]}
+            widthRatio={[1, 2, 1, 1, 1]}
+            data={userStudyJoinRequestList.data.data}
+          />
+        )}
+        {tabState === 3 && (
+          <Board
+            type={"study"}
+            category={[
+              ["스터디", "name"],
+              ["소개", "about"],
+              ["인원", "capacity"],
+              ["스터디 장", "leader"],
+              ["상태", "user_invite"],
+            ]}
+            widthRatio={[1, 2, 1, 1, 1]}
+            data={userStudyInviteList.data.data}
+          />
+        )}
       </S.RecordContainer>
     </S.Container>
   );
@@ -87,8 +136,7 @@ const Profile = ({ memberId }: LoginProps) => {
 
 export default Profile;
 
-const Container = styled(PageContainer)`
-`;
+const Container = styled(PageContainer)``;
 
 const InfoContainer = styled.div`
   margin: 60px 0px 40px 0px;
@@ -103,7 +151,7 @@ export const RecordContainer = styled.div`
   padding: 20px;
   height: 65vh;
   display: flex;
-  background-color : ${themedPalette.bg_element2};
+  background-color: ${themedPalette.bg_element2};
   border-radius: 10px;
   justify-content: space-evenly;
   align-items: center;

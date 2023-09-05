@@ -9,10 +9,10 @@ export const solvedApi = createApi({
     // 문제 번호로 문제 제목 가져오기
     getSolveTitle: builder.query({
       query: (id) => ({
-        url : `${END_POINT}/${id}`,
-        method:"GET",
+        url: `${END_POINT}/${id}`,
+        method: "GET",
       }),
-      providesTags: [{type: "Solved"}]
+      providesTags: [{ type: "Solved" }],
     }),
   }),
 });

@@ -78,7 +78,7 @@ const Line = styled.div`
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-`
+`;
 
 export const S = {
   Container,

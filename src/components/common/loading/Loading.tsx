@@ -3,9 +3,9 @@ import { S } from "./style";
 const Loading = () => {
   return (
     <S.LoadingContainer>
-      <S.Spinner/>
+      <S.Spinner />
     </S.LoadingContainer>
-  )
-}
+  );
+};
 
-export default Loading
+export default Loading;

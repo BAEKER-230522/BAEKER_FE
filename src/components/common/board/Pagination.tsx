@@ -8,7 +8,13 @@ interface IPagination {
   crntPage: number;
 }
 
-const Pagination = ({ onClickNext, onClickPrev, crntPageArray, onClickPage, crntPage }: IPagination) => {
+const Pagination = ({
+  onClickNext,
+  onClickPrev,
+  crntPageArray,
+  onClickPage,
+  crntPage,
+}: IPagination) => {
   return (
     <S.PaginationContainer>
       <S.PrevBtn onClick={onClickPrev} />

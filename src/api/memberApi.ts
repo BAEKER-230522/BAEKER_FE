@@ -10,21 +10,21 @@ export const memberApi = createApi({
     // 모든 멤버 정보 가져오기
     getAllMembers: builder.query({
       // query가 없다면 ? 어떻게 해야할까 ?
-      query: () =>({
-        url:`${END_POINT}/get/v1/all-members`,
-        method:"GET"
+      query: () => ({
+        url: `${END_POINT}/get/v1/all-members`,
+        method: "GET",
       }),
-      providesTags: [{type: "Member"}]
+      providesTags: [{ type: "Member" }],
     }),
 
     // id로 멤버 정보 가져오기
     getMember: builder.query({
       query: (id) => ({
-        url:`${END_POINT}/get/v1/id?id=${id}`,
-        method:"GET"
+        url: `${END_POINT}/get/v1/id?id=${id}`,
+        method: "GET",
       }),
-      providesTags: [{type: "Member"}]
-    }), 
+      providesTags: [{ type: "Member" }],
+    }),
 
     // 멤버 생성
     createMember: builder.mutation({
@@ -33,7 +33,7 @@ export const memberApi = createApi({
         method: "POST",
         data,
       }),
-      invalidatesTags: [{type: "Member"}]
+      invalidatesTags: [{ type: "Member" }],
     }),
 
     // 멤버 정보 수정
@@ -43,26 +43,31 @@ export const memberApi = createApi({
         method: "POST",
         data,
       }),
-      invalidatesTags: [{type: "Member"}]
+      invalidatesTags: [{ type: "Member" }],
     }),
     // http://bk.1ll.ca/api/member/v1/connect/baekjoon/2?name=chumjio1o
     // 백준 연동
     connectBaekjoon: builder.mutation({
-      query: ({memberId, baekjoonId}) => ({
+      query: ({ memberId, baekjoonId }) => ({
         url: `${END_POINT}/v1/connect/baekjoon/${memberId}?name=${baekjoonId}`,
         method: "POST",
       }),
-      invalidatesTags: [{type: "Member"}]
+      invalidatesTags: [{ type: "Member" }],
     }),
     // 유저의 일주일 문제풀이 현황
     weeklyUserProblemStatus: builder.query({
       query: (id) => ({
-        url:`${END_POINT}/get/v1/snapshot/week?id=${id}`,
-        method:"GET"
+        url: `${END_POINT}/get/v1/snapshot/week?id=${id}`,
+        method: "GET",
       }),
-      providesTags: [{type: "Member"}]
-    }), 
+      providesTags: [{ type: "Member" }],
+    }),
   }),
 });
 
-export const { useGetMemberQuery, useCreateMemberMutation, useConnectBaekjoonMutation, useWeeklyUserProblemStatusQuery } = memberApi;
+export const {
+  useGetMemberQuery,
+  useCreateMemberMutation,
+  useConnectBaekjoonMutation,
+  useWeeklyUserProblemStatusQuery,
+} = memberApi;

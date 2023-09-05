@@ -2,57 +2,84 @@ import styled from "styled-components";
 import { PageContainer } from "@/styles/common.style";
 import { themedPalette } from "@/styles/theme";
 import Image from "next/image";
-import kakao_logo from '../../public/kakao.png'
+import kakao_logo from "../../public/kakao.png";
 import { useRouter } from "next/router";
 
 const Home = () => {
-  const router = useRouter()
-  const kakaoLogin = async() => {
-    window.location.href = `${process.env.NEXT_PUBLIC_LOGIN_URL}oauth2/authorization/kakao`
-  }
+  const router = useRouter();
+  const kakaoLogin = async () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_LOGIN_URL}oauth2/authorization/kakao`;
+  };
 
-  const movePage = (type:'member' | 'study' | 'study_rank' | 'member_rank') => {
-    switch (type){
-      case 'member':
-        router.push('/member/1')
-        return
-      case 'study':
-        router.push('/study/1')
-        return
-      case 'study_rank':
-        router.push('/rank/study')
-        return
-      case 'member_rank':
-        router.push('/rank/member')
-        return
+  const movePage = (
+    type: "member" | "study" | "study_rank" | "member_rank"
+  ) => {
+    switch (type) {
+      case "member":
+        router.push("/member/1");
+        return;
+      case "study":
+        router.push("/study/1");
+        return;
+      case "study_rank":
+        router.push("/rank/study");
+        return;
+      case "member_rank":
+        router.push("/rank/member");
+        return;
     }
-
-
-  }
+  };
 
   return (
     <S.Container>
       <S.Wrapper>
         <S.TextWrapper>
           <span>📌 스터디 그룹</span>
-          <p>자신만의 스터디를 만들거나 다른 스터디에 가입하여,<br/> 함께 문제를 풀어나가는 경험을 만끽하세요.</p>
-          <S.MoveTag onClick={() => movePage('study')}>스터디 둘러보기</S.MoveTag>
+          <p>
+            자신만의 스터디를 만들거나 다른 스터디에 가입하여,
+            <br /> 함께 문제를 풀어나가는 경험을 만끽하세요.
+          </p>
+          <S.MoveTag onClick={() => movePage("study")}>
+            스터디 둘러보기
+          </S.MoveTag>
         </S.TextWrapper>
         <S.TextWrapper>
           <span>📌 개인 문제 풀이 통계</span>
-          <p>일주일 동안의 문제풀이 현황을 한눈에 파악하며,<br/> 개인적인 성장을 지속적으로 모니터링하세요.</p>
-          <S.MoveTag onClick={() => movePage('member')}>프로필 페이지 둘러보기</S.MoveTag>
+          <p>
+            일주일 동안의 문제풀이 현황을 한눈에 파악하며,
+            <br /> 개인적인 성장을 지속적으로 모니터링하세요.
+          </p>
+          <S.MoveTag onClick={() => movePage("member")}>
+            프로필 페이지 둘러보기
+          </S.MoveTag>
         </S.TextWrapper>
         <S.TextWrapper>
           <span>📌 랭킹 시스템</span>
-          <p>스터디 미션을 완료하면서 경험치를 얻어,<br/> 스터디 랭킹과 개인 랭킹을 높여보세요.</p>
-          <S.MoveTag onClick={() => movePage('member_rank')}>개인 랭킹 둘러보기</S.MoveTag>
-          <S.MoveTag onClick={() => movePage('study_rank')}>스터디 랭킹 둘러보기</S.MoveTag>
+          <p>
+            스터디 미션을 완료하면서 경험치를 얻어,
+            <br /> 스터디 랭킹과 개인 랭킹을 높여보세요.
+          </p>
+          <S.MoveTag onClick={() => movePage("member_rank")}>
+            개인 랭킹 둘러보기
+          </S.MoveTag>
+          <S.MoveTag onClick={() => movePage("study_rank")}>
+            스터디 랭킹 둘러보기
+          </S.MoveTag>
         </S.TextWrapper>
         <S.TextWrapper>
           <span>🚀 BAEKER 🚀</span>
-          <p>백준 알고리즘 문제를 함께 스터디 형식으로 풀며, <br/>도전과 성장의 즐거움을 누릴 수 있습니다.</p>
-          <S.KakaoButton onClick={kakaoLogin}><Image src={kakao_logo} width={140} height={40} alt="카카오 로그인 버튼"/></S.KakaoButton>
+          <p>
+            백준 알고리즘 문제를 함께 스터디 형식으로 풀며, <br />
+            도전과 성장의 즐거움을 누릴 수 있습니다.
+          </p>
+          <S.KakaoButton onClick={kakaoLogin}>
+            <Image
+              src={kakao_logo}
+              width={140}
+              height={40}
+              alt="카카오 로그인 버튼"
+            />
+          </S.KakaoButton>
         </S.TextWrapper>
       </S.Wrapper>
     </S.Container>
@@ -63,54 +90,53 @@ export default Home;
 const TextWrapper = styled.div`
   width: 100%;
   display: flex;
-  flex-direction : column;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  border : 1px solid ${themedPalette.border};
+  border: 1px solid ${themedPalette.border};
   border-radius: ${themedPalette.borderRadius};
-  span{
+  span {
     font-size: 1.3rem;
     font-weight: 600;
-    margin-top : 10px;
-    margin-bottom : 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
-  p{
+  p {
     line-height: 20px;
     font-size: 15px;
     margin-left: 28px;
   }
-  div{
+  div {
     display: flex;
     align-items: center;
     height: 40px;
   }
-`
+`;
 
 const MoveTag = styled.p`
   font-weight: 700;
   font-size: 15px;
-  color: #1877FF;
-  margin-top : 10px;
-  cursor : pointer;
-`
-
+  color: #1877ff;
+  margin-top: 10px;
+  cursor: pointer;
+`;
 
 const Container = styled(PageContainer)`
   height: 90vh;
-  flex-direction : row;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
 `;
 
 const Wrapper = styled.div`
   width: 70%;
-  height:70%;
+  height: 70%;
   padding: 15px;
   display: grid;
   grid-template-rows: repeat(2, 1fr); /* 2행 */
   grid-template-columns: repeat(2, 1fr); /* 2열 */
   gap: 10px;
-  color: ${themedPalette.text1};;
+  color: ${themedPalette.text1};
   font-size: 1.4rem;
   line-height: 1.9rem;
   border-radius: ${themedPalette.borderRadius};
@@ -122,7 +148,7 @@ const KakaoButton = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
-  margin-top : 10px;
+  margin-top: 10px;
 `;
 
 const S = {
@@ -132,4 +158,3 @@ const S = {
   TextWrapper,
   MoveTag,
 };
-

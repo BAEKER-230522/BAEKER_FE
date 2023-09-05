@@ -3,7 +3,6 @@ import { themedPalette } from "@/styles/theme";
 import { PageContainer } from "@/styles/common.style";
 
 const Home = () => {
-
   return (
     <S.Container>
       <S.Wrapper>
@@ -13,7 +12,6 @@ const Home = () => {
   );
 };
 export default Home;
-
 
 const Container = styled(PageContainer)`
   height: 95vh;
@@ -51,4 +49,3 @@ const S = {
   Wrapper,
   KakaoButton,
 };
-

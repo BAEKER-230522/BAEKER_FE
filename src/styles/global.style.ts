@@ -15,7 +15,7 @@ export const GlobalStyle = createGlobalStyle`
       ${themes.dark}
     }
   }
-
+ 
   body[data-theme='light'] {
     ${themes.light};
   }

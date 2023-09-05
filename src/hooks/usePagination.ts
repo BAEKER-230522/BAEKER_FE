@@ -44,9 +44,11 @@ export const usePagination = (page: number[]) => {
     } else if (Math.floor(crntPage / PAGE_COUNT) < crntRange.current) {
       crntRange.current -= 1;
     }
-    setCrntPageArray(page.slice(crntRange.current * 5, crntRange.current * 5 + 5));
+    setCrntPageArray(
+      page.slice(crntRange.current * 5, crntRange.current * 5 + 5)
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [crntPage, ]);
+  }, [crntPage]);
 
   return { crntPage, onClickNext, onClickPrev, crntPageArray, onClickPage };
 };

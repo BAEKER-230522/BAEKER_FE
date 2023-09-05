@@ -1,9 +1,9 @@
-import React, { ChangeEvent, FC, SetStateAction, useState } from 'react';
-import { S } from './style'
-import Loading from '../common/loading/Loading';
+import React, { ChangeEvent, FC, SetStateAction, useState } from "react";
+import { S } from "./style";
+import Loading from "../common/loading/Loading";
 
 interface IOption {
-  name : string;
+  name: string;
   id: number;
 }
 
@@ -11,7 +11,7 @@ interface Option {
   value: string;
   id: number;
   data: any;
-  isLoading: boolean
+  isLoading: boolean;
 }
 
 interface OptionElement extends HTMLOptionElement {
@@ -20,22 +20,36 @@ interface OptionElement extends HTMLOptionElement {
   };
 }
 
-
-const SelectBox = ({selectedOption, setSelectedOption, data, isLoading}:any) => {
+const SelectBox = ({
+  selectedOption,
+  setSelectedOption,
+  data,
+  isLoading,
+}: any) => {
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const selectedOption = JSON.parse((event.target.selectedOptions[0] as OptionElement).dataset.option) as Option;
+    const selectedOption = JSON.parse(
+      (event.target.selectedOptions[0] as OptionElement).dataset.option
+    ) as Option;
     setSelectedOption(selectedOption);
   };
 
-  if(isLoading) return (<S.SelectBoxContainer><Loading/></S.SelectBoxContainer>) 
-  
+  if (isLoading)
+    return (
+      <S.SelectBoxContainer>
+        <Loading />
+      </S.SelectBoxContainer>
+    );
+
   return (
     <S.SelectBoxContainer value={selectedOption.value} onChange={handleChange}>
       <option value="">미션 선택</option>
-      {data.data.map((option:IOption, idx:number) => (
-        <option key={idx} data-option={JSON.stringify({ value: option.name, id: option.id })}>
-        {option.name}
-      </option>
+      {data.data.map((option: IOption, idx: number) => (
+        <option
+          key={idx}
+          data-option={JSON.stringify({ value: option.name, id: option.id })}
+        >
+          {option.name}
+        </option>
       ))}
     </S.SelectBoxContainer>
   );

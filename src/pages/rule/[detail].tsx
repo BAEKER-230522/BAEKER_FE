@@ -17,22 +17,51 @@ interface RuleData {
 }
 
 const RuleDetail = () => {
-  const router = useRouter()
-  const {detail : param} = router.query
-  const {data, isLoading} = ruleApi.useGetRuleQuery(param) as {data: RuleData; isLoading: boolean};
-  
-  if(isLoading) return (
-    <S.Container>
-      <S.Wrapper>
-        <Loading/>
-      </S.Wrapper>
-      <S.ButtonContainer>
-        <S.Button onClick={() => router.push({pathname:"/rule/list"})}>목록</S.Button>
-        <AlertModal id={Number(param)} title={'규칙 삭제'} text={'삭제하시겠습니까 ?'} type={"rule"}>삭제</AlertModal>
-        <S.Button onClick={() => router.push({pathname:"/rule/create", query:{name: data!.data.name, count: data!.data.count, level: data!.data.difficulty, xp: data!.data.xp, about: data!.data.about, id:param}})}>수정</S.Button>
-      </S.ButtonContainer>
-    </S.Container>
-  )
+  const router = useRouter();
+  const { detail: param } = router.query;
+  const { data, isLoading } = ruleApi.useGetRuleQuery(param) as {
+    data: RuleData;
+    isLoading: boolean;
+  };
+
+  if (isLoading)
+    return (
+      <S.Container>
+        <S.Wrapper>
+          <Loading />
+        </S.Wrapper>
+        <S.ButtonContainer>
+          <S.Button onClick={() => router.push({ pathname: "/rule/list" })}>
+            목록
+          </S.Button>
+          <AlertModal
+            id={Number(param)}
+            title={"규칙 삭제"}
+            text={"삭제하시겠습니까 ?"}
+            type={"rule"}
+          >
+            삭제
+          </AlertModal>
+          <S.Button
+            onClick={() =>
+              router.push({
+                pathname: "/rule/create",
+                query: {
+                  name: data!.data.name,
+                  count: data!.data.count,
+                  level: data!.data.difficulty,
+                  xp: data!.data.xp,
+                  about: data!.data.about,
+                  id: param,
+                },
+              })
+            }
+          >
+            수정
+          </S.Button>
+        </S.ButtonContainer>
+      </S.Container>
+    );
   return (
     <S.Container>
       <S.Wrapper>
@@ -56,12 +85,36 @@ const RuleDetail = () => {
           <S.Title>획득 경험치</S.Title>
           <S.Content>{data.data.xp}</S.Content>
         </S.ContentWrapper>
-        
       </S.Wrapper>
       <S.ButtonContainer>
-        <S.Button onClick={() => router.push({pathname:"/rule/list"})}>목록</S.Button>
-        <AlertModal id={Number(param)} title={'규칙 삭제'} text={'삭제하시겠습니까 ?'} type={"rule"}>삭제</AlertModal>
-        <S.Button onClick={() => router.push({pathname:"/rule/create", query:{name: data.data.name, count: data.data.count, level: data.data.difficulty, xp: data.data.xp, about: data.data.about, id:param}})}>수정</S.Button>
+        <S.Button onClick={() => router.push({ pathname: "/rule/list" })}>
+          목록
+        </S.Button>
+        <AlertModal
+          id={Number(param)}
+          title={"규칙 삭제"}
+          text={"삭제하시겠습니까 ?"}
+          type={"rule"}
+        >
+          삭제
+        </AlertModal>
+        <S.Button
+          onClick={() =>
+            router.push({
+              pathname: "/rule/create",
+              query: {
+                name: data.data.name,
+                count: data.data.count,
+                level: data.data.difficulty,
+                xp: data.data.xp,
+                about: data.data.about,
+                id: param,
+              },
+            })
+          }
+        >
+          수정
+        </S.Button>
       </S.ButtonContainer>
     </S.Container>
   );
@@ -70,7 +123,7 @@ const RuleDetail = () => {
 export default RuleDetail;
 
 const Container = styled(PageContainer)`
-height: 95vh;
+  height: 95vh;
 `;
 
 const Wrapper = styled.div`
@@ -122,4 +175,12 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-const S = { Container, Wrapper, Title, Content, ContentWrapper, ButtonContainer, Button };
+const S = {
+  Container,
+  Wrapper,
+  Title,
+  Content,
+  ContentWrapper,
+  ButtonContainer,
+  Button,
+};
