@@ -18,6 +18,7 @@ const ModifyImg = ({ img, setImg, setImgFile }: IProps) => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+    
     setImgFile(file)
     if (file) {
       const url = URL.createObjectURL(file);

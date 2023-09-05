@@ -12,6 +12,7 @@ import Loading from "@/components/common/loading/Loading";
 import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
 import { PageContainer } from "@/styles/common.style";
+import axios from "axios";
 
 interface LoginProps {
   refreshToken: string;
@@ -54,8 +55,29 @@ const Modify = ({memberId}:LoginProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading])
 
-  const onSubmitUpdateUserInfo = (e:React.FormEvent<HTMLFormElement>) => {
+  const updateInfo = async () => {
+    const formData = new FormData();
+    formData.append("dto", JSON.stringify({"id": memberId, "nickname": nameValue, "about": aboutValue}));
+    
+    if (imgFile) {
+        formData.append("img", imgFile);
+    }
+    try {
+        await axios.post('http://34.64.169.216:8081/api/member/v1/update', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+        // Success 처리 로직 (예: alert, console.log 등)
+    } catch (error) {
+        console.error("Error updating info:", error);
+        // 에러 처리 로직 (예: alert, console.log 등)
+    }
+  }
+
+  const onSubmitUpdateUserInfo = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    updateInfo()
     handleUpdateUserInfo({nameValue, aboutValue, imgFile})
     router.push({pathname:"/profile"})
   }
