@@ -42,9 +42,10 @@ const Modify = ({memberId}:LoginProps) => {
   const [nameValue, setNameValue, onChangeName] = useInput('')  
   const [aboutValue, setAboutValue, onChangeAbout] = useInput('')
   const [img, setImg] = useState(data.data.profileImg)
+  const [imgFile, setImgFile] = useState<File | undefined>(undefined)
   const {handleUpdateUserInfo, updateImg} = useUpdateUserInfo(memberId);
   const router = useRouter();
-  
+  console.log(data);
   useEffect(() => {
     if(isLoading === false){
       setNameValue(data.data.nickname)
@@ -55,8 +56,7 @@ const Modify = ({memberId}:LoginProps) => {
 
   const onSubmitUpdateUserInfo = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    updateImg(img)
-    handleUpdateUserInfo({nameValue, aboutValue, img})
+    handleUpdateUserInfo({nameValue, aboutValue, imgFile})
     router.push({pathname:"/profile"})
   }
   
@@ -72,7 +72,7 @@ const Modify = ({memberId}:LoginProps) => {
   return (
     <S.Container >
       <S.FormContainer onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
-        <ModifyImg img={img} setImg={setImg}/>
+        <ModifyImg img={img} setImg={setImg} setImgFile={setImgFile}/>
         <Input title={"이름"} size={"25%"} value={nameValue} onChange={onChangeName} />
         <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={onChangeAbout}/>
         <ModifyButton />

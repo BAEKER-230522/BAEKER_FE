@@ -2,12 +2,13 @@
 const nextConfig = {
 	reactStrictMode: true,
   	images: {
-    remotePatterns: [
-      {
-        protocol: "http",
-        hostname: "k.kakaocdn.net",
-      },
-    ],
+      domains: ["s3.ap-northeast-2.amazonaws.com"],
+      remotePatterns: [
+        {
+          protocol: "http",
+          hostname: "k.kakaocdn.net",
+        },
+      ],
   },
 }
 module.exports = nextConfig

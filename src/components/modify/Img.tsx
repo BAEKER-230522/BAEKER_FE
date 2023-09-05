@@ -1,13 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { SetStateAction, useRef, useState } from "react";
 import { S } from "./style";
 import Image from "next/image";
 
 interface IProps{
   img : string;
-  setImg : any;
+  setImg : React.Dispatch<React.SetStateAction<string>>;
+  setImgFile: React.Dispatch<React.SetStateAction<File | undefined>>;
 }
 
-const ModifyImg = ({ img, setImg }: IProps) => {
+const ModifyImg = ({ img, setImg, setImgFile }: IProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleButtonClick = (event: any) => {
@@ -17,7 +18,7 @@ const ModifyImg = ({ img, setImg }: IProps) => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log(file);
+    setImgFile(file)
     if (file) {
       const url = URL.createObjectURL(file);
       setImg(url);
