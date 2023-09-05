@@ -58,16 +58,20 @@ const Modify = ({memberId}:LoginProps) => {
   const updateInfo = async () => {
     const formData = new FormData();
     formData.append("dto", JSON.stringify({"id": memberId, "nickname": nameValue, "about": aboutValue}));
-    
-    if (imgFile) {
-        formData.append("img", imgFile);
+    console.log(imgFile);
+    formData.append("img", imgFile!);
+    const body = {
+      dto: {id: memberId, nickname: nameValue, about: aboutValue},
+      img : imgFile!
     }
     try {
-        await axios.post('http://34.64.169.216:8081/api/member/v1/update', formData, {
+      const response = await axios.post('http://34.64.169.216:8081/api/member/v1/update', formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
     });
+      console.log(response.data)
+      return response.data
         // Success 처리 로직 (예: alert, console.log 등)
     } catch (error) {
         console.error("Error updating info:", error);
