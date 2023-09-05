@@ -1,4 +1,3 @@
-import { IMG_URL } from "../../../../public/mock";
 import { S } from "./style";
 import { useRouter } from "next/router";
 import JoinRequestModal from "../modal/JoinRequestModal";
