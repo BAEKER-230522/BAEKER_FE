@@ -4,37 +4,43 @@ import { toast } from "react-toastify";
 
 interface IArgument {
   nameValue: string;
-  aboutValue : string;
+  aboutValue: string;
   imgFile: File | undefined;
 }
 
-const useUpdateUserInfo = (userId:number) => {
+const useUpdateUserInfo = (memberId: number) => {
   const [updateUserInfo] = memberApi.useUpdateMemberMutation();
-  
 
-  const updateImg = async(img:File) => {
+  const handleUpdateUserInfo = async ({
+    nameValue,
+    aboutValue,
+    imgFile,
+  }: IArgument) => {
     const formData = new FormData();
-    formData.append('img', img);
-  
-    axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}api/member/v1/profile-img/${userId}`,
-      formData,
-    )
-  }
+    formData.append(
+      "dto",
+      new Blob(
+        [
+          JSON.stringify({
+            id: memberId,
+            nickname: nameValue,
+            about: aboutValue,
+          }),
+        ],
+        { type: "application/json" }
+      )
+    );
+    formData.append("img", imgFile!);
 
-  const handleUpdateUserInfo = async({nameValue, aboutValue, imgFile}:IArgument) => {
-    console.log(imgFile);
-    const formData = new FormData();
-    formData.append("dto", JSON.stringify({"id":userId, "nickname":nameValue, "about":aboutValue}))
-    formData.append("img", imgFile!)
-    try{
-      await updateUserInfo(formData)
-      toast('정보 등록 완료')
-    }catch(err){
-      console.log(err); 
+    try {
+      await updateUserInfo(formData);
+      toast("정보 등록 완료");
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
-  return {handleUpdateUserInfo, updateImg}
-}
+  return { handleUpdateUserInfo };
+};
 
-export default useUpdateUserInfo
+export default useUpdateUserInfo;
