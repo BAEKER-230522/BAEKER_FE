@@ -8,25 +8,15 @@ interface IPagination {
   crntPage: number;
 }
 
-const Pagination = ({
-  onClickNext,
-  onClickPrev,
-  crntPageArray,
-  onClickPage,
-  crntPage,
-}: IPagination) => {
+const Pagination = ({ onClickNext, onClickPrev, crntPageArray, onClickPage, crntPage }: IPagination) => {
   return (
     <S.PaginationContainer>
       <S.PrevBtn onClick={onClickPrev} />
       {crntPageArray.map((e) =>
         e === crntPage + 1 ? (
-          <S.PaginationElement
-            onClick={() => onClickPage(e)}
-            style={{ background: "gray", borderRadius: "5px", padding: "5px" }}
-            key={e}
-          >
+          <S.SelectedPaginationElement onClick={() => onClickPage(e)} key={e}>
             {e}
-          </S.PaginationElement>
+          </S.SelectedPaginationElement>
         ) : (
           <S.PaginationElement onClick={() => onClickPage(e)} key={e}>
             {e}

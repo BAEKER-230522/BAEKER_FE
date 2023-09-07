@@ -23,7 +23,6 @@ const Container = styled.div`
   align-items: start;
   flex-direction: column;
   border-radius: 10px;
-  color: white;
 `;
 
 interface IRatios {
@@ -103,6 +102,11 @@ const ButtonWrapper = styled.div`
   justify-content: space-around;
   width: 200px;
 `;
+
+const SelectedPaginationElement = styled(PaginationElement)`
+  background-color: ${themedPalette.bg_element3};
+  border-radius: 7px;
+`;
 export const S = {
   Container,
   HeaderContainer,
@@ -113,4 +117,5 @@ export const S = {
   NextBtn,
   PaginationElement,
   ButtonWrapper,
+  SelectedPaginationElement,
 };
