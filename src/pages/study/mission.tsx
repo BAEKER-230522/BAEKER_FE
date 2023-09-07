@@ -54,18 +54,8 @@ const CreateMission = () => {
           <S.MissionInputContainer>
             <S.MissionInputLeftContainer>
               <S.MissionInputInnerWrapper>
-                <Input
-                  title={"미션 이름"}
-                  size={"100%"}
-                  value={nameValue}
-                  onChange={nameHandler}
-                />
-                <Input
-                  title={"미션 소개"}
-                  size={"100%"}
-                  value={aboutValue}
-                  onChange={aboutHandler}
-                />
+                <Input title={"미션 이름"} size={"100%"} value={nameValue} onChange={nameHandler} />
+                <Input title={"미션 소개"} size={"100%"} value={aboutValue} onChange={aboutHandler} />
                 <S.SelectorWrapper>
                   <S.Title style={{ marginRight: "auto" }}>미션 기간</S.Title>
                   <StartToEndRangeDatePicker
@@ -88,11 +78,7 @@ const CreateMission = () => {
               <Loading />
             </S.MissionInputRightContainer>
           </S.MissionInputContainer>
-          {isEditMode ? (
-            <S.Button type="submit" value={"수정"} />
-          ) : (
-            <S.Button type="submit" value={"미션 생성"} />
-          )}
+          {isEditMode ? <S.Button type="submit" value={"수정"} /> : <S.Button type="submit" value={"미션 생성"} />}
         </S.FormContainer>
       </S.Container>
     );
@@ -102,18 +88,8 @@ const CreateMission = () => {
         <S.MissionInputContainer>
           <S.MissionInputLeftContainer>
             <S.MissionInputInnerWrapper>
-              <Input
-                title={"미션 이름"}
-                size={"100%"}
-                value={nameValue}
-                onChange={nameHandler}
-              />
-              <Input
-                title={"미션 소개"}
-                size={"100%"}
-                value={aboutValue}
-                onChange={aboutHandler}
-              />
+              <Input title={"미션 이름"} size={"100%"} value={nameValue} onChange={nameHandler} />
+              <Input title={"미션 소개"} size={"100%"} value={aboutValue} onChange={aboutHandler} />
               <S.SelectorWrapper>
                 <S.Title style={{ marginRight: "auto" }}>미션 기간</S.Title>
                 <StartToEndRangeDatePicker
@@ -146,11 +122,7 @@ const CreateMission = () => {
             />
           </S.MissionInputRightContainer>
         </S.MissionInputContainer>
-        {isEditMode ? (
-          <S.Button type="submit" value={"수정"} />
-        ) : (
-          <S.Button type="submit" value={"미션 생성"} />
-        )}
+        {isEditMode ? <S.Button type="submit" value={"수정"} /> : <S.Button type="submit" value={"미션 생성"} />}
       </S.FormContainer>
     </S.Container>
   );
@@ -158,19 +130,18 @@ const CreateMission = () => {
 
 export default CreateMission;
 
-const Container = styled(PageContainer)`
-  height: 95vh;
-`;
+const Container = styled(PageContainer)``;
 
 const FormContainer = styled.form`
   width: 80%;
-  height: 90%;
   background-color: ${themedPalette.bg_element2};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border-radius: 7px;
+  margin: 50px;
+  padding: 30px;
 `;
 
 const Button = styled.input`

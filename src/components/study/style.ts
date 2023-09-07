@@ -3,11 +3,12 @@ import { themedPalette } from "@/styles/theme";
 
 const Container = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   width: 100%;
-  height: 40vh;
+  height: 200px;
   margin-bottom: 50px;
-  background-color: #242933;
+  background-color: ${themedPalette.bg_element2};
 `;
 
 const Img = styled.img`
@@ -20,9 +21,9 @@ const Img = styled.img`
 const StudyInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 50px;
-  height: 35%;
-  justify-content: space-between;
+  margin-left: 30px;
+  height: 100%;
+  justify-content: center;
 
   button {
     height: 40px;
@@ -36,12 +37,13 @@ const StudyInfoContainer = styled.div`
 
 const Title = styled.div`
   font-size: 2.4rem;
-  color: #a6adbb;
+  color: ${themedPalette.text1};
   margin-bottom: 20px;
 `;
 
 const About = styled.p`
   margin-bottom: 20px;
+  color: ${themedPalette.text3};
 `;
 
 const ButtonWrapper = styled.div`

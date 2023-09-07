@@ -5,8 +5,12 @@ import { memberApi } from "@/api/memberApi";
 import Loading from "@/components/common/loading/Loading";
 
 const AlgorithmRank = () => {
-  const { data, isLoading } = memberApi.useGetAllMembersQuery({});
+  const { data, isLoading } = memberApi.useGetAllMembersQuery({
+    page: 0,
+    limit: 10,
+  });
   console.log(data);
+
   if (isLoading)
     return (
       <S.Container>
@@ -18,8 +22,8 @@ const AlgorithmRank = () => {
       <S.Wrapper>
         <Board
           category={[
-            ["랭킹", "id"],
-            ["이름", "nickname"],
+            ["랭킹", "rank"],
+            ["닉네임", "nickname"],
           ]}
           widthRatio={[1, 1]}
           data={data.data}

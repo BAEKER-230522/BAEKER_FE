@@ -19,9 +19,11 @@ export const studyApi = createApi({
       }),
       providesTags: ["Study"],
     }),
+
+    // 스터디 랭킹순 조회
     getAllStudyList: builder.query({
-      query: () => ({
-        url: `${END_POINT}/all`,
+      query: ({ page, limit }) => ({
+        url: `${END_POINT}/ranking?page=${page}&content=${limit}`,
         method: "GET",
       }),
       providesTags: ["Study"],

@@ -5,7 +5,10 @@ import { studyApi } from "@/api/studyApi";
 import Loading from "@/components/common/loading/Loading";
 
 const StudyRank = () => {
-  const { data, isLoading } = studyApi.useGetAllStudyListQuery({});
+  const { data, isLoading } = studyApi.useGetAllStudyListQuery({
+    page: 0,
+    limit: 10,
+  });
 
   if (isLoading) {
     return (
@@ -20,12 +23,13 @@ const StudyRank = () => {
       <S.Wrapper>
         <Board
           category={[
+            ["랭킹", "rank"],
             ["스터디", "name"],
             ["소개", "about"],
             ["인원", "capacity"],
-            ["방장", "leader"],
+            ["경험치", "xp"],
           ]}
-          widthRatio={[1, 2, 1, 1]}
+          widthRatio={[1, 1, 2, 1, 1]}
           data={data.data}
           type={"study"}
         />

@@ -7,11 +7,11 @@ export const memberApi = createApi({
   reducerPath: "memberApi",
   tagTypes: ["Member"],
   endpoints: (builder) => ({
-    // 모든 멤버 정보 가져오기
+    // 모든 멤버 랭킹순
     getAllMembers: builder.query({
       // query가 없다면 ? 어떻게 해야할까 ?
-      query: () => ({
-        url: `${END_POINT}/get/v1/all-members`,
+      query: ({ page, limit }) => ({
+        url: `${END_POINT}/get/v1/ranking?page=${page}&content=${limit}`,
         method: "GET",
       }),
       providesTags: [{ type: "Member" }],
@@ -69,6 +69,7 @@ export const memberApi = createApi({
 });
 
 export const {
+  useGetAllMembersQuery,
   useGetMemberQuery,
   useCreateMemberMutation,
   useConnectBaekjoonMutation,
