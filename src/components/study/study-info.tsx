@@ -21,7 +21,6 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
   if (isLoading)
     return (
       <S.Container>
-        <S.Img src={IMG_URL} />
         <S.StudyInfoContainer>
           <Loading />
         </S.StudyInfoContainer>
@@ -29,10 +28,9 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
     );
   return (
     <S.Container>
-      <S.Img src={IMG_URL} />
       <S.StudyInfoContainer>
         <S.Title>{data.data.name}</S.Title>
-        <S.About style={{ color: "white" }}>{data.data.about}</S.About>
+        <S.About>{data.data.about}</S.About>
         {isLeader ? (
           <S.ButtonWrapper>
             <button
@@ -42,8 +40,7 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
                   pathname: "/study/rule",
                   query: { param: studyId },
                 });
-              }}
-            >
+              }}>
               미션 만들기
             </button>
             <button
@@ -58,8 +55,7 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
                     capacity: data.data.capacity,
                   },
                 });
-              }}
-            >
+              }}>
               스터디 수정하기
             </button>
           </S.ButtonWrapper>

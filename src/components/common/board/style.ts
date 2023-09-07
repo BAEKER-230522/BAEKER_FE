@@ -18,7 +18,7 @@ const NextBtn = styled(GrFormNext)`
 
 const Container = styled.div`
   width: 80%;
-  background-color: #242933;
+  background-color: ${themedPalette.bg_element};
   display: flex;
   align-items: start;
   flex-direction: column;
