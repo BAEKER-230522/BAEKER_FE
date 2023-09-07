@@ -1,9 +1,11 @@
 import { createGlobalStyle } from "styled-components";
 import { themes } from "./theme";
 import reset from "styled-reset";
+import { themedPalette } from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset};
+  background-color: ${themedPalette.bg_element};
 
   body {
     ${themes.light}

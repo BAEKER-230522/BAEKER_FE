@@ -37,7 +37,7 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
               onClick={(e) => {
                 e.preventDefault();
                 router.push({
-                  pathname: "/study/rule",
+                  pathname: "/study/mission",
                   query: { param: studyId },
                 });
               }}>
