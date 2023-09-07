@@ -42,6 +42,9 @@ export const memberApi = createApi({
         url: `${END_POINT}/v1/update`,
         method: "POST",
         data,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       }),
       invalidatesTags: [{ type: "Member" }],
     }),
