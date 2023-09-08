@@ -40,27 +40,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const Profile = ({ memberId }: LoginProps) => {
   const TAB_ELEMENTS = ["현황", "스터디", "가입 신청", "가입 초대"];
-  const { data: userStudyList, isLoading: isStudyListLoading } =
-    useFetchUserStudyList({ memberId, status: 1 });
-  const {
-    data: userStudyJoinRequestList,
-    isLoading: isStudyJoinRequestListLoading,
-  } = useFetchUserStudyList({ memberId, status: 2 });
-  const { data: userStudyInviteList, isLoading: isStudyInviteListLoading } =
-    useFetchUserStudyList({ memberId, status: 3 });
-  const { data: userData, isLoading: isUserDataLoading } =
-    useFetchUserData(memberId);
+  const { data: userStudyList, isLoading: isStudyListLoading } = useFetchUserStudyList({ memberId, status: 1 });
+  const { data: userStudyJoinRequestList, isLoading: isStudyJoinRequestListLoading } = useFetchUserStudyList({
+    memberId,
+    status: 2,
+  });
+  const { data: userStudyInviteList, isLoading: isStudyInviteListLoading } = useFetchUserStudyList({
+    memberId,
+    status: 3,
+  });
+  const { data: userData, isLoading: isUserDataLoading } = useFetchUserData(memberId);
   console.log(userData);
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
   });
 
-  if (
-    isStudyListLoading ||
-    isStudyJoinRequestListLoading ||
-    isStudyInviteListLoading ||
-    isUserDataLoading
-  )
+  if (isStudyListLoading || isStudyJoinRequestListLoading || isStudyInviteListLoading || isUserDataLoading)
     return (
       <S.Container>
         <S.InfoContainer>

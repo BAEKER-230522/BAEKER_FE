@@ -20,15 +20,18 @@ const HeaderContainer = styled.div`
   }
 `;
 
-const Logo = styled.a`
+const Logo = styled.h1`
   width: 70px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: auto;
   margin-left: 20px;
   color: ${themedPalette.text1};
+`;
+
+const LogoContainer = styled.div`
+  margin-right: auto;
 `;
 
 const IconContainer = styled.div`
@@ -130,6 +133,7 @@ const StatusNumber = styled.span`
 
 export const S = {
   HeaderContainer,
+  LogoContainer,
   Logo,
   IconContainer,
   DropDownIcon,

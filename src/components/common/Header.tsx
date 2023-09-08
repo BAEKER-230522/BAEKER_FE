@@ -20,15 +20,11 @@ const Header = () => {
     dispatch(logout());
     LocalStorage.removeItem("refreshToken");
     LocalStorage.removeItem("memberId");
-    document.cookie =
-      "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie =
-      "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie =
-      "baekJoonConnect=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie =
-      "memberId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
+    document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "baekJoonConnect=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "memberId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    setIsLogin(false);
     router.push("/");
   };
 
@@ -92,9 +88,11 @@ const Header = () => {
 
   return (
     <S.HeaderContainer>
-      <Link href="/" legacyBehavior>
-        <S.Logo>BAEKER</S.Logo>
-      </Link>
+      <S.LogoContainer>
+        <Link href="/">
+          <S.Logo>BAEKER</S.Logo>
+        </Link>
+      </S.LogoContainer>
       <Search />
       <S.IconContainer>
         <Toggle />
@@ -107,8 +105,7 @@ const Header = () => {
               colorBorder: "#1E1E1E",
               colorPrimaryHover: "#E1E1E1",
             },
-          }}
-        >
+          }}>
           <Dropdown menu={{ items: items_1 }} placement="bottom">
             <Button>랭킹</Button>
           </Dropdown>

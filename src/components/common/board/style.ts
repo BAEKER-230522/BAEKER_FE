@@ -89,6 +89,7 @@ const PaginationContainer = styled.div`
   justify-content: center;
   margin: 0 auto;
   border-radius: 0px 0px 7px 7px;
+  color: ${themedPalette.text1};
 `;
 
 const PaginationElement = styled.span`
@@ -104,8 +105,8 @@ const ButtonWrapper = styled.div`
 `;
 
 const SelectedPaginationElement = styled(PaginationElement)`
-  background-color: ${themedPalette.bg_element3};
-  border-radius: 7px;
+  background-color: ${themedPalette.bg_element2};
+  border-radius: 10px;
 `;
 export const S = {
   Container,
