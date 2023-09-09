@@ -1,5 +1,5 @@
 import { S } from "./style";
-import { usePagination } from "@/hooks/usePagination-2";
+import { usePagination } from "@/hooks/usePagination";
 
 interface IPagination {
   data?: any;

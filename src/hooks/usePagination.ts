@@ -6,10 +6,15 @@ import { useState, useEffect, useRef } from "react";
 // 페이지 요소 5개 단위 자르기
 // 5에서 6으로 넘어갈 때 다음 배열
 
-export const usePagination = (page: number[]) => {
-  const PAGE_COUNT = 5;
+interface IArg {
+  crntPage: number;
+  setCrntPage: React.Dispatch<React.SetStateAction<number>>;
+  page: number[];
+}
+
+export const usePagination = ({ crntPage, setCrntPage, page }: IArg) => {
+  const CONTENT_LIMIT = 4;
   // 현재 페이지
-  const [crntPage, setCrntPage] = useState<number>(0);
 
   // 현재 페이지 범위
   // range logic
@@ -19,7 +24,7 @@ export const usePagination = (page: number[]) => {
 
   // 현재 페이지 배열
   const [crntPageArray, setCrntPageArray] = useState<number[]>(
-    page.slice(crntRange.current * 5, crntRange.current * 5 + 5)
+    page.slice(crntRange.current * CONTENT_LIMIT, crntRange.current * CONTENT_LIMIT + CONTENT_LIMIT)
   );
 
   const onClickNext = () => {
@@ -39,14 +44,12 @@ export const usePagination = (page: number[]) => {
   };
 
   useEffect(() => {
-    if (Math.floor(crntPage / PAGE_COUNT) > crntRange.current) {
+    if (Math.floor(crntPage / CONTENT_LIMIT) > crntRange.current) {
       crntRange.current += 1;
-    } else if (Math.floor(crntPage / PAGE_COUNT) < crntRange.current) {
+    } else if (Math.floor(crntPage / CONTENT_LIMIT) < crntRange.current) {
       crntRange.current -= 1;
     }
-    setCrntPageArray(
-      page.slice(crntRange.current * 5, crntRange.current * 5 + 5)
-    );
+    setCrntPageArray(page.slice(crntRange.current * CONTENT_LIMIT, crntRange.current * CONTENT_LIMIT + CONTENT_LIMIT));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [crntPage]);
 
