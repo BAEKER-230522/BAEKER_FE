@@ -1,19 +1,24 @@
 import { S } from "./style";
+import { usePagination } from "@/hooks/usePagination-2";
 
 interface IPagination {
-  onClickNext: () => void;
-  onClickPrev: () => void;
-  crntPageArray: number[];
-  onClickPage: (num: number) => void;
-  crntPage: number;
+  data?: any;
+  crntPage?: number;
+  setCrntPage?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Pagination = ({ onClickNext, onClickPrev, crntPageArray, onClickPage, crntPage }: IPagination) => {
+const Pagination = ({ data, crntPage, setCrntPage }: IPagination) => {
+  const PAGENATION_ARR = Array.from({ length: Math.ceil(data?.length / 4) }, (_, idx: number) => idx + 1);
+  const { onClickNext, onClickPrev, crntPageArray, onClickPage } = usePagination({
+    page: PAGENATION_ARR,
+    crntPage: crntPage!,
+    setCrntPage: setCrntPage!,
+  });
   return (
     <S.PaginationContainer>
       <S.PrevBtn onClick={onClickPrev} />
       {crntPageArray.map((e) =>
-        e === crntPage + 1 ? (
+        e === crntPage! + 1 ? (
           <S.SelectedPaginationElement onClick={() => onClickPage(e)} key={e}>
             {e}
           </S.SelectedPaginationElement>
