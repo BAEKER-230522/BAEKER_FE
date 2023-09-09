@@ -48,13 +48,20 @@ const HeaderContainer = styled.div<IRatios>`
   }
 `;
 
-const ContentContainer = styled.div`
+interface IContentContainerProps {
+  height?: string;
+  overflowY?: "scroll" | "hidden";
+}
+
+const ContentContainer = styled.div<IContentContainerProps>`
   display: flex;
   width: 100%;
   align-items: center;
   flex-direction: column;
   background-color: ${themedPalette.bg_element};
   color: ${themedPalette.text1};
+  height: ${(props) => props.height || "auto"};
+  overflow-y: ${(props) => props.overflowY || "visible"};
 `;
 
 const ContentWrapper = styled.div<IRatios>`
@@ -101,14 +108,36 @@ const PaginationElement = styled.span`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  width: 200px;
+  width: 100%;
 `;
 
 const SelectedPaginationElement = styled(PaginationElement)`
   background-color: ${themedPalette.bg_element2};
   border-radius: 10px;
 `;
+
+const ContentCell = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const UserInfoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 33%;
+`;
+
+const UserInfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 100% !important;
+  margin-left: 25%;
+`;
+
 export const S = {
+  ContentCell,
   Container,
   HeaderContainer,
   ContentContainer,
@@ -119,4 +148,6 @@ export const S = {
   PaginationElement,
   ButtonWrapper,
   SelectedPaginationElement,
+  UserInfoContainer,
+  UserInfoWrapper,
 };

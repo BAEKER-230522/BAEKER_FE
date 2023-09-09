@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { themedPalette } from "@/styles/theme";
 import StudyInfo from "@/components/study/study-info";
 import Tab from "@/components/common/tab/tab";
-import Board from "@/components/common/board/Board";
 import SolvedRecord from "@/components/common/tab/solved-record";
 import LineChart from "@/components/common/chart/chart";
 import { useSelector } from "react-redux";
@@ -14,6 +13,9 @@ import { parseCookies } from "@/util/parseCookie";
 import { GetServerSideProps } from "next";
 import { useState, useEffect } from "react";
 import { PageContainer } from "@/styles/common.style";
+import { TABLE_CONSTANT } from "@/constant/table";
+import BasicTable from "@/components/common/table/BasicTable";
+import MemberTable from "@/components/common/table/MeberTable";
 
 interface IServerSideProp {
   refreshToken: string;
@@ -42,25 +44,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
   const router = useRouter();
   const { studyId: param } = router.query;
-  const { data: studyMissionList, isLoading: getStudyMissionListLoading } =
-    studyApi.useGetStudyRuleListQuery(Number(param));
-  const { data: stduyMemberList, isLoading: getMemberListLoading } =
-    studyApi.useGetStudyMemberListQuery(Number(param));
-  const { data: studyPedingList, isLoading: getPedingListLoading } =
-    studyApi.useGetPendingListQuery(Number(param));
-  const { data: studyInfo, isLoading: getStudyInfoLoading } =
-    studyApi.useGetStudyInfoQuery(Number(param));
+  const { data: studyMissionList, isLoading: getStudyMissionListLoading } = studyApi.useGetStudyRuleListQuery(
+    Number(param)
+  );
+  const { data: stduyMemberList, isLoading: getMemberListLoading } = studyApi.useGetStudyMemberListQuery(Number(param));
+  const { data: studyPendingList, isLoading: getPedingListLoading } = studyApi.useGetPendingListQuery(Number(param));
+  const { data: studyInfo, isLoading: getStudyInfoLoading } = studyApi.useGetStudyInfoQuery(Number(param));
   const [isUserStudy, setIsUserStudy] = useState<boolean>(false);
   const [isLeader, setIsLeader] = useState<boolean>(false);
-  const [TAB_ELEMENTS, setTAB_ELEMENTS] = useState<string[]>([
-    "현황",
-    "미션",
-    "멤버",
-  ]);
+  const [TAB_ELEMENTS, setTAB_ELEMENTS] = useState<string[]>(["현황", "미션", "멤버"]);
   const tabState = useSelector((state: any) => {
     return state.tab.studyTabState;
   });
-
+  console.log(stduyMemberList);
   useEffect(() => {
     if (memberId === null) setIsUserStudy(true);
     if (!getMemberListLoading) {
@@ -84,19 +80,10 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getStudyInfoLoading]);
 
-  if (
-    getMemberListLoading ||
-    getPedingListLoading ||
-    getStudyMissionListLoading ||
-    getStudyInfoLoading
-  )
+  if (getMemberListLoading || getPedingListLoading || getStudyMissionListLoading || getStudyInfoLoading)
     return (
       <S.StudyContainer>
-        <StudyInfo
-          isUserStudy={isUserStudy}
-          isLeader={isLeader}
-          memberId={memberId}
-        />
+        <StudyInfo isUserStudy={isUserStudy} isLeader={isLeader} memberId={memberId} />
         <Tab elements={TAB_ELEMENTS} type="study" />
         <S.ContentContainer>
           <Loading />
@@ -106,11 +93,7 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
 
   return (
     <S.StudyContainer>
-      <StudyInfo
-        isUserStudy={isUserStudy}
-        isLeader={isLeader}
-        memberId={memberId}
-      />
+      <StudyInfo isUserStudy={isUserStudy} isLeader={isLeader} memberId={memberId} />
       <Tab elements={TAB_ELEMENTS} type="study" />
       <S.ContentContainer>
         {tabState === 0 && (
@@ -125,41 +108,24 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
           </>
         )}
         {tabState === 1 && (
-          <Board
-            type={"mission"}
-            category={[
-              ["규칙", "name"],
-              ["소개", "about"],
-              ["시작일", "startDate"],
-              ["종료일", "deadline"],
-              ["상태", "mission"],
-            ]}
-            widthRatio={[1, 2, 1, 1, 1]}
+          <BasicTable
             data={studyMissionList.data}
+            category={TABLE_CONSTANT.MISSION.CATEGORY}
+            widthRatio={TABLE_CONSTANT.MISSION.WIDTH_RATIO}
           />
         )}
         {tabState === 2 && (
-          <Board
-            type={"member"}
-            category={[
-              ["이름", "nickname"],
-              ["랭킹", "ruby"],
-              ["가입한 스터디", "id"],
-            ]}
-            widthRatio={[2, 1, 1]}
+          <MemberTable
             data={stduyMemberList.data}
+            category={TABLE_CONSTANT.MEMBER.CATEGORY}
+            widthRatio={TABLE_CONSTANT.MEMBER.WIDTH_RATIO}
           />
         )}
         {tabState === 3 && (
-          <Board
-            type={"join"}
-            category={[
-              ["이름", "nickname"],
-              ["랭킹", "ruby"],
-              ["상태", "study_invite"],
-            ]}
-            widthRatio={[1, 1, 1]}
-            data={studyPedingList.data.pending}
+          <BasicTable
+            data={studyPendingList.data.pending}
+            category={TABLE_CONSTANT.STUDY_INVITE.CATEGORY}
+            widthRatio={TABLE_CONSTANT.STUDY_INVITE.WIDTH_RATIO}
           />
         )}
       </S.ContentContainer>

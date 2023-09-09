@@ -73,14 +73,6 @@ const Header = () => {
       ),
     },
     {
-      key: "3",
-      label: (
-        <Link href={`/rule`} legacyBehavior>
-          규칙
-        </Link>
-      ),
-    },
-    {
       key: "4",
       label: <button onClick={handleLogout}>로그아웃</button>,
     },

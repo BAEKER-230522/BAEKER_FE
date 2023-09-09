@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { themedPalette } from "@/styles/theme";
-import Board from "@/components/common/board/Board";
+import { TABLE_CONSTANT } from "@/constant/table";
 import { studyApi } from "@/api/studyApi";
 import Loading from "@/components/common/loading/Loading";
+import BasicTable from "@/components/common/table/BasicTable";
 
 const StudyRank = () => {
   const { data, isLoading } = studyApi.useGetAllStudyListQuery({
@@ -21,17 +22,10 @@ const StudyRank = () => {
   return (
     <S.Container>
       <S.Wrapper>
-        <Board
-          category={[
-            ["랭킹", "rank"],
-            ["스터디", "name"],
-            ["소개", "about"],
-            ["인원", "capacity"],
-            ["경험치", "xp"],
-          ]}
-          widthRatio={[1, 1, 2, 1, 1]}
+        <BasicTable
           data={data.data}
-          type={"study"}
+          category={TABLE_CONSTANT.STUDY.CATEGORY}
+          widthRatio={TABLE_CONSTANT.STUDY.WIDTH_RATIO}
         />
       </S.Wrapper>
     </S.Container>

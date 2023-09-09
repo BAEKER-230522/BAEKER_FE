@@ -1,0 +1,31 @@
+import { S } from "./style";
+import { PAGE_LIMIT } from "@/constant";
+
+interface IContentProps {
+  crntPage?: number;
+  data?: any;
+  children: (item: any, index: number) => React.ReactNode;
+  height?: string;
+  overflowY?: "scroll" | "hidden";
+  contentLimit?: number | 4;
+}
+
+const ContentContainer = ({
+  contentLimit = PAGE_LIMIT,
+  height,
+  overflowY,
+  crntPage,
+  data,
+  children,
+}: IContentProps) => {
+  console.log(data, crntPage, children);
+
+  const CURRENT_DATA = data.slice(crntPage! * contentLimit, crntPage! * contentLimit + contentLimit);
+  return (
+    <S.ContentContainer style={{ height, overflowY }}>
+      {CURRENT_DATA.map((elem: any, index: number) => children(elem, index))}
+    </S.ContentContainer>
+  );
+};
+
+export default ContentContainer;

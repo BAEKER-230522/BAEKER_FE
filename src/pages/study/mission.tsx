@@ -3,16 +3,15 @@ import { themedPalette } from "@/styles/theme";
 import { Title } from "@/components/common/style";
 import Input from "@/components/common/input";
 import useInput from "@/hooks/useInput";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import { ruleApi } from "@/api/ruleApi";
 import useMissionEdit from "@/hooks/useMissionEdit";
-import Board from "@/components/common/board/Board";
 import AddProblemInputBox from "@/components/study/add-problem-button";
 import { useSelector } from "react-redux";
-import Loading from "@/components/common/loading/Loading";
 import { PageContainer } from "@/styles/common.style";
+import ScrollTable from "@/components/common/table/ScrollTable";
 import StartToEndRangeDatePicker from "@/components/common/calendar/RangeDatePicker";
+import { TABLE_CONSTANT } from "@/constant/table";
 
 const CreateMission = () => {
   const router = useRouter();
@@ -25,7 +24,6 @@ const CreateMission = () => {
   const [missionStartDate, setMissionStartDate] = useState("");
   const [missionEndDate, setMissionEndDate] = useState("");
   const [problemList, setProblemList] = useState([]);
-  const { data, isLoading } = ruleApi.useGetAllRulesQuery({});
 
   const missionProblemState = useSelector((state: any) => {
     return state.mission.missionProblemState;
@@ -47,41 +45,6 @@ const CreateMission = () => {
     }
   };
 
-  if (isLoading)
-    return (
-      <S.Container>
-        <S.FormContainer onSubmit={(e) => handleSubmit(e)}>
-          <S.MissionInputContainer>
-            <S.MissionInputLeftContainer>
-              <S.MissionInputInnerWrapper>
-                <Input title={"미션 이름"} size={"100%"} value={nameValue} onChange={nameHandler} />
-                <Input title={"미션 소개"} size={"100%"} value={aboutValue} onChange={aboutHandler} />
-                <S.SelectorWrapper>
-                  <S.Title style={{ marginRight: "auto" }}>미션 기간</S.Title>
-                  <StartToEndRangeDatePicker
-                    setMissionStartDate={setMissionStartDate}
-                    setMissionEndDate={setMissionEndDate}
-                  />
-                </S.SelectorWrapper>
-              </S.MissionInputInnerWrapper>
-            </S.MissionInputLeftContainer>
-            <S.MissionInputRightContainer>
-              <AddProblemInputBox
-                title={"문제 추가"}
-                size={"60%"}
-                value={problemValue}
-                onChange={problemHandler}
-                setProblemValue={setProblemValue}
-                setProblemList={setProblemList}
-                problemList={problemList}
-              />
-              <Loading />
-            </S.MissionInputRightContainer>
-          </S.MissionInputContainer>
-          {isEditMode ? <S.Button type="submit" value={"수정"} /> : <S.Button type="submit" value={"미션 생성"} />}
-        </S.FormContainer>
-      </S.Container>
-    );
   return (
     <S.Container>
       <S.FormContainer onSubmit={(e) => handleSubmit(e)}>
@@ -109,16 +72,10 @@ const CreateMission = () => {
               setProblemList={setProblemList}
               problemList={problemList}
             />
-            <Board
-              category={[
-                ["번호", "idx"],
-                ["문제 번호", "num"],
-                ["문제 이름", "title"],
-                ["삭제", "remove"],
-              ]}
-              widthRatio={[1, 1, 2, 1]}
+            <ScrollTable
               data={missionProblemState}
-              type={"problem"}
+              category={TABLE_CONSTANT.MISSION_PROBLEM.CATEGORY}
+              widthRatio={TABLE_CONSTANT.MISSION_PROBLEM.WIDTH_RATIO}
             />
           </S.MissionInputRightContainer>
         </S.MissionInputContainer>
@@ -134,6 +91,7 @@ const Container = styled(PageContainer)``;
 
 const FormContainer = styled.form`
   width: 80%;
+  height: 90vh;
   background-color: ${themedPalette.bg_element2};
   display: flex;
   flex-direction: column;

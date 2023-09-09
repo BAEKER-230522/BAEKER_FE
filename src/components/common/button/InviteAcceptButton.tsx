@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { S } from "./style";
+import { S } from "../table/style";
 import { Button } from "antd";
 import type { SizeType } from "antd/es/config-provider/SizeContext";
 import { studyApi } from "@/api/studyApi";
@@ -45,18 +45,10 @@ const InviteAcceptButton = ({ memberId, studyId }: IProps) => {
 
   return (
     <S.ButtonWrapper>
-      <Button
-        type="primary"
-        size={size}
-        onClick={(e) => handleStudyInviteAccept(e, memberId, studyId)}
-      >
+      <Button type="primary" size={size} onClick={(e) => handleStudyInviteAccept(e, memberId, studyId)}>
         승낙
       </Button>
-      <Button
-        type="primary"
-        size={size}
-        onClick={(e) => handleStudyInviteRefuse(e, memberId, studyId)}
-      >
+      <Button type="primary" size={size} onClick={(e) => handleStudyInviteRefuse(e, memberId, studyId)}>
         거절
       </Button>
     </S.ButtonWrapper>

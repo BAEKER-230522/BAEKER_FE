@@ -105,13 +105,10 @@ const MissionDetail = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [missionData, memberList]);
 
-  const movePage = (type: "study" | "rule") => {
+  const movePage = (type: "study") => {
     switch (type) {
       case "study":
         router.push({ pathname: `/study/${studyId}` });
-        return;
-      case "rule":
-        router.push({ pathname: `/rule/list` });
         return;
     }
   };
