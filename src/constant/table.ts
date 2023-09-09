@@ -43,4 +43,13 @@ export const TABLE_CONSTANT = {
     ],
     WIDTH_RATIO: [1, 1, 1],
   },
+  MISSION_PROBLEM: {
+    CATEGORY: [
+      ["번호", "idx"],
+      ["문제 번호", "num"],
+      ["문제 이름", "title"],
+      ["삭제", "remove"],
+    ],
+    WIDTH_RATIO: [1, 1, 2, 1],
+  },
 };
