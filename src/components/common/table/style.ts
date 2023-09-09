@@ -48,13 +48,20 @@ const HeaderContainer = styled.div<IRatios>`
   }
 `;
 
-const ContentContainer = styled.div`
+interface IContentContainerProps {
+  height?: string;
+  overflowY?: "scroll" | "hidden";
+}
+
+const ContentContainer = styled.div<IContentContainerProps>`
   display: flex;
   width: 100%;
   align-items: center;
   flex-direction: column;
   background-color: ${themedPalette.bg_element};
   color: ${themedPalette.text1};
+  height: ${(props) => props.height || "auto"};
+  overflow-y: ${(props) => props.overflowY || "visible"};
 `;
 
 const ContentWrapper = styled.div<IRatios>`

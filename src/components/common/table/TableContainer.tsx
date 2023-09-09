@@ -8,7 +8,6 @@ interface ITableProps {
 }
 
 const TableContainer = ({ children, data }: ITableProps) => {
-  console.log(data);
   const [crntPage, setCrntPage] = useState(0);
 
   return (
