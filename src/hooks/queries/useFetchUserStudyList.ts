@@ -1,5 +1,4 @@
 import { studyApi } from "@/api/studyApi";
-import { USER_NUMBER } from "@/util/constant";
 
 interface IArgument {
   memberId: number;
