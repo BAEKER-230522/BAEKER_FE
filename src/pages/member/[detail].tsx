@@ -5,7 +5,6 @@ import UserInfo from "@/components/common/user-info/user-info";
 import UserSolvedInfo from "@/components/common/user-info/user-solved-info";
 import Tab from "@/components/common/tab/tab";
 import SolvedRecord from "@/components/common/tab/solved-record";
-import Board from "@/components/common/table/Board";
 import { useSelector } from "react-redux";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
