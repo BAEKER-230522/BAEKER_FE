@@ -1,4 +1,4 @@
-import Board from "@/components/common/board/Board";
+import Board from "@/components/common/table/Board";
 import { themedPalette } from "@/styles/theme";
 import Search from "@/components/rule/search";
 import styled from "styled-components";

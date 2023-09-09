@@ -5,7 +5,7 @@ import UserInfo from "@/components/common/user-info/user-info";
 import UserSolvedInfo from "@/components/common/user-info/user-solved-info";
 import Tab from "@/components/common/tab/tab";
 import SolvedRecord from "@/components/common/tab/solved-record";
-import Board from "@/components/common/board/Board";
+import Board from "@/components/common/table/Board";
 import { useSelector } from "react-redux";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
@@ -14,8 +14,8 @@ import Loading from "@/components/common/loading/Loading";
 import { GetServerSideProps } from "next";
 import { parseCookies } from "@/util/parseCookie";
 import { PageContainer } from "@/styles/common.style";
-
-const flag = 0;
+import BasicTable from "@/components/common/table/BasicTable";
+import { TABLE_CONSTANT } from "@/constant/table";
 
 export interface IUserData {
   id: number;
@@ -47,10 +47,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const Member = ({ memberId }: { memberId: number }) => {
   const router = useRouter();
   const { detail: param } = router.query;
-  const { data: userStudyList, isLoading: isGetUserStudyListLoading } =
-    studyApi.useGetUserStudyListQuery({ memberId: param, status: 1 });
-  const { data: userData, isLoading: isGetUserInfoLoading } =
-    memberApi.useGetMemberQuery(param);
+  const { data: userStudyList, isLoading: isGetUserStudyListLoading } = studyApi.useGetUserStudyListQuery({
+    memberId: param,
+    status: 1,
+  });
+  const { data: userData, isLoading: isGetUserInfoLoading } = memberApi.useGetMemberQuery(param);
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
   });
@@ -79,26 +80,10 @@ const Member = ({ memberId }: { memberId: number }) => {
         );
       case 1:
         return (
-          <Board
-            type={"study"}
-            category={[
-              ["스터디", "name"],
-              ["소개", "about"],
-              ["인원", "capacity"],
-              ["스터디 장", "leader"],
-              ["랭킹", "xp"],
-            ]}
-            widthRatio={[1, 2, 1, 1, 1]}
+          <BasicTable
             data={userStudyList.data.data}
-          />
-        );
-      case 2:
-        return (
-          <Board
-            type={"study"}
-            category={["스터디", "소개", "인원", "스터디 장", "상태"]}
-            widthRatio={[1, 2, 1, 1, 1]}
-            data={userStudyList.data.studyList}
+            category={TABLE_CONSTANT.STUDY.CATEGORY}
+            widthRatio={TABLE_CONSTANT.STUDY.WIDTH_RATIO}
           />
         );
     }
@@ -106,11 +91,7 @@ const Member = ({ memberId }: { memberId: number }) => {
   return (
     <S.Container>
       <S.InfoContainer>
-        <UserInfo
-          userData={userData.data}
-          userId={Number(param)}
-          loginUser={memberId}
-        />
+        <UserInfo userData={userData.data} userId={Number(param)} loginUser={memberId} />
         <UserSolvedInfo userData={userData.data} />
       </S.InfoContainer>
       <Tab elements={TAB_ELEMENTS_OTHER} type="profile" />

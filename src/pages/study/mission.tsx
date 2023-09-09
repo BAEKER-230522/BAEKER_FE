@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { ruleApi } from "@/api/ruleApi";
 import useMissionEdit from "@/hooks/useMissionEdit";
-import Board from "@/components/common/board/Board";
+import Board from "@/components/common/table/Board";
 import AddProblemInputBox from "@/components/study/add-problem-button";
 import { useSelector } from "react-redux";
 import Loading from "@/components/common/loading/Loading";

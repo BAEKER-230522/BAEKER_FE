@@ -1,15 +1,15 @@
 import styled from "styled-components";
 import { themedPalette } from "@/styles/theme";
-import Board from "@/components/common/board/Board";
+import { TABLE_CONSTANT } from "@/constant/table";
 import { memberApi } from "@/api/memberApi";
 import Loading from "@/components/common/loading/Loading";
+import MemberTable from "@/components/common/table/MeberTable";
 
 const AlgorithmRank = () => {
   const { data, isLoading } = memberApi.useGetAllMembersQuery({
     page: 0,
     limit: 10,
   });
-  console.log(data);
 
   if (isLoading)
     return (
@@ -20,14 +20,10 @@ const AlgorithmRank = () => {
   return (
     <S.Container>
       <S.Wrapper>
-        <Board
-          category={[
-            ["랭킹", "rank"],
-            ["닉네임", "nickname"],
-          ]}
-          widthRatio={[1, 1]}
+        <MemberTable
           data={data.data}
-          type={"member"}
+          category={TABLE_CONSTANT.MEMBER.CATEGORY}
+          widthRatio={TABLE_CONSTANT.MEMBER.WIDTH_RATIO}
         />
       </S.Wrapper>
     </S.Container>

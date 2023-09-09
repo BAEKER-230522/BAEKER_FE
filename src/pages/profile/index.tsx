@@ -7,12 +7,15 @@ import UserInfo from "@/components/common/user-info/user-info";
 import UserSolvedInfo from "@/components/common/user-info/user-solved-info";
 import Tab from "@/components/common/tab/tab";
 import SolvedRecord from "@/components/common/tab/solved-record";
-import Board from "@/components/common/board/Board";
 import { useSelector } from "react-redux";
 import useFetchUserStudyList from "@/hooks/queries/useFetchUserStudyList";
 import useFetchUserData from "@/hooks/queries/useFetchUserData";
 import Loading from "@/components/common/loading/Loading";
 import { PageContainer } from "@/styles/common.style";
+import EmptyList from "@/components/common/empty/EmptyList";
+import BasicTable from "@/components/common/table/BasicTable";
+import InviteTable from "@/components/common/table/InviteTable";
+import { TABLE_CONSTANT } from "@/constant/table";
 
 interface LoginProps {
   refreshToken: string;
@@ -50,7 +53,7 @@ const Profile = ({ memberId }: LoginProps) => {
     status: 3,
   });
   const { data: userData, isLoading: isUserDataLoading } = useFetchUserData(memberId);
-  console.log(userData);
+
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
   });
@@ -83,44 +86,24 @@ const Profile = ({ memberId }: LoginProps) => {
           </>
         )}
         {tabState === 1 && (
-          <Board
-            type={"study"}
-            category={[
-              ["스터디", "name"],
-              ["소개", "about"],
-              ["인원", "capacity"],
-              ["스터디 장", "leader"],
-              ["랭킹", "xp"],
-            ]}
-            widthRatio={[1, 2, 1, 1, 1]}
+          <BasicTable
             data={userStudyList.data.data}
+            category={TABLE_CONSTANT.STUDY.CATEGORY}
+            widthRatio={TABLE_CONSTANT.STUDY.WIDTH_RATIO}
           />
         )}
         {tabState === 2 && (
-          <Board
-            type={"study"}
-            category={[
-              ["스터디", "name"],
-              ["소개", "about"],
-              ["인원", "capacity"],
-              ["스터디 장", "leader"],
-              ["상태", "request"],
-            ]}
-            widthRatio={[1, 2, 1, 1, 1]}
+          <BasicTable
             data={userStudyJoinRequestList.data.data}
+            category={TABLE_CONSTANT.STUDY.CATEGORY}
+            widthRatio={TABLE_CONSTANT.STUDY.WIDTH_RATIO}
           />
         )}
         {tabState === 3 && (
-          <Board
-            type={"study"}
-            category={[
-              ["스터디", "name"],
-              ["소개", "about"],
-              ["인원", "capacity"],
-              ["스터디 장", "leader"],
-              ["상태", "user_invite"],
-            ]}
-            widthRatio={[1, 2, 1, 1, 1]}
+          <InviteTable
+            category={TABLE_CONSTANT.INVITE.CATEGORY}
+            widthRatio={TABLE_CONSTANT.INVITE.WIDTH_RATIO}
+            memberId={memberId}
             data={userStudyInviteList.data.data}
           />
         )}
