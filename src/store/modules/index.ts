@@ -9,7 +9,6 @@ import user from "./user";
 import darkmode from "./darkmode";
 import { memberApi } from "@/api/memberApi";
 import { studyApi } from "@/api/studyApi";
-import { ruleApi } from "@/api/ruleApi";
 
 const reducer = (state: any, action: any) => {
   if (action.type === HYDRATE) {
@@ -29,7 +28,6 @@ const reducer = (state: any, action: any) => {
     darkmode,
     [memberApi.reducerPath]: memberApi.reducer,
     [studyApi.reducerPath]: studyApi.reducer,
-    [ruleApi.reducerPath]: ruleApi.reducer,
     // 리듀서 모듈(slice)을 추가할 때마다 combineReducers 함수의 인자로 전달되는 객체 내부에 추가해줘야함
   })(state, action);
 };
