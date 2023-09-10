@@ -1,13 +1,9 @@
 import { S } from "./style";
 import { usePagination } from "@/hooks/usePagination";
+import { useTable } from "./context/TableContext";
 
-interface IPagination {
-  data?: any;
-  crntPage?: number;
-  setCrntPage?: React.Dispatch<React.SetStateAction<number>>;
-}
-
-const Pagination = ({ data, crntPage, setCrntPage }: IPagination) => {
+const Pagination = () => {
+  const { data, crntPage, setCrntPage } = useTable();
   const PAGENATION_ARR = Array.from({ length: Math.ceil(data?.length / 4) }, (_, idx: number) => idx + 1);
   const { onClickNext, onClickPrev, crntPageArray, onClickPage } = usePagination({
     page: PAGENATION_ARR,

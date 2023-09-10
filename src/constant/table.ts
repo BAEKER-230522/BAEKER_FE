@@ -20,10 +20,11 @@ export const TABLE_CONSTANT = {
   MEMBER: {
     CATEGORY: [
       ["랭킹", "ranking"],
+      ["백준", "baekJoonName"],
       ["닉네임", "nickname"],
       ["소개", "about"],
     ],
-    WIDTH_RATIO: [1, 1, 1],
+    WIDTH_RATIO: [1, 1, 1, 1],
   },
   MISSION: {
     CATEGORY: [

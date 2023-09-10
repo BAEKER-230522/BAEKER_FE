@@ -1,3 +1,4 @@
+import { useTable } from "./context/TableContext";
 import { S } from "./style";
 import { PAGE_LIMIT } from "@/constant";
 
@@ -10,16 +11,8 @@ interface IContentProps {
   contentLimit?: number | 4;
 }
 
-const ContentContainer = ({
-  contentLimit = PAGE_LIMIT,
-  height,
-  overflowY,
-  crntPage,
-  data,
-  children,
-}: IContentProps) => {
-  console.log(data, crntPage, children);
-
+const ContentContainer = ({ contentLimit = PAGE_LIMIT, height, overflowY, children }: IContentProps) => {
+  const { data, crntPage } = useTable();
   const CURRENT_DATA = data.slice(crntPage! * contentLimit, crntPage! * contentLimit + contentLimit);
   return (
     <S.ContentContainer style={{ height, overflowY }}>
