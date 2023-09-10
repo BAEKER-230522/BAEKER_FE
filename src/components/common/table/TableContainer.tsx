@@ -1,5 +1,5 @@
 import { S } from "./style";
-import React, { useState } from "react";
+import { TableProvider } from "./context/TableContext";
 
 interface ITableProps {
   crntPage?: number;
@@ -8,16 +8,9 @@ interface ITableProps {
 }
 
 const TableContainer = ({ children, data }: ITableProps) => {
-  const [crntPage, setCrntPage] = useState(0);
-
   return (
     <S.Container>
-      {React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child as any, { crntPage, setCrntPage, data });
-        }
-        return child;
-      })}
+      <TableProvider data={data}>{children}</TableProvider>
     </S.Container>
   );
 };
