@@ -5,17 +5,17 @@ import EmptyList from "../empty/EmptyList";
 const BasicTable = ({ data, category, widthRatio }: any) => {
   const { navigatePage } = useNavigation();
 
-  const renderFieldContent = (field: any, item: any) => {
+  const renderFieldContent = (field: any, item: any, index: number) => {
     switch (field[1]) {
-      case "nickname":
+      case "capacity":
         return (
-          <div>
+          <div key={index}>
             ( {item.studyMember}/{item.capacity} )
           </div>
         );
 
       default:
-        return <div>{item[field[1]]}</div>;
+        return <div key={index}>{item[field[1]]}</div>;
     }
   };
 
@@ -27,12 +27,13 @@ const BasicTable = ({ data, category, widthRatio }: any) => {
       <Table.ContentContainer>
         {(item, index) => (
           <Table.ContentRow
+            key={index}
             onClickMethod={() => navigatePage({ type: "study", id: item.id })}
             widthRatio={widthRatio}
             item={item}
             idx={index}
             category={category}>
-            {(field) => renderFieldContent(field, item)}
+            {(field, idx) => renderFieldContent(field, item, idx)}
           </Table.ContentRow>
         )}
       </Table.ContentContainer>

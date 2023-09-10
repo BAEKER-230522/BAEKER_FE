@@ -6,10 +6,10 @@ import EmptyList from "../empty/EmptyList";
 const InviteTable = ({ data, category, widthRatio, memberId }: any) => {
   const { navigatePage } = useNavigation();
 
-  const renderFieldContent = (field: any, item: any) => {
+  const renderFieldContent = (field: any, item: any, index: number) => {
     switch (field[1]) {
       case "user_invite":
-        return <InviteAcceptButton memberId={memberId} studyId={item.id} />;
+        return <InviteAcceptButton key={index} memberId={memberId} studyId={item.id} />;
       case "capacity":
         return (
           <div>
@@ -17,7 +17,7 @@ const InviteTable = ({ data, category, widthRatio, memberId }: any) => {
           </div>
         );
       default:
-        return <div>{item[field[1]]}</div>;
+        return <div key={index}>{item[field[1]]}</div>;
     }
   };
 
@@ -33,8 +33,9 @@ const InviteTable = ({ data, category, widthRatio, memberId }: any) => {
             widthRatio={widthRatio}
             item={item}
             idx={index}
+            key={index}
             category={category}>
-            {(field) => renderFieldContent(field, item)}
+            {(field) => renderFieldContent(field, item, index)}
           </Table.ContentRow>
         )}
       </Table.ContentContainer>

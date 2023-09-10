@@ -6,9 +6,9 @@ const ScrollTable = ({ data, category, widthRatio }: any) => {
   const renderFieldContent = (field: any, item: any, index: number) => {
     switch (field[1]) {
       case "remove":
-        return <RemoveProblemButton idx={index + 1} />;
+        return <RemoveProblemButton key={index} idx={index + 1} />;
       default:
-        return <div>{item[field[1]]}</div>;
+        return <div key={index}>{item[field[1]]}</div>;
     }
   };
   if (data.length === 0) return <EmptyList />;
@@ -17,7 +17,7 @@ const ScrollTable = ({ data, category, widthRatio }: any) => {
       <Table.Header widthRatio={widthRatio} category={category} />
       <Table.ContentContainer height="350px" overflowY="scroll" contentLimit={30}>
         {(item, index) => (
-          <Table.ContentRow widthRatio={widthRatio} item={item} idx={index} category={category}>
+          <Table.ContentRow key={index} widthRatio={widthRatio} item={item} idx={index} category={category}>
             {(field) => renderFieldContent(field, item, index)}
           </Table.ContentRow>
         )}
