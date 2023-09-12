@@ -37,8 +37,7 @@ import { useEffect } from "react";
 // };
 
 const Login = () => {
-  const KAKAO_REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
-  const KAKAO_REDIRECT_URI = "http://localhost:3000/login";
+  const KAKAO_REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
   useEffect(() => {
     const params = new URL(document.location.toString()).searchParams;
     const code = params.get("code");
