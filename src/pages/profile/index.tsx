@@ -12,7 +12,6 @@ import useFetchUserStudyList from "@/hooks/queries/useFetchUserStudyList";
 import useFetchUserData from "@/hooks/queries/useFetchUserData";
 import Loading from "@/components/common/loading/Loading";
 import { PageContainer } from "@/styles/common.style";
-import EmptyList from "@/components/common/empty/EmptyList";
 import BasicTable from "@/components/common/table/BasicTable";
 import InviteTable from "@/components/common/table/InviteTable";
 import { TABLE_CONSTANT } from "@/constant/table";

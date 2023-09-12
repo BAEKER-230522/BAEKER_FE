@@ -11,7 +11,7 @@ const TableContext = createContext<ITableContext | undefined>(undefined);
 export const useTable = () => {
   const context = useContext(TableContext);
   if (!context) {
-    throw new Error("useTable must be used within a TableProvider");
+    throw new Error("table context error");
   }
   return context;
 };

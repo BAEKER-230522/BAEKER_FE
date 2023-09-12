@@ -1,4 +1,4 @@
-import { useChangeTabState } from "@/hooks/useChangeTabState";
+import { useChangeTabState } from "@/components/common/tab/hook/useChangeTabState";
 import { S } from "./style";
 
 interface ITab {

@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     domains: ["k.kakaocdn.net", "s3.ap-northeast-2.amazonaws.com"],
     remotePatterns: [

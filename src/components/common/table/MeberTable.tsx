@@ -1,5 +1,5 @@
-import { Table } from ".";
-import { S } from "./style";
+import { Table } from "./ui";
+import { S } from "./ui/style";
 import { useNavigation } from "@/hooks/useNavigation";
 import Image from "next/image";
 import EmptyList from "../empty/EmptyList";

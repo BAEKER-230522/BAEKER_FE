@@ -1,9 +1,8 @@
 import { S } from "./style";
-import { TableProvider } from "./context/TableContext";
+import { TableProvider } from "../context/TableContext";
 
 interface ITableProps {
-  crntPage?: number;
-  data?: any;
+  data: any;
   children: React.ReactNode;
 }
 

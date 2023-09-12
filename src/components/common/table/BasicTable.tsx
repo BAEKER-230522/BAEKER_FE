@@ -1,4 +1,4 @@
-import { Table } from ".";
+import { Table } from "./ui";
 import { useNavigation } from "@/hooks/useNavigation";
 import EmptyList from "../empty/EmptyList";
 

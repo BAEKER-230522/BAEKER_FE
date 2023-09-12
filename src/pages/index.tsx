@@ -8,8 +8,12 @@ import Head from "next/head";
 
 const Home = () => {
   const router = useRouter();
+  const KAKAO_REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
+  const KAKAO_REDIRECT_URI = "http://localhost:3000/login";
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+
   const kakaoLogin = async () => {
-    window.location.href = `${process.env.NEXT_PUBLIC_LOGIN_URL}oauth2/authorization/kakao`;
+    window.location.href = KAKAO_AUTH_URL;
   };
 
   const movePage = (type: "member" | "study" | "study_rank" | "member_rank") => {

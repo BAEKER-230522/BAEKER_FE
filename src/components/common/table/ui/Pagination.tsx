@@ -1,10 +1,11 @@
 import { S } from "./style";
-import { usePagination } from "@/hooks/usePagination";
-import { useTable } from "./context/TableContext";
+import { usePagination } from "@/components/common/table/hook/usePagination";
+import { useTable } from "../context/TableContext";
+import { PAGE_LIMIT } from "@/constant";
 
 const Pagination = () => {
   const { data, crntPage, setCrntPage } = useTable();
-  const PAGENATION_ARR = Array.from({ length: Math.ceil(data?.length / 4) }, (_, idx: number) => idx + 1);
+  const PAGENATION_ARR = Array.from({ length: Math.ceil(data?.length / PAGE_LIMIT) }, (_, idx: number) => idx + 1);
   const { onClickNext, onClickPrev, crntPageArray, onClickPage } = usePagination({
     page: PAGENATION_ARR,
     crntPage: crntPage!,

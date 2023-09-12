@@ -1,4 +1,4 @@
-import { useTable } from "./context/TableContext";
+import { useTable } from "../context/TableContext";
 import { S } from "./style";
 import { PAGE_LIMIT } from "@/constant";
 

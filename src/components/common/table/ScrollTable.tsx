@@ -1,4 +1,4 @@
-import { Table } from ".";
+import { Table } from "./ui";
 import EmptyList from "../empty/EmptyList";
 import RemoveProblemButton from "../button/RemoveProbleButton";
 
