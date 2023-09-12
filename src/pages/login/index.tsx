@@ -44,9 +44,7 @@ const Login = () => {
     if (code) {
       const kakaoResponse = async () =>
         await axios
-          .post(
-            `${process.env.NEXT_PUBLIC_BASE_URL}oauth2/authorization/kakao?code=${code}&redirectUri=${KAKAO_REDIRECT_URI}`
-          )
+          .get(`${process.env.NEXT_PUBLIC_BASE_URL}login/oauth2/kakao?code=${code}&redirectUri=${KAKAO_REDIRECT_URI}`)
           .then((e) => console.log(e));
       kakaoResponse();
     }
