@@ -3,7 +3,7 @@ import InviteAcceptButton from "../button/InviteAcceptButton";
 import { useNavigation } from "@/hooks/useNavigation";
 import EmptyList from "../empty/EmptyList";
 
-const InviteTable = ({ data, category, widthRatio, memberId }: any) => {
+const InviteTable = ({ data, category, widthRatio, memberId, url, routeType }: any) => {
   const { navigatePage } = useNavigation();
 
   const renderFieldContent = (field: any, item: any, index: number) => {
@@ -29,7 +29,7 @@ const InviteTable = ({ data, category, widthRatio, memberId }: any) => {
       <Table.ContentContainer>
         {(item, index) => (
           <Table.ContentRow
-            onClickMethod={() => navigatePage({ type: "study", id: item.id })}
+            onClickMethod={() => navigatePage({ url, routeType, id: item.id })}
             widthRatio={widthRatio}
             item={item}
             idx={index}

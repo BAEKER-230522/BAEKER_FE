@@ -108,6 +108,8 @@ const Profile = ({ memberId }: LoginProps) => {
             widthRatio={TABLE_CONSTANT.INVITE.WIDTH_RATIO}
             memberId={memberId}
             data={userStudyInviteList.data.data}
+            url="study"
+            routeType="defaultRoute"
           />
         )}
       </S.RecordContainer>
