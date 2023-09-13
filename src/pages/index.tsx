@@ -95,6 +95,7 @@ const TextWrapper = styled.div`
   align-items: center;
   border: 1px solid ${themedPalette.border};
   border-radius: ${themedPalette.borderRadius};
+  padding: 20px 0px;
   span {
     font-size: 1.3rem;
     font-weight: 600;
@@ -122,7 +123,6 @@ const MoveTag = styled.p`
 `;
 
 const Container = styled(PageContainer)`
-  height: 90vh;
   flex-direction: row;
   justify-content: center;
   align-items: center;

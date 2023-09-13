@@ -5,8 +5,7 @@ import { themedPalette } from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset};
-  background-color: ${themedPalette.bg_element};
-
+  
   body {
     ${themes.light}
     transition: 0.125s all ease-in;
@@ -15,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
   @media (prefers-color-scheme: dark) {
     body {
       ${themes.dark}
+      background-color: ${themedPalette.bg_element};
     }
   }
  
@@ -24,6 +24,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body[data-theme='dark'] {
     ${themes.dark};
+    background-color: ${themedPalette.bg_element};
   }
 
 `;

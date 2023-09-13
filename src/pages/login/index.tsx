@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { PageContainer } from "@/styles/common.style";
 import Loading from "@/components/common/loading/Loading";
 import { useKakaoLogin } from "@/hooks/login/useKakaoLogin";
+import { themedPalette } from "@/styles/theme";
 
 const Login = () => {
   useKakaoLogin();
@@ -22,6 +23,7 @@ const Container = styled(PageContainer)`
 const BigFont = styled.h1`
   font-size: 3rem;
   font-weight: 700;
+  color: ${themedPalette.text1};
   margin-bottom: 30px;
 `;
 

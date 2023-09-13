@@ -3,6 +3,7 @@ import { themedPalette } from "./theme";
 
 export const PageContainer = styled.div`
   width: 100vw;
+  min-height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
