@@ -30,10 +30,12 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
     bg_element: "#121212",
     bg_element2: "#1E1E1E",
     bg_element3: "#1B1B1B",
-    bg_element4: "#BB86FC",
+    bg_element4: "#1877FF", // (버튼)
+    // bg_element4: "#BB86FC",
     text1: "#E1E1E1",
     text2: "#000000",
-    text3: "#BB86FC",
+    text3: "#1877FF",
+    // text3: "#BB86FC",
     border: "#555555",
     borderRadius: "7px",
   },
@@ -41,11 +43,7 @@ const themeVariableSets: Record<Theme, ThemeVariables> = {
 
 const buildCssVariables = (variables: ThemeVariables) => {
   const keys = Object.keys(variables) as (keyof ThemeVariables)[];
-  return keys.reduce(
-    (acc, key) =>
-      acc.concat(`--${key.replace(/_/g, "-")}: ${variables[key]};`, "\n"),
-    ""
-  );
+  return keys.reduce((acc, key) => acc.concat(`--${key.replace(/_/g, "-")}: ${variables[key]};`, "\n"), "");
 };
 
 export const themes = {
@@ -57,10 +55,7 @@ const cssVar = (name: string) => `var(--${name.replace(/_/g, "-")})`;
 
 const variableKeys = Object.keys(themeVariableSets.light) as VariableKey[];
 
-export const themedPalette: Record<VariableKey, string> = variableKeys.reduce(
-  (acc, current) => {
-    acc[current] = cssVar(current);
-    return acc;
-  },
-  {} as ThemedPalette
-);
+export const themedPalette: Record<VariableKey, string> = variableKeys.reduce((acc, current) => {
+  acc[current] = cssVar(current);
+  return acc;
+}, {} as ThemedPalette);
