@@ -13,15 +13,7 @@ interface IInput {
   problemList: any;
 }
 
-const AddProblemInputBox = ({
-  title,
-  size,
-  value,
-  onChange,
-  setProblemValue,
-  setProblemList,
-  problemList,
-}: IInput) => {
+const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue, setProblemList, problemList }: IInput) => {
   const dispatch = useDispatch();
 
   const missionProblemState = useSelector((state: any) => {
@@ -35,16 +27,13 @@ const AddProblemInputBox = ({
       .find((row) => row.startsWith("accessToken="))
       ?.split("=")[1];
     try {
-      const response = await fetch(
-        `http://54.180.90.94:8084/api/solved/v1/${value}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${accessToken}`,
-          },
-        }
-      );
+      const response = await fetch(`${process.env.NEXT_PUBLIC_SOLVED_URL}api/solved/v1/${value}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${accessToken}`,
+        },
+      });
 
       const result = await response.json();
 
@@ -72,11 +61,7 @@ const AddProblemInputBox = ({
     <S.InputContainer size={size}>
       <S.Title>{title}</S.Title>
       <S.InputWrapper>
-        <S.Input
-          onChange={onChange}
-          value={value}
-          placeholder="문제 번호를 입력해 주세요"
-        />
+        <S.Input onChange={onChange} value={value} placeholder="문제 번호를 입력해 주세요" />
         <S.Button type="button" onClick={handleAddProblem}>
           추가
         </S.Button>
