@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
+const StudyDetail = ({ memberId }: IServerSideProp) => {
   const router = useRouter();
   const { studyId: param } = router.query;
   const { data: studyMissionList, isLoading: getStudyMissionListLoading } = studyApi.useGetStudyRuleListQuery(
@@ -56,7 +56,7 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
   const tabState = useSelector((state: any) => {
     return state.tab.studyTabState;
   });
-  console.log(stduyMemberList);
+
   useEffect(() => {
     if (memberId === null) setIsUserStudy(true);
     if (!getMemberListLoading) {
@@ -112,6 +112,8 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
             data={studyMissionList.data}
             category={TABLE_CONSTANT.MISSION.CATEGORY}
             widthRatio={TABLE_CONSTANT.MISSION.WIDTH_RATIO}
+            url="mission"
+            routeType="customRoute"
           />
         )}
         {tabState === 2 && (
@@ -126,6 +128,8 @@ const StudyDetail = ({ refreshToken, memberId }: IServerSideProp) => {
             data={studyPendingList.data.pending}
             category={TABLE_CONSTANT.STUDY_INVITE.CATEGORY}
             widthRatio={TABLE_CONSTANT.STUDY_INVITE.WIDTH_RATIO}
+            url="member"
+            routeType="defaultRoute"
           />
         )}
       </S.ContentContainer>

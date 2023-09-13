@@ -89,6 +89,8 @@ const Profile = ({ memberId }: LoginProps) => {
             data={userStudyList.data.data}
             category={TABLE_CONSTANT.STUDY.CATEGORY}
             widthRatio={TABLE_CONSTANT.STUDY.WIDTH_RATIO}
+            url="study"
+            routeType="defaultRoute"
           />
         )}
         {tabState === 2 && (
@@ -96,6 +98,8 @@ const Profile = ({ memberId }: LoginProps) => {
             data={userStudyJoinRequestList.data.data}
             category={TABLE_CONSTANT.STUDY.CATEGORY}
             widthRatio={TABLE_CONSTANT.STUDY.WIDTH_RATIO}
+            url="study"
+            routeType="defaultRoute"
           />
         )}
         {tabState === 3 && (
