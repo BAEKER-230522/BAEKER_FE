@@ -1,17 +1,17 @@
 import { S } from "./style";
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useEffect } from "react";
 import Link from "next/link";
 import type { MenuProps } from "antd";
 import { Button, Dropdown, ConfigProvider } from "antd";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LocalStorage from "@/util/localstorage";
-import { logout } from "@/store/modules/user";
+import { logout, login } from "@/store/modules/user";
 import Toggle from "./toggle";
 import Search from "./search/search";
 
 const Header = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const isLogin = useSelector((state: any) => state.user.isLogin);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -24,7 +24,7 @@ const Header = () => {
     document.cookie = "refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "baekJoonConnect=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     document.cookie = "memberId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    setIsLogin(false);
+    dispatch(logout());
     router.push("/");
   };
 
@@ -33,7 +33,12 @@ const Header = () => {
       .split("; ")
       .find((row) => row.startsWith("refreshToken="))
       ?.split("=")[1];
-    setIsLogin(!!refreshToken);
+    if (!!refreshToken) {
+      dispatch(login());
+    } else {
+      LocalStorage.removeItem("memberId");
+      dispatch(logout());
+    }
   }, []);
 
   const items_1: MenuProps["items"] = [

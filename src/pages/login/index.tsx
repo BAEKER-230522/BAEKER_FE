@@ -1,55 +1,27 @@
-import axios from "axios";
-import { useEffect } from "react";
-
-// import { GetServerSideProps } from "next";
-// import { themedPalette } from "@/styles/theme";
-
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const { req, res } = context;
-//   const { accessToken, refreshToken, memberId, baekJoonConnect } =
-//     context.query as {
-//       accessToken: string;
-//       refreshToken: string;
-//       memberId: string;
-//       baekJoonConnect: string;
-//     };
-
-//   if (accessToken) {
-//     // HttpOnly;
-//     res.setHeader("Set-Cookie", [
-//       `accessToken=${accessToken}; Path=/; Secure`,
-//       `refreshToken=${refreshToken}; Path=/; Secure`,
-//       `memberId=${memberId}; Path=/; Secure`,
-//       `baekJoonConnect=${baekJoonConnect}; Path=/; Secure`,
-//     ]);
-//     // 백준 연동 여부에 따른 페이지 이동
-//     if (baekJoonConnect === "true") {
-//       res.writeHead(302, { Location: "/profile" });
-//       res.end();
-//       return { props: {} };
-//     } else {
-//       res.writeHead(302, { Location: "/connector" });
-//       res.end();
-//       return { props: {} };
-//     }
-//   }
-//   return { props: {} };
-// };
+import styled from "styled-components";
+import { PageContainer } from "@/styles/common.style";
+import Loading from "@/components/common/loading/Loading";
+import { useKakaoLogin } from "@/hooks/login/useKakaoLogin";
 
 const Login = () => {
-  const KAKAO_REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
-  useEffect(() => {
-    const params = new URL(document.location.toString()).searchParams;
-    const code = params.get("code");
-    if (code) {
-      const kakaoResponse = async () =>
-        await axios
-          .get(`${process.env.NEXT_PUBLIC_BASE_URL}login/oauth2/kakao?code=${code}&redirectUri=${KAKAO_REDIRECT_URI}`)
-          .then((e) => console.log(e));
-      kakaoResponse();
-    }
-  }, []);
-  return <div>LOGIN PAGE</div>;
+  useKakaoLogin();
+  return (
+    <S.Container>
+      <S.BigFont>BAEKER</S.BigFont>
+      <Loading />
+    </S.Container>
+  );
 };
 
 export default Login;
+
+const Container = styled(PageContainer)`
+  height: 86vh;
+`;
+const BigFont = styled.h1`
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+`;
+
+const S = { Container, BigFont };
