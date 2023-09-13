@@ -5,6 +5,7 @@ import { useKakaoLogin } from "@/hooks/login/useKakaoLogin";
 
 const Login = () => {
   useKakaoLogin();
+  console.log("deploy issue");
   return (
     <S.Container>
       <S.BigFont>BAEKER</S.BigFont>
