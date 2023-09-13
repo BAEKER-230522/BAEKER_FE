@@ -36,7 +36,7 @@ const MemberTable = ({ data, category, widthRatio }: any) => {
         {(item, index) => (
           <Table.ContentRow
             key={index}
-            onClickMethod={() => navigatePage({ type: "member", id: item.id })}
+            onClickMethod={() => navigatePage({ url: "member", routeType: "defaultRoute", id: item.id })}
             widthRatio={widthRatio}
             item={item}
             idx={index}

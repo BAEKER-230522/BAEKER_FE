@@ -22,6 +22,7 @@ interface IPersonStudyRuleDtst {
   personalStudyRuleStatus: string;
   problemStatusQueryDtos: IProblemStatusQueryDtos[];
 }
+
 const MissionDetail = () => {
   const router = useRouter();
   const param = router.query;
@@ -29,8 +30,6 @@ const MissionDetail = () => {
   const missionId = router.query.missionId;
   const { data: missionData, isLoading: getMissionDataLoading } = studyApi.useGetStudyRuleQuery(missionId);
   const { data: memberList, isLoading: getMemberListLoading } = studyApi.useGetStudyMemberListQuery(studyId);
-  console.log(missionData);
-  console.log(memberList);
 
   const [memberStatus, setMemberStatus] = useState<IPersonStudyRuleDtst[]>();
   const [missionStatus, setMissionState] = useState<string>();

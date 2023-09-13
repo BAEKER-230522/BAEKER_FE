@@ -26,6 +26,8 @@ const StudyRank = () => {
           data={data.data}
           category={TABLE_CONSTANT.STUDY.CATEGORY}
           widthRatio={TABLE_CONSTANT.STUDY.WIDTH_RATIO}
+          url="study"
+          routeType="defaultRoute"
         />
       </S.Wrapper>
     </S.Container>

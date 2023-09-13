@@ -30,13 +30,7 @@ interface IProp {
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SearchBox = ({
-  searchResult,
-  isLoading,
-  setInputFocused,
-  focus,
-  setSearchValue,
-}: IProp) => {
+const SearchBox = ({ searchResult, isLoading, setInputFocused, focus, setSearchValue }: IProp) => {
   const formRef = useRef<HTMLDivElement>(null);
   const handleFocusOut = ({ target }: any) => {
     if (!formRef.current?.contains(target) && !focus) {
@@ -59,9 +53,7 @@ const SearchBox = ({
   if (isLoading) {
     return (
       <S.Container>
-        <div
-          style={{ width: "100%", display: "flex", justifyContent: "center" }}
-        >
+        <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
           <Loading />
         </div>
       </S.Container>
@@ -71,9 +63,7 @@ const SearchBox = ({
   if (searchResult === undefined) {
     return (
       <S.Container>
-        <div style={{ width: "100%", textAlign: "center" }}>
-          검색어를 입력해 주세요
-        </div>
+        <div style={{ width: "100%", textAlign: "center" }}>검색어를 입력해 주세요</div>
       </S.Container>
     );
   }
@@ -81,9 +71,7 @@ const SearchBox = ({
   if (searchResult.members.length === 0 && searchResult.studies.length === 0) {
     return (
       <S.Container>
-        <div style={{ width: "100%", textAlign: "center" }}>
-          검색 결과가 없습니다
-        </div>
+        <div style={{ width: "100%", textAlign: "center" }}>검색 결과가 없습니다</div>
       </S.Container>
     );
   }
@@ -93,19 +81,11 @@ const SearchBox = ({
       <S.Ul>
         <S.Title>유저 ({searchResult.members.length})</S.Title>
         {searchResult.members.length === 0 ? (
-          <div style={{ width: "100%", textAlign: "center" }}>
-            해당 유저가 없습니다.
-          </div>
+          <div style={{ width: "100%", textAlign: "center" }}>해당 유저가 없습니다.</div>
         ) : (
           searchResult.members.map((e, i) => (
             <S.Li key={i} onClick={() => movePage(e.id, "member")}>
-              <Image
-                src={e.profileImg}
-                width={20}
-                height={20}
-                alt="user Image"
-                style={{ borderRadius: "100%" }}
-              />
+              <Image src={e.profileImg} width={50} height={50} alt="user Image" style={{ borderRadius: "100%" }} />
               <span>{e.nickname}</span>
             </S.Li>
           ))
@@ -115,9 +95,7 @@ const SearchBox = ({
       <S.Ul>
         <S.Title>스터디 ({searchResult.studies.length})</S.Title>
         {searchResult.studies.length === 0 ? (
-          <div style={{ width: "100%", textAlign: "center" }}>
-            해당 스터디가 없습니다.
-          </div>
+          <div style={{ width: "100%", textAlign: "center" }}>해당 스터디가 없습니다.</div>
         ) : (
           searchResult.studies.map((e, i) => (
             <S.Li key={i} onClick={() => movePage(e.id, "study")}>
@@ -145,6 +123,7 @@ const Container = styled.div`
   color: ${themedPalette.text1};
   border-radius: 7px;
   padding: 1rem;
+  overflow-y: scroll;
 `;
 const Divider = styled.div`
   height: 1px;
@@ -159,6 +138,7 @@ const Li = styled.li`
   border-radius: 7px;
   font-weight: 400;
   width: 100%;
+  height: 60px;
   &:hover {
     background-color: ${themedPalette.bg_element2};
   }

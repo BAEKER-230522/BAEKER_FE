@@ -2,7 +2,7 @@ import { Table } from "./ui";
 import { useNavigation } from "@/hooks/useNavigation";
 import EmptyList from "../empty/EmptyList";
 
-const BasicTable = ({ data, category, widthRatio }: any) => {
+const BasicTable = ({ data, category, widthRatio, url, routeType }: any) => {
   const { navigatePage } = useNavigation();
 
   const renderFieldContent = (field: any, item: any, index: number) => {
@@ -28,7 +28,7 @@ const BasicTable = ({ data, category, widthRatio }: any) => {
         {(item, index) => (
           <Table.ContentRow
             key={index}
-            onClickMethod={() => navigatePage({ type: "study", id: item.id })}
+            onClickMethod={() => navigatePage({ url, routeType, id: item.id })}
             widthRatio={widthRatio}
             item={item}
             idx={index}

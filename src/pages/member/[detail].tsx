@@ -83,6 +83,8 @@ const Member = ({ memberId }: { memberId: number }) => {
             data={userStudyList.data.data}
             category={TABLE_CONSTANT.STUDY.CATEGORY}
             widthRatio={TABLE_CONSTANT.STUDY.WIDTH_RATIO}
+            url="study"
+            routeType="defaultRoute"
           />
         );
     }
