@@ -22,6 +22,7 @@ interface IPersonStudyRuleDtst {
   personalStudyRuleStatus: string;
   problemStatusQueryDtos: IProblemStatusQueryDtos[];
 }
+
 const MissionDetail = () => {
   const router = useRouter();
   const param = router.query;

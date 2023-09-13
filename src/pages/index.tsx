@@ -4,7 +4,7 @@ import { themedPalette } from "@/styles/theme";
 import Image from "next/image";
 import kakao_logo from "../../public/kakao.png";
 import Head from "next/head";
-import { movePage } from "@/util/movePage";
+import { useMovePage } from "@/hooks/home/useMovePage";
 
 const Home = () => {
   const KAKAO_REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
@@ -33,7 +33,7 @@ const Home = () => {
               자신만의 스터디를 만들거나 다른 스터디에 가입하여,
               <br /> 함께 문제를 풀어나가는 경험을 만끽하세요.
             </p>
-            <S.MoveTag onClick={() => movePage("study")}>스터디 둘러보기</S.MoveTag>
+            <S.MoveTag onClick={() => useMovePage("study")}>스터디 둘러보기</S.MoveTag>
           </S.TextWrapper>
           <S.TextWrapper>
             <span>📌 개인 문제 풀이 통계</span>
@@ -41,7 +41,7 @@ const Home = () => {
               일주일 동안의 문제풀이 현황을 한눈에 파악하며,
               <br /> 개인적인 성장을 지속적으로 모니터링하세요.
             </p>
-            <S.MoveTag onClick={() => movePage("member")}>프로필 페이지 둘러보기</S.MoveTag>
+            <S.MoveTag onClick={() => useMovePage("member")}>프로필 페이지 둘러보기</S.MoveTag>
           </S.TextWrapper>
           <S.TextWrapper>
             <span>📌 랭킹 시스템</span>
@@ -49,8 +49,8 @@ const Home = () => {
               스터디 미션을 완료하면서 경험치를 얻어,
               <br /> 스터디 랭킹과 개인 랭킹을 높여보세요.
             </p>
-            <S.MoveTag onClick={() => movePage("member_rank")}>개인 랭킹 둘러보기</S.MoveTag>
-            <S.MoveTag onClick={() => movePage("study_rank")}>스터디 랭킹 둘러보기</S.MoveTag>
+            <S.MoveTag onClick={() => useMovePage("member_rank")}>개인 랭킹 둘러보기</S.MoveTag>
+            <S.MoveTag onClick={() => useMovePage("study_rank")}>스터디 랭킹 둘러보기</S.MoveTag>
           </S.TextWrapper>
           <S.TextWrapper>
             <span>🚀 BAEKER 🚀</span>
