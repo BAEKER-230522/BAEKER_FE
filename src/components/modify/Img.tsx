@@ -1,6 +1,6 @@
 import { S } from "./style";
 import Image from "next/image";
-import React, { SetStateAction, useRef, useState } from "react";
+import React, { useRef } from "react";
 
 interface IProps {
   img: string;
@@ -28,16 +28,9 @@ const ModifyImg = ({ img, setImg, setImgFile }: IProps) => {
 
   return (
     <S.ImgContainer>
-      {img && (
-        <Image width={100} height={100} src={img} alt="kakao profile img" />
-      )}
+      {img && <Image width={100} height={100} src={img} alt="kakao profile img" />}
       <button onClick={handleButtonClick}>이미지 변경</button>
-      <input
-        type="file"
-        style={{ display: "none" }}
-        ref={inputRef}
-        onChange={handleFileChange}
-      />
+      <input type="file" style={{ display: "none" }} ref={inputRef} onChange={handleFileChange} />
     </S.ImgContainer>
   );
 };

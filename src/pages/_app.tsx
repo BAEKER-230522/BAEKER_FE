@@ -1,4 +1,4 @@
-import Header from "@/components/common/Header";
+import Header from "@/components/common/header/Header";
 import { GlobalStyle } from "@/styles/global.style";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

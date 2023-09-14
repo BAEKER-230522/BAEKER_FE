@@ -17,7 +17,6 @@ const Image = styled.img`
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  background-color: aqua;
 `;
 
 const BigFont = styled.span`
