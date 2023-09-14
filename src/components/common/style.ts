@@ -2,48 +2,6 @@ import styled from "styled-components";
 import { FaMedal } from "react-icons/fa";
 import { themedPalette } from "@/styles/theme";
 
-const HeaderContainer = styled.div`
-  width: 100%;
-  height: 70px;
-  transition: background-color 0.2s ease;
-  display: flex;
-  align-items: center;
-  font-weight: 700;
-  background-color: ${themedPalette.bg_element};
-  border-bottom: 2px solid ${themedPalette.border};
-  position: sticky;
-  backdrop-filter: saturate(180%) blur(6px);
-  top: 0;
-  z-index: 1000;
-  a {
-    text-decoration: none;
-  }
-`;
-
-const Logo = styled.h1`
-  width: 70px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 20px;
-  color: ${themedPalette.text1};
-`;
-
-const LogoContainer = styled.div`
-  margin-right: auto;
-`;
-
-const IconContainer = styled.div`
-  width: 200px;
-  height: 50px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-right: 30px;
-  margin-left: auto;
-`;
-
 const DropDownIcon = styled.div`
   position: relative;
   width: 40px;
@@ -132,10 +90,6 @@ const StatusNumber = styled.span`
 `;
 
 export const S = {
-  HeaderContainer,
-  LogoContainer,
-  Logo,
-  IconContainer,
   DropDownIcon,
   Input,
   Title,
