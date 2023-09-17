@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Button, Progress } from "antd";
 import { useEffect, useState } from "react";
 import AlertModal from "@/components/common/modal/AlertModal";
-import { calculateDuration, getTodayDateFormatted } from "../../../../util/date";
+import { calculateDuration, getTodayDateFormatted, isFuture } from "../../../../util/date";
 import { studyApi } from "@/api/studyApi";
 import Loading from "@/components/common/loading/Loading";
 import React from "react";
@@ -40,6 +40,12 @@ const MissionDetail = () => {
   const [PERIOD_HEADER, setPERIOD_HEADER] = useState<any>();
   useEffect(() => {
     if (missionData !== undefined && memberList !== undefined) {
+      // 총 문제 개수
+      let TOTAL_PROPLEM_COUNT = missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length;
+      // 총 스터디 멤버 인원
+      let STUDY_MEMBER_COUNT = memberList.data.length;
+      // 총 COMPLETE 개수
+      let USER_COMPLETE_COUNT = 0;
       setMemberStatus(missionData.data.personalStudyRuleDtos);
       setMissionState(missionData.data.mission);
       setTIME_SPAN_STATUS(
@@ -51,24 +57,28 @@ const MissionDetail = () => {
         )
       );
       const USER_STATUS = [];
-      for (let i = 0; i < memberList.data.length; i++) {
-        for (let k = 0; k < missionData.data.personalStudyRuleDtos.length; k++) {
-          if (missionData.data.personalStudyRuleDtos[k].memberId === memberList.data[i].id) {
-            const PROBLEM_STATUS = [];
-            for (let j = 0; j < missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos.length; j++) {
-              if (missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos[j] === "COMPLETE") {
-                PROBLEM_STATUS.push(true);
-              } else {
-                PROBLEM_STATUS.push(false);
-              }
-            }
-            USER_STATUS.push({
-              nickname: memberList.data[i].nickname,
-              problem_status: PROBLEM_STATUS,
-            });
+      console.log(missionData, "멤버 문제풀이 현황");
+      //
+      console.log(memberList.data, "이게 머임 ?");
+
+      // 각 멤버 문제풀이 현황 상태
+      for (let k = 0; k < missionData.data.personalStudyRuleDtos.length; k++) {
+        //
+        const PROBLEM_STATUS = [];
+        for (let j = 0; j < missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos.length; j++) {
+          if (missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos[j].problemStatus === "COMPLETE") {
+            USER_COMPLETE_COUNT += 1;
+            PROBLEM_STATUS.push(true);
+          } else {
+            PROBLEM_STATUS.push(false);
           }
         }
+        USER_STATUS.push({
+          nickname: memberList.data[k].nickname,
+          problem_status: PROBLEM_STATUS,
+        });
       }
+
       setUserSolvedStatus(USER_STATUS);
 
       let newStatus = [
@@ -79,18 +89,25 @@ const MissionDetail = () => {
           () => false
         ),
       ]; // 기존 배열 복사
-      for (let i = 0; i < calculateDuration(missionData.data.startDate, getTodayDateFormatted()) + 1; i++) {
-        if (i >= calculateDuration(missionData.data.startDate, missionData.data.deadline) + 1) break;
-        newStatus[i] = true;
+
+      // 미래가 아닐 경우만 동작
+      if (isFuture(missionData.data.startDate)) {
+        for (let i = 0; i < calculateDuration(missionData.data.startDate, getTodayDateFormatted()) + 1; i++) {
+          if (i >= calculateDuration(missionData.data.startDate, missionData.data.deadline) + 1) break;
+          newStatus[i] = true;
+        }
       }
       setTIME_SPAN_STATUS(newStatus);
 
-      const HEADER = ["랭킹", "아이디"];
+      const HEADER = ["닉네임"];
       console.log("rerender");
       console.log("rerender 1 2 3");
       for (let i = 0; i < missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length; i++) {
         HEADER.push(missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos[i].problemName);
       }
+
+      // missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length -> 문제 개수
+      // 퍼센트 -> 문제 풀이 개수 / 총 문제 개수
       setHEADER_ARR(HEADER);
       setPERIOD_HEADER(
         Array.from(
@@ -100,6 +117,7 @@ const MissionDetail = () => {
           (_, i) => `${i + 1}일차`
         )
       );
+      setMissionProgress((USER_COMPLETE_COUNT / (TOTAL_PROPLEM_COUNT * STUDY_MEMBER_COUNT)) * 100);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [missionData, memberList]);
@@ -155,15 +173,15 @@ const MissionDetail = () => {
       </S.MissionProblemListContainer>
       <S.MemberSolvingStatusContainer>
         <S.MissionProblemListContainer
-          numColumn={missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length + 2}>
+          numColumn={missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length + 1}>
           {HEADER_ARR.map((e: any, idx: number) => {
-            return idx <= 1 ? (
+            return idx <= 0 ? (
               <div>{e}</div>
             ) : (
               <S.Problem
                 onClick={() =>
                   window.open(
-                    `https://www.acmicpc.net/problem/${memberStatus![0].problemStatusQueryDtos[idx - 2].problemNumber}`,
+                    `https://www.acmicpc.net/problem/${memberStatus![0].problemStatusQueryDtos[idx - 1].problemNumber}`,
                     "_blank"
                   )
                 }>
@@ -173,7 +191,6 @@ const MissionDetail = () => {
           })}
           {userSolvedStatus.map((e: any, idx: number) => (
             <React.Fragment key={idx}>
-              <div>{idx + 1}</div>
               <div>{e.nickname}</div>
               {e.problem_status.map((p_status: any, i: number) => {
                 return p_status ? (
@@ -209,7 +226,9 @@ const MissionDetail = () => {
 
 export default MissionDetail;
 
-const Container = styled(PageContainer)``;
+const Container = styled(PageContainer)`
+  padding-bottom: 50px;
+`;
 
 const SelectorWrapper = styled.div`
   display: flex;
