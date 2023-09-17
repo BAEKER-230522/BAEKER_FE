@@ -27,14 +27,12 @@ interface IParsedCookies {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { req, res } = context;
+  const { req } = context;
   const cookies: IParsedCookies = parseCookies(req.headers.cookie);
-  const refreshToken = cookies.refreshToken;
   const memberId = Number(cookies.memberId);
 
   return {
     props: {
-      refreshToken,
       memberId,
     },
   };

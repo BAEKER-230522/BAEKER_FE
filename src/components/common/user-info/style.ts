@@ -17,7 +17,6 @@ const Image = styled.img`
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  background-color: aqua;
 `;
 
 const BigFont = styled.span`
@@ -38,7 +37,7 @@ const SmallFont = styled.div`
 `;
 
 const Button = styled.button`
-  width: 120px;
+  padding: 0px 17px;
   height: 40px;
   background-color: ${themedPalette.bg_element4};
   border-radius: 10px;

@@ -1,7 +1,8 @@
 import { S } from "./style";
 import { useRouter } from "next/router";
 import JoinRequestModal from "../modal/JoinRequestModal";
-import { useSelector } from "react-redux";
+import Image from "next/image";
+import LocalStorage from "@/util/localstorage";
 
 interface IProps {
   userData: any;
@@ -11,15 +12,19 @@ interface IProps {
 
 const UserInfo = ({ userData, userId, loginUser }: IProps) => {
   const router = useRouter();
-  const id = useSelector((state: any) => {
-    return state.user.memberId;
-  });
+  const id = Number(LocalStorage.getItem("memberId"));
   return (
     <S.Container>
-      <S.Image src={userData.profileImg} />
+      <Image
+        width={110}
+        height={110}
+        src={userData.profileImg}
+        alt="kakao profile img"
+        style={{ borderRadius: "50%" }}
+      />
       <S.Name>{userData.nickname}</S.Name>
       <S.Introduce>{userData.about}</S.Introduce>
-      {id === userId ? (
+      {id! === userId ? (
         <S.Button onClick={() => router.push({ pathname: "/modify" })}>프로필 수정</S.Button>
       ) : (
         loginUser && <JoinRequestModal loginUser={loginUser!} name={userData.nickname} id={userData.id} />

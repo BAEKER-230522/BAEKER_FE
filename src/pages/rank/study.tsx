@@ -8,7 +8,7 @@ import BasicTable from "@/components/common/table/BasicTable";
 const StudyRank = () => {
   const { data, isLoading } = studyApi.useGetAllStudyListQuery({
     page: 0,
-    limit: 10,
+    limit: 100,
   });
 
   if (isLoading) {

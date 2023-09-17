@@ -8,7 +8,7 @@ import MemberTable from "@/components/common/table/MeberTable";
 const AlgorithmRank = () => {
   const { data, isLoading } = memberApi.useGetAllMembersQuery({
     page: 0,
-    limit: 10,
+    limit: 100,
   });
 
   if (isLoading)

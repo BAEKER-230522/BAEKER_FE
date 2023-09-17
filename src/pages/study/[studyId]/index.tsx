@@ -16,6 +16,7 @@ import { PageContainer } from "@/styles/common.style";
 import { TABLE_CONSTANT } from "@/constant/table";
 import BasicTable from "@/components/common/table/BasicTable";
 import MemberTable from "@/components/common/table/MeberTable";
+import RequestTable from "@/components/common/table/RequestTable";
 
 interface IServerSideProp {
   refreshToken: string;
@@ -124,12 +125,11 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
           />
         )}
         {tabState === 3 && (
-          <BasicTable
+          <RequestTable
+            category={TABLE_CONSTANT.REQUEST.CATEGORY}
+            widthRatio={TABLE_CONSTANT.REQUEST.WIDTH_RATIO}
+            studyId={param}
             data={studyPendingList.data.pending}
-            category={TABLE_CONSTANT.STUDY_INVITE.CATEGORY}
-            widthRatio={TABLE_CONSTANT.STUDY_INVITE.WIDTH_RATIO}
-            url="member"
-            routeType="defaultRoute"
           />
         )}
       </S.ContentContainer>

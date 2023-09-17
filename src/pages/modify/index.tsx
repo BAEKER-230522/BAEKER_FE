@@ -51,9 +51,7 @@ const Modify = ({ memberId }: LoginProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
-  const onSubmitUpdateUserInfo = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  const onSubmitUpdateUserInfo = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     handleUpdateUserInfo({ nameValue, aboutValue, imgFile });
     router.push({ pathname: "/profile" });
@@ -73,18 +71,8 @@ const Modify = ({ memberId }: LoginProps) => {
     <S.Container>
       <S.FormContainer onSubmit={(e) => onSubmitUpdateUserInfo(e)}>
         <ModifyImg img={img} setImg={setImg} setImgFile={setImgFile} />
-        <Input
-          title={"이름"}
-          size={"25%"}
-          value={nameValue}
-          onChange={onChangeName}
-        />
-        <Input
-          title={"자기소개"}
-          size={"25%"}
-          value={aboutValue}
-          onChange={onChangeAbout}
-        />
+        <Input title={"이름"} size={"25%"} value={nameValue} onChange={onChangeName} />
+        <Input title={"자기소개"} size={"25%"} value={aboutValue} onChange={onChangeAbout} />
         <ModifyButton />
       </S.FormContainer>
     </S.Container>
@@ -104,6 +92,8 @@ export const FormContainer = styled.form`
   align-items: center;
   border-radius: ${themedPalette.borderRadius};
   background-color: ${themedPalette.bg_element2};
+  padding: 30px;
+  margin: 20px;
 `;
 
 const S = { Container, FormContainer };
