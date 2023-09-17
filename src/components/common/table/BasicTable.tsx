@@ -1,6 +1,7 @@
 import { Table } from "./ui";
 import { useNavigation } from "@/hooks/useNavigation";
 import EmptyList from "../empty/EmptyList";
+import { S } from "./ui/style";
 
 const BasicTable = ({ data, category, widthRatio, url, routeType }: any) => {
   const { navigatePage } = useNavigation();
@@ -9,8 +10,10 @@ const BasicTable = ({ data, category, widthRatio, url, routeType }: any) => {
     switch (field[1]) {
       case "capacity":
         return (
-          <div key={index}>
-            ( {item.studyMember}/{item.capacity} )
+          <div>
+            <S.Capacity key={index}>
+              {item.studyMember} / {item.capacity}
+            </S.Capacity>
           </div>
         );
 

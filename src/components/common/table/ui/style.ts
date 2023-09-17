@@ -136,6 +136,18 @@ const UserInfoWrapper = styled.div`
   margin-left: 25%;
 `;
 
+const Capacity = styled.span`
+  background-color: ${themedPalette.bg_element4};
+  padding: 5px 10px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  color: ${themedPalette.text2};
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 700;
+`;
+
 export const S = {
   ContentCell,
   Container,
@@ -150,4 +162,5 @@ export const S = {
   SelectedPaginationElement,
   UserInfoContainer,
   UserInfoWrapper,
+  Capacity,
 };
