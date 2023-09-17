@@ -1,4 +1,3 @@
-import { IMG_URL } from "../../../public/mock";
 import { S } from "./style";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
@@ -58,9 +57,21 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
               }}>
               스터디 수정하기
             </button>
+            <button>스터디 삭제</button>
           </S.ButtonWrapper>
-        ) : isUserStudy ? null : (
-          <RequestModal memberId={memberId} studyId={String(studyId)} />
+        ) : isUserStudy ? (
+          <S.ButtonWrapper>
+            <button
+              onClick={() => {
+                // http://localhost:8082/api/my-study/v1
+              }}>
+              스터디 탈퇴
+            </button>
+          </S.ButtonWrapper>
+        ) : (
+          <S.ButtonWrapper>
+            <RequestModal memberId={memberId} studyId={String(studyId)} />
+          </S.ButtonWrapper>
         )}
       </S.StudyInfoContainer>
     </S.Container>

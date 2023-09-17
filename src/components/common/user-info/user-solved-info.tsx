@@ -2,18 +2,13 @@ import { S } from "./style";
 
 const UserSolvedInfo = ({ userData }: any) => {
   const SOLVEDCOUNT =
-    userData.bronze +
-    userData.diamond +
-    userData.gold +
-    userData.ruby +
-    userData.silver +
-    userData.platinum;
+    userData.bronze + userData.diamond + userData.gold + userData.ruby + userData.silver + userData.platinum;
   return (
     <S.Container>
       <S.InfoContainer>
         <S.Title>랭킹</S.Title>
         <div style={{ display: "flex", alignContent: "center" }}>
-          <S.BigFont>{userData.id}</S.BigFont>
+          <S.BigFont>{userData.ranking}</S.BigFont>
           <S.SmallFont>등</S.SmallFont>
         </div>
       </S.InfoContainer>

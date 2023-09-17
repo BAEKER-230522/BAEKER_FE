@@ -24,15 +24,6 @@ const StudyInfoContainer = styled.div`
   margin-left: 30px;
   height: 100%;
   justify-content: center;
-
-  button {
-    height: 40px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    background-color: ${themedPalette.bg_element4};
-    color: ${themedPalette.text2};
-  }
 `;
 
 const Title = styled.div`
@@ -48,8 +39,19 @@ const About = styled.p`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  width: 200px;
+  max-width: 350px;
   justify-content: space-around;
+
+  button {
+    font-weight: 600;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: ${themedPalette.bg_element4};
+    color: ${themedPalette.text2};
+    padding: 0px 17px;
+  }
 `;
 
 const SelectBoxContainer = styled.select`

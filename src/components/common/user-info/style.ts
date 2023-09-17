@@ -37,7 +37,7 @@ const SmallFont = styled.div`
 `;
 
 const Button = styled.button`
-  width: 120px;
+  padding: 0px 17px;
   height: 40px;
   background-color: ${themedPalette.bg_element4};
   border-radius: 10px;
