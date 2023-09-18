@@ -38,3 +38,15 @@ export const isFuture = (targetDate: string) => {
 
   return simplifiedToday.getTime() >= simplifiedTargetDate.getTime();
 };
+
+export const isPast = (targetDate: string) => {
+  const today = new Date();
+  const date = new Date(targetDate);
+  // 오늘의 날짜만 가져옴 (시간, 분, 초는 무시)
+  const simplifiedToday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+  // 인자로 받은 날짜의 연, 월, 일만 가져옴
+  const simplifiedTargetDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+
+  return simplifiedToday.getTime() > simplifiedTargetDate.getTime();
+};
