@@ -30,8 +30,6 @@ const CreateMission = () => {
     return state.mission.missionProblemState;
   });
 
-  console.log(missionProblemState);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isPast(missionStartDate) === true) return toast("시작 날짜를 변경해주세요.");
