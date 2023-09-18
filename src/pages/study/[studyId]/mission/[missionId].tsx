@@ -130,7 +130,12 @@ const MissionDetail = () => {
     }
   };
 
-  if (getMissionDataLoading || getMemberListLoading || userSolvedStatus === undefined) return <Loading />;
+  if (getMissionDataLoading || getMemberListLoading || userSolvedStatus === undefined)
+    return (
+      <S.Container>
+        <Loading />;
+      </S.Container>
+    );
 
   return (
     <S.Container>

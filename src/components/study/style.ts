@@ -37,9 +37,13 @@ const About = styled.p`
   color: ${themedPalette.text3};
 `;
 
-const ButtonWrapper = styled.div`
+type ButtonWrapperProps = {
+  width: string;
+};
+
+const ButtonWrapper = styled.div<ButtonWrapperProps>`
   display: flex;
-  max-width: 350px;
+  max-width: ${(props) => props.width};
   justify-content: space-around;
 
   button {

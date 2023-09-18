@@ -31,7 +31,7 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
         <S.Title>{data.data.name}</S.Title>
         <S.About>{data.data.about}</S.About>
         {isLeader ? (
-          <S.ButtonWrapper>
+          <S.ButtonWrapper width="350px">
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -60,7 +60,7 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
             <button>스터디 삭제</button>
           </S.ButtonWrapper>
         ) : isUserStudy ? (
-          <S.ButtonWrapper>
+          <S.ButtonWrapper width="150px">
             <button
               onClick={() => {
                 // http://localhost:8082/api/my-study/v1
@@ -69,7 +69,7 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
             </button>
           </S.ButtonWrapper>
         ) : (
-          <S.ButtonWrapper>
+          <S.ButtonWrapper width="150px">
             <RequestModal memberId={memberId} studyId={String(studyId)} />
           </S.ButtonWrapper>
         )}

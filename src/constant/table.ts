@@ -1,12 +1,13 @@
 export const TABLE_CONSTANT = {
   STUDY: {
     CATEGORY: [
+      ["랭킹", "ranking"],
       ["스터디", "name"],
       ["소개", "about"],
       ["인원", "capacity"],
       ["경험치", "xp"],
     ],
-    WIDTH_RATIO: [1, 2, 1, 1],
+    WIDTH_RATIO: [1, 1, 2, 1, 1],
   },
   INVITE: {
     CATEGORY: [
@@ -39,8 +40,8 @@ export const TABLE_CONSTANT = {
   MISSION_PROBLEM: {
     CATEGORY: [
       ["번호", "idx"],
-      ["문제 번호", "num"],
-      ["문제 이름", "title"],
+      ["문제 번호", "problemNumber"],
+      ["문제 이름", "problemName"],
       ["삭제", "remove"],
     ],
     WIDTH_RATIO: [1, 1, 2, 1],
