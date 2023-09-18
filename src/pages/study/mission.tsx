@@ -12,6 +12,8 @@ import { PageContainer } from "@/styles/common.style";
 import ScrollTable from "@/components/common/table/ScrollTable";
 import StartToEndRangeDatePicker from "@/components/common/calendar/RangeDatePicker";
 import { TABLE_CONSTANT } from "@/constant/table";
+import { toast } from "react-toastify";
+import { isPast } from "@/util/date";
 
 const CreateMission = () => {
   const router = useRouter();
@@ -23,14 +25,26 @@ const CreateMission = () => {
   const [problemValue, setProblemValue, problemHandler] = useInput("");
   const [missionStartDate, setMissionStartDate] = useState("");
   const [missionEndDate, setMissionEndDate] = useState("");
-  const [problemList, setProblemList] = useState([]);
 
   const missionProblemState = useSelector((state: any) => {
     return state.mission.missionProblemState;
   });
 
+  console.log(missionProblemState);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (isPast(missionStartDate) === true) return toast("시작 날짜를 변경해주세요.");
+    if (missionProblemState.length === 0) return toast("1문제 이상 등록하세요.");
+    if (nameValue === "") return toast("미션 제목을 입력하세요");
+
+    const problemList = [];
+    for (let i = 0; i < missionProblemState.length; i++) {
+      problemList.push({
+        problemNumber: missionProblemState[i].problemNumber,
+        problemName: missionProblemState[i].problemName,
+      });
+    }
     if (isEditMode) {
       handleUpdateStudy({ nameValue, aboutValue, router });
     } else {
@@ -69,8 +83,6 @@ const CreateMission = () => {
               value={problemValue}
               onChange={problemHandler}
               setProblemValue={setProblemValue}
-              setProblemList={setProblemList}
-              problemList={problemList}
             />
             <ScrollTable
               data={missionProblemState}
