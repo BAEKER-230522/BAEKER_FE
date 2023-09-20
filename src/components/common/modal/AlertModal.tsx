@@ -5,16 +5,19 @@ import { studyApi } from "@/api/studyApi";
 import { toast } from "react-toastify";
 
 interface IProps {
+  data: any;
   title: string;
   text: string;
-  id: number;
   type: string;
   backId?: number;
   children: string;
+  buttonText: string;
 }
 
-const AlertModal = ({ title, text, id, type, backId }: IProps) => {
-  const [deleteMission, { isLoading: deleteMissionLoading }] = studyApi.useDeleteStudyMissionMutation();
+const AlertModal = ({ title, text, data, type, backId, buttonText }: IProps) => {
+  const [deleteMission] = studyApi.useDeleteStudyMissionMutation();
+  const [quitStudy] = studyApi.useResignStudyMutation();
+  const [deleteStudy] = studyApi.useDeleteStudyMutation();
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [modalText, setModalText] = useState("Content of the modal");
@@ -28,15 +31,23 @@ const AlertModal = ({ title, text, id, type, backId }: IProps) => {
       setModalText("삭제 중입니다");
       setConfirmLoading(true);
       if (type === "mission") {
-        await deleteMission(id);
+        await deleteMission(data);
+      }
+      if (type === "study") {
+        await quitStudy(data);
+      }
+      if (type === "delete") {
+        await deleteStudy(data);
       }
     } catch (err) {
       console.log(err);
     } finally {
-      toast("삭제 완료");
+      toast(title);
       setConfirmLoading(false);
       if (type === "mission") {
         router.push({ pathname: `/study/${backId}` });
+      } else {
+        router.push({ pathname: `/profile` });
       }
     }
   };
@@ -48,7 +59,7 @@ const AlertModal = ({ title, text, id, type, backId }: IProps) => {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        삭제하기
+        {buttonText}
       </Button>
       <Modal title={title} open={open} onOk={handleOk} confirmLoading={confirmLoading} onCancel={handleCancel}>
         <p>{text}</p>

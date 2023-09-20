@@ -1,15 +1,16 @@
-import styled from "styled-components";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
+import { parseCookies } from "@/util/parseCookie";
 import { themedPalette } from "@/styles/theme";
+import { PageContainer } from "@/styles/common.style";
+import { toast } from "react-toastify";
+import styled from "styled-components";
 import Input from "@/components/common/input";
 import Slider from "@/components/common/slider/slider";
 import useInput from "@/hooks/useInput";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import useStudyEdit from "@/hooks/useStudyEdit";
-import { GetServerSideProps } from "next";
-import { parseCookies } from "@/util/parseCookie";
 import useFetchUserData from "@/hooks/queries/useFetchUserData";
-import { PageContainer } from "@/styles/common.style";
+import useStudyEdit from "@/hooks/useStudyEdit";
 
 interface IParsedCookies {
   refreshToken?: string;
@@ -29,18 +30,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 const CreateStudy = ({ userId }: { userId: number }) => {
-  const {
-    maxStudyCapacity,
-    setMaxStudyCapacity,
-    handleCreateStudy,
-    handleUpdateStudy,
-  } = useStudyEdit();
+  const { maxStudyCapacity, setMaxStudyCapacity, handleCreateStudy, handleUpdateStudy } = useStudyEdit();
   const [nameValue, setNameValue, nameHandler] = useInput("");
   const [aboutValue, setAboutValue, aboutHandler] = useInput("");
   const router = useRouter();
   const isEditMode = Object.keys(router.query).length !== 0 ? true : false;
-  const { data: userData, isLoading: isUserDataLoading } =
-    useFetchUserData(userId);
+  const { data: userData, isLoading: isUserDataLoading } = useFetchUserData(userId);
   useEffect(() => {
     if (isEditMode) {
       setNameValue(String(router.query.name));
@@ -54,6 +49,7 @@ const CreateStudy = ({ userId }: { userId: number }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (nameValue === "") return toast("스터디 이름을 설정해주세요.");
     if (isEditMode) {
       handleUpdateStudy({ nameValue, aboutValue });
     } else {
@@ -69,22 +65,9 @@ const CreateStudy = ({ userId }: { userId: number }) => {
   return (
     <S.Container>
       <S.FormContainer onSubmit={(e) => handleSubmit(e)}>
-        <Input
-          title={"스터디 이름"}
-          size={"40%"}
-          value={nameValue}
-          onChange={nameHandler}
-        />
-        <Input
-          title={"스터디 소개"}
-          size={"40%"}
-          value={aboutValue}
-          onChange={aboutHandler}
-        />
-        <Slider
-          maxStudyCapacity={maxStudyCapacity}
-          setMaxStudyCapacity={setMaxStudyCapacity}
-        />
+        <Input title={"스터디 이름"} size={"40%"} value={nameValue} onChange={nameHandler} />
+        <Input title={"스터디 소개"} size={"40%"} value={aboutValue} onChange={aboutHandler} />
+        <Slider maxStudyCapacity={maxStudyCapacity} setMaxStudyCapacity={setMaxStudyCapacity} />
         {isEditMode ? (
           <S.Button type="submit" value={"스터디 수정"} />
         ) : (

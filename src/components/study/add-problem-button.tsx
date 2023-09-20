@@ -9,18 +9,15 @@ interface IInput {
   value: string;
   setProblemValue: React.Dispatch<React.SetStateAction<string>>;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  setProblemList: React.Dispatch<React.SetStateAction<any>>;
-  problemList: any;
 }
 
-const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue, setProblemList, problemList }: IInput) => {
+const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue }: IInput) => {
   const dispatch = useDispatch();
 
   const missionProblemState = useSelector((state: any) => {
     return state.mission.missionProblemState;
   });
-
-  const handleAddProblem = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleAddProblem = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     const accessToken = document.cookie
       .split("; ")
@@ -37,18 +34,10 @@ const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue, set
 
       const result = await response.json();
 
-      setProblemList([
-        ...problemList,
-        {
-          problemName: result.data.subject,
-          problemNumber: value,
-        },
-      ]);
-
       const newProblem = {
         idx: missionProblemState.length + 1,
-        num: value,
-        title: result.data.subject,
+        problemNumber: value,
+        problemName: result.data.subject,
         remove: "삭제",
       };
       dispatch(userAction.addProblem(newProblem));
@@ -57,11 +46,17 @@ const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue, set
       toast("존재하지 않는 문제 번호입니다");
     }
   };
+
+  const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleAddProblem(e);
+    }
+  };
   return (
     <S.InputContainer size={size}>
       <S.Title>{title}</S.Title>
       <S.InputWrapper>
-        <S.Input onChange={onChange} value={value} placeholder="문제 번호를 입력해 주세요" />
+        <S.Input onChange={onChange} value={value} placeholder="문제 번호를 입력해 주세요" onKeyPress={onKeyPress} />
         <S.Button type="button" onClick={handleAddProblem}>
           추가
         </S.Button>

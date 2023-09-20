@@ -3,7 +3,7 @@ import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
 import RequestModal from "../common/modal/RequestModal";
 import Loading from "../common/loading/Loading";
-
+import AlertModal from "../common/modal/AlertModal";
 interface IProps {
   isUserStudy: boolean;
   isLeader: boolean;
@@ -31,7 +31,7 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
         <S.Title>{data.data.name}</S.Title>
         <S.About>{data.data.about}</S.About>
         {isLeader ? (
-          <S.ButtonWrapper>
+          <S.ButtonWrapper width="350px">
             <button
               onClick={(e) => {
                 e.preventDefault();
@@ -57,19 +57,30 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
               }}>
               스터디 수정하기
             </button>
-            <button>스터디 삭제</button>
+            <AlertModal
+              data={{ memberId, studyId }}
+              title={"스터디 삭제"}
+              text={"삭제하시겠습니까 ?"}
+              type={"delete"}
+              backId={Number(studyId)}
+              buttonText={"스터디 삭제"}>
+              삭제
+            </AlertModal>
           </S.ButtonWrapper>
         ) : isUserStudy ? (
-          <S.ButtonWrapper>
-            <button
-              onClick={() => {
-                // http://localhost:8082/api/my-study/v1
-              }}>
-              스터디 탈퇴
-            </button>
+          <S.ButtonWrapper width="150px">
+            <AlertModal
+              data={{ memberId, studyId }}
+              title={"스터디 탈퇴"}
+              text={"탈퇴하시겠습니까 ?"}
+              type={"study"}
+              backId={Number(studyId)}
+              buttonText={"탈퇴하기"}>
+              탈퇴
+            </AlertModal>
           </S.ButtonWrapper>
         ) : (
-          <S.ButtonWrapper>
+          <S.ButtonWrapper width="150px">
             <RequestModal memberId={memberId} studyId={String(studyId)} />
           </S.ButtonWrapper>
         )}

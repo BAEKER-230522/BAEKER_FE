@@ -85,7 +85,7 @@ const StatusNumber = styled.span`
   font-weight: 700;
   font-size: 2.7rem;
   &:nth-child(2) {
-    color: #661ae6;
+    color: ${themedPalette.bg_element4};
   }
 `;
 

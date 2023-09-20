@@ -7,8 +7,8 @@ interface IinitialState {
 
 interface MissionProblem {
   idx: number;
-  num: string;
-  title: string;
+  problemNumber: string;
+  problemName: string;
   remove: string;
 }
 
@@ -22,21 +22,19 @@ const missionSlice = createSlice({
   initialState,
   reducers: {
     addProblem: (state, action: PayloadAction<MissionProblem>) => {
-      const { idx, num, title, remove } = action.payload;
-      state.missionProblemState.push({ idx, num, title, remove });
+      const { idx, problemNumber, problemName, remove } = action.payload;
+      state.missionProblemState.push({ idx, problemNumber, problemName, remove });
     },
     removeProblem: (state, action: PayloadAction<number>) => {
       const idx = action.payload;
-      state.missionProblemState = state.missionProblemState.filter(
-        (problem) => problem.idx !== idx
-      );
+      state.missionProblemState = state.missionProblemState.filter((problem) => problem.idx !== idx);
       const temp = state.missionProblemState;
       state.missionProblemState = [];
       temp.forEach((e, idx) => {
         state.missionProblemState.push({
           idx: idx + 1,
-          num: e.num,
-          title: e.title,
+          problemNumber: e.problemNumber,
+          problemName: e.problemName,
           remove: e.remove,
         });
       });
@@ -50,6 +48,5 @@ const missionSlice = createSlice({
   },
 });
 
-export const { addProblem, removeProblem, resetProblems, propMissionData } =
-  missionSlice.actions;
+export const { addProblem, removeProblem, resetProblems, propMissionData } = missionSlice.actions;
 export default missionSlice.reducer;
