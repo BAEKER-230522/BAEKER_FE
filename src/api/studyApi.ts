@@ -9,7 +9,7 @@ const END_POINT_4 = "api/studyrule/v2";
 export const studyApi = createApi({
   baseQuery: axiosBaseQuery(),
   reducerPath: "studyApi",
-  tagTypes: ["Study"],
+  tagTypes: ["Study", "Mission"],
   endpoints: (builder) => ({
     // 스터디 페이징 조회
     getStudyInfoList: builder.query({
@@ -80,9 +80,7 @@ export const studyApi = createApi({
         url: `${END_POINT_3}/studyrules/${id}`,
         method: "GET",
       }),
-      providesTags: (result: any, err: any, arg: any) => {
-        return [{ type: "Study", id: Number(arg.id) }];
-      },
+      providesTags: ["Mission"],
     }),
 
     // 스터디 미션 Id로 조회
@@ -91,9 +89,7 @@ export const studyApi = createApi({
         url: `${END_POINT_4}/search/${id}`,
         method: "GET",
       }),
-      providesTags: (result: any, err: any, arg: any) => {
-        return [{ type: "Study", id: Number(arg.id) }];
-      },
+      providesTags: ["Mission"],
     }),
 
     // 스터디 미션
@@ -103,9 +99,17 @@ export const studyApi = createApi({
         method: "POST",
         data,
       }),
-      invalidatesTags: (result: any, err: any, arg: any) => {
-        return [{ type: "Study", id: Number(arg.studyId) }];
-      },
+      invalidatesTags: ["Mission"],
+    }),
+
+    // 스터디 삭제
+    deleteStudy: builder.mutation({
+      query: (data) => ({
+        url: END_POINT,
+        method: "DELETE",
+        data,
+      }),
+      invalidatesTags: ["Study"],
     }),
 
     // study 생성
@@ -115,7 +119,7 @@ export const studyApi = createApi({
         method: "POST",
         data,
       }),
-      invalidatesTags: [{ type: "Study" }],
+      invalidatesTags: ["Study"],
     }),
 
     // study 이름/소개/인원 수정
@@ -125,7 +129,7 @@ export const studyApi = createApi({
         method: "POST",
         data,
       }),
-      invalidatesTags: [{ type: "Study" }],
+      invalidatesTags: ["Study"],
     }),
 
     // study 리더 수정
@@ -135,7 +139,7 @@ export const studyApi = createApi({
         method: "POST",
         data,
       }),
-      invalidatesTags: [{ type: "Study" }],
+      invalidatesTags: ["Study"],
     }),
 
     // 스터디 가입 신청
@@ -145,7 +149,7 @@ export const studyApi = createApi({
         method: "POST",
         data,
       }),
-      invalidatesTags: [{ type: "Study" }],
+      invalidatesTags: ["Study"],
     }),
 
     // 스터디 탈퇴
@@ -155,7 +159,7 @@ export const studyApi = createApi({
         method: "DELETE",
         data,
       }),
-      invalidatesTags: [{ type: "Study" }],
+      invalidatesTags: ["Study"],
     }),
 
     // 스터디 가입 초대
@@ -165,7 +169,7 @@ export const studyApi = createApi({
         method: "POST",
         data,
       }),
-      invalidatesTags: [{ type: "Study" }],
+      invalidatesTags: ["Study"],
     }),
 
     // 스터디 가입 승인
@@ -175,7 +179,7 @@ export const studyApi = createApi({
         method: "POST",
         data,
       }),
-      invalidatesTags: [{ type: "Study" }],
+      invalidatesTags: ["Study"],
     }),
 
     // 스터디 가입 거절
@@ -185,7 +189,7 @@ export const studyApi = createApi({
         method: "DELETE",
         data,
       }),
-      invalidatesTags: [{ type: "Study" }],
+      invalidatesTags: ["Study"],
     }),
 
     // 스터디 미션 수정
@@ -195,7 +199,7 @@ export const studyApi = createApi({
         method: "PATCH",
         data,
       }),
-      invalidatesTags: [{ type: "Study" }],
+      invalidatesTags: ["Mission"],
     }),
 
     // 스터디 미션 삭제
@@ -204,7 +208,7 @@ export const studyApi = createApi({
         url: `${END_POINT_3}/studyrules/${missionId}`,
         method: "DELETE",
       }),
-      invalidatesTags: [{ type: "Study" }],
+      invalidatesTags: ["Mission"],
     }),
 
     // 스터디 미션 개별 조회
@@ -237,4 +241,5 @@ export const {
   useJoinStudyMutation,
   useResignStudyMutation,
   useGetStudyRuleQuery,
+  useDeleteStudyMutation,
 } = studyApi;
