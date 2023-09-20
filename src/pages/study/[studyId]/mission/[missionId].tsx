@@ -32,7 +32,6 @@ const MissionDetail = () => {
   const { data: memberList, isLoading: getMemberListLoading } = studyApi.useGetStudyMemberListQuery(studyId);
 
   const [memberStatus, setMemberStatus] = useState<IPersonStudyRuleDtst[]>();
-  const [missionStatus, setMissionState] = useState<string>();
   const [missionProgress, setMissionProgress] = useState(0);
   const [userSolvedStatus, setUserSolvedStatus] = useState<any>();
   const [HEADER_ARR, setHEADER_ARR] = useState<any>();
@@ -40,14 +39,20 @@ const MissionDetail = () => {
   const [PERIOD_HEADER, setPERIOD_HEADER] = useState<any>();
   useEffect(() => {
     if (missionData !== undefined && memberList !== undefined) {
+      const HEADER = ["닉네임"];
+      const USER_STATUS = [];
+      const MEMBER_ID = memberList.data.reduce((acc: any, cur: any) => {
+        acc[cur.id] = cur.nickname;
+        return acc;
+      }, {});
       // 총 문제 개수
       let TOTAL_PROPLEM_COUNT = missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length;
       // 총 스터디 멤버 인원
       let STUDY_MEMBER_COUNT = memberList.data.length;
       // 총 COMPLETE 개수
       let USER_COMPLETE_COUNT = 0;
+
       setMemberStatus(missionData.data.personalStudyRuleDtos);
-      setMissionState(missionData.data.mission);
       setTIME_SPAN_STATUS(
         Array.from(
           {
@@ -56,10 +61,6 @@ const MissionDetail = () => {
           () => false
         )
       );
-      const USER_STATUS = [];
-      console.log(missionData, "멤버 문제풀이 현황");
-      //
-      console.log(memberList.data, "이게 머임 ?");
 
       // 각 멤버 문제풀이 현황 상태
       for (let k = 0; k < missionData.data.personalStudyRuleDtos.length; k++) {
@@ -74,7 +75,7 @@ const MissionDetail = () => {
           }
         }
         USER_STATUS.push({
-          nickname: memberList.data[k].nickname,
+          nickname: MEMBER_ID[missionData.data.personalStudyRuleDtos[k].memberId],
           problem_status: PROBLEM_STATUS,
         });
       }
@@ -99,9 +100,6 @@ const MissionDetail = () => {
       }
       setTIME_SPAN_STATUS(newStatus);
 
-      const HEADER = ["닉네임"];
-      console.log("rerender");
-      console.log("rerender 1 2 3");
       for (let i = 0; i < missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length; i++) {
         HEADER.push(missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos[i].problemName);
       }
@@ -217,11 +215,12 @@ const MissionDetail = () => {
           목록
         </Button>
         <AlertModal
-          id={Number(param.missionId)}
+          data={Number(param.missionId)}
           title={"미션 삭제"}
           text={"삭제하시겠습니까 ?"}
           type={"mission"}
-          backId={Number(param.studyId)}>
+          backId={Number(param.studyId)}
+          buttonText={"삭제하기"}>
           삭제
         </AlertModal>
       </S.ButtonContainer>
