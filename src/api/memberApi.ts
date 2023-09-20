@@ -48,6 +48,15 @@ export const memberApi = createApi({
       }),
       invalidatesTags: [{ type: "Member" }],
     }),
+    // 이미지 외의 정보 수정
+    updateMemberInfo: builder.mutation({
+      query: (data) => ({
+        url: `${END_POINT}/v1/profile`,
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: [{ type: "Member" }],
+    }),
     // http://bk.1ll.ca/api/member/v1/connect/baekjoon/2?name=chumjio1o
     // 백준 연동
     connectBaekjoon: builder.mutation({
@@ -74,4 +83,6 @@ export const {
   useCreateMemberMutation,
   useConnectBaekjoonMutation,
   useWeeklyUserProblemStatusQuery,
+  useUpdateMemberInfoMutation,
+  useUpdateMemberMutation,
 } = memberApi;

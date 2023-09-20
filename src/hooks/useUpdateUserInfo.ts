@@ -9,37 +9,52 @@ interface IArgument {
 
 const useUpdateUserInfo = (memberId: number) => {
   const [updateUserInfo] = memberApi.useUpdateMemberMutation();
-
-  const handleUpdateUserInfo = async ({
-    nameValue,
-    aboutValue,
-    imgFile,
-  }: IArgument) => {
-    const formData = new FormData();
-    formData.append(
-      "dto",
-      new Blob(
-        [
-          JSON.stringify({
-            id: memberId,
-            nickname: nameValue,
-            about: aboutValue,
-          }),
-        ],
-        { type: "application/json" }
-      )
-    );
-    formData.append("img", imgFile!);
-
-    try {
-      await updateUserInfo(formData);
-      toast("정보 등록 완료");
-    } catch (err) {
-      console.log(err);
+  const [updateUserInfoWithoutImg] = memberApi.useUpdateMemberInfoMutation();
+  const handleUpdateUserInfo = async ({ nameValue, aboutValue, imgFile }: IArgument) => {
+    if (imgFile === undefined) {
+      //   {
+      //     "id": 1,
+      //     "nickname": "꾹",
+      //     "about": "hi"
+      // }
+      await updateUserInfoWithoutImg({
+        id: memberId,
+        nickname: nameValue,
+        about: aboutValue,
+      })
+        .unwrap()
+        .then((payload) => toast("프로필 수정 완료"))
+        .catch((error) => toast("실패"));
+    } else {
+      const formData = new FormData();
+      formData.append(
+        "dto",
+        new Blob(
+          [
+            JSON.stringify({
+              id: memberId,
+              nickname: nameValue,
+              about: aboutValue,
+            }),
+          ],
+          { type: "application/json" }
+        )
+      );
+      formData.append("img", imgFile!);
+      await updateUserInfo(formData)
+        .unwrap()
+        .then((payload) => {
+          toast("프로필 수정 완료");
+          console.log(payload);
+        })
+        .catch((error) => {
+          toast("실패");
+          console.log(error);
+        });
     }
   };
 
-  return { handleUpdateUserInfo };
+  return { handleUpdateUserInfo, updateUserInfoWithoutImg };
 };
 
 export default useUpdateUserInfo;
