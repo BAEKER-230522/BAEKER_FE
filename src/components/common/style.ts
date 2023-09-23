@@ -23,8 +23,8 @@ export const Input = styled.input`
   height: 40px;
   margin-bottom: 50px;
   border-radius: 7px;
-  border: 0.6px solid #a6adbb;
-  background-color: ${themedPalette.bg_element2};
+  border: none;
+  background-color: ${themedPalette.bg_element};
   color: ${themedPalette.text1};
   padding-left: 10px;
   outline: none;
@@ -52,12 +52,16 @@ const Button = styled.button`
   border-radius: 7px;
   outline: none;
   margin-left: 15px;
+  border: none;
+  color: ${themedPalette.text2};
+  background-color: ${themedPalette.bg_element4};
+  cursor: pointer;
 `;
 
 const StatusContainer = styled.div`
   width: 80%;
   height: 120px;
-  background-color: ${themedPalette.bg_element3};
+  background-color: ${themedPalette.bg_element};
   border-radius: 10px;
   display: flex;
   justify-content: space-around;
