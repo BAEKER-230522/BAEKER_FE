@@ -42,9 +42,11 @@ const JoinRequestModal = ({ id, name, loginUser }: IProps) => {
         inviter: loginUser,
         invitee: id,
         msg: message,
-      });
+      })
+        .unwrap()
+        .then(() => toast("스터디 초대 완료"))
+        .catch(() => toast("스터디 초대 실패"));
       setMessage("");
-      toast("스터디 초대 완료");
       setOpen(false);
     } catch (err) {
       console.log(err);
@@ -73,8 +75,7 @@ const JoinRequestModal = ({ id, name, loginUser }: IProps) => {
           open={open}
           onOk={handleOk}
           confirmLoading={confirmLoading}
-          onCancel={handleCancel}
-        >
+          onCancel={handleCancel}>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <Loading />
             <TextArea
@@ -99,8 +100,7 @@ const JoinRequestModal = ({ id, name, loginUser }: IProps) => {
         open={open}
         onOk={handleOk}
         confirmLoading={confirmLoading}
-        onCancel={handleCancel}
-      >
+        onCancel={handleCancel}>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <Selector data={getStudyList.data} setId={setId} />
           <TextArea

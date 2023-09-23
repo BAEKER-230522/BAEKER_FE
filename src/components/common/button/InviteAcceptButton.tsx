@@ -22,8 +22,10 @@ const InviteAcceptButton = ({ memberId, studyId }: IProps) => {
   ) => {
     e.stopPropagation();
     try {
-      toast("가입 승인");
-      await acceptStudy({ memberId: memberId, studyId: studyId });
+      await acceptStudy({ memberId: memberId, studyId: studyId })
+        .unwrap()
+        .then(() => toast("가입 승인"))
+        .catch(() => toast("가입 승인 실패"));
     } catch (err) {
       console.log(err);
     }
@@ -36,8 +38,10 @@ const InviteAcceptButton = ({ memberId, studyId }: IProps) => {
   ) => {
     e.stopPropagation();
     try {
-      toast("가입 거절");
-      await refuseStudy({ memberId: memberId, studyId: studyId });
+      await refuseStudy({ memberId: memberId, studyId: studyId })
+        .unwrap()
+        .then(() => toast("가입 거절"))
+        .catch(() => toast("가입 거절 실패"));
     } catch (err) {
       console.log(err);
     }
