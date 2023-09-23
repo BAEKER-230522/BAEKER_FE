@@ -35,13 +35,14 @@ const CreateMission = () => {
     if (isPast(missionStartDate) === true) return toast("시작 날짜를 변경해주세요.");
     if (missionProblemState.length === 0) return toast("1문제 이상 등록하세요.");
     if (nameValue === "") return toast("미션 제목을 입력하세요");
-
+    let xp = 0;
     const problemList = [];
     for (let i = 0; i < missionProblemState.length; i++) {
       problemList.push({
         problemNumber: missionProblemState[i].problemNumber,
         problemName: missionProblemState[i].problemName,
       });
+      xp += missionProblemState[i].xp + 1;
     }
     if (isEditMode) {
       handleUpdateStudy({ nameValue, aboutValue, router });
@@ -53,6 +54,7 @@ const CreateMission = () => {
         startDate: missionStartDate,
         deadline: missionEndDate,
         problemList,
+        xp,
       });
     }
   };

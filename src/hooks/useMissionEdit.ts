@@ -17,6 +17,7 @@ interface IArgument {
   deadline: string;
   startDate: string;
   problemList: IProblemList[];
+  xp: number;
 }
 
 const useMissionEdit = () => {
@@ -32,6 +33,7 @@ const useMissionEdit = () => {
     startDate,
     deadline,
     problemList,
+    xp,
   }: IArgument) => {
     try {
       await createMission({
@@ -41,8 +43,11 @@ const useMissionEdit = () => {
         startDate: startDate,
         deadline: deadline,
         createProblemList: problemList,
-      });
-      toast("미션 등록 완료");
+        xp,
+      })
+        .unwrap()
+        .then(() => toast("미션 등록 완료"))
+        .catch(() => toast("미션 등록 실패"));
       router.push({ pathname: `/study/${param}` });
       dispatch(userAction.resetProblems());
     } catch (err) {
