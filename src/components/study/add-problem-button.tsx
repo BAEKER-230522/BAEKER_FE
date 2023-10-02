@@ -17,7 +17,6 @@ const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue }: I
   const missionProblemState = useSelector((state: any) => {
     return state.mission.missionProblemState;
   });
-  console.log(missionProblemState);
 
   const handleAddProblem = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -43,7 +42,6 @@ const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue }: I
       });
 
       const result = await response.json();
-      console.log(result);
       const newProblem = {
         idx: missionProblemState.length + 1,
         problemNumber: value,

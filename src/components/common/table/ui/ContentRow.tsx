@@ -10,7 +10,6 @@ interface IContentRow {
 }
 
 const ContentRow = ({ idx, widthRatio, onClickMethod, children, item, category }: IContentRow) => {
-  console.log(item);
   const ratioSum = widthRatio?.reduce((a, b) => a + b, 0);
   const ratio = Math.floor(100 / ratioSum!);
   const target_nth = widthRatio?.findIndex((e) => e !== 1);
