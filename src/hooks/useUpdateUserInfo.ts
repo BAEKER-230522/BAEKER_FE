@@ -48,7 +48,7 @@ const useUpdateUserInfo = (memberId: number) => {
           console.log(payload);
         })
         .catch((error) => {
-          toast("실패");
+          toast("프로필 수정 실패");
           console.log(error);
         });
     }

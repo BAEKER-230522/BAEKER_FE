@@ -16,12 +16,7 @@ const useStudyEdit = () => {
   const [createStudy] = studyApi.useCreateStudyMutation();
   const [updateStudy] = studyApi.useUpdateStudyMutation();
 
-  const handleCreateStudy = async ({
-    nameValue,
-    aboutValue,
-    userId,
-    nickname,
-  }: IArgument) => {
+  const handleCreateStudy = async ({ nameValue, aboutValue, userId, nickname }: IArgument) => {
     try {
       await createStudy({
         member: userId,
@@ -29,8 +24,10 @@ const useStudyEdit = () => {
         about: aboutValue,
         leader: nickname,
         capacity: maxStudyCapacity,
-      });
-      toast("스터디 생성 완료");
+      })
+        .unwrap()
+        .then(() => toast("스터디 생성 완료"))
+        .catch(() => toast("스터디 생성 실패"));
       router.push({ pathname: "/profile" });
     } catch (err) {
       console.log(err);
@@ -44,8 +41,10 @@ const useStudyEdit = () => {
         name: nameValue,
         about: aboutValue,
         capacity: maxStudyCapacity,
-      });
-      toast("스터디 수정 완료");
+      })
+        .unwrap()
+        .then(() => toast("스터디 수정 완료"))
+        .catch(() => toast("스터디 수정 실패"));
       router.push({ pathname: `${router.query.id}` });
     } catch (err) {
       console.log(err);

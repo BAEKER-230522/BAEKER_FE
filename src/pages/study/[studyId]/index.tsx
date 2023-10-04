@@ -75,7 +75,7 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
     if (!getStudyInfoLoading) {
       if (studyInfo.data.leader === memberId) {
         setIsLeader(true);
-        setTAB_ELEMENTS(["현황", "미션", "멤버", "가입요청"]);
+        setTAB_ELEMENTS(["현황", "미션", "멤버", "가입 요청", "초대 현황"]);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -130,6 +130,13 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
             widthRatio={TABLE_CONSTANT.REQUEST.WIDTH_RATIO}
             studyId={param}
             data={studyPendingList.data.pending}
+          />
+        )}
+        {tabState === 4 && (
+          <MemberTable
+            category={TABLE_CONSTANT.MEMBER.CATEGORY}
+            widthRatio={TABLE_CONSTANT.REQUEST.WIDTH_RATIO}
+            data={studyPendingList.data.inviting}
           />
         )}
       </S.ContentContainer>

@@ -12,7 +12,7 @@ const Input = ({ title, size, value, onChange }: IInput) => {
   return (
     <S.InputContainer size={size}>
       <S.Title>{title}</S.Title>
-      <S.Input onChange={onChange} value={value} />
+      <S.Input placeholder={title} onChange={onChange} value={value} />
     </S.InputContainer>
   );
 };

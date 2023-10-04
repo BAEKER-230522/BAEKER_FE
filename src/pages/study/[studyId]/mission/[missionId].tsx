@@ -9,6 +9,7 @@ import { studyApi } from "@/api/studyApi";
 import Loading from "@/components/common/loading/Loading";
 import React from "react";
 import { PageContainer } from "@/styles/common.style";
+import LocalStorage from "@/util/localstorage";
 
 interface IProblemStatusQueryDtos {
   memberId: number;
@@ -30,16 +31,17 @@ const MissionDetail = () => {
   const missionId = router.query.missionId;
   const { data: missionData, isLoading: getMissionDataLoading } = studyApi.useGetStudyRuleQuery(missionId);
   const { data: memberList, isLoading: getMemberListLoading } = studyApi.useGetStudyMemberListQuery(studyId);
-
   const [memberStatus, setMemberStatus] = useState<IPersonStudyRuleDtst[]>();
   const [missionProgress, setMissionProgress] = useState(0);
   const [userSolvedStatus, setUserSolvedStatus] = useState<any>();
   const [HEADER_ARR, setHEADER_ARR] = useState<any>();
   const [TIME_SPAN_STATUS, setTIME_SPAN_STATUS] = useState<any>();
   const [PERIOD_HEADER, setPERIOD_HEADER] = useState<any>();
+  const [isLeader, setIsLeader] = useState<boolean>(false);
   useEffect(() => {
     if (missionData !== undefined && memberList !== undefined) {
-      const HEADER = ["닉네임"];
+      if (LocalStorage.getItem("memberId") === String(missionData.data.study.leader)) setIsLeader(true);
+
       const USER_STATUS = [];
       const MEMBER_ID = memberList.data.reduce((acc: any, cur: any) => {
         acc[cur.id] = cur.nickname;
@@ -99,7 +101,7 @@ const MissionDetail = () => {
         }
       }
       setTIME_SPAN_STATUS(newStatus);
-
+      const HEADER = ["닉네임"];
       for (let i = 0; i < missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length; i++) {
         HEADER.push(missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos[i].problemName);
       }
@@ -211,18 +213,23 @@ const MissionDetail = () => {
         </S.MissionProblemListContainer>
       </S.MemberSolvingStatusContainer>
       <S.ButtonContainer>
-        <Button type="primary" style={{ width: "100px", height: "40px" }} onClick={() => movePage("study")}>
+        <Button
+          type="primary"
+          style={{ width: "80px", height: "32px", padding: "4px 15px", marginRight: "10px" }}
+          onClick={() => movePage("study")}>
           목록
         </Button>
-        <AlertModal
-          data={Number(param.missionId)}
-          title={"미션 삭제"}
-          text={"삭제하시겠습니까 ?"}
-          type={"mission"}
-          backId={Number(param.studyId)}
-          buttonText={"삭제하기"}>
-          삭제
-        </AlertModal>
+        {isLeader && (
+          <AlertModal
+            data={Number(param.missionId)}
+            title={"미션 삭제"}
+            text={"삭제하시겠습니까 ?"}
+            type={"mission"}
+            backId={Number(param.studyId)}
+            buttonText={"삭제하기"}>
+            삭제
+          </AlertModal>
+        )}
       </S.ButtonContainer>
     </S.Container>
   );
@@ -247,7 +254,7 @@ const SelectorWrapper = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   width: 50%;
-  justify-content: space-around;
+  justify-content: center;
   height: 40px;
   margin-top: 10px;
 `;

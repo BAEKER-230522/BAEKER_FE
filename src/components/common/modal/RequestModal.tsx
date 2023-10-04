@@ -30,9 +30,11 @@ const RequestModal = ({ memberId, studyId }: IProps) => {
         study: Number(studyId),
         member: memberId,
         msg: message,
-      });
+      })
+        .unwrap()
+        .then(() => toast("스터디 가입 신청 완료"))
+        .catch(() => toast("스터디 가입 신청 실패"));
       setMessage("");
-      toast("스터디 가입 신청 완료");
       setOpen(false);
     } catch (err) {
       console.log(err);
@@ -55,13 +57,7 @@ const RequestModal = ({ memberId, studyId }: IProps) => {
       <Button type="primary" onClick={showModal}>
         스터디 가입하기
       </Button>
-      <Modal
-        title={"가입 메세지"}
-        open={open}
-        onOk={handleOk}
-        confirmLoading={confirmLoading}
-        onCancel={handleCancel}
-      >
+      <Modal title={"가입 메세지"} open={open} onOk={handleOk} confirmLoading={confirmLoading} onCancel={handleCancel}>
         <TextArea
           style={{ height: 150, resize: "none" }}
           showCount

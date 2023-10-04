@@ -17,8 +17,18 @@ const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue }: I
   const missionProblemState = useSelector((state: any) => {
     return state.mission.missionProblemState;
   });
+  console.log(missionProblemState);
+
   const handleAddProblem = async (e: React.SyntheticEvent) => {
     e.preventDefault();
+    let valid = true;
+    for (let i = 0; i < missionProblemState.length; i++) {
+      if (missionProblemState[i].problemNumber === String(value)) {
+        valid = false;
+        break;
+      }
+    }
+    if (valid === false) return toast("중복되는 문제가 존재합니다.");
     const accessToken = document.cookie
       .split("; ")
       .find((row) => row.startsWith("accessToken="))
@@ -33,11 +43,12 @@ const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue }: I
       });
 
       const result = await response.json();
-
+      console.log(result);
       const newProblem = {
         idx: missionProblemState.length + 1,
         problemNumber: value,
         problemName: result.data.subject,
+        xp: result.data.level + 1,
         remove: "삭제",
       };
       dispatch(userAction.addProblem(newProblem));
