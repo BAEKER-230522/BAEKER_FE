@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Loading from "@/components/common/loading/Loading";
 import AlertModal from "@/components/common/modal/AlertModal";
 import useMissionDetail from "@/hooks/mission/useMissionDetail";
@@ -11,8 +11,13 @@ import { useRouter } from "next/router";
 import { Button } from "antd";
 import { PageContainer } from "@/styles/common.style";
 import { studyApi } from "@/api/studyApi";
+import ReviewModal from "@/components/mission/ReviewModal";
 
 const MissionDetail = () => {
+  const [showCodeModal, setShowCodeModal] = useState<boolean>(false);
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const [showCodeReviewModal, setShowCodeReviewModal] = useState<boolean>(false);
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState<boolean>(false);
   const router = useRouter();
   const param = router.query;
   const studyId = router.query.studyId;
@@ -40,7 +45,13 @@ const MissionDetail = () => {
     <S.Container>
       <MissionInfo missionData={missionData} missionProgress={missionProgress} />
       <MissionProblemList missionData={missionData} PERIOD_HEADER={PERIOD_HEADER} TIME_SPAN_STATUS={TIME_SPAN_STATUS} />
-      <MemberSolvingStatus missionData={missionData} HEADER_ARR={HEADER_ARR} userSolvedStatus={userSolvedStatus} />
+      <MemberSolvingStatus
+        missionData={missionData}
+        HEADER_ARR={HEADER_ARR}
+        userSolvedStatus={userSolvedStatus}
+        setShowCodeModal={setShowCodeModal}
+        setShowCodeReviewModal={setShowCodeReviewModal}
+      />
       <S.ButtonContainer>
         <Button
           type="primary"
@@ -60,7 +71,22 @@ const MissionDetail = () => {
           </AlertModal>
         )}
       </S.ButtonContainer>
-      <MissionCodeModal />
+      {showCodeModal && (
+        <MissionCodeModal
+          showCodeModal={showCodeModal}
+          setShowCodeModal={setShowCodeModal}
+          isModalOpened={isModalOpened}
+          setIsModalOpened={setIsModalOpened}
+        />
+      )}
+      {showCodeReviewModal && (
+        <ReviewModal
+          showCodeReviewModal={showCodeReviewModal}
+          setShowCodeReviewModal={setShowCodeReviewModal}
+          isReviewModalOpen={isReviewModalOpen}
+          setIsReviewModalOpen={setIsReviewModalOpen}
+        />
+      )}
     </S.Container>
   );
 };

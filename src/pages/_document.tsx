@@ -37,6 +37,7 @@ class MyDocument extends Document {
       <Html lang="ko">
         <Head>
           <meta name="title" content="BAEKER" />
+          <meta charSet="utf-8"></meta>
           <link rel="icon" href="/favicon.ico" />
           <meta
             name="description"

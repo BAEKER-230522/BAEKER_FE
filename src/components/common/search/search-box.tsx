@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
 import { themedPalette } from "@/styles/theme";
+import useOutsideClick from "./useOutsideClick";
 
 interface IMember {
   nickname: string;
@@ -32,11 +33,7 @@ interface IProp {
 
 const SearchBox = ({ searchResult, isLoading, setInputFocused, focus, setSearchValue }: IProp) => {
   const formRef = useRef<HTMLDivElement>(null);
-  const handleFocusOut = ({ target }: any) => {
-    if (!formRef.current?.contains(target) && !focus) {
-      setInputFocused(false);
-    }
-  };
+  useOutsideClick({ ref: formRef, isFocus: focus, setFocus: setInputFocused });
   const router = useRouter();
   const movePage = (id: number, type: "member" | "study") => {
     setInputFocused(false);
@@ -44,12 +41,7 @@ const SearchBox = ({ searchResult, isLoading, setInputFocused, focus, setSearchV
     if (type === "study") router.push(`/study/${id}`);
     if (type === "member") router.push(`/member/${id}`);
   };
-  useEffect(() => {
-    window.addEventListener("click", handleFocusOut);
-    return () => {
-      window.removeEventListener("click", handleFocusOut);
-    };
-  });
+
   if (isLoading) {
     return (
       <S.Container>

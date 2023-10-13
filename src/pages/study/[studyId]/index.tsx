@@ -151,7 +151,7 @@ const Container = styled(PageContainer)`
 `;
 
 const StudyContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

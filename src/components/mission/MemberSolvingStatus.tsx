@@ -11,9 +11,24 @@ interface IProps {
   missionData: IMission;
   HEADER_ARR: string[];
   userSolvedStatus: IUserSolvedStatus[];
+  setShowCodeModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowCodeReviewModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MemberSolvingStatus = ({ missionData, HEADER_ARR, userSolvedStatus }: IProps) => {
+const MemberSolvingStatus = ({
+  missionData,
+  HEADER_ARR,
+  userSolvedStatus,
+  setShowCodeModal,
+  setShowCodeReviewModal,
+}: IProps) => {
+  const codeModalHandler = () => {
+    setShowCodeModal(true);
+  };
+
+  const codeReviewModalHandler = () => {
+    setShowCodeReviewModal(true);
+  };
   return (
     <S.MemberSolvingStatusContainer>
       <S.MissionProblemListContainer
@@ -40,12 +55,16 @@ const MemberSolvingStatus = ({ missionData, HEADER_ARR, userSolvedStatus }: IPro
               return p_status ? (
                 <S.StatusBoxContainer key={i}>
                   <S.Dot color={"#5bc59c"} />
-                  <S.CodeButton>code</S.CodeButton>
+                  <S.CodeButton style={{ backgroundColor: "#5bc59c" }} onClick={codeReviewModalHandler}>
+                    code
+                  </S.CodeButton>
                 </S.StatusBoxContainer>
               ) : (
                 <S.StatusBoxContainer key={i}>
                   <S.Dot color={"#e31d2e"} />
-                  <S.CodeButton>code</S.CodeButton>
+                  <S.CodeButton style={{ backgroundColor: "#e31d2e" }} onClick={codeModalHandler}>
+                    code
+                  </S.CodeButton>
                 </S.StatusBoxContainer>
               );
             })}
