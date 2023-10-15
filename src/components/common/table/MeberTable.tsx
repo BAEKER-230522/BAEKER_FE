@@ -19,12 +19,12 @@ const MemberTable = ({ data, category, widthRatio }: any) => {
                 src={item.profileImg}
                 alt="profile img"
               />
-              <span>{item[field[1]]}</span>
+              <S.Cell>{item[field[1]]}</S.Cell>
             </S.UserInfoWrapper>
           </S.UserInfoContainer>
         );
       default:
-        return <div key={index}>{item[field[1]]}</div>;
+        return <S.Cell key={index}>{item[field[1]]}</S.Cell>;
     }
   };
 

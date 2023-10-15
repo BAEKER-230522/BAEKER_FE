@@ -28,7 +28,7 @@ const RequestTable = ({ data, category, widthRatio, studyId }: any) => {
       case "request":
         return <InviteAcceptButton key={index} memberId={item.id} studyId={studyId} />;
       default:
-        return <div key={index}>{item[field[1]]}</div>;
+        return <S.Cell key={index}>{item[field[1]]}</S.Cell>;
     }
   };
 

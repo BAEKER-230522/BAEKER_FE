@@ -3,6 +3,7 @@ import EmptyList from "../empty/EmptyList";
 import RemoveProblemButton from "../button/RemoveProbleButton";
 import Image from "next/image";
 import { LEVEL_IMG_URL } from "@/constant/level";
+import { S } from "./ui/style";
 
 interface IMissionProblem {
   idx: number;
@@ -32,7 +33,7 @@ const ScrollTable = ({ data, category, widthRatio }: IProps) => {
           </div>
         );
       default:
-        return <div key={index}>{item[field[1] as keyof IMissionProblem]}</div>;
+        return <S.Cell key={index}>{item[field[1] as keyof IMissionProblem]}</S.Cell>;
     }
   };
   if (data.length === 0) return <EmptyList />;
