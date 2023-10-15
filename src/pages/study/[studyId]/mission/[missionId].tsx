@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import Loading from "@/components/common/loading/Loading";
 import AlertModal from "@/components/common/modal/AlertModal";
 import useMissionDetail from "@/hooks/mission/useMissionDetail";
-import styled from "styled-components";
 import MissionInfo from "@/components/mission/MissionInfo";
+import styled from "styled-components";
 import MissionProblemList from "@/components/mission/MissionProblemList";
 import MemberSolvingStatus from "@/components/mission/MemberSolvingStatus";
 import MissionCodeModal from "@/components/mission/CodeModal";
@@ -14,18 +14,19 @@ import { studyApi } from "@/api/studyApi";
 import ReviewModal from "@/components/mission/ReviewModal";
 
 const MissionDetail = () => {
-  const [showCodeModal, setShowCodeModal] = useState<boolean>(false);
-  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
-  const [showCodeReviewModal, setShowCodeReviewModal] = useState<boolean>(false);
-  const [isReviewModalOpen, setIsReviewModalOpen] = useState<boolean>(false);
+  const [isInitCodeModal, setIsInitCodeModal] = useState<boolean>(false);
+  const [isCodeModalOpened, setIsCodeModalOpened] = useState<boolean>(false);
+
+  const [isInitCodeReviewModal, setIsInitCodeReviewModal] = useState<boolean>(false);
+  const [isCodeReviewModalOpen, setIsCodeReviewModalOpen] = useState<boolean>(false);
   const router = useRouter();
   const param = router.query;
   const studyId = router.query.studyId;
   const missionId = router.query.missionId;
   const { data: missionData, isLoading: getMissionDataLoading } = studyApi.useGetStudyRuleQuery(missionId);
-  const { data: memberList, isLoading: getMemberListLoading } = studyApi.useGetStudyMemberListQuery(studyId);
+
   const { isLeader, TIME_SPAN_STATUS, userSolvedStatus, HEADER_ARR, PERIOD_HEADER, missionProgress } = useMissionDetail(
-    { missionData, memberList }
+    { missionData }
   );
   const movePage = (type: "study") => {
     switch (type) {
@@ -34,7 +35,7 @@ const MissionDetail = () => {
         return;
     }
   };
-  if (getMissionDataLoading || getMemberListLoading || userSolvedStatus === undefined)
+  if (getMissionDataLoading || userSolvedStatus === undefined)
     return (
       <S.Container>
         <Loading />
@@ -49,8 +50,10 @@ const MissionDetail = () => {
         missionData={missionData}
         HEADER_ARR={HEADER_ARR}
         userSolvedStatus={userSolvedStatus}
-        setShowCodeModal={setShowCodeModal}
-        setShowCodeReviewModal={setShowCodeReviewModal}
+        setIsInitCodeModal={setIsInitCodeModal}
+        setIsCodeModalOpened={setIsCodeModalOpened}
+        setIsInitCodeReviewModal={setIsInitCodeReviewModal}
+        setIsCodeReviewModalOpen={setIsCodeReviewModalOpen}
       />
       <S.ButtonContainer>
         <Button
@@ -71,20 +74,20 @@ const MissionDetail = () => {
           </AlertModal>
         )}
       </S.ButtonContainer>
-      {showCodeModal && (
+      {isCodeModalOpened && (
         <MissionCodeModal
-          showCodeModal={showCodeModal}
-          setShowCodeModal={setShowCodeModal}
-          isModalOpened={isModalOpened}
-          setIsModalOpened={setIsModalOpened}
+          isInitCodeModal={isInitCodeModal}
+          setIsInitCodeModal={setIsInitCodeModal}
+          isCodeModalOpened={isCodeModalOpened}
+          setIsCodeModalOpened={setIsCodeModalOpened}
         />
       )}
-      {showCodeReviewModal && (
+      {isCodeReviewModalOpen && (
         <ReviewModal
-          showCodeReviewModal={showCodeReviewModal}
-          setShowCodeReviewModal={setShowCodeReviewModal}
-          isReviewModalOpen={isReviewModalOpen}
-          setIsReviewModalOpen={setIsReviewModalOpen}
+          isInitCodeReviewModal={isInitCodeReviewModal}
+          setIsInitCodeReviewModal={setIsInitCodeReviewModal}
+          isCodeReviewModalOpen={isCodeReviewModalOpen}
+          setIsCodeReviewModalOpen={setIsCodeReviewModalOpen}
         />
       )}
     </S.Container>

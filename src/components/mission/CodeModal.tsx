@@ -4,22 +4,22 @@ import HighlightCode from "./HighlightCode";
 import useOutsideClick from "@/hooks/mission/useOutsideClick";
 
 interface IProps {
-  showCodeModal: boolean;
-  setShowCodeModal: React.Dispatch<React.SetStateAction<boolean>>;
-  isModalOpened: boolean;
-  setIsModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  isInitCodeModal: boolean;
+  setIsInitCodeModal: React.Dispatch<React.SetStateAction<boolean>>;
+  isCodeModalOpened: boolean;
+  setIsCodeModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const MissionCodeModal = ({ showCodeModal, setShowCodeModal, isModalOpened, setIsModalOpened }: IProps) => {
+const MissionCodeModal = ({ isInitCodeModal, setIsInitCodeModal, isCodeModalOpened, setIsCodeModalOpened }: IProps) => {
   const codeModalRef = useRef<HTMLDivElement>(null);
   const [showHighlighter, setShowHighlighter] = useState<boolean>(false);
   const [code, setCode] = useState<string>("");
   useOutsideClick({
     ref: codeModalRef,
-    isFocus: showCodeModal,
-    setFocus: setShowCodeModal,
-    isOpened: isModalOpened,
-    setIsOpened: setIsModalOpened,
+    isInit: isInitCodeModal,
+    setIsInit: setIsInitCodeModal,
+    isOpened: isCodeModalOpened,
+    setIsOpened: setIsCodeModalOpened,
   });
   const codeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCode(e.target.value);
@@ -29,8 +29,8 @@ const MissionCodeModal = ({ showCodeModal, setShowCodeModal, isModalOpened, setI
   };
 
   const codeModalHandler = () => {
-    setShowCodeModal(false);
-    setIsModalOpened(false);
+    setIsInitCodeModal(false);
+    setIsCodeModalOpened(false);
   };
 
   return (

@@ -7,25 +7,25 @@ import useOutsideClick from "@/hooks/mission/useOutsideClick";
 hljs.registerLanguage("javascript", javascript);
 
 interface IProps {
-  showCodeReviewModal: boolean;
-  setShowCodeReviewModal: React.Dispatch<React.SetStateAction<boolean>>;
-  isReviewModalOpen: boolean;
-  setIsReviewModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isInitCodeReviewModal: boolean;
+  setIsInitCodeReviewModal: React.Dispatch<React.SetStateAction<boolean>>;
+  isCodeReviewModalOpen: boolean;
+  setIsCodeReviewModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ReviewModal = ({
-  showCodeReviewModal,
-  setShowCodeReviewModal,
-  isReviewModalOpen,
-  setIsReviewModalOpen,
+  isInitCodeReviewModal,
+  setIsInitCodeReviewModal,
+  isCodeReviewModalOpen,
+  setIsCodeReviewModalOpen,
 }: IProps) => {
   const codeModalRef = useRef<HTMLDivElement>(null);
   useOutsideClick({
     ref: codeModalRef,
-    isFocus: showCodeReviewModal,
-    setFocus: setShowCodeReviewModal,
-    isOpened: isReviewModalOpen,
-    setIsOpened: setIsReviewModalOpen,
+    isInit: isInitCodeReviewModal,
+    setIsInit: setIsInitCodeReviewModal,
+    isOpened: isCodeReviewModalOpen,
+    setIsOpened: setIsCodeReviewModalOpen,
   });
   const content = `
   import React, { useEffect } from "react";

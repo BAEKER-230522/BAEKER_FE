@@ -11,23 +11,29 @@ interface IProps {
   missionData: IMission;
   HEADER_ARR: string[];
   userSolvedStatus: IUserSolvedStatus[];
-  setShowCodeModal: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowCodeReviewModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsInitCodeModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCodeModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsInitCodeReviewModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCodeReviewModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const MemberSolvingStatus = ({
   missionData,
   HEADER_ARR,
   userSolvedStatus,
-  setShowCodeModal,
-  setShowCodeReviewModal,
+  setIsInitCodeModal,
+  setIsCodeModalOpened,
+  setIsInitCodeReviewModal,
+  setIsCodeReviewModalOpen,
 }: IProps) => {
   const codeModalHandler = () => {
-    setShowCodeModal(true);
+    setIsInitCodeModal(true);
+    setIsCodeModalOpened(true);
   };
 
   const codeReviewModalHandler = () => {
-    setShowCodeReviewModal(true);
+    setIsInitCodeReviewModal(true);
+    setIsCodeReviewModalOpen(true);
   };
   return (
     <S.MemberSolvingStatusContainer>
