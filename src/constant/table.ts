@@ -1,4 +1,13 @@
-export const TABLE_CONSTANT = {
+type TableCategory = [string, string];
+
+interface ITableConstant {
+  [key: string]: {
+    CATEGORY: TableCategory[];
+    WIDTH_RATIO: number[];
+  };
+}
+
+export const TABLE_CONSTANT: ITableConstant = {
   STUDY: {
     CATEGORY: [
       ["랭킹", "ranking"],
@@ -25,7 +34,7 @@ export const TABLE_CONSTANT = {
       ["닉네임", "nickname"],
       ["소개", "about"],
     ],
-    WIDTH_RATIO: [1, 1, 1, 1],
+    WIDTH_RATIO: [1, 1, 2, 1],
   },
   MISSION: {
     CATEGORY: [
@@ -39,12 +48,12 @@ export const TABLE_CONSTANT = {
   },
   MISSION_PROBLEM: {
     CATEGORY: [
-      ["번호", "idx"],
+      ["난이도", "xp"],
       ["문제 번호", "problemNumber"],
       ["문제 이름", "problemName"],
       ["삭제", "remove"],
     ],
-    WIDTH_RATIO: [1, 1, 2, 1],
+    WIDTH_RATIO: [1, 1, 1, 1],
   },
   REQUEST: {
     CATEGORY: [

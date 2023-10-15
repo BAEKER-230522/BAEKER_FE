@@ -1,127 +1,33 @@
-import { useRouter } from "next/router";
-import { themedPalette } from "@/styles/theme";
-import styled from "styled-components";
-import { Button, Progress } from "antd";
-import { useEffect, useState } from "react";
-import AlertModal from "@/components/common/modal/AlertModal";
-import { calculateDuration, getTodayDateFormatted, isFuture } from "../../../../util/date";
-import { studyApi } from "@/api/studyApi";
+import React, { useState } from "react";
 import Loading from "@/components/common/loading/Loading";
-import React from "react";
+import AlertModal from "@/components/common/modal/AlertModal";
+import useMissionDetail from "@/hooks/mission/useMissionDetail";
+import MissionInfo from "@/components/mission/MissionInfo";
+import styled from "styled-components";
+import MissionProblemList from "@/components/mission/MissionProblemList";
+import MemberSolvingStatus from "@/components/mission/MemberSolvingStatus";
+import MissionCodeModal from "@/components/mission/CodeModal";
+import { useRouter } from "next/router";
+import { Button } from "antd";
 import { PageContainer } from "@/styles/common.style";
-import LocalStorage from "@/util/localstorage";
-
-interface IProblemStatusQueryDtos {
-  memberId: number;
-  problemName: string;
-  problemNumber: number;
-  problemStatus: string;
-}
-
-interface IPersonStudyRuleDtst {
-  memberId: number;
-  personalStudyRuleStatus: string;
-  problemStatusQueryDtos: IProblemStatusQueryDtos[];
-}
+import { studyApi } from "@/api/studyApi";
+import ReviewModal from "@/components/mission/ReviewModal";
 
 const MissionDetail = () => {
+  const [isInitCodeModal, setIsInitCodeModal] = useState<boolean>(false);
+  const [isCodeModalOpened, setIsCodeModalOpened] = useState<boolean>(false);
+
+  const [isInitCodeReviewModal, setIsInitCodeReviewModal] = useState<boolean>(false);
+  const [isCodeReviewModalOpen, setIsCodeReviewModalOpen] = useState<boolean>(false);
   const router = useRouter();
   const param = router.query;
   const studyId = router.query.studyId;
   const missionId = router.query.missionId;
   const { data: missionData, isLoading: getMissionDataLoading } = studyApi.useGetStudyRuleQuery(missionId);
-  const { data: memberList, isLoading: getMemberListLoading } = studyApi.useGetStudyMemberListQuery(studyId);
-  const [memberStatus, setMemberStatus] = useState<IPersonStudyRuleDtst[]>();
-  const [missionProgress, setMissionProgress] = useState(0);
-  const [userSolvedStatus, setUserSolvedStatus] = useState<any>();
-  const [HEADER_ARR, setHEADER_ARR] = useState<any>();
-  const [TIME_SPAN_STATUS, setTIME_SPAN_STATUS] = useState<any>();
-  const [PERIOD_HEADER, setPERIOD_HEADER] = useState<any>();
-  const [isLeader, setIsLeader] = useState<boolean>(false);
-  useEffect(() => {
-    if (missionData !== undefined && memberList !== undefined) {
-      if (LocalStorage.getItem("memberId") === String(missionData.data.study.leader)) setIsLeader(true);
 
-      const USER_STATUS = [];
-      const MEMBER_ID = memberList.data.reduce((acc: any, cur: any) => {
-        acc[cur.id] = cur.nickname;
-        return acc;
-      }, {});
-      // 총 문제 개수
-      let TOTAL_PROPLEM_COUNT = missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length;
-      // 총 스터디 멤버 인원
-      let STUDY_MEMBER_COUNT = memberList.data.length;
-      // 총 COMPLETE 개수
-      let USER_COMPLETE_COUNT = 0;
-
-      setMemberStatus(missionData.data.personalStudyRuleDtos);
-      setTIME_SPAN_STATUS(
-        Array.from(
-          {
-            length: calculateDuration(missionData.data.startDate, missionData.data.deadline) + 1,
-          },
-          () => false
-        )
-      );
-
-      // 각 멤버 문제풀이 현황 상태
-      for (let k = 0; k < missionData.data.personalStudyRuleDtos.length; k++) {
-        //
-        const PROBLEM_STATUS = [];
-        for (let j = 0; j < missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos.length; j++) {
-          if (missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos[j].problemStatus === "COMPLETE") {
-            USER_COMPLETE_COUNT += 1;
-            PROBLEM_STATUS.push(true);
-          } else {
-            PROBLEM_STATUS.push(false);
-          }
-        }
-        USER_STATUS.push({
-          nickname: MEMBER_ID[missionData.data.personalStudyRuleDtos[k].memberId],
-          problem_status: PROBLEM_STATUS,
-        });
-      }
-
-      setUserSolvedStatus(USER_STATUS);
-
-      let newStatus = [
-        ...Array.from(
-          {
-            length: calculateDuration(missionData.data.startDate, missionData.data.deadline) + 1,
-          },
-          () => false
-        ),
-      ]; // 기존 배열 복사
-
-      // 미래가 아닐 경우만 동작
-      if (isFuture(missionData.data.startDate)) {
-        for (let i = 0; i < calculateDuration(missionData.data.startDate, getTodayDateFormatted()) + 1; i++) {
-          if (i >= calculateDuration(missionData.data.startDate, missionData.data.deadline) + 1) break;
-          newStatus[i] = true;
-        }
-      }
-      setTIME_SPAN_STATUS(newStatus);
-      const HEADER = ["닉네임"];
-      for (let i = 0; i < missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length; i++) {
-        HEADER.push(missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos[i].problemName);
-      }
-
-      // missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length -> 문제 개수
-      // 퍼센트 -> 문제 풀이 개수 / 총 문제 개수
-      setHEADER_ARR(HEADER);
-      setPERIOD_HEADER(
-        Array.from(
-          {
-            length: calculateDuration(missionData.data.startDate, missionData.data.deadline) + 1,
-          },
-          (_, i) => `${i + 1}일차`
-        )
-      );
-      setMissionProgress((USER_COMPLETE_COUNT / (TOTAL_PROPLEM_COUNT * STUDY_MEMBER_COUNT)) * 100);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [missionData, memberList]);
-
+  const { isLeader, TIME_SPAN_STATUS, userSolvedStatus, HEADER_ARR, PERIOD_HEADER, missionProgress } = useMissionDetail(
+    { missionData }
+  );
   const movePage = (type: "study") => {
     switch (type) {
       case "study":
@@ -129,89 +35,26 @@ const MissionDetail = () => {
         return;
     }
   };
-
-  if (getMissionDataLoading || getMemberListLoading || userSolvedStatus === undefined)
+  if (getMissionDataLoading || userSolvedStatus === undefined)
     return (
       <S.Container>
-        <Loading />;
+        <Loading />
       </S.Container>
     );
 
   return (
     <S.Container>
-      <S.MissionInfoContainer>
-        <S.TitleContainer>
-          <S.Title>{missionData.data.name}</S.Title>
-          <S.About>{missionData.data.about}</S.About>
-        </S.TitleContainer>
-        <S.Divider></S.Divider>
-        <S.TitleContainer>
-          <S.Title>미션 진행률</S.Title>
-          <Progress type="circle" percent={missionProgress} status={"active"} width={80} />
-        </S.TitleContainer>
-        <S.Divider></S.Divider>
-        <S.TitleContainer>
-          <S.Title>시작 날짜</S.Title>
-          <S.About>{missionData.data.startDate}</S.About>
-        </S.TitleContainer>
-        <S.Divider></S.Divider>
-        <S.TitleContainer>
-          <S.Title>종료 날짜</S.Title>
-          <S.About>{missionData.data.deadline}</S.About>
-        </S.TitleContainer>
-      </S.MissionInfoContainer>
-
-      <S.MissionProblemListContainer
-        numColumn={calculateDuration(missionData.data.startDate, missionData.data.deadline) + 1}>
-        {PERIOD_HEADER.map((e: any, idx: number) => (
-          <div key={idx}>{e}</div>
-        ))}
-        {TIME_SPAN_STATUS.map((e: any, idx: number) => {
-          return e ? (
-            <div key={idx}>
-              <S.Dot color={"#6495Ed"} />
-            </div>
-          ) : (
-            <div key={idx}></div>
-          );
-        })}
-      </S.MissionProblemListContainer>
-      <S.MemberSolvingStatusContainer>
-        <S.MissionProblemListContainer
-          numColumn={missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length + 1}>
-          {HEADER_ARR.map((e: any, idx: number) => {
-            return idx <= 0 ? (
-              <div>{e}</div>
-            ) : (
-              <S.Problem
-                onClick={() =>
-                  window.open(
-                    `https://www.acmicpc.net/problem/${memberStatus![0].problemStatusQueryDtos[idx - 1].problemNumber}`,
-                    "_blank"
-                  )
-                }>
-                {e}
-              </S.Problem>
-            );
-          })}
-          {userSolvedStatus.map((e: any, idx: number) => (
-            <React.Fragment key={idx}>
-              <div>{e.nickname}</div>
-              {e.problem_status.map((p_status: any, i: number) => {
-                return p_status ? (
-                  <div key={i}>
-                    <S.Dot color={"#5bc59c"} />
-                  </div>
-                ) : (
-                  <div key={i}>
-                    <S.Dot color={"#e31d2e"} />
-                  </div>
-                );
-              })}
-            </React.Fragment>
-          ))}
-        </S.MissionProblemListContainer>
-      </S.MemberSolvingStatusContainer>
+      <MissionInfo missionData={missionData} missionProgress={missionProgress} />
+      <MissionProblemList missionData={missionData} PERIOD_HEADER={PERIOD_HEADER} TIME_SPAN_STATUS={TIME_SPAN_STATUS} />
+      <MemberSolvingStatus
+        missionData={missionData}
+        HEADER_ARR={HEADER_ARR}
+        userSolvedStatus={userSolvedStatus}
+        setIsInitCodeModal={setIsInitCodeModal}
+        setIsCodeModalOpened={setIsCodeModalOpened}
+        setIsInitCodeReviewModal={setIsInitCodeReviewModal}
+        setIsCodeReviewModalOpen={setIsCodeReviewModalOpen}
+      />
       <S.ButtonContainer>
         <Button
           type="primary"
@@ -231,6 +74,22 @@ const MissionDetail = () => {
           </AlertModal>
         )}
       </S.ButtonContainer>
+      {isCodeModalOpened && (
+        <MissionCodeModal
+          isInitCodeModal={isInitCodeModal}
+          setIsInitCodeModal={setIsInitCodeModal}
+          isCodeModalOpened={isCodeModalOpened}
+          setIsCodeModalOpened={setIsCodeModalOpened}
+        />
+      )}
+      {isCodeReviewModalOpen && (
+        <ReviewModal
+          isInitCodeReviewModal={isInitCodeReviewModal}
+          setIsInitCodeReviewModal={setIsInitCodeReviewModal}
+          isCodeReviewModalOpen={isCodeReviewModalOpen}
+          setIsCodeReviewModalOpen={setIsCodeReviewModalOpen}
+        />
+      )}
     </S.Container>
   );
 };
@@ -241,16 +100,6 @@ const Container = styled(PageContainer)`
   padding-bottom: 50px;
 `;
 
-const SelectorWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-  align-items: start;
-  justify-content: start;
-  width: 40%;
-  margin-bottom: 50px;
-`;
-
 const ButtonContainer = styled.div`
   display: flex;
   width: 50%;
@@ -259,136 +108,7 @@ const ButtonContainer = styled.div`
   margin-top: 10px;
 `;
 
-const MissionInputContainer = styled.div`
-  display: flex;
-  width: 90%;
-`;
-
-const MissionInputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-`;
-
-interface MissionProblemListContainerProps {
-  numColumn: number;
-}
-const MissionProblemListContainer = styled.div<MissionProblemListContainerProps>`
-  border-radius: 10px;
-  display: grid;
-  grid-template-columns: ${(props) => `repeat(${props.numColumn}, 150px)`};
-  margin-bottom: 20px;
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    background-color: #e7e3e3;
-    border-radius: 5px;
-    margin: 2px;
-  }
-`;
-interface ColorProp {
-  color: string;
-}
-
-const Dot = styled.span<ColorProp>`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-`;
-
-const MemberSolvingStatusContainer = styled.div`
-  border-radius: 10px;
-  margin-top: 50px;
-`;
-
-const MissionStatusContainer = styled.div`
-  display: flex;
-  width: 75%;
-  height: 95%;
-  border-radius: 10px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: ${themedPalette.bg_element2};
-  overflow-x: scroll;
-`;
-
-const MissionProgressContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-`;
-
-const Problem = styled.div`
-  cursor: pointer;
-  color: #6495ed;
-`;
-const MissionInfoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  height: 180px;
-  margin-bottom: 70px;
-  background-color: ${themedPalette.bg_element2};
-`;
-
-const MissionInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-`;
-
-const Divider = styled.div`
-  height: 80%;
-  width: 0px;
-  border-right: 1px solid ${themedPalette.bg_element};
-`;
-
-const TitleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-left: 30px;
-  height: 100%;
-  justify-content: center;
-`;
-
-const Title = styled.div`
-  font-size: 2rem;
-  color: ${themedPalette.text1};
-  margin-bottom: 20px;
-`;
-
-const About = styled.p`
-  margin-bottom: 20px;
-  font-size: 1.1rem;
-  color: ${themedPalette.text3};
-`;
-
 const S = {
-  Problem,
-  Dot,
-  MissionStatusContainer,
-  MissionProgressContainer,
   ButtonContainer,
   Container,
-  MemberSolvingStatusContainer,
-  MissionProblemListContainer,
-  SelectorWrapper,
-  MissionInputContainer,
-  MissionInputWrapper,
-  MissionInfoContainer,
-  MissionInfo,
-  TitleContainer,
-  Title,
-  Divider,
-  About,
 };

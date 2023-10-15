@@ -3,7 +3,7 @@ import { useNavigation } from "@/hooks/useNavigation";
 import EmptyList from "../empty/EmptyList";
 import { S } from "./ui/style";
 
-const BasicTable = ({ data, category, widthRatio, url, routeType }: any) => {
+const MissionTable = ({ data, category, widthRatio, url, routeType }: any) => {
   const { navigatePage } = useNavigation();
 
   const renderFieldContent = (field: any, item: any, index: number) => {
@@ -17,6 +17,45 @@ const BasicTable = ({ data, category, widthRatio, url, routeType }: any) => {
           </div>
         );
 
+      case "mission":
+        switch (item[field[1]]) {
+          case "DONE":
+            return (
+              <div>
+                <S.ColorBox key={index} color="red">
+                  Done
+                </S.ColorBox>
+              </div>
+            );
+          case "ACTIVE":
+            return (
+              <div>
+                <S.ColorBox key={index} color="blue">
+                  Ing
+                </S.ColorBox>
+              </div>
+            );
+          case "INACTIVE":
+            return (
+              <div>
+                <S.ColorBox key={index} color="green">
+                  Pre
+                </S.ColorBox>
+              </div>
+            );
+        }
+      case "startDate":
+        return (
+          <S.Cell key={index} color="green">
+            {item[field[1]].substring(5)}
+          </S.Cell>
+        );
+      case "deadline":
+        return (
+          <S.Cell key={index} color="green">
+            {item[field[1]].substring(5)}
+          </S.Cell>
+        );
       default:
         return <S.Cell key={index}>{item[field[1]]}</S.Cell>;
     }
@@ -45,4 +84,4 @@ const BasicTable = ({ data, category, widthRatio, url, routeType }: any) => {
   );
 };
 
-export default BasicTable;
+export default MissionTable;

@@ -14,13 +14,13 @@ const InviteTable = ({ data, category, widthRatio, memberId, url, routeType }: a
       case "capacity":
         return (
           <div>
-            <S.Capacity key={index}>
+            <S.ColorBox key={index} color="blue">
               {item.studyMember} / {item.capacity}
-            </S.Capacity>
+            </S.ColorBox>
           </div>
         );
       default:
-        return <div key={index}>{item[field[1]]}</div>;
+        return <S.Cell key={index}>{item[field[1]]}</S.Cell>;
     }
   };
 

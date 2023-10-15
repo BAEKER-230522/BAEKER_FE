@@ -24,15 +24,12 @@ const Search = () => {
     const debounceTimeout = setTimeout(async () => {
       try {
         setIsLoading(true);
-        const data = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}api/search/v1/${searchValue}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const data = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}api/search/v1/${searchValue}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         const result = await data.json();
         setSearchResult(result.data);
       } catch (err) {
@@ -46,12 +43,7 @@ const Search = () => {
   return (
     <S.Container>
       <S.SearchSVG />
-      <S.Input
-        value={searchValue}
-        onChange={onChangeSearch}
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
-      />
+      <S.Input value={searchValue} onChange={onChangeSearch} onFocus={handleInputFocus} onBlur={handleInputBlur} />
       {isInputFocused && (
         <SearchBox
           searchResult={searchResult!}

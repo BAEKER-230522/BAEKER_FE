@@ -5,8 +5,13 @@ import { themedPalette } from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
   ${reset};
-  
+  html{
+    width: 100%;
+    height: 100%;
+  }
   body {
+    width: 100%;
+    height: 100%;
     ${themes.light}
     transition: 0.125s all ease-in;
   }

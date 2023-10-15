@@ -88,6 +88,7 @@ const StatusTitle = styled.span`
 const StatusNumber = styled.span`
   font-weight: 700;
   font-size: 2.7rem;
+  margin-top: 10px;
   &:nth-child(2) {
     color: ${themedPalette.bg_element4};
   }

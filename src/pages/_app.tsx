@@ -4,13 +4,10 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import wrapper from "@/store";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
 import Head from "next/head";
-import LocalStorage from "@/util/localstorage";
+import "highlight.js/styles/vs2015.css";
 
 const App = ({ Component, pageProps }: any) => {
-  const dispatch = useDispatch();
-
   return (
     <>
       <Head>

@@ -136,19 +136,44 @@ const UserInfoWrapper = styled.div`
   margin-left: 25%;
 `;
 
-const Capacity = styled.span`
-  background-color: ${themedPalette.bg_element4};
+type ColorBoxProps = {
+  color?: "blue" | "red" | "green";
+};
+
+const ColorBox = styled.span<ColorBoxProps>`
+  background-color: ${(props) => {
+    switch (props.color) {
+      case "blue":
+        return "#1877FF";
+      case "green":
+        return "#5bc59c";
+      case "red":
+        return "#e31d2e";
+      default:
+        return "#1877FF"; // 기본값 설정
+    }
+  }};
   padding: 5px 10px;
   height: 20px;
   text-align: center;
   line-height: 20px;
-  color: ${themedPalette.text2};
+  color: white;
   border-radius: 7px;
   font-size: 12px;
   font-weight: 700;
 `;
 
+const Cell = styled.div`
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  color: ${themedPalette.text1};
+  font-size: 14px;
+  font-weight: 700;
+`;
+
 export const S = {
+  Cell,
   ContentCell,
   Container,
   HeaderContainer,
@@ -162,5 +187,5 @@ export const S = {
   SelectedPaginationElement,
   UserInfoContainer,
   UserInfoWrapper,
-  Capacity,
+  ColorBox,
 };

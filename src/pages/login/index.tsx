@@ -6,7 +6,6 @@ import { themedPalette } from "@/styles/theme";
 
 const Login = () => {
   useKakaoLogin();
-  console.log("deploy issue");
   return (
     <S.Container>
       <S.BigFont>BAEKER</S.BigFont>
