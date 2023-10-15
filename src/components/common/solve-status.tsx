@@ -12,8 +12,8 @@ const SolveStatus = ({ studyInfo }: any) => {
         <S.StatusNumber>{studyInfo.data.solvedCount}</S.StatusNumber>
       </S.StatusElement>
       <S.StatusElement>
-        <S.StatusTitle>해결한 미션</S.StatusTitle>
-        <S.StatusNumber>-</S.StatusNumber>
+        <S.StatusTitle>경험치</S.StatusTitle>
+        <S.StatusNumber>{studyInfo.data.xp}</S.StatusNumber>
       </S.StatusElement>
     </S.StatusContainer>
   );

@@ -12,7 +12,7 @@ interface IProblemStatusQueryDtos {
 }
 
 interface IPersonalStudyRuleDtos {
-  memberId: number;
+  nickName: string;
   personalStudyRuleStatus: string;
   problemStatusQueryDtos: IProblemStatusQueryDtos[];
 }
@@ -22,7 +22,7 @@ interface IMissionData {
   deadline: string;
   id: number;
   mission: string;
-  name: string;
+  studyRuleName: string;
   personalStudyRuleDtos: IPersonalStudyRuleDtos[];
   startDate: string;
   status: string;
@@ -48,10 +48,9 @@ interface IMemberList {
 
 interface IProps {
   missionData: IMission;
-  memberList: IMember;
 }
 
-const useMissionDetail = ({ missionData, memberList }: IProps) => {
+const useMissionDetail = ({ missionData }: IProps) => {
   const [memberStatus, setMemberStatus] = useState<IPersonalStudyRuleDtos[]>();
   const [missionProgress, setMissionProgress] = useState(0);
   const [userSolvedStatus, setUserSolvedStatus] = useState<any>();
@@ -59,19 +58,17 @@ const useMissionDetail = ({ missionData, memberList }: IProps) => {
   const [TIME_SPAN_STATUS, setTIME_SPAN_STATUS] = useState<boolean[]>([]);
   const [PERIOD_HEADER, setPERIOD_HEADER] = useState<string[]>([]);
   const [isLeader, setIsLeader] = useState<boolean>(false);
+
   useEffect(() => {
-    if (missionData !== undefined && memberList !== undefined) {
+    if (missionData !== undefined) {
       if (LocalStorage.getItem("memberId") === String(missionData.data.study.leader)) setIsLeader(true);
 
       const USER_STATUS = [];
-      const MEMBER_ID = memberList.data.reduce((acc: any, cur: any) => {
-        acc[cur.id] = cur.nickname;
-        return acc;
-      }, {});
+
       // 총 문제 개수
       let TOTAL_PROPLEM_COUNT = missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length;
       // 총 스터디 멤버 인원
-      let STUDY_MEMBER_COUNT = memberList.data.length;
+      let STUDY_MEMBER_COUNT = missionData.data.personalStudyRuleDtos.length;
       // 총 COMPLETE 개수
       let USER_COMPLETE_COUNT = 0;
 
@@ -98,7 +95,7 @@ const useMissionDetail = ({ missionData, memberList }: IProps) => {
           }
         }
         USER_STATUS.push({
-          nickname: MEMBER_ID[missionData.data.personalStudyRuleDtos[k].memberId],
+          nickname: missionData.data.personalStudyRuleDtos[k].nickName,
           problem_status: PROBLEM_STATUS,
         });
       }
@@ -141,7 +138,7 @@ const useMissionDetail = ({ missionData, memberList }: IProps) => {
       setMissionProgress((USER_COMPLETE_COUNT / (TOTAL_PROPLEM_COUNT * STUDY_MEMBER_COUNT)) * 100);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [missionData, memberList]);
+  }, [missionData]);
 
   return {
     isLeader,

@@ -34,7 +34,7 @@ export const TABLE_CONSTANT: ITableConstant = {
       ["닉네임", "nickname"],
       ["소개", "about"],
     ],
-    WIDTH_RATIO: [1, 1, 1, 1],
+    WIDTH_RATIO: [1, 1, 2, 1],
   },
   MISSION: {
     CATEGORY: [

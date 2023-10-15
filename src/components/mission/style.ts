@@ -14,21 +14,21 @@ const MissionInfoContainer = styled.div`
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-left: 30px;
   height: 100%;
   justify-content: center;
+  text-align: center;
 `;
 
 const Title = styled.div`
   font-size: 2rem;
   color: ${themedPalette.text1};
   margin-bottom: 20px;
+  /* text-align: center; */
 `;
 
 const About = styled.p`
-  margin-bottom: 20px;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
   color: ${themedPalette.text3};
 `;
 
@@ -134,8 +134,10 @@ const CodeModalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  border-radius: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
 `;
 
 const CodeModal = styled.div`

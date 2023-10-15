@@ -27,5 +27,3 @@ const HighlightCode = ({ content, status, language }: Props) => {
 };
 
 export default HighlightCode;
-
-[[{}, {}, {}, {}, {}]];
