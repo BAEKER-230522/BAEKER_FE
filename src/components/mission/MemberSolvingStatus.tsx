@@ -35,6 +35,9 @@ const MemberSolvingStatus = ({
     setIsInitCodeReviewModal(true);
     setIsCodeReviewModalOpen(true);
   };
+
+  console.log(missionData);
+
   return (
     <S.MemberSolvingStatusContainer>
       <S.MissionProblemListContainer
@@ -46,7 +49,9 @@ const MemberSolvingStatus = ({
             <S.Problem
               onClick={() =>
                 window.open(
-                  `https://www.acmicpc.net/problem/${memberStatus![0].problemStatusQueryDtos[idx - 1].problemNumber}`,
+                  `https://www.acmicpc.net/problem/${
+                    missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos[idx - 1].problemNumber
+                  }`,
                   "_blank"
                 )
               }>
