@@ -14,7 +14,7 @@ import { GetServerSideProps } from "next";
 import { useState, useEffect } from "react";
 import { PageContainer } from "@/styles/common.style";
 import { TABLE_CONSTANT } from "@/constant/table";
-import BasicTable from "@/components/common/table/BasicTable";
+import MissionTable from "@/components/common/table/MissionTable";
 import MemberTable from "@/components/common/table/MeberTable";
 import RequestTable from "@/components/common/table/RequestTable";
 
@@ -26,6 +26,24 @@ interface IServerSideProp {
 interface IParsedCookies {
   refreshToken?: string;
   memberId?: string;
+}
+
+interface IMission {
+  id: number;
+  name: string;
+  about: string;
+  createDate: string;
+  modifyDate: string;
+  mission: string;
+  status: string;
+  startDate: string;
+  deadline: string;
+}
+
+interface IMember {
+  about: string;
+  baekJoonName: string;
+  ranking: number;
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -51,9 +69,13 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
   const { data: stduyMemberList, isLoading: getMemberListLoading } = studyApi.useGetStudyMemberListQuery(Number(param));
   const { data: studyPendingList, isLoading: getPedingListLoading } = studyApi.useGetPendingListQuery(Number(param));
   const { data: studyInfo, isLoading: getStudyInfoLoading } = studyApi.useGetStudyInfoQuery(Number(param));
+
   const [isUserStudy, setIsUserStudy] = useState<boolean>(false);
   const [isLeader, setIsLeader] = useState<boolean>(false);
   const [TAB_ELEMENTS, setTAB_ELEMENTS] = useState<string[]>(["현황", "미션", "멤버"]);
+  const [missionList, setMissionList] = useState<IMission[]>([]);
+  const [memberList, setMemberList] = useState<IMember[]>([]);
+
   const tabState = useSelector((state: any) => {
     return state.tab.studyTabState;
   });
@@ -68,8 +90,14 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
         }
       }
     }
+
+    if (studyMissionList !== undefined && stduyMemberList !== undefined && missionList.length === 0) {
+      setMemberList([...stduyMemberList.data].sort((a, b) => a.ranking - b.ranking));
+      setMissionList([...studyMissionList.data].reverse());
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getMemberListLoading]);
+  }, [getMemberListLoading, getMemberListLoading]);
 
   useEffect(() => {
     if (!getStudyInfoLoading) {
@@ -109,8 +137,8 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
           </>
         )}
         {tabState === 1 && (
-          <BasicTable
-            data={studyMissionList.data}
+          <MissionTable
+            data={missionList}
             category={TABLE_CONSTANT.MISSION.CATEGORY}
             widthRatio={TABLE_CONSTANT.MISSION.WIDTH_RATIO}
             url="mission"
@@ -119,7 +147,7 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
         )}
         {tabState === 2 && (
           <MemberTable
-            data={stduyMemberList.data}
+            data={memberList}
             category={TABLE_CONSTANT.MEMBER.CATEGORY}
             widthRatio={TABLE_CONSTANT.MEMBER.WIDTH_RATIO}
           />
