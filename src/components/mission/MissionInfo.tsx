@@ -27,7 +27,7 @@ const MissionInfo = ({ missionData, missionProgress }: IProps) => {
       <S.Divider></S.Divider>
       <S.TitleContainer>
         <S.Title>XP</S.Title>
-        <S.About>40</S.About>
+        <S.About>{missionData.data.xp}</S.About>
       </S.TitleContainer>
       <S.Divider></S.Divider>
       <S.TitleContainer>

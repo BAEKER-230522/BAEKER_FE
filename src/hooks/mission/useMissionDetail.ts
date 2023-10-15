@@ -27,6 +27,7 @@ interface IMissionData {
   startDate: string;
   status: string;
   study: IStudy;
+  xp: number;
 }
 
 export interface IMission {
