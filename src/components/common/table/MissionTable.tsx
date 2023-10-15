@@ -7,7 +7,6 @@ const MissionTable = ({ data, category, widthRatio, url, routeType }: any) => {
   const { navigatePage } = useNavigation();
 
   const renderFieldContent = (field: any, item: any, index: number) => {
-    console.log(field);
     switch (field[1]) {
       case "capacity":
         return (

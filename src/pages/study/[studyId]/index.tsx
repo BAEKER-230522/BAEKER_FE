@@ -79,14 +79,8 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
   const tabState = useSelector((state: any) => {
     return state.tab.studyTabState;
   });
-  console.log(missionList, "1");
-  console.log(memberList, "1");
 
   useEffect(() => {
-    console.log(studyMissionList);
-    console.log(stduyMemberList);
-    console.log("in useEffect");
-
     if (memberId === null) setIsUserStudy(true);
     if (!getMemberListLoading) {
       for (let i = 0; i < stduyMemberList.data.length; i++) {
