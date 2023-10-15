@@ -8,7 +8,7 @@ import { S } from "./style";
 interface Props {
   content: string;
   status: boolean;
-  language: "typescript" | "java" | "python";
+  language: "javascript" | "java" | "python";
 }
 
 const HighlightCode = ({ content, status, language }: Props) => {
