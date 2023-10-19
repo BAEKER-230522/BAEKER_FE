@@ -12,11 +12,6 @@ const useUpdateUserInfo = (memberId: number) => {
   const [updateUserInfoWithoutImg] = memberApi.useUpdateMemberInfoMutation();
   const handleUpdateUserInfo = async ({ nameValue, aboutValue, imgFile }: IArgument) => {
     if (imgFile === undefined) {
-      //   {
-      //     "id": 1,
-      //     "nickname": "꾹",
-      //     "about": "hi"
-      // }
       await updateUserInfoWithoutImg({
         id: memberId,
         nickname: nameValue,
@@ -45,7 +40,6 @@ const useUpdateUserInfo = (memberId: number) => {
         .unwrap()
         .then((payload) => {
           toast("프로필 수정 완료");
-          console.log(payload);
         })
         .catch((error) => {
           toast("프로필 수정 실패");

@@ -30,14 +30,13 @@ const LineChart = ({ id, type }: IProps) => {
     THURSDAY: "Thu",
     FRIDAY: "Fri",
     SATURDAY: "Sat",
+    SUNDAY: "Sun",
     MONDAY: "Mon",
     TUESDAY: "Tue",
     WEDNESDAY: "Wed",
   };
-  const { data: userWeeklyProblem, isLoading: isLoadingMember } =
-    memberApi.useWeeklyUserProblemStatusQuery(id);
-  const { data: studyWeeklyProblem, isLoading: isLoadingStudy } =
-    studyApi.useWeeklyStudyProblemStatusQuery(id);
+  const { data: userWeeklyProblem, isLoading: isLoadingMember } = memberApi.useWeeklyUserProblemStatusQuery(id);
+  const { data: studyWeeklyProblem, isLoading: isLoadingStudy } = studyApi.useWeeklyStudyProblemStatusQuery(id);
   const [chartData, setChartData] = useState<IChart>();
   useEffect(() => {
     const LABELS = [];
@@ -45,7 +44,7 @@ const LineChart = ({ id, type }: IProps) => {
     let RECORD_DATA: any;
     if (type === "study") RECORD_DATA = studyWeeklyProblem;
     if (type === "member") RECORD_DATA = userWeeklyProblem;
-
+    console.log(userWeeklyProblem);
     if (!isLoadingMember && !isLoadingStudy && RECORD_DATA !== undefined) {
       for (let i = 0; i < RECORD_DATA.data.length; i++) {
         LABELS.push(label_obj[RECORD_DATA.data[i].dayOfWeek]);

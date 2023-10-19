@@ -73,7 +73,6 @@ instance.interceptors.response.use(
       const newToken = await refreshedTokenPromise;
 
       if (newToken) {
-        console.log(newToken, "new Tokwn", "5");
         config.headers.Authorization = newToken.accessToken;
         document.cookie = `accessToken=${newToken.accessToken}; path=/; samesite=strict`;
         document.cookie = `refreshToken=${newToken.refreshToken}; path=/; samesite=strict; expires=${utcDate}`;

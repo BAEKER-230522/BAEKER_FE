@@ -10,7 +10,6 @@ interface IProps {
 
 const useOutsideClick = ({ ref, isInit, setIsInit, isOpened, setIsOpened }: IProps) => {
   const handleFocusOut = (event: MouseEvent) => {
-    console.log(ref.current?.contains(event.target as Node));
     // 최초 모달 오픈
     if (isInit) {
       setIsInit(false);

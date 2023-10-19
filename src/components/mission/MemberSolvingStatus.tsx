@@ -36,8 +36,6 @@ const MemberSolvingStatus = ({
     setIsCodeReviewModalOpen(true);
   };
 
-  console.log(missionData);
-
   return (
     <S.MemberSolvingStatusContainer>
       <S.MissionProblemListContainer

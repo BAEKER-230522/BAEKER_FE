@@ -20,8 +20,6 @@ interface IProps {
 }
 
 const ScrollTable = ({ data, category, widthRatio }: IProps) => {
-  console.log(data, category, widthRatio);
-
   const renderFieldContent = (field: CategoryItem, item: IMissionProblem, index: number) => {
     switch (field[1]) {
       case "remove":

@@ -6,7 +6,6 @@ import EmptyList from "../empty/EmptyList";
 import InviteAcceptButton from "../button/InviteAcceptButton";
 
 const RequestTable = ({ data, category, widthRatio, studyId }: any) => {
-  console.log(data);
   const { navigatePage } = useNavigation();
   const renderFieldContent = (field: any, item: any, index: number) => {
     switch (field[1]) {
