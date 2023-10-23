@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LocalStorage from "@/util/localstorage";
 import { logout, login } from "@/store/modules/user";
 import Toggle from "../toggle";
-import Search from "../search/search";
+import Search from "./search/search";
 import DropwDown from "./DropDown";
 
 const Header = () => {

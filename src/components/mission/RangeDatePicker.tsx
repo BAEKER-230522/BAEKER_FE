@@ -8,10 +8,7 @@ interface IProps {
   setMissionEndDate: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const StartToEndRangeDatePicker = ({
-  setMissionStartDate,
-  setMissionEndDate,
-}: IProps) => {
+const StartToEndRangeDatePicker = ({ setMissionStartDate, setMissionEndDate }: IProps) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   useEffect(() => {
@@ -36,7 +33,7 @@ const StartToEndRangeDatePicker = ({
   }, [endDate, setMissionEndDate]); // 의존성 배열에 setMissionEndDate 추가
 
   return (
-    <S.Container>
+    <S.DatePickerContainer>
       <S.CustomDatePicker
         selected={startDate}
         onChange={(date: Date) => setStartDate(date)}
@@ -55,7 +52,7 @@ const StartToEndRangeDatePicker = ({
         minDate={startDate}
         locale={enUS}
       />
-    </S.Container>
+    </S.DatePickerContainer>
   );
 };
 

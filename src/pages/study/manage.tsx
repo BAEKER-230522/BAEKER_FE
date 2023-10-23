@@ -10,7 +10,7 @@ import Input from "@/components/common/input";
 import Slider from "@/components/common/slider/slider";
 import useInput from "@/hooks/useInput";
 import useFetchUserData from "@/hooks/queries/useFetchUserData";
-import useStudyEdit from "@/hooks/useStudyEdit";
+import useStudyEdit from "@/hooks/study/useStudyEdit";
 
 interface IParsedCookies {
   refreshToken?: string;

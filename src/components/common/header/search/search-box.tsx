@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Loading from "../loading/Loading";
+import Loading from "../../loading/Loading";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { themedPalette } from "@/styles/theme";
 import useOutsideClick from "./useOutsideClick";
 
