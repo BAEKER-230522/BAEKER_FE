@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import JoinRequestModal from "../modal/JoinRequestModal";
 import Image from "next/image";
 import LocalStorage from "@/util/localstorage";
+import { useEffect } from "react";
 
 interface IProps {
   userData: any;
@@ -13,6 +14,7 @@ interface IProps {
 const UserInfo = ({ userData, userId, loginUser }: IProps) => {
   const router = useRouter();
   const id = Number(LocalStorage.getItem("memberId"));
+
   return (
     <S.Container>
       <Image

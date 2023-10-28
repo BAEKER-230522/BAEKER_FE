@@ -91,23 +91,31 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
       }
     }
 
-    if (studyMissionList !== undefined && stduyMemberList !== undefined && missionList.length === 0) {
+    if (stduyMemberList !== undefined) {
       setMemberList([...stduyMemberList.data].sort((a, b) => a.ranking - b.ranking));
+    }
+
+    if (studyMissionList !== undefined) {
       setMissionList([...studyMissionList.data].reverse());
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getMemberListLoading, getStudyMissionListLoading]);
+  }, [stduyMemberList, studyMissionList]);
 
   useEffect(() => {
-    if (!getStudyInfoLoading) {
+    if (studyInfo !== undefined) {
+      console.log(studyInfo, memberId);
       if (studyInfo.data.leader === memberId) {
         setIsLeader(true);
         setTAB_ELEMENTS(["현황", "미션", "멤버", "가입 요청", "초대 현황"]);
+      } else {
+        setIsLeader(false);
+        setTAB_ELEMENTS(["현황", "미션", "멤버"]);
       }
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [getStudyInfoLoading]);
+  }, [studyInfo]);
 
   if (getMemberListLoading || getPedingListLoading || getStudyMissionListLoading || getStudyInfoLoading)
     return (
