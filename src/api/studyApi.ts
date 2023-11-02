@@ -92,7 +92,7 @@ export const studyApi = createApi({
       providesTags: ["Mission"],
     }),
 
-    // 스터디 미션
+    // 스터디 미션 생성
     createStudyMission: builder.mutation({
       query: (data) => ({
         url: `${END_POINT_3}/studyrules`,
