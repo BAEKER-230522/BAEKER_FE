@@ -182,11 +182,12 @@ const StatusWrapper = styled.div`
 `;
 
 const CodeHighlighterContainer = styled.div<HighlighterType>`
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   display: ${(props) => (props.status ? "block" : "none")};
   width: 90%;
-  max-height: 85%;
+  min-height: 85%;
   overflow-y: scroll;
+  position: relative;
 `;
 
 const CodeReviewModalBody = styled.div`
@@ -204,13 +205,19 @@ const ReviewModal = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CodeSection = styled.div`
   box-sizing: border-box;
+  position: relative;
   width: 70%;
   height: 100%;
   overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ReplySection = styled.div`
@@ -223,29 +230,57 @@ const ReplySection = styled.div`
   padding: 10px;
 `;
 
+const LoadingWrapper = styled.div`
+  width: 100vh;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const ReplyList = styled.div`
   height: 85%;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
-  div {
-    width: 90%;
-    min-height: 100px;
-    border: 1px solid ${themedPalette.text1};
-    padding: 5px;
-    margin-bottom: 10px;
-    border-radius: 7px;
-  }
 `;
 const ReplyInput = styled.textarea`
   height: 15%;
   resize: none;
   padding: 5px;
+  border-radius: 7px;
+`;
+
+const Reply = styled.div`
+  width: 90%;
+  min-height: 100px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 7px;
+  background-color: ${themedPalette.bg_element2};
+`;
+
+const ReplyUserInfo = styled.div`
+  display: flex;
+  width: 40%;
+  justify-content: space-around;
+  height: 45px;
+  align-items: center;
+  margin-bottom: 15px;
 `;
 
 const CodeReviewModalTop = styled.div`
+  height: 20px;
+  padding: 10px;
+  margin-left: 30px;
+  line-height: 20px;
   width: 100%;
+  font-size: 15px;
+  font-weight: bold;
 `;
 
 const DatePicker = dynamic(() => import("react-datepicker"), {
@@ -267,7 +302,31 @@ const DatePickerContainer = styled.div`
   align-items: center;
 `;
 
+const CodeHighlightBackground = styled.div`
+  width: 100%;
+  height: 70vh;
+  background-color: #1e1e1e;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+`;
+
+const CodeHighlight = styled.div`
+  width: 100%;
+  height: auto;
+  z-index: 999;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+`;
+
 export const S = {
+  ReplyUserInfo,
+  Reply,
+  LoadingWrapper,
+  CodeHighlight,
+  CodeHighlightBackground,
   DatePickerContainer,
   CustomDatePicker,
   CodeReviewModalBody,

@@ -9,8 +9,11 @@ const spinner = keyframes`
   }
 `;
 
-const LoadingContainer = styled.div``;
+const LoadingContainer = styled.div`
+  z-index: 999;
+`;
 const Spinner = styled.div`
+  z-index: 999;
   width: 30px;
   height: 30px;
   border: 3px solid #f3f3f3; /* Light grey */

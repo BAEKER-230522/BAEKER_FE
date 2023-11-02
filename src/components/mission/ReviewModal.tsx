@@ -1,24 +1,46 @@
 import { S } from "./style";
 import Reply from "./Reply";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import hljs from "highlight.js";
 import javascript from "highlight.js/lib/languages/javascript";
 import useOutsideClick from "@/hooks/mission/useOutsideClick";
+import Loading from "../common/loading/Loading";
+import instance from "@/api/instance";
+import { IProblemStatus } from "./MemberSolvingStatus";
+import { codeReviewApi } from "@/api/codeReviewApi";
 hljs.registerLanguage("javascript", javascript);
 
 interface IProps {
   isInitCodeReviewModal: boolean;
-  setIsInitCodeReviewModal: React.Dispatch<React.SetStateAction<boolean>>;
+  problemInfo: IProblemStatus;
   isCodeReviewModalOpen: boolean;
+  setIsInitCodeReviewModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsCodeReviewModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const ReviewModal = ({
   isInitCodeReviewModal,
-  setIsInitCodeReviewModal,
+  problemInfo,
   isCodeReviewModalOpen,
+  setIsInitCodeReviewModal,
   setIsCodeReviewModalOpen,
 }: IProps) => {
+  console.log(problemInfo.id);
+
+  // const { data } = codeReviewApi.useGetCodeReviewQuery(problemInfo.id)
+  const [codeData, setCodeData] = useState<any>();
+  const [commentUpdate, setCommentUpdate] = useState<boolean>(false);
+  const getCode = async () => {
+    await instance
+      .get(`${process.env.NEXT_PUBLIC_BASE_URL}pub/comm/web/post/v1/problem-status/${problemInfo.id}`)
+      .then((data) => setCodeData(data.data.data));
+  };
+
+  useEffect(() => {
+    getCode();
+  }, [commentUpdate]);
+  console.log(codeData);
+
   const codeModalRef = useRef<HTMLDivElement>(null);
   useOutsideClick({
     ref: codeModalRef,
@@ -27,83 +49,44 @@ const ReviewModal = ({
     isOpened: isCodeReviewModalOpen,
     setIsOpened: setIsCodeReviewModalOpen,
   });
-  const content = `
-  import React, { useEffect } from "react";
-  import hljs from "highlight.js";
-  import javascript from "highlight.js/lib/languages/javascript";
-  hljs.registerLanguage("javascript", javascript);
-  import { S } from "./style";
-  // Import a theme from the package
-  
-  interface Props {
-    content: string;
-    status: boolean;
-    language: "javascript" | "java" | "python";
-  }
-  
-  const HighlightCode = ({ content, status, language }: Props) => {
-    const myHtml = hljs.highlight(content, { language }).value;
-    useEffect(() => {
-      hljs.highlightAll();
-    }, []);
-  
-    return (
-      <S.CodeHighlighterContainer status={status}>
-        <pre>
-          <code dangerouslySetInnerHTML={{ __html: myHtml }} />
-        </pre>
-      </S.CodeHighlighterContainer>
-    );
-  };
-  
-  export default HighlightCode;
-  import React, { useEffect } from "react";
-  import hljs from "highlight.js";
-  import javascript from "highlight.js/lib/languages/javascript";
-  hljs.registerLanguage("javascript", javascript);
-  import { S } from "./style";
-  // Import a theme from the package
-  
-  interface Props {
-    content: string;
-    status: boolean;
-    language: "javascript" | "java" | "python";
-  }
-  
-  const HighlightCode = ({ content, status, language }: Props) => {
-    const myHtml = hljs.highlight(content, { language }).value;
-    useEffect(() => {
-      hljs.highlightAll();
-    }, []);
-  
-    return (
-      <S.CodeHighlighterContainer status={status}>
-        <pre>
-          <code dangerouslySetInnerHTML={{ __html: myHtml }} />
-        </pre>
-      </S.CodeHighlighterContainer>
-    );
-  };
-  
-  export default HighlightCode;
-    
-`;
+
   const language = "typescript";
-  const myHtml = hljs.highlight(content, { language }).value;
+  const myHtml = codeData
+    ? hljs.highlight(`${codeData.content}`, { language }).value
+    : hljs.highlight("", { language }).value;
   useEffect(() => {
     hljs.highlightAll();
-  }, []);
+  }, [codeData]);
+  if (codeData === undefined) {
+    return (
+      <S.CodeModalContainer>
+        <S.ReviewModal ref={codeModalRef}>
+          <S.CodeReviewModalTop></S.CodeReviewModalTop>
+          <S.CodeReviewModalBody>
+            <S.CodeSection>
+              <Loading />
+              <S.CodeHighlightBackground />
+            </S.CodeSection>
+          </S.CodeReviewModalBody>
+        </S.ReviewModal>
+      </S.CodeModalContainer>
+    );
+  }
   return (
     <S.CodeModalContainer>
       <S.ReviewModal ref={codeModalRef}>
-        <S.CodeReviewModalTop>X</S.CodeReviewModalTop>
+        <S.CodeReviewModalTop>문제 제목 : {codeData.title}</S.CodeReviewModalTop>
         <S.CodeReviewModalBody>
           <S.CodeSection>
-            <pre>
-              <code dangerouslySetInnerHTML={{ __html: myHtml }} />
-            </pre>
+            <S.CodeHighlight>
+              <pre>
+                <code dangerouslySetInnerHTML={{ __html: myHtml }} />
+              </pre>
+            </S.CodeHighlight>
+            <S.CodeHighlightBackground />
           </S.CodeSection>
-          <Reply />
+
+          <Reply codeData={codeData} setCommentUpdate={setCommentUpdate} />
         </S.CodeReviewModalBody>
       </S.ReviewModal>
     </S.CodeModalContainer>
