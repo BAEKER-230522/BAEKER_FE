@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { codeReviewApi } from "@/api/codeReviewApi";
 import { S } from "./style";
 import { toast } from "react-toastify";
 import Image from "next/image";
 
-const Reply = ({ codeData }: any) => {
+const Reply = ({ codeData, setCommentUpdate }: any) => {
   const [postComment] = codeReviewApi.usePostCommentMutation();
   const [commentValue, setCommentValue] = useState<string>();
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -16,6 +16,7 @@ const Reply = ({ codeData }: any) => {
       .unwrap()
       .then(() => {
         toast("댓글 등록 완료");
+        setCommentUpdate((prev: boolean) => !prev);
       })
       .catch(() => toast("댓글 등록 실패"));
     setCommentValue("");

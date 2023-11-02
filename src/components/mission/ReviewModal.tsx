@@ -7,6 +7,7 @@ import useOutsideClick from "@/hooks/mission/useOutsideClick";
 import Loading from "../common/loading/Loading";
 import instance from "@/api/instance";
 import { IProblemStatus } from "./MemberSolvingStatus";
+import { codeReviewApi } from "@/api/codeReviewApi";
 hljs.registerLanguage("javascript", javascript);
 
 interface IProps {
@@ -19,14 +20,16 @@ interface IProps {
 
 const ReviewModal = ({
   isInitCodeReviewModal,
-  setIsInitCodeReviewModal,
-  isCodeReviewModalOpen,
-  setIsCodeReviewModalOpen,
   problemInfo,
+  isCodeReviewModalOpen,
+  setIsInitCodeReviewModal,
+  setIsCodeReviewModalOpen,
 }: IProps) => {
-  // const data = codeReviewApi.useGetCodeReviewQuery(problemInfo.id);
-  const [codeData, setCodeData] = useState<any>();
+  console.log(problemInfo.id);
 
+  // const { data } = codeReviewApi.useGetCodeReviewQuery(problemInfo.id)
+  const [codeData, setCodeData] = useState<any>();
+  const [commentUpdate, setCommentUpdate] = useState<boolean>(false);
   const getCode = async () => {
     await instance
       .get(`${process.env.NEXT_PUBLIC_BASE_URL}pub/comm/web/post/v1/problem-status/${problemInfo.id}`)
@@ -35,7 +38,8 @@ const ReviewModal = ({
 
   useEffect(() => {
     getCode();
-  }, []);
+  }, [commentUpdate]);
+  console.log(codeData);
 
   const codeModalRef = useRef<HTMLDivElement>(null);
   useOutsideClick({
@@ -82,7 +86,7 @@ const ReviewModal = ({
             <S.CodeHighlightBackground />
           </S.CodeSection>
 
-          <Reply codeData={codeData} />
+          <Reply codeData={codeData} setCommentUpdate={setCommentUpdate} />
         </S.CodeReviewModalBody>
       </S.ReviewModal>
     </S.CodeModalContainer>

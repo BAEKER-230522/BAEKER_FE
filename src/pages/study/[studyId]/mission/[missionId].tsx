@@ -34,6 +34,7 @@ const MissionDetail = () => {
   const { data: missionData, isLoading: getMissionDataLoading } = studyApi.useGetStudyRuleQuery(missionId, {
     refetchOnMountOrArgChange: true,
   });
+  const data = studyApi.useGetStudyRuleQuery(missionId);
 
   const [userUploadStatus, setUserUploadStatus] = useState<any>();
 

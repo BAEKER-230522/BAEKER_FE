@@ -7,9 +7,8 @@ export const codeReviewApi = createApi({
   baseQuery: axiosBaseQuery(),
   reducerPath: "codeReviewAPi",
   tagTypes: ["CodeReview"],
-  refetchOnMountOrArgChange: true,
   endpoints: (builder) => ({
-    //미션 번호와 문제 번호로 문제 제목 가져오기
+    //미션 번호와 문제 번호로 문제 가져오기
     getUserCodeReviews: builder.query({
       query: ({ query }) => ({
         url: `${PUBLIC_END_POINT}/mission/${query.missionId}/${query.memberId}`,
@@ -19,10 +18,13 @@ export const codeReviewApi = createApi({
     }),
     // problem status id로 코드 Get
     getCodeReview: builder.query({
-      query: (problemStatusId) => ({
-        url: `${PUBLIC_END_POINT}/problem-status/${problemStatusId}`,
-        method: "GET",
-      }),
+      query: (problemStatusId) => (
+        console.log(problemStatusId),
+        {
+          url: `${PUBLIC_END_POINT}/problem-status/${problemStatusId}`,
+          method: "GET",
+        }
+      ),
       providesTags: ["CodeReview"],
     }),
     createCodeReview: builder.mutation({
