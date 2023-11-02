@@ -19,9 +19,12 @@ const HighlightCode = ({ content, status, language }: Props) => {
 
   return (
     <S.CodeHighlighterContainer status={status}>
-      <pre>
-        <code dangerouslySetInnerHTML={{ __html: myHtml }} />
-      </pre>
+      <S.CodeHighlight>
+        <pre>
+          <code dangerouslySetInnerHTML={{ __html: myHtml }} />
+        </pre>
+      </S.CodeHighlight>
+      <S.CodeHighlightBackground />
     </S.CodeHighlighterContainer>
   );
 };

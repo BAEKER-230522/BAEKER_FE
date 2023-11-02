@@ -2,15 +2,31 @@ import React from "react";
 import { S } from "./style";
 import { IMission } from "@/hooks/mission/useMissionDetail";
 
-interface IUserSolvedStatus {
+export interface IProblemStatus {
+  status: boolean;
+  id: number;
+  title: string;
+}
+
+export interface IUserSolvedStatus {
   nickname: string;
-  problem_status: boolean[];
+  problem_status: IProblemStatus[];
+  userUploadList: IUserUploadElement[];
+}
+
+interface IUserUploadElement {
+  memberId: number;
+  missionId: number;
+  postId: number;
+  problemStatusId: number;
+  title: string;
 }
 
 interface IProps {
   missionData: IMission;
   HEADER_ARR: string[];
   userSolvedStatus: IUserSolvedStatus[];
+  setProblemInfo: React.Dispatch<React.SetStateAction<IProblemStatus>>;
   setIsInitCodeModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsCodeModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
   setIsInitCodeReviewModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,6 +34,7 @@ interface IProps {
 }
 
 const MemberSolvingStatus = ({
+  setProblemInfo,
   missionData,
   HEADER_ARR,
   userSolvedStatus,
@@ -26,14 +43,16 @@ const MemberSolvingStatus = ({
   setIsInitCodeReviewModal,
   setIsCodeReviewModalOpen,
 }: IProps) => {
-  const codeModalHandler = () => {
+  const codeModalHandler = (problemStatus: IProblemStatus) => {
     setIsInitCodeModal(true);
     setIsCodeModalOpened(true);
+    setProblemInfo(problemStatus);
   };
 
-  const codeReviewModalHandler = () => {
+  const codeReviewModalHandler = (problemStatus: IProblemStatus) => {
     setIsInitCodeReviewModal(true);
     setIsCodeReviewModalOpen(true);
+    setProblemInfo(problemStatus);
   };
 
   return (
@@ -60,20 +79,40 @@ const MemberSolvingStatus = ({
         {userSolvedStatus.map((e: IUserSolvedStatus, idx: number) => (
           <React.Fragment key={idx}>
             <div>{e.nickname}</div>
-            {e.problem_status.map((p_status: boolean, i: number) => {
-              return p_status ? (
+            {e.problem_status.map((problemStatus: IProblemStatus, i: number) => {
+              return problemStatus.status ? (
                 <S.StatusBoxContainer key={i}>
                   <S.Dot color={"#5bc59c"} />
-                  <S.CodeButton style={{ backgroundColor: "#5bc59c" }} onClick={codeReviewModalHandler}>
-                    code
-                  </S.CodeButton>
+                  {e.userUploadList.includes(problemStatus.id) ? (
+                    <S.CodeButton
+                      style={{ backgroundColor: "#5bc59c" }}
+                      onClick={() => codeReviewModalHandler(problemStatus)}>
+                      code
+                    </S.CodeButton>
+                  ) : (
+                    <S.CodeButton
+                      style={{ backgroundColor: "#e31d2e" }}
+                      onClick={() => codeModalHandler(problemStatus)}>
+                      code
+                    </S.CodeButton>
+                  )}
                 </S.StatusBoxContainer>
               ) : (
                 <S.StatusBoxContainer key={i}>
                   <S.Dot color={"#e31d2e"} />
-                  <S.CodeButton style={{ backgroundColor: "#e31d2e" }} onClick={codeModalHandler}>
-                    code
-                  </S.CodeButton>
+                  {e.userUploadList.includes(problemStatus.id) ? (
+                    <S.CodeButton
+                      style={{ backgroundColor: "#5bc59c" }}
+                      onClick={() => codeReviewModalHandler(problemStatus)}>
+                      code
+                    </S.CodeButton>
+                  ) : (
+                    <S.CodeButton
+                      style={{ backgroundColor: "#e31d2e" }}
+                      onClick={() => codeModalHandler(problemStatus)}>
+                      code
+                    </S.CodeButton>
+                  )}
                 </S.StatusBoxContainer>
               );
             })}

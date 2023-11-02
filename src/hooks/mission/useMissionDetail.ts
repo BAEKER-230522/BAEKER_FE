@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import LocalStorage from "@/util/localstorage";
 import { calculateDuration, getTodayDateFormatted, isFuture } from "../../util/date";
+import { IUserSolvedStatus } from "@/components/mission/MemberSolvingStatus";
 
-interface IProblemStatusQueryDtos {
+export interface IProblemStatusQueryDtos {
   memberId: number;
   memory: number;
   problemName: string;
   problemNumber: number;
   problemStatus: string;
   time: number;
+  problemStatusId: number;
 }
 
-interface IPersonalStudyRuleDtos {
+export interface IPersonalStudyRuleDtos {
   nickName: string;
   personalStudyRuleStatus: string;
   problemStatusQueryDtos: IProblemStatusQueryDtos[];
@@ -29,42 +31,41 @@ interface IMissionData {
   study: IStudy;
   xp: number;
 }
+type MissionInfo = {
+  memberId: number;
+  missionId: number;
+  postId: number;
+  problemStatusId: number;
+  title: string;
+};
+
+type userUploadStatusType = {
+  [key: number]: MissionInfo[];
+};
 
 export interface IMission {
-  data: IMissionData;
-}
-
-interface IMember {
-  data: IMemberList[];
+  missionData: IMissionData;
+  userUploadStatus: userUploadStatusType;
 }
 
 interface IStudy {
   leader: number;
 }
 
-interface IMemberList {
-  id: number;
-  nickname: string;
-}
-
-interface IProps {
-  missionData: IMission;
-}
-
-const useMissionDetail = ({ missionData }: IProps) => {
+const useMissionDetail = ({ missionData, userUploadStatus }: IMission) => {
   const [memberStatus, setMemberStatus] = useState<IPersonalStudyRuleDtos[]>();
   const [missionProgress, setMissionProgress] = useState(0);
-  const [userSolvedStatus, setUserSolvedStatus] = useState<any>();
+  const [userSolvedStatus, setUserSolvedStatus] = useState<number[]>();
   const [HEADER_ARR, setHEADER_ARR] = useState<string[]>([]);
   const [TIME_SPAN_STATUS, setTIME_SPAN_STATUS] = useState<boolean[]>([]);
   const [PERIOD_HEADER, setPERIOD_HEADER] = useState<string[]>([]);
   const [isLeader, setIsLeader] = useState<boolean>(false);
 
   useEffect(() => {
-    if (missionData !== undefined) {
+    if (missionData !== undefined && userUploadStatus !== undefined) {
       if (LocalStorage.getItem("memberId") === String(missionData.data.study.leader)) setIsLeader(true);
 
-      const USER_STATUS = [];
+      const USER_STATUS: IUserSolvedStatus[] = [];
 
       // 총 문제 개수
       let TOTAL_PROPLEM_COUNT = missionData.data.personalStudyRuleDtos[0].problemStatusQueryDtos.length;
@@ -90,19 +91,41 @@ const useMissionDetail = ({ missionData }: IProps) => {
         for (let j = 0; j < missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos.length; j++) {
           if (missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos[j].problemStatus === "COMPLETE") {
             USER_COMPLETE_COUNT += 1;
-            PROBLEM_STATUS.push(true);
+            PROBLEM_STATUS.push({
+              status: true,
+              id: missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos[j].problemStatusId,
+              title: missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos[j].problemName,
+            });
           } else {
-            PROBLEM_STATUS.push(false);
+            PROBLEM_STATUS.push({
+              status: false,
+              id: missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos[j].problemStatusId,
+              title: missionData.data.personalStudyRuleDtos[k].problemStatusQueryDtos[j].problemName,
+            });
           }
         }
+        const userUploadList = [];
+
+        if (Object.keys(userUploadStatus).length !== 0) {
+          userUploadList.push(userUploadStatus[Number(missionData.data.personalStudyRuleDtos[k].memberId)]);
+        }
+
+        // TODO 일단 nickname으로 추후에 memberId로 변경 예정
+        // if (missionData.data.personalStudyRuleDtos[k].memberId === "정도") {
+        //   userUploadList.push(userUploadStatus[1]);
+        // } else {
+        //   userUploadList.push(userUploadStatus[3]);
+        // }
         USER_STATUS.push({
           nickname: missionData.data.personalStudyRuleDtos[k].nickName,
           problem_status: PROBLEM_STATUS,
+          userUploadList:
+            userUploadList.length === 0 || !userUploadStatus[Number(missionData.data.personalStudyRuleDtos[k].memberId)]
+              ? []
+              : userUploadList[0].map((e) => e.problemStatusId),
         });
       }
-
       setUserSolvedStatus(USER_STATUS);
-
       let newStatus = [
         ...Array.from(
           {
@@ -139,7 +162,7 @@ const useMissionDetail = ({ missionData }: IProps) => {
       setMissionProgress((USER_COMPLETE_COUNT / (TOTAL_PROPLEM_COUNT * STUDY_MEMBER_COUNT)) * 100);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [missionData]);
+  }, [missionData, userUploadStatus]);
 
   return {
     isLeader,
