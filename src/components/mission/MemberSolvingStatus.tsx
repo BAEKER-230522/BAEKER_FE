@@ -25,7 +25,7 @@ interface IProps {
   missionData: IMissionInner;
   HEADER_ARR: string[];
   userSolvedStatus: IUserSolvedStatus[];
-  setProblemInfo: React.Dispatch<React.SetStateAction<IProblemStatus>>;
+  setProblemInfo: React.Dispatch<React.SetStateAction<Partial<IProblemStatus>>>;
   setIsInitCodeModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsCodeModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
   setIsInitCodeReviewModal: React.Dispatch<React.SetStateAction<boolean>>;

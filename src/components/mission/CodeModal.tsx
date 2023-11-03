@@ -11,7 +11,7 @@ interface IProps {
   isInitCodeModal: boolean;
   isCodeModalOpened: boolean;
   missionId: number;
-  problemInfo: IProblemStatus;
+  problemInfo: Partial<IProblemStatus>;
   studyId: number;
   setIsInitCodeModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsCodeModalOpened: React.Dispatch<React.SetStateAction<boolean>>;

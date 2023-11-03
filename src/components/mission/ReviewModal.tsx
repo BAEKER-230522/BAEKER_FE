@@ -12,7 +12,7 @@ hljs.registerLanguage("javascript", javascript);
 
 interface IProps {
   isInitCodeReviewModal: boolean;
-  problemInfo: IProblemStatus;
+  problemInfo: Partial<IProblemStatus>;
   isCodeReviewModalOpen: boolean;
   setIsInitCodeReviewModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsCodeReviewModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

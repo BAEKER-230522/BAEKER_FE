@@ -31,7 +31,7 @@ export interface IUserUploadState {
 }
 
 const MissionDetail = () => {
-  const [problemInfo, setProblemInfo] = useState<IProblemStatus>({});
+  const [problemInfo, setProblemInfo] = useState<Partial<IProblemStatus>>({});
   const [isInitCodeModal, setIsInitCodeModal] = useState<boolean>(false);
   const [isCodeModalOpened, setIsCodeModalOpened] = useState<boolean>(false);
   const [isInitCodeReviewModal, setIsInitCodeReviewModal] = useState<boolean>(false);
