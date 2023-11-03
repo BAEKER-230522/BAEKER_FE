@@ -13,15 +13,25 @@ import { PageContainer } from "@/styles/common.style";
 import { studyApi } from "@/api/studyApi";
 import ReviewModal from "@/components/mission/ReviewModal";
 import instance from "@/api/instance";
-
-interface IUserUploadInfo {
-  problemStatusId: number;
-  title: string;
-  missionId: number;
-  memberId: number;
+interface Comment {
+  commentId: number;
+  postId: number;
 }
+
+interface Post {
+  comments: Comment[];
+  content: string;
+  memberId: number;
+  title: string;
+  problemStatusId: number;
+}
+
+export interface IUserUploadState {
+  [key: number]: Post[];
+}
+
 const MissionDetail = () => {
-  const [problemInfo, setProblemInfo] = useState<IProblemStatus>();
+  const [problemInfo, setProblemInfo] = useState<IProblemStatus>({});
   const [isInitCodeModal, setIsInitCodeModal] = useState<boolean>(false);
   const [isCodeModalOpened, setIsCodeModalOpened] = useState<boolean>(false);
   const [isInitCodeReviewModal, setIsInitCodeReviewModal] = useState<boolean>(false);
@@ -34,9 +44,8 @@ const MissionDetail = () => {
   const { data: missionData, isLoading: getMissionDataLoading } = studyApi.useGetStudyRuleQuery(missionId, {
     refetchOnMountOrArgChange: true,
   });
-  const data = studyApi.useGetStudyRuleQuery(missionId);
 
-  const [userUploadStatus, setUserUploadStatus] = useState<any>();
+  const [userUploadStatus, setUserUploadStatus] = useState<IUserUploadState>({});
 
   const { isLeader, TIME_SPAN_STATUS, userSolvedStatus, HEADER_ARR, PERIOD_HEADER, missionProgress } = useMissionDetail(
     { missionData, userUploadStatus }
@@ -64,7 +73,7 @@ const MissionDetail = () => {
       const fetchUrl = (url: string) => instance.get(url);
       const getUserUploadStatus = () => {
         Promise.all(url_arr.map((url: string) => fetchUrl(url))).then((result) => {
-          result.forEach(({ data: { data } }: IUserUploadInfo[]) => {
+          result.forEach(({ data: { data } }: any) => {
             console.log(data);
             if (data.length === 0) {
               setUserUploadStatus((prevStatus) => ({ ...prevStatus }));

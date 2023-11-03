@@ -4,10 +4,12 @@ import reset from "styled-reset";
 import { themedPalette } from "./theme";
 
 export const GlobalStyle = createGlobalStyle`
+
   ${reset};
   html{
     width: 100%;
     height: 100%;
+    font-family: 'Noto Sans CJK KR'
   }
   body {
     width: 100%;
