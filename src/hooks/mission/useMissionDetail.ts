@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import LocalStorage from "@/util/localstorage";
 import { calculateDuration, getTodayDateFormatted, isFuture } from "../../util/date";
 import { IUserSolvedStatus } from "@/components/mission/MemberSolvingStatus";
-
+import { IUserUploadState } from "@/pages/study/[studyId]/mission/[missionId]";
 export interface IProblemStatusQueryDtos {
   memberId: number;
   memory: number;
@@ -14,6 +14,7 @@ export interface IProblemStatusQueryDtos {
 }
 
 export interface IPersonalStudyRuleDtos {
+  memberId: string;
   nickName: string;
   personalStudyRuleStatus: string;
   problemStatusQueryDtos: IProblemStatusQueryDtos[];
@@ -31,21 +32,13 @@ interface IMissionData {
   study: IStudy;
   xp: number;
 }
-type MissionInfo = {
-  memberId: number;
-  missionId: number;
-  postId: number;
-  problemStatusId: number;
-  title: string;
-};
 
-type userUploadStatusType = {
-  [key: number]: MissionInfo[];
-};
-
+export interface IMissionInner {
+  data: IMissionData;
+}
 export interface IMission {
-  missionData: IMissionData;
-  userUploadStatus: userUploadStatusType;
+  missionData: IMissionInner;
+  userUploadStatus: IUserUploadState;
 }
 
 interface IStudy {
@@ -53,9 +46,11 @@ interface IStudy {
 }
 
 const useMissionDetail = ({ missionData, userUploadStatus }: IMission) => {
+  console.log(missionData);
+
   const [memberStatus, setMemberStatus] = useState<IPersonalStudyRuleDtos[]>();
   const [missionProgress, setMissionProgress] = useState(0);
-  const [userSolvedStatus, setUserSolvedStatus] = useState<number[]>();
+  const [userSolvedStatus, setUserSolvedStatus] = useState<IUserSolvedStatus[]>();
   const [HEADER_ARR, setHEADER_ARR] = useState<string[]>([]);
   const [TIME_SPAN_STATUS, setTIME_SPAN_STATUS] = useState<boolean[]>([]);
   const [PERIOD_HEADER, setPERIOD_HEADER] = useState<string[]>([]);

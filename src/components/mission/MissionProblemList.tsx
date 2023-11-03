@@ -1,14 +1,16 @@
 import { S } from "./style";
 import { calculateDuration } from "@/util/date";
-import { IMission } from "@/hooks/mission/useMissionDetail";
+import { IMissionInner } from "@/hooks/mission/useMissionDetail";
 
 interface IProps {
   PERIOD_HEADER: string[];
-  missionData: IMission;
+  missionData: IMissionInner;
   TIME_SPAN_STATUS: boolean[];
 }
 
 const MissionProblemList = ({ missionData, PERIOD_HEADER, TIME_SPAN_STATUS }: IProps) => {
+  console.log(missionData);
+
   return (
     <S.MissionProblemListContainer
       numColumn={calculateDuration(missionData.data.startDate, missionData.data.deadline) + 1}>

@@ -1,10 +1,10 @@
-import Header from "@/components/common/header/Header";
 import { GlobalStyle } from "@/styles/global.style";
 import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import Header from "@/components/common/header/Header";
 import wrapper from "@/store";
 import PropTypes from "prop-types";
 import Head from "next/head";
+import "react-toastify/dist/ReactToastify.css";
 import "highlight.js/styles/vs2015.css";
 
 const App = ({ Component, pageProps }: any) => {

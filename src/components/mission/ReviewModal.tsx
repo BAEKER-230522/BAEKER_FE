@@ -7,12 +7,12 @@ import useOutsideClick from "@/hooks/mission/useOutsideClick";
 import Loading from "../common/loading/Loading";
 import instance from "@/api/instance";
 import { IProblemStatus } from "./MemberSolvingStatus";
-import { codeReviewApi } from "@/api/codeReviewApi";
+// import { codeReviewApi } from "@/api/codeReviewApi";
 hljs.registerLanguage("javascript", javascript);
 
 interface IProps {
   isInitCodeReviewModal: boolean;
-  problemInfo: IProblemStatus;
+  problemInfo: Partial<IProblemStatus>;
   isCodeReviewModalOpen: boolean;
   setIsInitCodeReviewModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsCodeReviewModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

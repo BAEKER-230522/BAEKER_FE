@@ -1,7 +1,6 @@
 import React from "react";
 import { S } from "./style";
-import { IMission } from "@/hooks/mission/useMissionDetail";
-
+import { IMissionInner } from "@/hooks/mission/useMissionDetail";
 export interface IProblemStatus {
   status: boolean;
   id: number;
@@ -11,7 +10,7 @@ export interface IProblemStatus {
 export interface IUserSolvedStatus {
   nickname: string;
   problem_status: IProblemStatus[];
-  userUploadList: IUserUploadElement[];
+  userUploadList: number[];
 }
 
 interface IUserUploadElement {
@@ -23,10 +22,10 @@ interface IUserUploadElement {
 }
 
 interface IProps {
-  missionData: IMission;
+  missionData: IMissionInner;
   HEADER_ARR: string[];
   userSolvedStatus: IUserSolvedStatus[];
-  setProblemInfo: React.Dispatch<React.SetStateAction<IProblemStatus>>;
+  setProblemInfo: React.Dispatch<React.SetStateAction<Partial<IProblemStatus>>>;
   setIsInitCodeModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsCodeModalOpened: React.Dispatch<React.SetStateAction<boolean>>;
   setIsInitCodeReviewModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -54,6 +53,8 @@ const MemberSolvingStatus = ({
     setIsCodeReviewModalOpen(true);
     setProblemInfo(problemStatus);
   };
+
+  console.log(userSolvedStatus);
 
   return (
     <S.MemberSolvingStatusContainer>

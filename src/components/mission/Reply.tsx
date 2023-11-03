@@ -4,12 +4,19 @@ import { S } from "./style";
 import { toast } from "react-toastify";
 import Image from "next/image";
 
+interface IComment {
+  commentId: number;
+  content: string;
+  memberId: string;
+}
+
 const Reply = ({ codeData, setCommentUpdate }: any) => {
   const [postComment] = codeReviewApi.usePostCommentMutation();
   const [commentValue, setCommentValue] = useState<string>();
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCommentValue(e.target.value);
   };
+  console.log(codeData);
 
   const postCommentHandler = () => {
     postComment({ postId: codeData.postId, content: commentValue })
@@ -25,8 +32,8 @@ const Reply = ({ codeData, setCommentUpdate }: any) => {
   return (
     <S.ReplySection>
       <S.ReplyList>
-        {codeData.comments.map((comment: string) => (
-          <S.Reply>
+        {codeData.comments.map((comment: IComment, idx: number) => (
+          <S.Reply key={idx}>
             <S.ReplyUserInfo>
               <Image style={{ borderRadius: "50%" }} src="/study.png" width={40} height={40} alt="이미지" />
               정도임당

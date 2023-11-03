@@ -1,9 +1,9 @@
-import { IMission } from "@/hooks/mission/useMissionDetail";
+import { IMissionInner } from "@/hooks/mission/useMissionDetail";
 import { Progress } from "antd";
 import { S } from "./style";
 
 interface IProps {
-  missionData: IMission;
+  missionData: IMissionInner;
   missionProgress: number;
 }
 
