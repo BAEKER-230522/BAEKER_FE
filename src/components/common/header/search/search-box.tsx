@@ -26,8 +26,8 @@ interface IResult {
 interface IProp {
   searchResult: IResult;
   isLoading: boolean;
-  setInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
   focus: boolean;
+  setInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 }
 

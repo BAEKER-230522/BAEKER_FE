@@ -3,11 +3,11 @@ import { useRouter } from "next/router";
 import { themedPalette } from "@/styles/theme";
 import { PageContainer } from "@/styles/common.style";
 import { toast } from "react-toastify";
+import { memberApi } from "@/api/memberApi";
 import styled from "styled-components";
-import Input from "@/components/common/input";
+import Input from "@/components/common/Input";
 import Slider from "@/components/common/slider/slider";
 import useInput from "@/hooks/useInput";
-import useFetchUserData from "@/hooks/queries/useFetchUserData";
 import useStudyEdit from "@/hooks/study/useStudyEdit";
 import LocalStorage from "@/util/localstorage";
 
@@ -18,7 +18,7 @@ const CreateStudy = () => {
   const [aboutValue, setAboutValue, aboutHandler] = useInput("");
   const router = useRouter();
   const isEditMode = Object.keys(router.query).length !== 0 ? true : false;
-  const { data: userData, isLoading: isUserDataLoading } = useFetchUserData(userId);
+  const { data: userData, isLoading: isUserDataLoading } = memberApi.useGetMemberQuery(userId);
   useEffect(() => {
     if (isEditMode) {
       setNameValue(String(router.query.name));
