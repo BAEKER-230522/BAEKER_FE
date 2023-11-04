@@ -9,24 +9,13 @@ import SolveStatus from "@/components/common/solve-status";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
 import Loading from "@/components/common/loading/Loading";
-import { parseCookies } from "@/util/parseCookie";
-import { GetServerSideProps } from "next";
 import { useState, useEffect } from "react";
 import { PageContainer } from "@/styles/common.style";
 import { TABLE_CONSTANT } from "@/constant/table";
 import MissionTable from "@/components/common/table/MissionTable";
 import MemberTable from "@/components/common/table/MeberTable";
 import RequestTable from "@/components/common/table/RequestTable";
-
-interface IServerSideProp {
-  refreshToken: string;
-  memberId: number;
-}
-
-interface IParsedCookies {
-  refreshToken?: string;
-  memberId?: string;
-}
+import LocalStorage from "@/util/localstorage";
 
 interface IMission {
   id: number;
@@ -46,21 +35,16 @@ interface IMember {
   ranking: number;
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { req, res } = context;
-  const cookies: IParsedCookies = parseCookies(req.headers.cookie);
-  const refreshToken = cookies.refreshToken ? cookies.refreshToken : null;
-  const memberId = Number(cookies.memberId) ? Number(cookies.memberId) : null;
+export interface IUserRoles {
+  isUserStudy: boolean;
+  isGuest: boolean;
+  isLeader: boolean;
+}
 
-  return {
-    props: {
-      refreshToken,
-      memberId,
-    },
-  };
-};
+const StudyDetail = () => {
+  const memberId = Number(LocalStorage.getItem("memberId"));
+  console.log(memberId);
 
-const StudyDetail = ({ memberId }: IServerSideProp) => {
   const router = useRouter();
   const { studyId: param } = router.query;
   const { data: studyMissionList, isLoading: getStudyMissionListLoading } = studyApi.useGetStudyRuleListQuery(
@@ -69,9 +53,11 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
   const { data: stduyMemberList, isLoading: getMemberListLoading } = studyApi.useGetStudyMemberListQuery(Number(param));
   const { data: studyPendingList, isLoading: getPedingListLoading } = studyApi.useGetPendingListQuery(Number(param));
   const { data: studyInfo, isLoading: getStudyInfoLoading } = studyApi.useGetStudyInfoQuery(Number(param));
-
-  const [isUserStudy, setIsUserStudy] = useState<boolean>(false);
-  const [isLeader, setIsLeader] = useState<boolean>(false);
+  const [userRoles, setUserRoles] = useState<IUserRoles>({
+    isUserStudy: false,
+    isGuest: false,
+    isLeader: false,
+  });
   const [TAB_ELEMENTS, setTAB_ELEMENTS] = useState<string[]>(["현황", "미션", "멤버"]);
   const [missionList, setMissionList] = useState<IMission[]>([]);
   const [memberList, setMemberList] = useState<IMember[]>([]);
@@ -81,11 +67,11 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
   });
 
   useEffect(() => {
-    if (memberId === null) setIsUserStudy(true);
+    if (memberId == 0) setUserRoles((prevRole) => ({ ...prevRole, ["isGuest"]: true }));
     if (!getMemberListLoading) {
       for (let i = 0; i < stduyMemberList.data.length; i++) {
         if (memberId === stduyMemberList.data[i].id) {
-          setIsUserStudy(true);
+          setUserRoles((prevRole) => ({ ...prevRole, ["isUserStudy"]: true }));
           break;
         }
       }
@@ -104,12 +90,10 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
 
   useEffect(() => {
     if (studyInfo !== undefined) {
-      console.log(studyInfo, memberId);
       if (studyInfo.data.leader === memberId) {
-        setIsLeader(true);
+        setUserRoles((prevRole) => ({ ...prevRole, ["isLeader"]: true }));
         setTAB_ELEMENTS(["현황", "미션", "멤버", "가입 요청", "초대 현황"]);
       } else {
-        setIsLeader(false);
         setTAB_ELEMENTS(["현황", "미션", "멤버"]);
       }
     }
@@ -120,7 +104,7 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
   if (getMemberListLoading || getPedingListLoading || getStudyMissionListLoading || getStudyInfoLoading)
     return (
       <S.StudyContainer>
-        <StudyInfo isUserStudy={isUserStudy} isLeader={isLeader} memberId={memberId} />
+        <StudyInfo userRoles={userRoles} memberId={memberId} />
         <Tab elements={TAB_ELEMENTS} type="study" />
         <S.ContentContainer>
           <Loading />
@@ -130,7 +114,7 @@ const StudyDetail = ({ memberId }: IServerSideProp) => {
 
   return (
     <S.StudyContainer>
-      <StudyInfo isUserStudy={isUserStudy} isLeader={isLeader} memberId={memberId} />
+      <StudyInfo userRoles={userRoles} memberId={memberId} />
       <Tab elements={TAB_ELEMENTS} type="study" />
       <S.ContentContainer>
         {tabState === 0 && (

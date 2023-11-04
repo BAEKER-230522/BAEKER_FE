@@ -13,6 +13,7 @@ import { PageContainer } from "@/styles/common.style";
 import { studyApi } from "@/api/studyApi";
 import ReviewModal from "@/components/mission/ReviewModal";
 import instance from "@/api/instance";
+import LocalStorage from "@/util/localstorage";
 interface Comment {
   commentId: number;
   postId: number;
@@ -31,12 +32,14 @@ export interface IUserUploadState {
 }
 
 const MissionDetail = () => {
+  const isGuset = LocalStorage.getItem("memberId") === null ? true : false;
   const [problemInfo, setProblemInfo] = useState<Partial<IProblemStatus>>({});
   const [isInitCodeModal, setIsInitCodeModal] = useState<boolean>(false);
   const [isCodeModalOpened, setIsCodeModalOpened] = useState<boolean>(false);
   const [isInitCodeReviewModal, setIsInitCodeReviewModal] = useState<boolean>(false);
   const [isCodeReviewModalOpen, setIsCodeReviewModalOpen] = useState<boolean>(false);
   const [isUpdateLoading, setIsUpdateLoading] = useState<boolean>(false);
+  const [userUploadStatus, setUserUploadStatus] = useState<IUserUploadState>({});
   const router = useRouter();
   const param = router.query;
   const studyId = router.query.studyId;
@@ -44,8 +47,6 @@ const MissionDetail = () => {
   const { data: missionData, isLoading: getMissionDataLoading } = studyApi.useGetStudyRuleQuery(missionId, {
     refetchOnMountOrArgChange: true,
   });
-
-  const [userUploadStatus, setUserUploadStatus] = useState<IUserUploadState>({});
 
   const { isLeader, TIME_SPAN_STATUS, userSolvedStatus, HEADER_ARR, PERIOD_HEADER, missionProgress } = useMissionDetail(
     { missionData, userUploadStatus }
@@ -74,7 +75,6 @@ const MissionDetail = () => {
       const getUserUploadStatus = () => {
         Promise.all(url_arr.map((url: string) => fetchUrl(url))).then((result) => {
           result.forEach(({ data: { data } }: any) => {
-            console.log(data);
             if (data.length === 0) {
               setUserUploadStatus((prevStatus) => ({ ...prevStatus }));
             } else {
@@ -128,7 +128,7 @@ const MissionDetail = () => {
           </AlertModal>
         )}
       </S.ButtonContainer>
-      {isCodeModalOpened && (
+      {isCodeModalOpened && !isGuset && (
         <MissionCodeModal
           studyId={Number(studyId)}
           setIsUpdateLoading={setIsUpdateLoading}
@@ -140,7 +140,7 @@ const MissionDetail = () => {
           setIsCodeModalOpened={setIsCodeModalOpened}
         />
       )}
-      {isCodeReviewModalOpen && (
+      {isCodeReviewModalOpen && !isGuset && (
         <ReviewModal
           problemInfo={problemInfo}
           isInitCodeReviewModal={isInitCodeReviewModal}

@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { themedPalette } from "@/styles/theme";
-import { GetServerSideProps } from "next";
-import { parseCookies } from "@/util/parseCookie";
 import LineChart from "@/components/common/chart/chart";
 import UserInfo from "@/components/common/user-info/user-info";
 import UserSolvedInfo from "@/components/common/user-info/user-solved-info";
@@ -15,30 +13,10 @@ import { PageContainer } from "@/styles/common.style";
 import BasicTable from "@/components/common/table/BasicTable";
 import InviteTable from "@/components/common/table/InviteTable";
 import { TABLE_CONSTANT } from "@/constant/table";
+import LocalStorage from "@/util/localstorage";
 
-interface LoginProps {
-  refreshToken: string;
-  memberId: number;
-}
-
-interface IParsedCookies {
-  refreshToken?: string;
-  memberId?: string;
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { req } = context;
-  const cookies: IParsedCookies = parseCookies(req.headers.cookie);
-  const memberId = Number(cookies.memberId);
-
-  return {
-    props: {
-      memberId,
-    },
-  };
-};
-
-const Profile = ({ memberId }: LoginProps) => {
+const Profile = () => {
+  const memberId = Number(LocalStorage.getItem("memberId"));
   const TAB_ELEMENTS = ["현황", "스터디", "가입 신청", "가입 초대"];
   const { data: userStudyList, isLoading: isStudyListLoading } = useFetchUserStudyList({ memberId, status: 1 });
   const { data: userStudyJoinRequestList, isLoading: isStudyJoinRequestListLoading } = useFetchUserStudyList({

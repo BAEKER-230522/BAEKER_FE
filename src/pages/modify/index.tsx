@@ -9,33 +9,11 @@ import { useRouter } from "next/router";
 import useInput from "@/hooks/useInput";
 import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
 import Loading from "@/components/common/loading/Loading";
-import { parseCookies } from "@/util/parseCookie";
-import { GetServerSideProps } from "next";
 import { PageContainer } from "@/styles/common.style";
+import LocalStorage from "@/util/localstorage";
 
-interface LoginProps {
-  refreshToken: string;
-  memberId: number;
-}
-
-interface IParsedCookies {
-  refreshToken?: string;
-  memberId?: string;
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { req } = context;
-  const cookies: IParsedCookies = parseCookies(req.headers.cookie);
-  const memberId = Number(cookies.memberId);
-
-  return {
-    props: {
-      memberId,
-    },
-  };
-};
-
-const Modify = ({ memberId }: LoginProps) => {
+const Modify = () => {
+  const memberId = Number(LocalStorage.getItem("memberId"));
   const { data, isLoading } = memberApi.useGetMemberQuery(memberId);
   const [nameValue, setNameValue, onChangeName] = useInput("");
   const [aboutValue, setAboutValue, onChangeAbout] = useInput("");

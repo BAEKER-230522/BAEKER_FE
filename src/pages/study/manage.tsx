@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { GetServerSideProps } from "next";
-import { parseCookies } from "@/util/parseCookie";
 import { themedPalette } from "@/styles/theme";
 import { PageContainer } from "@/styles/common.style";
 import { toast } from "react-toastify";
@@ -11,25 +9,10 @@ import Slider from "@/components/common/slider/slider";
 import useInput from "@/hooks/useInput";
 import useFetchUserData from "@/hooks/queries/useFetchUserData";
 import useStudyEdit from "@/hooks/study/useStudyEdit";
+import LocalStorage from "@/util/localstorage";
 
-interface IParsedCookies {
-  refreshToken?: string;
-  memberId?: string;
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { req, res } = context;
-  const cookies: IParsedCookies = parseCookies(req.headers.cookie);
-  const userId = Number(cookies.memberId);
-
-  return {
-    props: {
-      userId,
-    },
-  };
-};
-
-const CreateStudy = ({ userId }: { userId: number }) => {
+const CreateStudy = () => {
+  const userId = Number(LocalStorage.getItem("membeId"));
   const { maxStudyCapacity, setMaxStudyCapacity, handleCreateStudy, handleUpdateStudy } = useStudyEdit();
   const [nameValue, setNameValue, nameHandler] = useInput("");
   const [aboutValue, setAboutValue, aboutHandler] = useInput("");

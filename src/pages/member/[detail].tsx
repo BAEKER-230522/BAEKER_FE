@@ -10,11 +10,10 @@ import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
 import { memberApi } from "@/api/memberApi";
 import Loading from "@/components/common/loading/Loading";
-import { GetServerSideProps } from "next";
-import { parseCookies } from "@/util/parseCookie";
 import { PageContainer } from "@/styles/common.style";
 import BasicTable from "@/components/common/table/BasicTable";
 import { TABLE_CONSTANT } from "@/constant/table";
+import LocalStorage from "@/util/localstorage";
 
 export interface IUserData {
   id: number;
@@ -26,24 +25,8 @@ export interface IUserData {
   platinum: number;
 }
 
-interface IParsedCookies {
-  refreshToken?: string;
-  memberId?: string;
-}
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { req, res } = context;
-  const cookies: IParsedCookies = parseCookies(req.headers.cookie);
-  const memberId = Number(cookies.memberId) ? Number(cookies.memberId) : null;
-
-  return {
-    props: {
-      memberId,
-    },
-  };
-};
-
-const Member = ({ memberId }: { memberId: number }) => {
+const Member = () => {
+  const memberId = Number(LocalStorage.getItem("memberId"));
   const router = useRouter();
   const { detail: param } = router.query;
   const { data: userStudyList, isLoading: isGetUserStudyListLoading } = studyApi.useGetUserStudyListQuery({
