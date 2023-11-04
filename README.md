@@ -7,7 +7,11 @@
       스터디원의 참여로 팀 랭킹 시스템을 통해 사용자간 긍정적인 경쟁을 하며 실력 향상의 효과가 있습니다. <br/>
     </p>
     <p>
-        <a href="https://baeker.vercel.app/" target="_blank">🔗BAEKER</a><span>(리팩토링 중입니다.)</span>
+        <a href="https://baeker.vercel.app/" target="_blank">🔗BAEKER</a>
+        <br/>
+
+<br/>
+        <span>(리팩토링 중입니다.)</span>
     </p>
     <br /><br />
     <img src="https://img.shields.io/badge/Next-13.4.3-black?logo=next.js">
