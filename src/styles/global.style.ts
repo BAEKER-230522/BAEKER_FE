@@ -9,7 +9,8 @@ export const GlobalStyle = createGlobalStyle`
   html{
     width: 100%;
     height: 100%;
-    font-family: 'Noto Sans CJK KR'
+    font-family: 'Noto Sans KR', sans-serif;
+    word-break: keep-all;
   }
   body {
     width: 100%;
