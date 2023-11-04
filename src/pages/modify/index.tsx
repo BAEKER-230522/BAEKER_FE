@@ -17,7 +17,7 @@ const Modify = () => {
   const { data, isLoading } = memberApi.useGetMemberQuery(memberId);
   const [nameValue, setNameValue, onChangeName] = useInput("");
   const [aboutValue, setAboutValue, onChangeAbout] = useInput("");
-  const [img, setImg] = useState(data.data.profileImg);
+  const [img, setImg] = useState();
   const [imgFile, setImgFile] = useState<File | undefined>(undefined);
   const { handleUpdateUserInfo } = useUpdateUserInfo(memberId);
   const router = useRouter();
@@ -25,6 +25,7 @@ const Modify = () => {
     if (isLoading === false) {
       setNameValue(data.data.nickname);
       setAboutValue(data.data.about);
+      setImg(data.data.profileImg);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
