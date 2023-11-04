@@ -1,7 +1,6 @@
 // 리듀서 통합 모듈
 import { combineReducers } from "redux";
 import { HYDRATE } from "next-redux-wrapper";
-import tab from "./tab";
 import mission from "./mission";
 import user from "./user";
 import darkmode from "./darkmode";
@@ -19,7 +18,6 @@ const reducer = (state: any, action: any) => {
   }
   return combineReducers({
     // 정의한 리듀서 모듈들을 결합
-    tab,
     mission,
     user,
     darkmode,

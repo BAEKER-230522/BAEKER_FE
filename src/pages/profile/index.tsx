@@ -3,7 +3,6 @@ import { TABLE_CONSTANT } from "@/constant/table";
 import { memberApi } from "@/api/memberApi";
 import { studyApi } from "@/api/studyApi";
 import { themedPalette } from "@/styles/theme";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import LineChart from "@/components/common/chart/chart";
 import UserInfo from "@/components/common/user-info/user-info";
@@ -14,10 +13,12 @@ import Loading from "@/components/common/loading/Loading";
 import BasicTable from "@/components/common/table/BasicTable";
 import InviteTable from "@/components/common/table/InviteTable";
 import LocalStorage from "@/util/localstorage";
+import { useState } from "react";
 
 const Profile = () => {
   const memberId = Number(LocalStorage.getItem("memberId"));
   const TAB_ELEMENTS = ["현황", "스터디", "가입 신청", "가입 초대"];
+  const [tabState, setTabState] = useState<number>(0);
   const { data: userStudyList, isLoading: isStudyListLoading } = studyApi.useGetUserStudyListQuery({
     memberId,
     status: 1,
@@ -33,17 +34,13 @@ const Profile = () => {
   });
   const { data: userData, isLoading: isUserDataLoading } = memberApi.useGetMemberQuery(memberId);
 
-  const tabState = useSelector((state: any) => {
-    return state.tab.profileTabState;
-  });
-
   if (isStudyListLoading || isStudyJoinRequestListLoading || isStudyInviteListLoading || isUserDataLoading)
     return (
       <S.Container>
         <S.InfoContainer>
           <Loading />
         </S.InfoContainer>
-        <Tab elements={TAB_ELEMENTS} type="profile" />
+        <Tab elements={TAB_ELEMENTS} tabState={tabState} setTabState={setTabState} />
         <S.RecordContainer>
           <Loading />
         </S.RecordContainer>
@@ -56,7 +53,7 @@ const Profile = () => {
         <UserInfo userData={userData.data} userId={memberId} />
         <UserSolvedInfo userData={userData.data} />
       </S.InfoContainer>
-      <Tab elements={TAB_ELEMENTS} type="profile" />
+      <Tab elements={TAB_ELEMENTS} tabState={tabState} setTabState={setTabState} />
       <S.RecordContainer>
         {tabState === 0 && (
           <>
