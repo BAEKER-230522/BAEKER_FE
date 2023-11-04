@@ -4,16 +4,16 @@ import { useRouter } from "next/router";
 import RequestModal from "../common/modal/RequestModal";
 import Loading from "../common/loading/Loading";
 import AlertModal from "../common/modal/AlertModal";
+import { IUserRoles } from "@/pages/study/[studyId]";
 interface IProps {
-  isUserStudy: boolean;
-  isLeader: boolean;
-  memberId: number;
+  userRoles: IUserRoles;
+  memberId: number | null;
 }
 
 // 리더일 경우 -> 미션 만들기, 스터디 수정하기, 가입요청 탭
 // 스터디원일 경우, 비로그인 -> 오직 GET 요청
 // 스터디원 아닌 로그인 유저 -> 스터디 가입하기
-const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
+const StudyInfo = ({ userRoles, memberId }: IProps) => {
   const router = useRouter();
   const { studyId } = router.query;
   const { data, isLoading } = studyApi.useGetStudyInfoQuery(studyId);
@@ -30,7 +30,7 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
       <S.StudyInfoContainer>
         <S.Title>{data.data.name}</S.Title>
         <S.About>{data.data.about}</S.About>
-        {isLeader ? (
+        {userRoles.isLeader ? (
           <S.ButtonWrapper width="350px">
             <button
               onClick={(e) => {
@@ -67,7 +67,7 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
               삭제
             </AlertModal>
           </S.ButtonWrapper>
-        ) : isUserStudy ? (
+        ) : userRoles.isUserStudy ? (
           <S.ButtonWrapper width="150px">
             <AlertModal
               data={{ memberId, studyId }}
@@ -79,6 +79,8 @@ const StudyInfo = ({ isLeader, isUserStudy, memberId }: IProps) => {
               탈퇴
             </AlertModal>
           </S.ButtonWrapper>
+        ) : userRoles.isGuest ? (
+          <S.ButtonWrapper width="150px"></S.ButtonWrapper>
         ) : (
           <S.ButtonWrapper width="150px">
             <RequestModal memberId={memberId} studyId={String(studyId)} />

@@ -6,7 +6,7 @@ import { Input } from "antd";
 import { toast } from "react-toastify";
 
 interface IProps {
-  memberId: number;
+  memberId: number | null;
   studyId: string;
 }
 
@@ -15,8 +15,6 @@ const RequestModal = ({ memberId, studyId }: IProps) => {
   const [message, setMessage] = useState<string>("");
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalText, setModalText] = useState("Content of the modal");
-  const router = useRouter();
   const [handleJoinStudy] = studyApi.useJoinStudyMutation();
   const showModal = () => {
     setOpen(true);
