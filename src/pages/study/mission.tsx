@@ -7,7 +7,7 @@ import { TABLE_CONSTANT } from "@/constant/table";
 import { toast } from "react-toastify";
 import { isPast } from "@/util/date";
 import styled from "styled-components";
-import Input from "@/components/common/Input";
+import Input from "@/components/common/input";
 import useInput from "@/hooks/useInput";
 import useMissionEdit from "@/hooks/study/useMissionEdit";
 import AddProblemInputBox from "@/components/study/add-problem-button";
