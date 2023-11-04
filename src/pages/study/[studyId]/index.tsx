@@ -4,7 +4,6 @@ import StudyInfo from "@/components/study/study-info";
 import Tab from "@/components/common/tab/tab";
 import SolvedRecord from "@/components/common/tab/solved-record";
 import LineChart from "@/components/common/chart/chart";
-import { useSelector } from "react-redux";
 import SolveStatus from "@/components/common/solve-status";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
@@ -61,10 +60,7 @@ const StudyDetail = () => {
   const [TAB_ELEMENTS, setTAB_ELEMENTS] = useState<string[]>(["현황", "미션", "멤버"]);
   const [missionList, setMissionList] = useState<IMission[]>([]);
   const [memberList, setMemberList] = useState<IMember[]>([]);
-
-  const tabState = useSelector((state: any) => {
-    return state.tab.studyTabState;
-  });
+  const [tabState, setTabState] = useState<number>(0);
 
   useEffect(() => {
     if (memberId == 0) setUserRoles((prevRole) => ({ ...prevRole, ["isGuest"]: true }));
@@ -105,7 +101,7 @@ const StudyDetail = () => {
     return (
       <S.StudyContainer>
         <StudyInfo userRoles={userRoles} memberId={memberId} />
-        <Tab elements={TAB_ELEMENTS} type="study" />
+        <Tab elements={TAB_ELEMENTS} tabState={tabState} setTabState={setTabState} />
         <S.ContentContainer>
           <Loading />
         </S.ContentContainer>
@@ -115,7 +111,7 @@ const StudyDetail = () => {
   return (
     <S.StudyContainer>
       <StudyInfo userRoles={userRoles} memberId={memberId} />
-      <Tab elements={TAB_ELEMENTS} type="study" />
+      <Tab elements={TAB_ELEMENTS} tabState={tabState} setTabState={setTabState} />
       <S.ContentContainer>
         {tabState === 0 && (
           <>

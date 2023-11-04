@@ -5,7 +5,6 @@ import UserInfo from "@/components/common/user-info/user-info";
 import UserSolvedInfo from "@/components/common/user-info/user-solved-info";
 import Tab from "@/components/common/tab/tab";
 import SolvedRecord from "@/components/common/tab/solved-record";
-import { useSelector } from "react-redux";
 import { studyApi } from "@/api/studyApi";
 import { useRouter } from "next/router";
 import { memberApi } from "@/api/memberApi";
@@ -14,6 +13,7 @@ import { PageContainer } from "@/styles/common.style";
 import BasicTable from "@/components/common/table/BasicTable";
 import { TABLE_CONSTANT } from "@/constant/table";
 import LocalStorage from "@/util/localstorage";
+import { useState } from "react";
 
 export interface IUserData {
   id: number;
@@ -34,9 +34,7 @@ const Member = () => {
     status: 1,
   });
   const { data: userData, isLoading: isGetUserInfoLoading } = memberApi.useGetMemberQuery(param);
-  const tabState = useSelector((state: any) => {
-    return state.tab.profileTabState;
-  });
+  const [tabState, setTabState] = useState<number>(0);
   const TAB_ELEMENTS_OTHER = ["백준", "스터디"];
 
   if (isGetUserStudyListLoading || isGetUserInfoLoading)
@@ -78,7 +76,7 @@ const Member = () => {
         <UserInfo userData={userData.data} userId={Number(param)} loginUser={memberId} />
         <UserSolvedInfo userData={userData.data} />
       </S.InfoContainer>
-      <Tab elements={TAB_ELEMENTS_OTHER} type="profile" />
+      <Tab elements={TAB_ELEMENTS_OTHER} setTabState={setTabState} tabState={tabState} />
       <S.RecordContainer>{Component(tabState)}</S.RecordContainer>
     </S.Container>
   );
