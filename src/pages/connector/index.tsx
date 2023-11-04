@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { themedPalette } from "@/styles/theme";
 import ModifyImg from "@/components/modify/Img";
 import Input from "@/components/common/Input";
-import ModifyButton from "@/components/modify/Button";
+import ModifyButton from "@/components/modify/button";
 import { memberApi } from "@/api/memberApi";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
