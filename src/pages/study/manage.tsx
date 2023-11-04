@@ -9,6 +9,7 @@ import Slider from "@/components/common/slider/slider";
 import useInput from "@/hooks/useInput";
 import useStudyEdit from "@/hooks/study/useStudyEdit";
 import LocalStorage from "@/util/localstorage";
+import { memberApi } from "@/api/memberApi";
 
 const CreateStudy = () => {
   const userId = Number(LocalStorage.getItem("membeId"));
@@ -17,7 +18,7 @@ const CreateStudy = () => {
   const [aboutValue, setAboutValue, aboutHandler] = useInput("");
   const router = useRouter();
   const isEditMode = Object.keys(router.query).length !== 0 ? true : false;
-  const { data: userData, isLoading: isUserDataLoading } = useFetchUserData(userId);
+  const { data: userData, isLoading: isUserDataLoading } = memberApi.useGetMemberQuery(userId);
   useEffect(() => {
     if (isEditMode) {
       setNameValue(String(router.query.name));
