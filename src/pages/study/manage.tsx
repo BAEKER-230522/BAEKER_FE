@@ -10,15 +10,18 @@ import useInput from "@/hooks/useInput";
 import useStudyEdit from "@/hooks/study/useStudyEdit";
 import LocalStorage from "@/util/localstorage";
 import { memberApi } from "@/api/memberApi";
+import Loading from "@/components/common/loading/Loading";
 
 const CreateStudy = () => {
-  const userId = Number(LocalStorage.getItem("membeId"));
+  const userId = Number(LocalStorage.getItem("memberId"));
+
   const { maxStudyCapacity, setMaxStudyCapacity, handleCreateStudy, handleUpdateStudy } = useStudyEdit();
   const [nameValue, setNameValue, nameHandler] = useInput("");
   const [aboutValue, setAboutValue, aboutHandler] = useInput("");
   const router = useRouter();
   const isEditMode = Object.keys(router.query).length !== 0 ? true : false;
   const { data: userData, isLoading: isUserDataLoading } = memberApi.useGetMemberQuery(userId);
+
   useEffect(() => {
     if (isEditMode) {
       setNameValue(String(router.query.name));
@@ -28,7 +31,13 @@ const CreateStudy = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isUserDataLoading) return <div>Loading..</div>;
+  if (isUserDataLoading) {
+    <S.Container>
+      <S.FormContainer onSubmit={(e) => handleSubmit(e)}>
+        <Loading />
+      </S.FormContainer>
+    </S.Container>;
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
