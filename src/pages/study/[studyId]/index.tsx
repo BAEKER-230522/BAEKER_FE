@@ -42,7 +42,6 @@ export interface IUserRoles {
 
 const StudyDetail = () => {
   const memberId = Number(LocalStorage.getItem("memberId"));
-  console.log(memberId);
 
   const router = useRouter();
   const { studyId: param } = router.query;

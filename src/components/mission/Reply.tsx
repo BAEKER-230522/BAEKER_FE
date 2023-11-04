@@ -16,7 +16,6 @@ const Reply = ({ codeData, setCommentUpdate }: any) => {
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCommentValue(e.target.value);
   };
-  console.log(codeData);
 
   const postCommentHandler = () => {
     postComment({ postId: codeData.postId, content: commentValue })

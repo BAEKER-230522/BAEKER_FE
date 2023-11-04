@@ -46,8 +46,6 @@ interface IStudy {
 }
 
 const useMissionDetail = ({ missionData, userUploadStatus }: IMission) => {
-  console.log(missionData);
-
   const [memberStatus, setMemberStatus] = useState<IPersonalStudyRuleDtos[]>();
   const [missionProgress, setMissionProgress] = useState(0);
   const [userSolvedStatus, setUserSolvedStatus] = useState<IUserSolvedStatus[]>();

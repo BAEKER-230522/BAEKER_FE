@@ -25,8 +25,6 @@ const ReviewModal = ({
   setIsInitCodeReviewModal,
   setIsCodeReviewModalOpen,
 }: IProps) => {
-  console.log(problemInfo.id);
-
   // const { data } = codeReviewApi.useGetCodeReviewQuery(problemInfo.id)
   const [codeData, setCodeData] = useState<any>();
   const [commentUpdate, setCommentUpdate] = useState<boolean>(false);
@@ -39,7 +37,6 @@ const ReviewModal = ({
   useEffect(() => {
     getCode();
   }, [commentUpdate]);
-  console.log(codeData);
 
   const codeModalRef = useRef<HTMLDivElement>(null);
   useOutsideClick({

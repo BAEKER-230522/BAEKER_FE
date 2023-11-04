@@ -87,7 +87,6 @@ const MissionDetail = () => {
       getUserUploadStatus();
     }
   }, [isUpdateLoading, getMissionDataLoading]);
-  console.log(userSolvedStatus, userUploadStatus);
   if (getMissionDataLoading || userSolvedStatus === undefined)
     return (
       <S.Container>
