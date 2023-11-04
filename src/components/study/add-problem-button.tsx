@@ -1,23 +1,27 @@
 import React from "react";
 import { S } from "../common/style";
-import { useDispatch, useSelector } from "react-redux";
-import * as userAction from "@/store/modules/mission";
 import { toast } from "react-toastify";
+import { IMissionProblem } from "@/pages/study/mission";
+
 interface IInput {
   title: string;
   size: string;
   value: string;
+  missionProblemState: IMissionProblem[];
   setProblemValue: React.Dispatch<React.SetStateAction<string>>;
+  setMissionProblemState: React.Dispatch<React.SetStateAction<IMissionProblem[]>>;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue }: IInput) => {
-  const dispatch = useDispatch();
-
-  const missionProblemState = useSelector((state: any) => {
-    return state.mission.missionProblemState;
-  });
-
+const AddProblemInputBox = ({
+  missionProblemState,
+  title,
+  size,
+  value,
+  onChange,
+  setProblemValue,
+  setMissionProblemState,
+}: IInput) => {
   const handleAddProblem = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     let valid = true;
@@ -42,14 +46,14 @@ const AddProblemInputBox = ({ title, size, value, onChange, setProblemValue }: I
       });
 
       const result = await response.json();
-      const newProblem = {
+      const newProblem: IMissionProblem = {
         idx: missionProblemState.length + 1,
         problemNumber: value,
         problemName: result.data.subject,
         xp: result.data.level + 1,
         remove: "삭제",
       };
-      dispatch(userAction.addProblem(newProblem));
+      setMissionProblemState((prevProblemState) => [...prevProblemState, newProblem]);
       setProblemValue("");
     } catch (err) {
       toast("존재하지 않는 문제 번호입니다");
