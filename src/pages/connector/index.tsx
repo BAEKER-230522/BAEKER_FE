@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { themedPalette } from "@/styles/theme";
-import ModifyImg from "@/components/modify/Img";
-import Input from "@/components/common/Input";
+import ModifyImg from "@/components/modify/img";
+import Input from "@/components/common/input";
 import ModifyButton from "@/components/modify/button";
 import { memberApi } from "@/api/memberApi";
 import { useEffect, useState } from "react";
