@@ -7,7 +7,7 @@ import { memberApi } from "@/api/memberApi";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useInput from "@/hooks/useInput";
-import useUpdateUserInfo from "@/hooks/useUpdateUserInfo";
+import useUpdateUserInfo from "@/hooks/profile/useUpdateUserInfo";
 import Loading from "@/components/common/loading/Loading";
 import { PageContainer } from "@/styles/common.style";
 import LocalStorage from "@/util/localstorage";

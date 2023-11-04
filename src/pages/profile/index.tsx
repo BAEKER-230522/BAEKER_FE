@@ -1,33 +1,37 @@
-import styled from "styled-components";
+import { PageContainer } from "@/styles/common.style";
+import { TABLE_CONSTANT } from "@/constant/table";
+import { memberApi } from "@/api/memberApi";
+import { studyApi } from "@/api/studyApi";
 import { themedPalette } from "@/styles/theme";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
 import LineChart from "@/components/common/chart/chart";
 import UserInfo from "@/components/common/user-info/user-info";
 import UserSolvedInfo from "@/components/common/user-info/user-solved-info";
 import Tab from "@/components/common/tab/tab";
 import SolvedRecord from "@/components/common/tab/solved-record";
-import { useSelector } from "react-redux";
-import useFetchUserStudyList from "@/hooks/queries/useFetchUserStudyList";
-import useFetchUserData from "@/hooks/queries/useFetchUserData";
 import Loading from "@/components/common/loading/Loading";
-import { PageContainer } from "@/styles/common.style";
 import BasicTable from "@/components/common/table/BasicTable";
 import InviteTable from "@/components/common/table/InviteTable";
-import { TABLE_CONSTANT } from "@/constant/table";
 import LocalStorage from "@/util/localstorage";
 
 const Profile = () => {
   const memberId = Number(LocalStorage.getItem("memberId"));
   const TAB_ELEMENTS = ["현황", "스터디", "가입 신청", "가입 초대"];
-  const { data: userStudyList, isLoading: isStudyListLoading } = useFetchUserStudyList({ memberId, status: 1 });
-  const { data: userStudyJoinRequestList, isLoading: isStudyJoinRequestListLoading } = useFetchUserStudyList({
+  const { data: userStudyList, isLoading: isStudyListLoading } = studyApi.useGetUserStudyListQuery({
     memberId,
-    status: 2,
+    status: 1,
   });
-  const { data: userStudyInviteList, isLoading: isStudyInviteListLoading } = useFetchUserStudyList({
+  const { data: userStudyJoinRequestList, isLoading: isStudyJoinRequestListLoading } =
+    studyApi.useGetUserStudyListQuery({
+      memberId,
+      status: 2,
+    });
+  const { data: userStudyInviteList, isLoading: isStudyInviteListLoading } = studyApi.useGetUserStudyListQuery({
     memberId,
     status: 3,
   });
-  const { data: userData, isLoading: isUserDataLoading } = useFetchUserData(memberId);
+  const { data: userData, isLoading: isUserDataLoading } = memberApi.useGetMemberQuery(memberId);
 
   const tabState = useSelector((state: any) => {
     return state.tab.profileTabState;
