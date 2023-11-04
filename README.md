@@ -66,7 +66,7 @@
       <td align="center">문제풀이 댓글등록</td>
     </tr>
     <tr>
-      <td align="center" width="500" height="400"><img src="https://github.com/BAEKER-230522/BAEKER_FE/assets/72500346/33fea3cb-82df-4891-9bc0-24106796b0c0" width="400"/></td>
+      <td align="center" width="500" height="400"><img src="https://github.com/BAEKER-230522/BAEKER_FE/assets/72500346/5ded8076-55ba-4f40-980d-d2b5833c25ed" width="400"/></td>
       <td align="center" width="500"><img src="https://github.com/BAEKER-230522/BAEKER_FE/assets/72500346/cb93891a-e3bb-4c79-bd1f-e049c97c0b10" width="400"/></td>
     </tr>
  </table>
