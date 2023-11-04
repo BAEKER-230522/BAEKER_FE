@@ -7,7 +7,6 @@ import styled from "styled-components";
 import Input from "@/components/common/input";
 import Slider from "@/components/common/slider/slider";
 import useInput from "@/hooks/useInput";
-import useFetchUserData from "@/hooks/queries/useFetchUserData";
 import useStudyEdit from "@/hooks/study/useStudyEdit";
 import LocalStorage from "@/util/localstorage";
 
