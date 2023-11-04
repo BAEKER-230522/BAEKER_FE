@@ -17,7 +17,7 @@ const Modify = () => {
   const { data, isLoading } = memberApi.useGetMemberQuery(memberId);
   const [nameValue, setNameValue, onChangeName] = useInput("");
   const [aboutValue, setAboutValue, onChangeAbout] = useInput("");
-  const [img, setImg] = useState();
+  const [img, setImg] = useState<string>("");
   const [imgFile, setImgFile] = useState<File | undefined>(undefined);
   const { handleUpdateUserInfo } = useUpdateUserInfo(memberId);
   const router = useRouter();
