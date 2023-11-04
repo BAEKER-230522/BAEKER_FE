@@ -3,7 +3,6 @@ import { combineReducers } from "redux";
 import { HYDRATE } from "next-redux-wrapper";
 import dropdown from "./dropdown";
 import tab from "./tab";
-import modify from "./modify";
 import mission from "./mission";
 import user from "./user";
 import darkmode from "./darkmode";
@@ -23,7 +22,6 @@ const reducer = (state: any, action: any) => {
     // 정의한 리듀서 모듈들을 결합
     dropdown,
     tab,
-    modify,
     mission,
     user,
     darkmode,
