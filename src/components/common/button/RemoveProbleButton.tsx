@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import { S } from "../table/ui/style";
 import { Button } from "antd";
 import type { SizeType } from "antd/es/config-provider/SizeContext";
-import { useDispatch } from "react-redux";
-import * as userAction from "@/store/modules/mission";
+import { IMissionProblem } from "@/pages/study/mission";
 
-const RemoveProblemButton = ({ idx }: { idx: number }) => {
-  const dispatch = useDispatch();
+interface IProps {
+  idx: number;
+  data: IMissionProblem[];
+  setMissionProblemState: React.Dispatch<React.SetStateAction<IMissionProblem[]>>;
+}
+
+const RemoveProblemButton = ({ idx, data, setMissionProblemState }: IProps) => {
   const [size, setSize] = useState<SizeType>("middle"); // default is 'middle'
 
   const handleRemoveMissionProblem = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
-    dispatch(userAction.removeProblem(idx));
+    const temp = data.filter((problem) => problem.idx !== idx);
+    setMissionProblemState(temp);
   };
 
   return (

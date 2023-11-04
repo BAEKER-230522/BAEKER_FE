@@ -37,6 +37,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
+// test
 const Connector = ({ memberId }: LoginProps) => {
   const { data, isLoading } = memberApi.useGetMemberQuery(memberId);
   const [nameValue, setNameValue, onChangeName] = useInput("");

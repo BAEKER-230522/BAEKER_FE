@@ -54,8 +54,6 @@ const MemberSolvingStatus = ({
     setProblemInfo(problemStatus);
   };
 
-  console.log(userSolvedStatus);
-
   return (
     <S.MemberSolvingStatusContainer>
       <S.MissionProblemListContainer

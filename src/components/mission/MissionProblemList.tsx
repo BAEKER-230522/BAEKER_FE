@@ -9,8 +9,6 @@ interface IProps {
 }
 
 const MissionProblemList = ({ missionData, PERIOD_HEADER, TIME_SPAN_STATUS }: IProps) => {
-  console.log(missionData);
-
   return (
     <S.MissionProblemListContainer
       numColumn={calculateDuration(missionData.data.startDate, missionData.data.deadline) + 1}>

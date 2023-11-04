@@ -1,29 +1,33 @@
-import { Table } from "./ui";
+import React from "react";
 import EmptyList from "../empty/EmptyList";
 import RemoveProblemButton from "../button/RemoveProbleButton";
 import Image from "next/image";
+import { Table } from "./ui";
 import { LEVEL_IMG_URL } from "@/constant/level";
 import { S } from "./ui/style";
+import { IMissionProblem } from "@/pages/study/mission";
 
-interface IMissionProblem {
-  idx: number;
-  problemName: string;
-  problemNumber: string;
-  xp: number;
-}
 type CategoryItem = [string, string];
 
 interface IProps {
-  data: IMissionProblem[];
   category: CategoryItem[];
   widthRatio: number[];
+  data: IMissionProblem[];
+  setMissionProblemState: React.Dispatch<React.SetStateAction<IMissionProblem[]>>;
 }
 
-const ScrollTable = ({ data, category, widthRatio }: IProps) => {
+const ScrollTable = ({ data, category, widthRatio, setMissionProblemState }: IProps) => {
   const renderFieldContent = (field: CategoryItem, item: IMissionProblem, index: number) => {
     switch (field[1]) {
       case "remove":
-        return <RemoveProblemButton key={index} idx={index + 1} />;
+        return (
+          <RemoveProblemButton
+            key={index}
+            idx={index + 1}
+            setMissionProblemState={setMissionProblemState}
+            data={data}
+          />
+        );
       case "xp":
         return (
           <div>

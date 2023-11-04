@@ -1,19 +1,26 @@
-import styled from "styled-components";
 import { themedPalette } from "@/styles/theme";
 import { Title } from "@/components/common/style";
-import Input from "@/components/common/input";
-import useInput from "@/hooks/useInput";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import useMissionEdit from "@/hooks/study/useMissionEdit";
-import AddProblemInputBox from "@/components/study/add-problem-button";
-import { useSelector } from "react-redux";
 import { PageContainer } from "@/styles/common.style";
-import ScrollTable from "@/components/common/table/ScrollTable";
-import StartToEndRangeDatePicker from "@/components/mission/RangeDatePicker";
 import { TABLE_CONSTANT } from "@/constant/table";
 import { toast } from "react-toastify";
 import { isPast } from "@/util/date";
+import styled from "styled-components";
+import Input from "@/components/common/input";
+import useInput from "@/hooks/useInput";
+import useMissionEdit from "@/hooks/study/useMissionEdit";
+import AddProblemInputBox from "@/components/study/add-problem-button";
+import ScrollTable from "@/components/common/table/ScrollTable";
+import StartToEndRangeDatePicker from "@/components/mission/RangeDatePicker";
+
+export interface IMissionProblem {
+  idx: number;
+  problemNumber: string;
+  problemName: string;
+  remove: string;
+  xp: number;
+}
 
 const CreateMission = () => {
   const router = useRouter();
@@ -25,11 +32,7 @@ const CreateMission = () => {
   const [problemValue, setProblemValue, problemHandler] = useInput("");
   const [missionStartDate, setMissionStartDate] = useState("");
   const [missionEndDate, setMissionEndDate] = useState("");
-
-  const missionProblemState = useSelector((state: any) => {
-    return state.mission.missionProblemState;
-  });
-
+  const [missionProblemState, setMissionProblemState] = useState<IMissionProblem[]>([]);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isPast(missionStartDate) === true) return toast("시작 날짜를 변경해주세요.");
@@ -39,7 +42,7 @@ const CreateMission = () => {
     const problemList = [];
     for (let i = 0; i < missionProblemState.length; i++) {
       problemList.push({
-        problemNumber: missionProblemState[i].problemNumber,
+        problemNumber: Number(missionProblemState[i].problemNumber),
         problemName: missionProblemState[i].problemName,
       });
       xp += missionProblemState[i].xp + 1;
@@ -83,9 +86,12 @@ const CreateMission = () => {
               value={problemValue}
               onChange={problemHandler}
               setProblemValue={setProblemValue}
+              missionProblemState={missionProblemState}
+              setMissionProblemState={setMissionProblemState}
             />
             <ScrollTable
               data={missionProblemState}
+              setMissionProblemState={setMissionProblemState}
               category={TABLE_CONSTANT.MISSION_PROBLEM.CATEGORY}
               widthRatio={TABLE_CONSTANT.MISSION_PROBLEM.WIDTH_RATIO}
             />

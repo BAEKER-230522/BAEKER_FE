@@ -18,13 +18,10 @@ export const codeReviewApi = createApi({
     }),
     // problem status id로 코드 Get
     getCodeReview: builder.query({
-      query: (problemStatusId) => (
-        console.log(problemStatusId),
-        {
-          url: `${PUBLIC_END_POINT}/problem-status/${problemStatusId}`,
-          method: "GET",
-        }
-      ),
+      query: (problemStatusId) => ({
+        url: `${PUBLIC_END_POINT}/problem-status/${problemStatusId}`,
+        method: "GET",
+      }),
       providesTags: ["CodeReview"],
     }),
     createCodeReview: builder.mutation({

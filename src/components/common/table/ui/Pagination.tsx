@@ -1,5 +1,5 @@
 import { S } from "./style";
-import { usePagination } from "@/components/common/table/hook/usePagination";
+import { usePagination } from "@/hooks/table/usePagination";
 import { useTable } from "../context/TableContext";
 import { PAGE_LIMIT } from "@/constant";
 
