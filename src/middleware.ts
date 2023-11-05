@@ -4,6 +4,7 @@ export function middleware(request: NextRequest) {
   const isLogin = request.cookies.get("refreshToken");
   const restrictedPages = ["/home", "/profile", "/study/manage"];
   const currentPath = request.nextUrl.pathname;
+  console.log(currentPath, isLogin);
 
   if (isLogin === undefined && restrictedPages.includes(currentPath)) {
     return NextResponse.redirect(`${request.nextUrl.origin}`);
