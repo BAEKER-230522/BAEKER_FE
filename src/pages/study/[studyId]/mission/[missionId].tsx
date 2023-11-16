@@ -108,6 +108,7 @@ const MissionDetail = () => {
         setIsInitCodeReviewModal={setIsInitCodeReviewModal}
         setIsCodeReviewModalOpen={setIsCodeReviewModalOpen}
       />
+      <S.Message>문제 해결 여부는 2시간 주기로 업데이트됩니다.</S.Message>
       <S.ButtonContainer>
         <Button
           type="primary"
@@ -166,7 +167,20 @@ const ButtonContainer = styled.div`
   margin-top: 10px;
 `;
 
+const Message = styled.div`
+  background-color: #e7e3e3;
+  height: 30px;
+  width: auto;
+  padding: 5px 15px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+`;
+
 const S = {
+  Message,
   ButtonContainer,
   Container,
 };

@@ -67,7 +67,7 @@ const SearchBox = ({ searchResult, isLoading, setInputFocused, focus, setSearchV
       </S.Container>
     );
   }
-  3;
+
   return (
     <S.Container ref={formRef}>
       <S.Ul>

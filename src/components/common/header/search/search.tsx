@@ -43,7 +43,13 @@ const Search = () => {
   return (
     <S.Container>
       <S.SearchSVG />
-      <S.Input value={searchValue} onChange={onChangeSearch} onFocus={handleInputFocus} onBlur={handleInputBlur} />
+      <S.Input
+        value={searchValue}
+        onChange={onChangeSearch}
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+        placeholder="닉네임, 스터디 이름 검색"
+      />
       {isInputFocused && (
         <SearchBox
           searchResult={searchResult!}
