@@ -1,9 +1,15 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
+import { HYDRATE } from "next-redux-wrapper";
 import axiosBaseQuery from "./axiosBaseQuery";
 
 const END_POINT = "api/member";
 export const memberApi = createApi({
   baseQuery: axiosBaseQuery(),
+  extractRehydrationInfo(action, { reducerPath }) {
+    if (action.type === HYDRATE) {
+      return action.payload[reducerPath];
+    }
+  },
   reducerPath: "memberApi",
   tagTypes: ["Member"],
   endpoints: (builder) => ({
@@ -85,4 +91,7 @@ export const {
   useWeeklyUserProblemStatusQuery,
   useUpdateMemberInfoMutation,
   useUpdateMemberMutation,
+  util: { getRunningQueriesThunk },
 } = memberApi;
+
+export const { getAllMembers, getMember } = memberApi.endpoints;

@@ -40,6 +40,7 @@
     "@types/react-datepicker": "^4.11.2",
     "@types/redux-logger": "^3.0.9",
     "@types/styled-components": "^5.1.26",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0"
   }
 }

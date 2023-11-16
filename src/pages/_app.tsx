@@ -1,7 +1,7 @@
 import { GlobalStyle } from "@/styles/global.style";
 import { ToastContainer } from "react-toastify";
 import Header from "@/components/common/header/Header";
-import wrapper from "@/store";
+import { wrapper } from "@/store";
 import PropTypes from "prop-types";
 import Head from "next/head";
 import "react-toastify/dist/ReactToastify.css";

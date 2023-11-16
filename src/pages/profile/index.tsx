@@ -1,6 +1,6 @@
 import { PageContainer } from "@/styles/common.style";
 import { TABLE_CONSTANT } from "@/constant/table";
-import { memberApi } from "@/api/memberApi";
+import { getMember, getRunningQueriesThunk, memberApi } from "@/api/memberApi";
 import { studyApi } from "@/api/studyApi";
 import { themedPalette } from "@/styles/theme";
 import styled from "styled-components";
@@ -14,6 +14,15 @@ import BasicTable from "@/components/common/table/BasicTable";
 import InviteTable from "@/components/common/table/InviteTable";
 import LocalStorage from "@/util/localstorage";
 import { useState } from "react";
+import { wrapper } from "@/store";
+
+// export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
+//   const { data } = studyApi.useGetUserStudyListQuery({
+//     memberId: 1,
+//     status: 1,
+//   });
+//   return { props: { data } };
+// });
 
 const Profile = () => {
   const memberId = Number(LocalStorage.getItem("memberId"));

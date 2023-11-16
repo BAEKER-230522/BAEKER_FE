@@ -1,5 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
+import { HYDRATE } from "next-redux-wrapper";
 import axiosBaseQuery from "./axiosBaseQuery";
+
 const END_POINT = "api/study/v1";
 const END_POINT_2 = "api/my-study/v1";
 const END_POINT_3 = "api/studyrule/v1";
@@ -8,6 +10,11 @@ const END_POINT_4 = "api/studyrule/v2";
 // baseQuery, reducerPath, tagTypes, endpoints,
 export const studyApi = createApi({
   baseQuery: axiosBaseQuery(),
+  extractRehydrationInfo(action, { reducerPath }) {
+    if (action.type === HYDRATE) {
+      return action.payload[reducerPath];
+    }
+  },
   reducerPath: "studyApi",
   tagTypes: ["Study", "Mission"],
   endpoints: (builder) => ({
