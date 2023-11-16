@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import JoinRequestModal from "../modal/JoinRequestModal";
 import Image from "next/image";
 import LocalStorage from "@/util/localstorage";
-import { useEffect } from "react";
 
 interface IProps {
   userData: any;

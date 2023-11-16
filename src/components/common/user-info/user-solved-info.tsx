@@ -1,6 +1,7 @@
 import { S } from "./style";
-
+import { useRouter } from "next/router";
 const UserSolvedInfo = ({ userData }: any) => {
+  const router = useRouter();
   const SOLVEDCOUNT =
     userData.bronze + userData.diamond + userData.gold + userData.ruby + userData.silver + userData.platinum;
   return (
@@ -20,6 +21,7 @@ const UserSolvedInfo = ({ userData }: any) => {
           <S.SmallFont>문제 해결</S.SmallFont>
         </div>
       </S.InfoContainer>
+      <S.Button onClick={() => router.push({ pathname: "/study/manage" })}>스터디 생성</S.Button>
     </S.Container>
   );
 };

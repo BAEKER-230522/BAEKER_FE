@@ -46,7 +46,7 @@ const Header = () => {
             text="메뉴"
             element={[
               { text: "마이페이지", type: "router", url: "/profile" },
-              { text: "스터디만들기", type: "router", url: "/study/manage" },
+              { text: "스터디 생성", type: "router", url: "/study/manage" },
               { text: "로그아웃", type: "signout" },
             ]}
           />
