@@ -1,11 +1,17 @@
-import styled from "styled-components";
 import { PageContainer } from "@/styles/common.style";
 import { themedPalette } from "@/styles/theme";
-import Image from "next/image";
-import useOutsideClick from "@/hooks/mission/useOutsideClick";
 import { useRef, useState } from "react";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { login } from "@/store/modules/user";
+import Image from "next/image";
+import styled from "styled-components";
+import useOutsideClick from "@/hooks/mission/useOutsideClick";
+import LocalStorage from "@/util/localstorage";
 
 const Lading = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const KAKAO_REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID;
   const KAKAO_REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_REST_API_KEY}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
@@ -26,12 +32,19 @@ const Lading = () => {
     isOpened: isLoginBoxOpened,
     setIsOpened: setIsLoginBoxOpened,
   });
+
+  const guestLoginHandler = () => {
+    dispatch(login());
+    LocalStorage.setItem("memberId", process.env.NEXT_PUBLIC_GUEST_MEMBER_ID!);
+    document.cookie = `accessToken=${process.env.NEXT_PUBLIC_GUEST_ACCESS_TOKEN};path=/`;
+    document.cookie = `refreshToken=${process.env.NEXT_PUBLIC_GUEST_ACCESS_TOKEN};path=/`;
+    router.push("/profile");
+  };
   return (
     <S.Container>
       {isLoginBoxOpened && (
         <S.ModalContainer>
           <S.LoginBox ref={loginModal}>
-            <div>카카오 로그인</div>
             <S.Kakao onClick={kakaoLogin}>
               <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
                 <path
@@ -39,6 +52,7 @@ const Lading = () => {
                   fill="rgba(34,34,34)"></path>
               </svg>
             </S.Kakao>
+            <S.LoginButton onClick={guestLoginHandler}>Guest 둘러보기</S.LoginButton>
           </S.LoginBox>
         </S.ModalContainer>
       )}
@@ -167,7 +181,6 @@ const Wrapper = styled.div`
 `;
 
 const LoginButton = styled.button`
-  margin-bottom: 100px;
   /* background-color: rgb(255, 232, 18); */
   background-color: ${themedPalette.bg_element4};
   color: white;
@@ -208,6 +221,7 @@ const IntroduceWrapper = styled.div`
   gap: 60px;
   border-radius: 12px;
   margin-bottom: 100px;
+  margin-top: 100px;
 `;
 
 const ImgWrapper = styled.picture`
@@ -251,7 +265,6 @@ const LoginBox = styled.div`
   border-radius: 12px;
   display: flex;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
   font-size: 1.5rem;
   gap: 30px;

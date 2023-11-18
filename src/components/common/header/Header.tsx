@@ -22,7 +22,7 @@ const Header = () => {
       LocalStorage.removeItem("memberId");
       dispatch(logout());
     }
-  }, []);
+  }, [isLogin]);
 
   return (
     <S.HeaderContainer>

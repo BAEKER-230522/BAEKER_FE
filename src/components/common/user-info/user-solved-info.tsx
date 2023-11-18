@@ -1,6 +1,11 @@
+import { useState } from "react";
 import { S } from "./style";
 import { useRouter } from "next/router";
+import LocalStorage from "@/util/localstorage";
 const UserSolvedInfo = ({ userData }: any) => {
+  const memberId = Number(LocalStorage.getItem("memberId"));
+  const [isMypage, setIsMypage] = useState(userData.id === memberId ? true : false);
+
   const router = useRouter();
   const SOLVEDCOUNT =
     userData.bronze + userData.diamond + userData.gold + userData.ruby + userData.silver + userData.platinum;
@@ -21,7 +26,7 @@ const UserSolvedInfo = ({ userData }: any) => {
           <S.SmallFont>문제 해결</S.SmallFont>
         </div>
       </S.InfoContainer>
-      <S.Button onClick={() => router.push({ pathname: "/study/manage" })}>스터디 생성</S.Button>
+      {isMypage && <S.Button onClick={() => router.push({ pathname: "/study/manage" })}>스터디 생성</S.Button>}
     </S.Container>
   );
 };

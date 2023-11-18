@@ -1,9 +1,9 @@
-import axios from "axios";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import LocalStorage from "@/util/localstorage";
 import { useDispatch } from "react-redux";
 import { login } from "@/store/modules/user";
+import LocalStorage from "@/util/localstorage";
+import axios from "axios";
 
 export const useKakaoLogin = () => {
   const dispatch = useDispatch();
