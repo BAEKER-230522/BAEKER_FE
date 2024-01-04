@@ -1,14 +1,32 @@
 import styled from "styled-components";
 import { themedPalette } from "@/styles/theme";
 import { TABLE_CONSTANT } from "@/constant/table";
-import { memberApi } from "@/api/memberApi";
+import { QueryClient, dehydrate, useQuery } from "@tanstack/react-query";
 import Loading from "@/components/common/loading/Loading";
 import MemberTable from "@/components/common/table/MeberTable";
+import { getAllMembers, useMembersQuery } from "@/hooks/api/useMembersQuery";
+import { GetServerSideProps } from "next";
+import { QUERY_KEY } from "@/constant/key";
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const qc = new QueryClient();
+  await qc.prefetchQuery({
+    queryKey: [QUERY_KEY.MEMBER],
+    queryFn: () => getAllMembers({ page: 0, limit: 100 }),
+    staleTime: Infinity,
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(qc),
+    },
+  };
+};
 
 const AlgorithmRank = () => {
-  const { data, isLoading } = memberApi.useGetAllMembersQuery({
-    page: 0,
-    limit: 100,
+  const { data, isLoading } = useQuery({
+    queryKey: [QUERY_KEY.MEMBER],
+    queryFn: () => getAllMembers({ page: 0, limit: 100 }),
   });
 
   if (isLoading)
@@ -17,6 +35,7 @@ const AlgorithmRank = () => {
         <Loading />
       </S.Container>
     );
+
   return (
     <S.Container>
       <S.Wrapper>
