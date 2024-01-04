@@ -10,7 +10,11 @@ import { QUERY_KEY } from "@/constant/key";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const qc = new QueryClient();
-  await useMembersQuery({ page: 0, limit: 100, qc });
+  await qc.prefetchQuery({
+    queryKey: [QUERY_KEY.MEMBER],
+    queryFn: () => getAllMembers({ page: 0, limit: 100 }),
+    staleTime: Infinity,
+  });
 
   return {
     props: {
